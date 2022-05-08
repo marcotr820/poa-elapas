@@ -1,0 +1,89 @@
+@extends('layouts.plantillabase')
+
+@section('contenido')
+<style>
+    table td{
+        padding: 5px;
+        border: 0.5px solid #999999;
+    }
+    table thead{
+        font-size: 13px;
+    }
+</style>
+    <div class="card">
+        <div class="card-header">
+            <p class="mb-2"><b>Corto Plazo Accion:</b> {{$corto_plazo_accion->accion_corto_plazo}}</p>
+            <p class="mb-2"><b>Presupuesto Aprobado:</b> {{ number_format($corto_plazo_accion->presupuesto_programado, 2, '.', ',') }} Bs.</p>
+            <p class="mb-2"><b>Fecha Inicio:</b> {{ $corto_plazo_accion->fecha_inicio }}</p>
+            <p class="mb-2"><b>Fecha Fin:</b> {{ $corto_plazo_accion->fecha_fin }}</p>
+            <p class="mb-2"><b>Presupuesto Restante:</b> {{ number_format($corto_plazo_accion->presupuesto_programado - $corto_plazo_accion->evaluaciones->sum('presupuesto_ejecutado'), 2, '.', ',') }} Bs.</p>
+            <div>
+                <a href="{{ route('planificacion_evaluacion') }}" class="boton red"><i class="fas fa-arrow-left"></i> Volver Atrás</a>
+            </div>
+        </div>
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="m-0">Lista de Evaluaciones</h5>
+            {{-- verificamos que estamos dentro de las fechas que tenemos que evaluarnos para mostrar el boton de evaluar --}}
+            @if (!empty($trimestre))
+                {{-- verificamos si la evaluacion ya tiene un registro para no repetir evaluaciones por trimestre --}}
+                @if (!$corto_plazo_accion->evaluaciones->where('trimestre', $trimestre)->first())
+                    <button type="button" id="nuevo" class="boton blue ml-2"><i class="fas fa-plus"></i> Evaluar</button>
+                @endif
+            @endif
+        </div>
+        <div class="card-body">
+            <table class="" style="width:100%">
+                <thead class="thead" style="background-color: skyblue">
+                    <tr>
+                        <td rowspan="2" style="text-align: center;" width="13%">Trimestre</td>
+                        <td colspan="3" class="text-center">RESULTADOS</td>
+                        <td colspan="3" class="text-center">PRESUPUESTO</td>
+                        <td>RELACION AVANCE</td>
+                        <td rowspan="2" class="text-center">Accion</td>
+                        <tr>
+                            <td>Esperados</td>
+                            <td>Logrados</td>
+                            <td>Eficacia %</td>
+                            <td>Presupuesto</td>
+                            <td>Ejecutado</td>
+                            <td>Ejecucion %</td>
+                            <td>Avance %</td>
+                        </tr>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($corto_plazo_accion->evaluaciones as $evaluacion)
+                        <tr>
+                            <td>{{ ucfirst( str_replace("_", " ", $evaluacion->trimestre) ) }}</td>
+                            <td>{{ $evaluacion->resultado_esperado }}%</td>
+                            <td>{{ $evaluacion->resultado_logrado }}%</td>
+                            <td>{{ $evaluacion->eficacia }}%</td>
+                            <td>{{ number_format($evaluacion->presupuesto, 2, '.', ',') }} Bs.</td>
+                            <td>{{ number_format($evaluacion->presupuesto_ejecutado, 2, '.', ',') }} Bs.</td>
+                            <td>{{ $evaluacion->ejecucion }}%</td>
+                            <td>{{ $evaluacion->relacion_avance }}%</td>
+                            @if ($evaluacion->trimestre == $trimestre)
+                                <td class="text-center"><button class="boton blue" data-edit="{{ $evaluacion->uuid }}" onclick="edit('{{ $evaluacion->uuid }}')">Editar</button></td>
+                            @else
+                                <td class="text-center text-muted">Evaluado</td>
+                            @endif
+                        </tr>
+                    @empty
+                        <tr>
+                            <td class="text-center text-muted" colspan="9">No se encontraron evaluaciones.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
+    @include('evaluaciones.modal_evaluacion.evaluacion_form')
+
+@endsection
+
+@section('js')
+    <script>
+        var corto_plazo_accion_uuid = '{!! $corto_plazo_accion->uuid !!}';
+    </script>
+   <script src="{{asset('libs/js/validacionform/evaluacion_validar.js')}}"></script>
+@endsection
