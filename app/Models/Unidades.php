@@ -30,7 +30,11 @@ class Unidades extends Model
     
     //relacion uno a muchos
     public function trabajadores(){
-        return $this->hasMany(Trabajadores::class);
+        return $this->hasMany(Trabajadores::class, 'unidad_id');
+    }
+
+    public function corto_plazo_acciones(){
+        return $this->hasManyThrough(CortoPlazoAcciones::class, Trabajadores::class, 'unidad_id', 'trabajador_id');
     }
 
     // una unidad pertenece a una gerencia

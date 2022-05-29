@@ -8,7 +8,7 @@ function update(accion_uuid){
             type: 'PUT',
             data: datosform,
             success:function(resp){
-                console.log(resp);
+                // console.log(resp);
                 $('#modal').modal('hide');
                 $('#table').DataTable().ajax.reload(null, false);
                 // contamos las acciones que tengan un status 1 para mostrarlos como notificacion en el sidebar
@@ -22,7 +22,7 @@ function update(accion_uuid){
                     }
                 })
                 .catch(function(error){
-                    console.log(error);
+                    // console.log(error);
                 });
             }
         })

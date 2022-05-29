@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CortoPlazoAcciones;
 use App\Models\Pilares;
 use App\Models\Unidades;
+use Carbon\Carbon;
 use Elibyy\TCPDF\Facades\TCPDF as PDF;
 use Illuminate\Http\Request;
 
@@ -23,10 +24,35 @@ class DeterminarOperacionesTareasController extends Controller
 
         // return $data_trabajador->withCount('corto_plazo_acciones')->get();
 
-        $corto_plazo_acciones = CortoPlazoAcciones::join('trabajadores', 'trabajadores.id', '=', 'corto_plazo_acciones.trabajador_id')
+        $date = Carbon::now()->addYear();
+            $pilares = Pilares::select('gestion_pilar')
+                ->groupBy('gestion_pilar')
+                ->orderBy('gestion_pilar', 'ASC')
+                ->get();
+        if ($pilares->count()) {
+            // si existe un pilar para la gestion siguiente se buscara los pilares con la gestion siguiente, si no se mostrara los pilares de la ultima gestion creada
+            if ($pilares->last()->gestion_pilar == $date->year) {
+                $gestion = $date->year;
+            }else{
+                $gestion = $pilares->last()->gestion_pilar;
+            }
+        }
+
+        if (isset($gestion)) {
+            $corto_plazo_acciones = CortoPlazoAcciones::join('trabajadores', 'trabajadores.id', '=', 'corto_plazo_acciones.trabajador_id')
             ->join('unidades', 'unidades.id', '=', 'trabajadores.unidad_id')
+            ->join('pei_objetivos_especificos', 'pei_objetivos_especificos.id', '=', 'corto_plazo_acciones.pei_objetivo_especifico_id')
+            ->join('mediano_plazo_acciones', 'mediano_plazo_acciones.id', '=', 'pei_objetivos_especificos.mediano_plazo_accion_id')
+            ->join('resultados', 'resultados.id', 'mediano_plazo_acciones.resultado_id')
+            ->join('metas', 'metas.id', '=', 'resultados.meta_id')
+            ->join('pilares', 'pilares.id', '=', 'metas.pilar_id')
             ->select('corto_plazo_acciones.*')
-            ->where('unidades.id', $unidad->id)->get();
+            ->where('pilares.gestion_pilar', $gestion)
+            ->where('unidades.id', $unidad->id)
+            ->get();
+        } else {
+            $corto_plazo_acciones = [];
+        }
 
         return view('reporte_operaciones_tareas.index', compact('unidad', 'corto_plazo_acciones'));
     }
@@ -40,10 +66,10 @@ class DeterminarOperacionesTareasController extends Controller
         // return view('reporte_operaciones_tareas.reporte_pdf', compact('trabajador', 'acciones_corto_plazo'));
         $view = view('reporte_operaciones_tareas.reporte_pdf', compact('unidad', 'corto_plazo_acciones'));
         $html = $view->render();
-        PDF::SetTitle('TITULO_ejemplooo');
+        PDF::SetTitle('Reporte Operaciones y Tareas');
         // Custom Header
         $gerencia = $unidad->gerencia;
-        $gestion_pilar = Pilares::select('gestion_pilar')->groupBy('gestion_pilar')->orderBy('gestion_pilar', 'ASC')->get()->last();
+        $gestion_pilar = Pilares::select('gestion_pilar')->groupBy('gestion_pilar')->orderBy('gestion_pilar', 'ASC')->get()->last() ?? '--';
         PDF::setHeaderCallback(function($pdf) use ($unidad, $gerencia, $gestion_pilar) {
             $image_file = K_PATH_IMAGES.'logo_elapas.png'; //vendor/tecnickcom/examples/images
             $pdf->Image($image_file, 5, 2, 32, '', 'PNG', '', 'T', false, 200, '', false, false, 0, false, false, false);
@@ -51,7 +77,7 @@ class DeterminarOperacionesTareasController extends Controller
             $pdf->Ln(2); /*centrar y dar margin-top al title ESPACIO ENTRE LINEAS*/
             $pdf->SetFont('helvetica', 'B', 11);
             // Title
-            $pdf->Cell(0, 7, 'Determinacion de operaciones y tareas', 0, 1, 'C', 0, '', 0, false, 'M', 'M');
+            $pdf->Cell(0, 7, 'Determinacion de Operaciones y Tareas', 0, 1, 'C', 0, '', 0, false, 'M', 'M');
             // $pdf->Ln(1); /*ESPACIO ENTRE LINEAS*/
             $pdf->SetFont('helvetica', '', 9);
             $pdf->Ln(1);

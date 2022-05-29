@@ -39,7 +39,7 @@
             @if (!is_null($SelectedtUnidad))
                 <div class="mt-2 d-flex justify-content-end">
                     <div class="x-dropdown">
-                        <button class="x-dropdown-button boton default">Ver mas</button>
+                        <button class="x-dropdown-button boton default">Ver Reporte</button>
                         <ul class="x-dropdown-menu menu-right">
                             <li>
                                 <a href="{{ route('operaciones_tareas.index', $SelectedtUnidad) }}">Operaciones Tareas</a>

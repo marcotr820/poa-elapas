@@ -8,7 +8,7 @@
     }
     table tr td{
         border: 0.5px solid #b3b3b3;
-        padding: 3px;
+        padding: 4px;
     }
 </style>
     <div class="card">
@@ -44,7 +44,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5">No se encontraron resultados.</td>
+                            <td colspan="5" class="text-center text-muted">No se encontraron resultados.</td>
                         </tr>
                     @endforelse
                 </tbody>

@@ -37,7 +37,7 @@
 					<label for=""><strong>Documento / CI</strong></label>
 						<div class="input-group mb-2">
 							<!--preguntamos si hay algun error en el capo con name usuario si hay imprime is-invalid-->
-							<input type="number" name="usuario" class="form-control {{$errors->has('usuario') ? 'is-invalid' : ''}}" value="{{old('usuario')}}" placeholder="Usuario..." autocomplete="off">
+							<input type="number" name="usuario" class="form-control {{$errors->has('usuario') ? 'is-invalid' : ''}}" value="{{old('usuario')}}" placeholder="Usuario..." autocomplete="off" required>
 						</div>
 						<span class="text-danger">@error('usuario') {{ $message }} @enderror</span>
 					</div>
@@ -45,7 +45,7 @@
 					<div class="form-group">
 						<label for=""><strong>Password</strong></label>
 						<div class="input-group mb-2">
-							<input type="password" name="password" class="form-control {{$errors->has('password') ? 'is-invalid' : ''}}" placeholder="Password...">
+							<input type="password" name="password" class="form-control {{$errors->has('password') ? 'is-invalid' : ''}}" placeholder="Password..." required>
 							{{-- <input type="password" name="password" class="form-control {{$errors->has('password') ? 'is-invalid' : ''}}" placeholder="Password..."> --}}
 						</div>
 						<span class="text-danger">@error('password') {{ $message }} @enderror</span>

@@ -131,6 +131,11 @@ Route::group(['middleware' => ['auth:usuario']], function(){
     Route::get('items_actividad/{actividad}', [PoaController::class, 'items_actividad'])->name('items_actividad.index');
     Route::get('tareas_especificas_actividad/{actividad}', [PoaController::class, 'tareas_especificas_actividad'])->name('tareas_especificas_actividad.index');
 
+    Route::get('poas_gerencia', [PoaController::class, 'poas_gerencia'])->name('poas.gerencia');
+    Route::get('get_poas_gerencia/{gerencia}', [PoaController::class, 'get_poas_gerencia']);
+    Route::get('acciones_unidad/{unidad}', [PoaController::class, 'acciones_unidad']);
+
+
     //************************************** CORTO PLAZO ACCIONES **************************
     Route::get('/pei_objetivos_especifico/{pei_objetivo_especifico}/corto_plazo_acciones', [CortoPlazoAccionController::class, 'index'])->name('corto_plazo_acciones');
     Route::post('corto_plazo_acciones/{pei_objetivo_especifico}', [CortoPlazoAccionController::class, 'store']);

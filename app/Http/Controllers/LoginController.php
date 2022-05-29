@@ -14,15 +14,15 @@ class LoginController extends Controller
 {
     public function autenticacion (LoginRequest $request)
     {
-        $usuario = Usuario::where('usuario', $request->usuario)->first();
-        if($usuario && Hash::check($request->password, $usuario->password))
-        {
-            Auth::guard('usuario')->login($usuario);
-
-            // $request->session()->regenerate();
-
+        // $usuario = Usuario::where('usuario', $request->usuario)->first();
+        if (Auth::guard('usuario')->attempt(['usuario' => $request->usuario, 'password' => $request->password])) {
             return redirect()->route('index.home');
         }
+        // if($usuario && Hash::check($request->password, $usuario->password)){
+        //     Auth::guard('usuario')->login($usuario);
+        //     // $request->session()->regenerate();
+        //     return redirect()->route('index.home');
+        // }
     
         //si el login es incorrecto redireccionamos a la pagina raiz donde esta el login
         // return redirect()->back()->with("error_login", "Incorrecto password o usuario.");

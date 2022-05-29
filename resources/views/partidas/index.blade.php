@@ -21,7 +21,7 @@
             </div>
         </h5>
         <div class="card-body">
-            <div class="loading"><strong>Loading...</strong></div>
+            <h5 class="loading m-0">Loading...</h5>
             <article class="table-loading">
                 <table id="partidas" class="table table-striped display table-sm" style="width:100%">
                     <thead class="thead border-dark" style="background-color: skyblue;">

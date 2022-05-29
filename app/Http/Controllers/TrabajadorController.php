@@ -8,6 +8,7 @@ use App\Models\Trabajadores;
 use App\Models\Unidades;
 use App\Models\Usuario;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class TrabajadorController extends Controller
@@ -18,6 +19,7 @@ class TrabajadorController extends Controller
     }
 
     public function index(Request $request){
+        // return (string) Str::random(20).date('s');
         //obtenemos los datos pedidos de la peticion ajax
         if($request->ajax()){
             $query = Gerencias::join("unidades", "gerencias.id", "=", "unidades.gerencia_id")

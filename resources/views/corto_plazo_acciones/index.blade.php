@@ -72,7 +72,7 @@
                         switch(data){
                             case 'editar':
                                 return `
-                                <button class="btn btn-primary btn-sm" data-edit="" onclick="edit('${row.uuid}')"><i class="fas fa-pen"></i></button>
+                                <button class="boton blue" data-edit="" onclick="edit('${row.uuid}')"><i class="fas fa-pen"></i></button>
                                 `;
                             break;
 

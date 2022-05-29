@@ -7,7 +7,7 @@
     }
     table tr td{
         border: 0.5px solid #b3b3b3;
-        padding: 3px;
+        padding: 4px;
     }
 </style>
     <div class="card">
@@ -37,7 +37,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="2">No se encontraron registros.</td>
+                            <td colspan="2" class="text-center text-muted">No se encontraron registros.</td>
                         </tr>
                     @endforelse
                 </tbody>

@@ -48,7 +48,7 @@ class DirectrizPoaController extends Controller
         $pilares = Pilares::select('id', 'nombre_pilar', 'uuid', 'gestion_pilar')->where('gestion_pilar', date('Y')+1)->get();
         $view = view('directriz_poa.directriz_pdf', compact('pilares'));
         $html = $view->render();
-        PDF::SetTitle('TITULO_ejemplooo');
+        PDF::SetTitle('Directriz POA');
         // Custom Header
         $gestion = $pilares->first()->gestion_pilar;
         PDF::setHeaderCallback(function($pdf) use ($gestion){

@@ -2,12 +2,12 @@
 
 @section('contenido')
 <style>
+    table{
+        font-size: 12px;
+    }
     table td{
         padding: 5px;
         border: 0.5px solid #999999;
-    }
-    table thead{
-        font-size: 13px;
     }
 </style>
     <div class="card">
@@ -63,11 +63,24 @@
                             <td>{{ $evaluacion->ejecucion }}%</td>
                             <td>{{ $evaluacion->relacion_avance }}%</td>
                             @if ($evaluacion->trimestre == $trimestre)
-                                <td class="text-center"><button class="boton blue" data-edit="{{ $evaluacion->uuid }}" onclick="edit('{{ $evaluacion->uuid }}')">Editar</button></td>
+                                <td class="text-center">
+                                    <button class="boton blue" data-edit="{{ $evaluacion->uuid }}" onclick="edit('{{ $evaluacion->uuid }}')">Editar</button>
+                                </td>
                             @else
                                 <td class="text-center text-muted">Evaluado</td>
                             @endif
                         </tr>
+                        @if ($loop->last)
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>total:</td>
+                                <td>{{ number_format($corto_plazo_accion->evaluaciones->sum('presupuesto_ejecutado'), 2, '.', ',') }} Bs.</td>
+                                <td>{{ $corto_plazo_accion->evaluaciones->sum('ejecucion') }}%</td>
+                            </tr>
+                        @endif
                     @empty
                         <tr>
                             <td class="text-center text-muted" colspan="9">No se encontraron evaluaciones.</td>

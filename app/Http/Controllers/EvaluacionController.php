@@ -16,7 +16,7 @@ class EvaluacionController extends Controller
     public function index(CortoPlazoAcciones $corto_plazo_accion)
     {
         // $fecha_actual = Carbon::now();
-        $fecha_actual = Carbon::createFromDate("2022-04-01");
+        $fecha_actual = Carbon::createFromDate("2022-10-01");
 
         $fecha_inicio = Carbon::createFromDate($corto_plazo_accion->fecha_inicio);
         $fecha_fin = Carbon::createFromDate($corto_plazo_accion->fecha_fin);
@@ -69,7 +69,7 @@ class EvaluacionController extends Controller
     public function store(EvaluacionRequest $request, CortoPlazoAcciones $corto_plazo_accion)
     {
         // $fecha_actual = Carbon::now();
-        $fecha_actual = Carbon::createFromDate("2022-04-01");
+        $fecha_actual = Carbon::createFromDate("2022-10-01");
         switch ($fecha_actual->month) {
             case 2: case 3:
                 $resultado_esperado = "";
@@ -107,7 +107,7 @@ class EvaluacionController extends Controller
                 'eficacia' => ($request->resultado_logrado / $corto_plazo_accion->planificacion->$trimestre )*100,
                 'presupuesto' => $corto_plazo_accion->presupuesto_programado - $corto_plazo_accion->evaluaciones->sum('presupuesto_ejecutado'),
                 'presupuesto_ejecutado' => $request->presupuesto_ejecutado,
-                'ejecucion' => (($corto_plazo_accion->evaluaciones->sum('presupuesto_ejecutado') + $request->presupuesto_ejecutado) / $corto_plazo_accion->presupuesto_programado) * 100,
+                'ejecucion' => ($request->presupuesto_ejecutado / $corto_plazo_accion->presupuesto_programado) * 100,
                 'relacion_avance' => $relacion_avance,
                 'trimestre' => $trimestre,
                 'corto_plazo_accion_id' => $corto_plazo_accion->id
@@ -140,7 +140,7 @@ class EvaluacionController extends Controller
             'eficacia' => ($request->resultado_logrado / $evaluacion->resultado_esperado) * 100,
             'presupuesto' => $evaluacion->presupuesto,
             'presupuesto_ejecutado' => $request->presupuesto_ejecutado,
-            'ejecucion' => ($request->presupuesto_ejecutado / $evaluacion->presupuesto) * 100,
+            'ejecucion' => ($request->presupuesto_ejecutado / $evaluacion->corto_plazo_accion->presupuesto_programado) * 100,
             'relacion_avance' => 9.81,
         ]);
     }

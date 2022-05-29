@@ -32,7 +32,7 @@
                     <div class="form-group" data-block="input">
                         <label for="Password"><b>Password:</b></label>
                         <input class="validacion form-control" data-error="input" type="password" id="password"
-                            name="password" required>
+                            name="password">
                         <span class="text-danger" data-error="span" id="password-error"></span>
                     </div>
 

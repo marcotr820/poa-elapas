@@ -27,7 +27,7 @@
                 <tr>
                     <td><h6 class="m-0"><b>Presupuesto Ejecutado:</b></h6></td>
                     <td class="d-flex flex-row">
-                        <h6 class="m-0 mr-2 d-inline-block" style="width: 15%">{!!number_format($accion->items->sum('presupuesto'), 2, '.', ',')!!} Bs.</h6>
+                        <h6 class="m-0 mr-2 d-inline-block" style="width: 15%">{{number_format($accion->items->sum('presupuesto'), 2, '.', ',')}} Bs.</h6>
                         <div class="progress border border-dark" style="height: 18px; width: 85%;">
                             <div class="progress-bar" role="progressbar" 
                                 style="width:{{ ($accion->items->sum('presupuesto')/$accion->presupuesto_programado)*100 }}%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">

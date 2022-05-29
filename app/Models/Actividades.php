@@ -25,7 +25,7 @@ class Actividades extends Model
 
     public function corto_plazo_accion(){
         return $this->belongsToThrough(CortoPlazoAcciones::class, Operaciones::class);
-   }
+    }
 
     public function operacion(){
         return $this->belongsTo(Operaciones::class, "operacion_id");

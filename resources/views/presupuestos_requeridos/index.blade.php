@@ -49,7 +49,6 @@
 @endsection
 
 @section('js')
-    
     <script src="{{asset('libs/js/validacionform/presupuestos_requeridos.js')}}"></script>
     <script>
         var URL = "{{ asset('libs/datatables/es-ES.json') }}";
@@ -59,5 +58,4 @@
             }
         });
     </script>
-
 @endsection

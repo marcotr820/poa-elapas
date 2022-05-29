@@ -158,6 +158,13 @@
                         </a>
                     </li>
 
+                    <li class="bloque">
+                        <a href="{{route('poas.gerencia')}}" class="titulo">
+                            <i class="fas fa-address-card"></i>
+                            <span class="pl-2">POA Gerencia</span>
+                        </a>
+                    </li>
+
                 </ul>
             </div>
         </div>
@@ -187,7 +194,7 @@
                             <div class="data-session">
                                 <p class="m-0">Iniciado sesión como</p class="m-0">
                                 {{-- <p class="m-0"><strong>{{Auth::guard('usuario')->user()->trabajador->nombre}}</strong></p> --}}
-                                <p class="m-0"><strong>{{ auth('usuario')->user()->trabajador->nombre }}</strong></p>
+                                <p class="m-0"><strong>{{ strtolower(auth('usuario')->user()->trabajador->nombre) }}</strong></p>
                             </div>
                         </li>
                         <li>

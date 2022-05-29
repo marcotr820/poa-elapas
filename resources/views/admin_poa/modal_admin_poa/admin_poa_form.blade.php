@@ -17,7 +17,7 @@
                         </label>
                         <p id="accion_corto_plazo"></p>
                         <label class="m-0">
-                            <strong>Presupuesto:</strong>
+                            <strong>Presupuesto Programado:</strong>
                         </label>
                         <p><span id="presupuesto_accion"></span> Bs.</p>
                     </div>

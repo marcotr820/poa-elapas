@@ -58,7 +58,7 @@
                                                     <a href="{{ route('tareas_especificas_actividad.index', $act->uuid) }}">Tareas especificas</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{ route('items_actividad.index', $act->uuid) }}">Items servicios</a>
+                                                    <a href="{{ route('items_actividad.index', $act->uuid) }}">Items / servicios</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -85,7 +85,7 @@
                                                         <a href="{{ route('tareas_especificas_actividad.index', $act->uuid) }}">Tareas especificas</a>
                                                     </li>
                                                     <li>
-                                                        <a href="{{ route('items_actividad.index', $act->uuid) }}">Items servicios</a>
+                                                        <a href="{{ route('items_actividad.index', $act->uuid) }}">Items / servicios</a>
                                                     </li>
                                                 </ul>
                                             </div>
