@@ -1,5 +1,7 @@
 @extends('layouts.plantillabase')
 
+@section('title', 'Administrar Estados POA')
+
 @section('css')
 <style>
    table{
@@ -16,7 +18,7 @@
     <select id="select2" class="select2" onchange="cambio()" style="width: 100%, display: flex;">
         <option value=""> -- Seleccione Objetivo Especifico -- </option>
         @foreach ($objetivos_especificos as $obj)
-            <option value="{{$obj->uuid}}" data-gerencia="{{$obj->gerencia->nombre_gerencia}}">{{$obj->objetivo_institucional}} -> {{$obj->gerencia->nombre_gerencia}}</option>
+            <option value="{{$obj->uuid}}" data-gerencia="{{$obj->gerencia->nombre_gerencia}}">{{$obj->gerencia->nombre_gerencia}} >> {{$obj->objetivo_institucional}}</option>
         @endforeach
     </select>
 

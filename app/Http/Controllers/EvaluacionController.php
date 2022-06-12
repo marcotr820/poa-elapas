@@ -16,18 +16,14 @@ class EvaluacionController extends Controller
     public function index(CortoPlazoAcciones $corto_plazo_accion)
     {
         // $fecha_actual = Carbon::now();
-        $fecha_actual = Carbon::createFromDate("2022-10-01");
+        $fecha_actual = Carbon::createFromDate("2022-04-01");
 
         $fecha_inicio = Carbon::createFromDate($corto_plazo_accion->fecha_inicio);
         $fecha_fin = Carbon::createFromDate($corto_plazo_accion->fecha_fin);
+
         if($corto_plazo_accion->planificacion()->exists()){//si se logra ingresar a evaluaciones y no se cuenta con una planificacion se devolvera valores vacios para no generar error
             // if($fecha_actual >= $fecha_inicio && $fecha_actual <= $fecha_fin){
                 switch ($fecha_actual->month) {
-                    case 2: case 3:
-                        $resultado_esperado = "";
-                        $trimestre = "";
-                        break;
-
                     case 4: case 5: case 6:
                         if($corto_plazo_accion->planificacion->primer_trimestre !== 0){
                             $resultado_esperado = $corto_plazo_accion->planificacion->primer_trimestre;
@@ -44,7 +40,7 @@ class EvaluacionController extends Controller
                         else{ $resultado_esperado =""; $trimestre = ""; }
                         break;
 
-                    case 10: case 11: case 12:
+                    case 10: case 11:
                         if($corto_plazo_accion->planificacion->tercer_trimestre !== 0){
                             $resultado_esperado = $corto_plazo_accion->planificacion->tercer_trimestre;
                             $trimestre = "tercer_trimestre";
@@ -52,8 +48,30 @@ class EvaluacionController extends Controller
                         else{ $resultado_esperado =""; $trimestre = ""; }
                         break;
                     
+                    case 12: 
+                        if($corto_plazo_accion->planificacion->cuarto_trimestre !== 0){
+                            $resultado_esperado = $corto_plazo_accion->planificacion->cuarto_trimestre;
+                            $trimestre = "cuarto_trimestre";
+                        }
+                        else{ $resultado_esperado =""; $trimestre = ""; }
+                        break;
+
+                    case 1:
+                        if($fecha_fin->year < $fecha_actual->year)
+                        {
+                            if($corto_plazo_accion->planificacion->cuarto_trimestre !== 0)
+                            {
+                                $resultado_esperado = $corto_plazo_accion->planificacion->cuarto_trimestre;
+                                $trimestre = "cuarto_trimestre";
+                            }
+                            else{ $resultado_esperado =""; $trimestre = ""; }
+                        }
+                        else{ $resultado_esperado =""; $trimestre = ""; }
+                        break;
+
                     default:
-                        #code
+                        $resultado_esperado = "";
+                        $trimestre = "";
                         break;
                 }
             // }
@@ -69,13 +87,9 @@ class EvaluacionController extends Controller
     public function store(EvaluacionRequest $request, CortoPlazoAcciones $corto_plazo_accion)
     {
         // $fecha_actual = Carbon::now();
-        $fecha_actual = Carbon::createFromDate("2022-10-01");
-        switch ($fecha_actual->month) {
-            case 2: case 3:
-                $resultado_esperado = "";
-                // $trimestre = "";
-                break;
-
+        $fecha_actual = Carbon::createFromDate("2022-04-01");
+        switch ($fecha_actual->month) 
+        {
             case 4: case 5: case 6:
                 $resultado_esperado = $corto_plazo_accion->planificacion->primer_trimestre;
                 $trimestre = "primer_trimestre";
@@ -86,11 +100,21 @@ class EvaluacionController extends Controller
                 $trimestre = "segundo_trimestre";
                 break;
 
-            case 10: case 11: case 12:
+            case 10: case 11:
                 $resultado_esperado = $corto_plazo_accion->planificacion->tercer_trimestre;
                 $trimestre = "tercer_trimestre";
                 break;
             
+            case 12:
+                $resultado_esperado = $corto_plazo_accion->planificacion->cuarto_trimestre;
+                $trimestre = "cuarto_trimestre";
+                break;
+
+            case 1:
+                $resultado_esperado = $corto_plazo_accion->planificacion->cuarto_trimestre;
+                $trimestre = "cuarto_trimestre";
+                break;
+
             default:
                 #code
                 break;
@@ -134,6 +158,10 @@ class EvaluacionController extends Controller
         //     throw ValidationException::withMessages(['presupuesto_ejecutado' => "Su presupuesto restante es de $presupuesto_restante Bs."]);
         // }
 
+        $fecha_inicio = Carbon::parse($evaluacion->corto_plazo_accion->fecha_inicio);
+        $fecha_now = Carbon::now();
+        $fecha_fin = Carbon::parse($evaluacion->corto_plazo_accion->fecha_fin);
+        $relacion_avance = round(($fecha_now->diffInDays($fecha_inicio) / ( $fecha_now->diffInDays($fecha_inicio) * $fecha_fin->diffInDays($fecha_now) ))*100, 2);
         $evaluacion->update([
             'resultado_logrado' => $request->resultado_logrado,
             // volvemos a registrar la eficacia con el resultado esperado guardado en la columna de la evaluacion que vamos a editar
@@ -141,7 +169,7 @@ class EvaluacionController extends Controller
             'presupuesto' => $evaluacion->presupuesto,
             'presupuesto_ejecutado' => $request->presupuesto_ejecutado,
             'ejecucion' => ($request->presupuesto_ejecutado / $evaluacion->corto_plazo_accion->presupuesto_programado) * 100,
-            'relacion_avance' => 9.81,
+            'relacion_avance' => $relacion_avance,
         ]);
     }
 

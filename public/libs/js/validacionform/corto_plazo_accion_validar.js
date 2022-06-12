@@ -1,4 +1,21 @@
 const d = document;
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-right',
+    iconColor: 'white',
+    customClass: {
+       popup: 'colored-toast'
+    },
+    showConfirmButton: false,
+    timer: 1500,
+    showClass: {
+       popup: 'animate__animated animate__fadeInUp'
+    },
+    hideClass: {
+       popup: 'animate__animated animate__fadeOutUp'
+    }
+})
+
 function edit(accion_uuid){
     d.getElementById('form').onsubmit = function(e){
         if(! e.target.hasAttribute('data-form')){
@@ -8,11 +25,10 @@ function edit(accion_uuid){
                 type: 'PUT',
                 data: datosform,
                 beforeSend:function(){
+                    d.querySelector('.overlay').classList.add('show');
                     $(document).find('[data-error="input"]').removeClass('is-invalid');
                     $(document).find('[data-error="textarea"]').removeClass('is-invalid');
                     $(document).find('[data-error="span"]').text('');
-                    d.querySelector('.spinner-border').style.display = 'inline-block';
-                    d.getElementById('btnGuardar').disabled = true;
                 },
                 success:function(res){
                     $('#corto_plazo_acciones').DataTable().ajax.reload(null, false);
@@ -21,8 +37,7 @@ function edit(accion_uuid){
                 error:function(respuesta){
                     if(respuesta.responseJSON.hasOwnProperty('errors')){
                         $.each(respuesta.responseJSON.errors, function(key, value){
-                            d.querySelector('.spinner-border').style.display = 'none';
-                            d.getElementById('btnGuardar').disabled = false;
+                            d.querySelector('.overlay').classList.remove('show');
                             // console.log(key);
                             // console.log(value);
                             $('input[id='+ key +']').addClass('is-invalid');
@@ -51,11 +66,12 @@ function delet(accion_uuid){
             },
             error:function()
             {
-                Swal.fire({
+                $('#modal_delete').modal('hide');
+                Toast.fire({
+                    padding: '6px',
+                    width: '320px',
                     icon: 'error',
-                    html: "No se pudo eliminar el registro",
-                    width: '20%',
-                    confirmButtonText: 'Aceptar',
+                    title: 'Error al realizar la acción'
                 })
             }
         })
@@ -75,8 +91,7 @@ d.addEventListener('click', (e)=>{
     }
 
     if(e.target.matches('#nuevo') || e.target.matches('#nuevo *')){
-        d.querySelector('.spinner-border').style.display = 'none';
-        d.getElementById('btnGuardar').disabled = false;
+        d.querySelector('.overlay').classList.remove('show');
         $(document).find('[data-error="input"]').removeClass('is-invalid');
         $(document).find('[data-error="textarea"]').removeClass('is-invalid');
         $(document).find('[data-error="span"]').text('');
@@ -87,8 +102,7 @@ d.addEventListener('click', (e)=>{
     }
 
     if(e.target.matches('[data-edit]') || e.target.matches('[data-edit] *')){
-        d.querySelector('.spinner-border').style.display = 'none';
-        d.getElementById('btnGuardar').disabled = false;
+        d.querySelector('.overlay').classList.remove('show');
         $(document).find('[data-error="input"]').removeClass('is-invalid');
         $(document).find('[data-error="textarea"]').removeClass('is-invalid');
         $(document).find('[data-error="span"]').text('');
@@ -124,11 +138,10 @@ d.addEventListener('submit', (e)=>{
                 type: 'POST',
                 data: datosform,
                 beforeSend:function(resp){
+                    d.querySelector('.overlay').classList.add('show');
                     $(document).find('[data-error="input"]').removeClass('is-invalid');
                     $(document).find('[data-error="textarea"]').removeClass('is-invalid');
                     $(document).find('[data-error="span"]').text('');
-                    d.querySelector('.spinner-border').style.display = 'inline-block';
-                    d.getElementById('btnGuardar').disabled = true;
                 },
                 success:function(resp){
                     $('#corto_plazo_acciones').DataTable().ajax.reload(null, false);
@@ -136,8 +149,7 @@ d.addEventListener('submit', (e)=>{
                 },
                 error:function(resp){
                     if(resp.responseJSON.hasOwnProperty('errors')){
-                        d.querySelector('.spinner-border').style.display = 'none';
-                        d.getElementById('btnGuardar').disabled = false;
+                        d.querySelector('.overlay').classList.remove('show');
                         $.each(resp.responseJSON.errors, function(key, value){
                             $('input[id='+key+']').addClass('is-invalid');
                             $('span[id='+key+'-error]').text(value);

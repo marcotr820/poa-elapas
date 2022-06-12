@@ -1,4 +1,21 @@
 const d = document;
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-right',
+    iconColor: 'white',
+    customClass: {
+       popup: 'colored-toast'
+    },
+    showConfirmButton: false,
+    timer: 1500,
+    showClass: {
+       popup: 'animate__animated animate__fadeInUp'
+    },
+    hideClass: {
+       popup: 'animate__animated animate__fadeOutUp'
+    }
+})
+
 //Initialize Select2 Elements
 $('.select2').select2({
     theme: 'bootstrap4',
@@ -22,11 +39,11 @@ function edit(usuario_uuid){
                 $('#usuarios').DataTable().ajax.reload();
             })
             .catch(function (error){
-                d.querySelector('.overlay').classList.remove('show');
                 // console.log(error.response.data.errors);
                 const objeto = error.response.data.errors; //creamos el objeto para luego recorrerlo
                 if (error.response.data.hasOwnProperty('errors')) //preguntamos si exite la propiedad donde se almacenan los errores false/true
                 {
+                    d.querySelector('.overlay').classList.remove('show');
                     for (let key in  objeto) 
                     {
                         //key: llave    objeto[key]: valor respuesta
@@ -56,11 +73,12 @@ function delet(usuario_uuid){
             },
             error:function()
             {
-                Swal.fire({
+                $('#modal_delete').modal('hide');
+                Toast.fire({
+                    padding: '6px',
+                    width: '320px',
                     icon: 'error',
-                    html: "No se pudo eliminar al Usuario",
-                    width: '20%',
-                    confirmButtonText: 'Aceptar',
+                    title: 'Error al realizar la acción'
                 })
             }
         })

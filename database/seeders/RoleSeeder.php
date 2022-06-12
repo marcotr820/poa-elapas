@@ -17,6 +17,7 @@ class RoleSeeder extends Seeder
         $role1 = Role::create(['guard_name' => 'usuario', 'name' => 'ADMIN']);
         $role2 = Role::create(['guard_name' => 'usuario', 'name' => 'PLANIFICADOR']);
         $role3 = Role::create(['guard_name' => 'usuario', 'name' => 'TRABAJADOR']);
+        $role4 = Role::create(['guard_name' => 'usuario', 'name' => 'GERENTE']);
 
         //despues de crear el permiso lo relaciona con el rol ->assignRole
         Permission::create(['guard_name' => 'usuario', 'name' => 'SUPER-ADMIN'])->assignRole($role1);
@@ -32,5 +33,8 @@ class RoleSeeder extends Seeder
         // TRABAJADOR
         Permission::create(['guard_name' => 'usuario', 'name' => 'VER-POA'])->assignRole($role3);
         Permission::create(['guard_name' => 'usuario', 'name' => 'VER-PLANIFICACION-EVALUACION-POA'])->assignRole($role3);
+
+        // GERENTE
+        Permission::create(['guard_name' => 'usuario', 'name' => 'VER-POA-UNIDADES-GERENCIA'])->assignRole($role4);
     }
 }

@@ -1,5 +1,7 @@
 @extends('layouts.plantillabase')
 
+@section('title', 'Crear Evaluación')
+
 @section('contenido')
 <style>
     table{

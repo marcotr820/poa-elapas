@@ -13,6 +13,16 @@ body{
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+/* LAYOUT */
+.layout-roles{
+    color: #eee;
+    font-size: 12px;
+    font-weight: 600;
+    border: 0.5px solid #eee;
+    padding: 2px;
+    border-radius: 5px;
+}
+
 /*-----------------
 	1. MAIN
 -----------------------*/
@@ -311,6 +321,7 @@ input::placeholder { text-transform: none; } /* placeholder */
     margin-left: auto;
     color: #fff;
     background-color:#c62828;
+    font-size: 12px;
 }
 /*-----------------
 	5. Sidebar Menu END
@@ -337,53 +348,6 @@ input::placeholder { text-transform: none; } /* placeholder */
 /*-----------------
 	7. Toast
 -----------------------*/
-#toast-success{
-    background: #008f49;
-    color: white;
-    font-size: 1rem;
-    padding: 15px;
-    /*display: inline-block;*/
-    display: flex;
-    align-items: center;
-    text-align: center;
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    border-radius: 5%;
-    transform: translateY(100px);
-    transition: all 300ms;
-}
-#toast-success.show{
-    transform: translateY(0);
-}
-#toast-success i{
-    font-size: 1.5rem;
-}
-
-#toast-error{
-    background: #c62828;
-    color: white;
-    font-size: 1rem;
-    padding: 15px;
-    /*display: inline-block;*/
-    display: flex;
-    align-items: center;
-    text-align: center;
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    border-radius: 5%;
-    transform: translateY(100px);
-    transition: all 300ms;
-}
-
-#toast-error.show{
-    transform: translateY(0);
-}
-
-#toast-error i{
-    font-size: 1.5rem;
-}
 
 /*-----------------
 	7. Toast END
@@ -461,6 +425,7 @@ table thead tr td{
     transform: translate(0, 0) !important;
 }
 
+/* OVERLAY MODAL INICIO */
 .modal-dialog .overlay {
     opacity: 0;
     pointer-events: none;
@@ -477,7 +442,7 @@ table thead tr td{
     justify-content: center;
     -ms-flex-align: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.6);
     color: #ddd;
     border-radius: 0.3rem;
     transition: opacity 0.2s ease;
@@ -486,6 +451,7 @@ table thead tr td{
     opacity: 1;
     pointer-events: visible;
 }
+/* OVERLAY MODAL FIN */
 
 /*-----------------
 	10. Modal END
@@ -589,11 +555,11 @@ table thead tr td{
 	12. Toast SweetAlert2
 -----------------------*/
 .colored-toast.swal2-icon-success {
-    background-color: #28a745 !important;
+    background-color: #2d862d !important;
   }
   
   .colored-toast.swal2-icon-error {
-    background-color: #f27474 !important;
+    background-color: #A0111F !important;
   }
   
   .colored-toast.swal2-icon-warning {

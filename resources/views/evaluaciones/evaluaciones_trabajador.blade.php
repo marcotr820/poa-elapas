@@ -1,4 +1,7 @@
 @extends('layouts.plantillabase')
+
+@section('title', 'Ver Evaluación Trabajador')
+
 @section('contenido')
 <style>
     .table-evaluaciones td{

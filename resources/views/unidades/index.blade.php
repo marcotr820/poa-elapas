@@ -1,5 +1,7 @@
 @extends('layouts.plantillabase')
 
+@section('title', 'Unidades')
+
 @section('contenido')
     <div class="card">
         <h5 class="card-header py-1 d-flex justify-content-between align-items-center">

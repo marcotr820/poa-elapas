@@ -1,5 +1,7 @@
 @extends('layouts.plantillabase')
 
+@section('title', 'Pei Objetivo Institucional Especifico')
+
 @section('contenido')
     <div class="card">
         <div class="bg-light p-2">

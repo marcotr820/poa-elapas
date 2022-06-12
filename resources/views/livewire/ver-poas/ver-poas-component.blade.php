@@ -42,10 +42,10 @@
                         <button class="x-dropdown-button boton default">Ver Reporte</button>
                         <ul class="x-dropdown-menu menu-right">
                             <li>
-                                <a href="{{ route('operaciones_tareas.index', $SelectedtUnidad) }}">Operaciones Tareas</a>
+                                <a href="{{ route('operaciones_tareas.index', $SelectedtUnidad) }}" target="_blank">Operaciones Tareas</a>
                             </li>
                             <li>
-                                <a href="{{ route('requerimientos.index', $SelectedtUnidad) }}">Requerimientos</a>
+                                <a href="{{ route('requerimientos.index', $SelectedtUnidad) }}" target="_blank">Requerimientos</a>
                             </li>
                         </ul>
                     </div>
@@ -93,7 +93,7 @@
                                             echo $row_btn > 1 ?  "rowspan='$row_btn'" : '';
                                             ?>
                                         >
-                                            <a href="{{ route('actividades_accion_corto_plazo', $acp->uuid) }}" class="boton blue">Ver</a>
+                                            <a href="{{ route('actividades_accion_corto_plazo', $acp->uuid) }}" class="boton blue" target="_blank">Ver</a>
                                         </td>
                                     @endif
                                 @empty
@@ -110,7 +110,7 @@
                                     }
                                     echo $row_btn > 1 ?  "rowspan='$row_btn'" : '';
                                     ?>
-                                    ><a href="{{ route('actividades_accion_corto_plazo', $acp->uuid) }}" class="boton blue">Ver</a>
+                                    ><a href="{{ route('actividades_accion_corto_plazo', $acp->uuid) }}" class="boton blue" target="_blank">Ver</a>
                                     </td>
                                 @endforelse
                             @endif

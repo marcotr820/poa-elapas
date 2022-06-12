@@ -10,6 +10,8 @@ class PermissionController extends Controller
 {
     public function index(Request $request)
     {
+        // $permiso = Permission::find(10);
+        // return $permiso->roles()->exists();
         if($request->ajax())
         {
             $query = Permission::select('id', 'name');
@@ -38,6 +40,10 @@ class PermissionController extends Controller
     }
 
     public function destroy(Permission $permission){
+        if($permission->roles()->exists())
+        {
+            return abort(409);
+        }
         $permission->delete();
     }
 }

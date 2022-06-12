@@ -1,7 +1,7 @@
-<div class="modal fade animado" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade animado" id="modal" tabindex="-1" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
    <div class="modal-dialog">
      <div class="modal-content">
-        {{--  --}}
+        {{-- OVERLAY MODAL --}}
         <div class="overlay">
           <i class="fas fa-2x fa-sync fa-spin"></i>
         </div>

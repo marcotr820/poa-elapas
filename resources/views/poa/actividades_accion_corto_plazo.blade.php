@@ -1,5 +1,7 @@
 @extends('layouts.plantillabase')
 
+@section('title', 'Reporte Actividad')
+
 @section('contenido')
 <style>
     table{
@@ -10,7 +12,7 @@
     }
     table tr td{
         border: 0.5px solid #b3b3b3;
-        padding: 3px;
+        padding: 3px 5px;
     }
     table .boton{
         padding: 2px 7px;
@@ -20,8 +22,8 @@
     <div class="card">
         <div class="card-header">
             <div>
-                <strong>Accion Corto Plazo:</strong> {{$accion_corto_plazo->accion_corto_plazo}}
-                <br>
+                <p class="m-0"><strong>Unidad:</strong> enviar $unidad</p>
+                <p class="m-0"><strong>Accion Corto Plazo:</strong> {{$accion_corto_plazo->accion_corto_plazo}}</p>
                 <a href="{{ route('poa.ver_poas') }}" class="boton red mt-2"><i class="fas fa-arrow-left"></i> Volver Atras</a>
             </div>
         </div>

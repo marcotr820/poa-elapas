@@ -1,5 +1,7 @@
 @extends('layouts.plantillabase')
 
+@section('title', 'Acciones Corto Plazo')
+
 @section('contenido')
 
     <div class="card">

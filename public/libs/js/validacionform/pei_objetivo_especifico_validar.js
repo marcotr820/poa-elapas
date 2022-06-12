@@ -1,9 +1,25 @@
 const d = document;
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-right',
+    iconColor: 'white',
+    customClass: {
+       popup: 'colored-toast'
+    },
+    showConfirmButton: false,
+    timer: 1500,
+    showClass: {
+       popup: 'animate__animated animate__fadeInUp'
+    },
+    hideClass: {
+       popup: 'animate__animated animate__fadeOutUp'
+    }
+})
+
 function edit(pei_objetivo_uuid){
     d.getElementById('form').onsubmit = function(e){
         if(! e.target.hasAttribute('data-form')){
-            d.querySelector('.spinner-border').style.display = 'inline-block';
-            d.getElementById('btnGuardar').setAttribute('disabled', true);
+            d.querySelector('.overlay').classList.add('show');
             let datosform = $('#form').serializeArray();
             $.ajax({
                 url:"/pei_objetivos_especificos/" + pei_objetivo_uuid,
@@ -21,8 +37,7 @@ function edit(pei_objetivo_uuid){
                 },
                 error:function(respuesta){
                     if(respuesta.responseJSON.hasOwnProperty('errors')){
-                        d.querySelector('.spinner-border').style.display = 'none';
-                        d.getElementById('btnGuardar').removeAttribute('disabled');
+                        d.querySelector('.overlay').classList.remove('show');
                         $.each(respuesta.responseJSON.errors, function(key, value){
                             // console.log(key);
                             // console.log(value);
@@ -53,11 +68,12 @@ function delet(pei_objetivo_uuid){
             },
             error:function()
             {
-                Swal.fire({
+                $('#modal_delete').modal('hide');
+                Toast.fire({
+                    padding: '6px',
+                    width: '320px',
                     icon: 'error',
-                    html: "No se pudo eliminar el registro",
-                    width: '20%',
-                    confirmButtonText: 'Aceptar',
+                    title: 'Error al realizar la acción'
                 })
             }
         })
@@ -66,8 +82,7 @@ function delet(pei_objetivo_uuid){
 
 d.addEventListener('click', (e)=>{
     if(e.target.matches('#nuevo') || e.target.matches('#nuevo *')){
-        d.querySelector('.spinner-border').style.display = 'none';
-        d.getElementById('btnGuardar').removeAttribute('disabled');
+        d.querySelector('.overlay').classList.remove('show');
         $(document).find('[data-error="span"]').text('');
         $(document).find('[data-error="input"]').removeClass('is-invalid');
         $(document).find('[data-error="select"]').removeClass('is-invalid');
@@ -80,8 +95,7 @@ d.addEventListener('click', (e)=>{
     }
 
     if(e.target.matches('[data-edit]') || e.target.matches('[data-edit] *')){
-        d.querySelector('.spinner-border').style.display = 'none';
-        d.getElementById('btnGuardar').removeAttribute('disabled');
+        d.querySelector('.overlay').classList.remove('show');
         $(document).find('[data-error="span"]').text('');
         $(document).find('[data-error="input"]').removeClass('is-invalid');
         $(document).find('[data-error="select"]').removeClass('is-invalid');
@@ -109,8 +123,7 @@ d.addEventListener('submit', (e)=>{
     if(e.target.matches('#form')){
         e.preventDefault();
         if(e.target.hasAttribute('data-form')){
-            d.querySelector('.spinner-border').style.display = 'inline-block';
-            d.getElementById('btnGuardar').setAttribute('disabled', true);
+            d.querySelector('.overlay').classList.add('show');
             var datosform = $('#form').serializeArray();
             $.ajax({
                 // url:$(this).attr('action'),
@@ -130,8 +143,7 @@ d.addEventListener('submit', (e)=>{
                 },
                 error:function(resp){
                     if(resp.responseJSON.hasOwnProperty('errors')){
-                        d.querySelector('.spinner-border').style.display = 'none';
-                        d.getElementById('btnGuardar').removeAttribute('disabled');
+                        d.querySelector('.overlay').classList.remove('show');
                         $.each(resp.responseJSON.errors, function(key, value){
                             // console.log(key);
                             // console.log(value);

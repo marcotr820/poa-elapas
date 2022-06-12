@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title> @yield('title') </title>
     {{-- google font fuente --}}
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
@@ -37,6 +37,7 @@
 
     {{-- toastr --}}
     <link rel="stylesheet" href="{{asset('libs/plugins/toastr/toastr.min.css')}}">
+    {{-- <link rel="stylesheet" href="{{asset('libs/plugins/toastr/toastr.css')}}"> --}}
 
     @yield('css')
 
@@ -128,7 +129,8 @@
                         <a href="{{route('admin_poa.index')}}" class="titulo">
                             <i class="fas fa-stream"></i>
                             <span class="pl-2">Administrar estados POA</span>
-                            <span class="badge" id="notificacion"></span>
+                            <span class="badge badge-primary badge-pill" id="notificacion"></span>
+                            {{-- <span class="badge" id="notificacion"></span> --}}
                         </a>
                     </li>
                     @endcan
@@ -158,12 +160,14 @@
                         </a>
                     </li>
 
+                    @can('VER-POA-UNIDADES-GERENCIA')
                     <li class="bloque">
                         <a href="{{route('poas.gerencia')}}" class="titulo">
                             <i class="fas fa-address-card"></i>
                             <span class="pl-2">POA Gerencia</span>
                         </a>
                     </li>
+                    @endcan
 
                 </ul>
             </div>
@@ -172,7 +176,7 @@
         <div class="main">
             <!--*****************CABEZA MENU**********************-->
             <div class="topbar">
-                <div class="toggle" id="toggle">
+                <div class="toggle d-inline-flex" id="toggle">
                     <i class="fas fa-bars"></i>
                 </div>
 
@@ -185,6 +189,8 @@
                 @role('TRABAJADOR')
                     <p class="btn btn-danger btn-sm">TRABAJADOR</p>
                 @endrole --}}
+
+                {{-- <span class="badge badge-secondary">{{ auth('usuario')->user()->roles }}</span> --}}
     
                 {{-- DROP DOWN PERFIL CERRAR SESION --}}
                 <div class="perfil">
@@ -192,9 +198,14 @@
                     <ul class="link-perfil">
                         <li>
                             <div class="data-session">
-                                <p class="m-0">Iniciado sesión como</p class="m-0">
+                                <p class="m-0">Iniciado sesión como:</p class="m-0">
                                 {{-- <p class="m-0"><strong>{{Auth::guard('usuario')->user()->trabajador->nombre}}</strong></p> --}}
                                 <p class="m-0"><strong>{{ strtolower(auth('usuario')->user()->trabajador->nombre) }}</strong></p>
+                                <hr class="bg-dark my-1">
+                                <p class="m-0">Roles:</p>
+                                @foreach (auth('usuario')->user()->roles as $rol)
+                                    <p class="m-0"><strong>* {{ ucfirst(strtolower($rol->name)) }}</strong></p>
+                                @endforeach
                             </div>
                         </li>
                         <li>

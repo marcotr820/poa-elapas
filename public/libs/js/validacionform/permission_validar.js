@@ -1,4 +1,20 @@
 const d = document;
+const Toast = Swal.mixin({
+   toast: true,
+   position: 'top-right',
+   iconColor: 'white',
+   customClass: {
+      popup: 'colored-toast'
+   },
+   showConfirmButton: false,
+   timer: 1500,
+   showClass: {
+      popup: 'animate__animated animate__fadeInUp'
+   },
+   hideClass: {
+      popup: 'animate__animated animate__fadeOutUp'
+   }
+})
 
 function edit(id){
    d.getElementById('form').onsubmit = function(e){
@@ -103,11 +119,11 @@ d.addEventListener('submit', (e)=>{
                   $("#permisos").DataTable().ajax.reload(null, false);
                },
                error:function(){
-                  Swal.fire({
+                  Toast.fire({
+                     padding: '6px',
+                     width: '320px',
                      icon: 'error',
-                     html: "No se pudo eliminar el registro",
-                     width: '20%',
-                     confirmButtonText: 'Aceptar',
+                     title: 'Error al realizar la acción'
                   })
                }
             })

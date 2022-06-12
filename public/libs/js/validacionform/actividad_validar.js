@@ -1,23 +1,26 @@
 const d = document;
-toastr.options = {
-    "closeButton": true,
-    "debug": false,
-    "newestOnTop": false,
-    "progressBar": false,
-    "positionClass": "toast-top-right",
-    "preventDuplicates": false,
-    "onclick": null,
-    "showDuration": "500",
-    "hideDuration": "1000",
-    "timeOut": "1500"
-}
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-right',
+    iconColor: 'white',
+    customClass: {
+       popup: 'colored-toast'
+    },
+    showConfirmButton: false,
+    timer: 1500,
+    showClass: {
+       popup: 'animate__animated animate__fadeInUp'
+    },
+    hideClass: {
+       popup: 'animate__animated animate__fadeOutUp'
+    }
+})
 
 function edit(actividad_uuid){
 	d.getElementById('form').onsubmit = function (e){
 		e.preventDefault();
 		if(! e.target.hasAttribute('data-form')){
-			d.querySelector('.spinner-border').style.display = 'inline-block';
-			d.getElementById('btnGuardar').disabled = true;
+			d.querySelector('.overlay').classList.add('show');
 			d.querySelectorAll('[data-error="textarea"]').forEach( (el) => { el.classList.remove('is-invalid') });
 			d.querySelectorAll('[data-error="input"]').forEach( (el) => { el.classList.remove('is-invalid') }); //limpiamos el input del error
     		d.querySelectorAll('[data-error="span"]').forEach( (el) => { el.textContent = '' }); //limpiamos el span del error
@@ -35,8 +38,7 @@ function edit(actividad_uuid){
 				let objeto = error.response.data.errors; //creamos el objeto para luego recorrerlo
 				if (error.response.data.hasOwnProperty('errors')) //preguntamos si exite la propiedad donde se almacenan los errores false/true
 				{
-					d.querySelector('.spinner-border').style.display = 'none';
-					d.getElementById('btnGuardar').disabled = false;
+					d.querySelector('.overlay').classList.remove('show');
 					for (let key in  objeto) 
 					{
 						d.getElementById(key).classList.add('is-invalid');
@@ -57,15 +59,20 @@ function delet(actividad_uuid){
 			$('#actividades').DataTable().ajax.reload(null, false);
 		})
 		.catch(function (error) {
-			toastr["error"]("No se pudo realizar la accion!");
+			$('#modal_delete').modal('hide');
+			Toast.fire({
+                padding: '6px',
+                width: '320px',
+                icon: 'error',
+                title: 'Error al realizar la acción'
+            })
 		});
 	}
 }
 // evento click
 d.addEventListener('click', (e)=>{
 	if(e.target.matches('#nuevo') || e.target.matches('#nuevo *')){
-		d.querySelector('.spinner-border').style.display = 'none';
-		d.getElementById('btnGuardar').disabled = false;
+		d.querySelector('.overlay').classList.remove('show');
 		d.querySelectorAll('[data-error="textarea"]').forEach( (el) => { el.classList.remove('is-invalid') });
 		d.querySelectorAll('[data-error="input"]').forEach( (el) => { el.classList.remove('is-invalid') }); //limpiamos el input del error
     	d.querySelectorAll('[data-error="span"]').forEach( (el) => { el.textContent = '' }); //limpiamos el span del error
@@ -78,8 +85,7 @@ d.addEventListener('click', (e)=>{
 
 	if(e.target.matches('[data-edit]') || e.target.matches('[data-edit] *'))
 	{
-		d.querySelector('.spinner-border').style.display = 'none';
-		d.getElementById('btnGuardar').disabled = false;
+		d.querySelector('.overlay').classList.remove('show');
 		d.querySelectorAll('[data-error="textarea"]').forEach( (el) => { el.classList.remove('is-invalid') });
 		d.querySelectorAll('[data-error="input"]').forEach(el => { el.classList.remove('is-invalid') }); //limpiamos el input del error
 		d.querySelectorAll('[data-error="span"]').forEach(el => { el.textContent = '' }); //limpiamos el span del error
@@ -121,8 +127,7 @@ d.addEventListener('submit', (e)=>{
 		e.preventDefault();
 		if(e.target.hasAttribute('data-form')) //verificamos si tiene el atributo data-form
 		{	//POST
-			d.querySelector('.spinner-border').style.display = 'inline-block';
-			d.getElementById('btnGuardar').disabled = true;
+			d.querySelector('.overlay').classList.add('show');
 			d.querySelectorAll('[data-error="textarea"]').forEach( (el) => { el.classList.remove('is-invalid') });
 			d.querySelectorAll('[data-error="input"]').forEach((el) => { el.classList.remove('is-invalid') }); //limpiamos el input del error
 			d.querySelectorAll('[data-error="span"]').forEach((el) => { el.textContent = '' }); //limpiamos el span del error
@@ -138,8 +143,7 @@ d.addEventListener('submit', (e)=>{
             const objeto = error.response.data.errors; //creamos el objeto para luego recorrerlo
             if (error.response.data.hasOwnProperty('errors')) //preguntamos si exite la propiedad donde se almacenan los errores false/true
             {
-				d.querySelector('.spinner-border').style.display = 'none';
-				d.getElementById('btnGuardar').disabled = false;
+				d.querySelector('.overlay').classList.remove('show');
                 for (let key in  objeto) 
                 {
                     //console.log(key);

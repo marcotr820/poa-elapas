@@ -75,6 +75,9 @@ class TrabajadorController extends Controller
 
     public function destroy(Trabajadores $trabajador)
     {
+        if($trabajador->id == 1){   //evitamos que se elimine el usuario con id 1 ADMINISTRADOR
+            abort(500);
+        }
         $trabajador->delete();
     }
 }

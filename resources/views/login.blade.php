@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>login Poa</title>
+	<title>Login Poa</title>
 	<!--bootstrap-->
 	<link rel="stylesheet" href="{{asset('css/app.css')}}">
 

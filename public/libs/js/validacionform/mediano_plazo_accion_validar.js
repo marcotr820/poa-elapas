@@ -1,23 +1,26 @@
 const d = document;
-toastr.options = {
-    "closeButton": true,
-    "debug": false,
-    "newestOnTop": false,
-    "progressBar": false,
-    "positionClass": "toast-top-right",
-    "preventDuplicates": false,
-    "onclick": null,
-    "showDuration": "500",
-    "hideDuration": "1000",
-    "timeOut": "1500"
-}
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-right',
+    iconColor: 'white',
+    customClass: {
+       popup: 'colored-toast'
+    },
+    showConfirmButton: false,
+    timer: 1500,
+    showClass: {
+       popup: 'animate__animated animate__fadeInUp'
+    },
+    hideClass: {
+       popup: 'animate__animated animate__fadeOutUp'
+    }
+})
 
 function edit(mediano_plazo_accion_uuid){
     d.getElementById('form').onsubmit = function(e){
         if(! e.target.hasAttribute('data-form')){
             e.preventDefault();
-            d.querySelector('.spinner-border').style.display = 'inline-block';
-            d.getElementById('btnGuardar').setAttribute('disabled', true);
+            d.querySelector('.overlay').classList.add('show');
             $(document).find('[data-error="textarea"]').removeClass('is-invalid');
             $(document).find('[data-error="span"]').text('');
             axios.put('/mediano_plazo_acciones/'+ mediano_plazo_accion_uuid, {
@@ -31,8 +34,7 @@ function edit(mediano_plazo_accion_uuid){
                 const objeto = error.response.data.errors; //creamos el objeto para luego recorrerlo
                 if (error.response.data.hasOwnProperty('errors')) //preguntamos si exite la propiedad donde se almacenan los errores false/true
                 {
-                    d.querySelector('.spinner-border').style.display = 'none';
-                    d.getElementById('btnGuardar').removeAttribute('disabled');
+                    d.querySelector('.overlay').classList.remove('show');
                     for (let key in  objeto)
                     {
                         d.getElementById(key).classList.add('is-invalid');
@@ -54,7 +56,12 @@ function delet(mediano_plazo_accion_uuid){
         })
         .catch(function (error){
             $('#modal_delete').modal('hide');
-            toastr["error"]("No se pudo realizar la accion!");
+            Toast.fire({
+                padding: '6px',
+                width: '320px',
+                icon: 'error',
+                title: 'Error al realizar la acción'
+            })
         })
     }
 }
@@ -67,8 +74,7 @@ d.addEventListener('click', (e)=>{
     }
 
     if(e.target.matches('#nuevo') || e.target.matches('#nuevo *')){
-        d.querySelector('.spinner-border').style.display = 'none';
-        d.getElementById('btnGuardar').removeAttribute('disabled');
+        d.querySelector('.overlay').classList.remove('show');
         $(document).find('[data-error="textarea"]').removeClass('is-invalid');
         $(document).find('[data-error="span"]').text('');
         d.getElementById('form').setAttribute('data-form', '');
@@ -78,8 +84,7 @@ d.addEventListener('click', (e)=>{
     }
 
     if(e.target.matches('[data-edit]') || e.target.matches('[data-edit] *')){
-        d.querySelector('.spinner-border').style.display = 'none';
-        d.getElementById('btnGuardar').removeAttribute('disabled');
+        d.querySelector('.overlay').classList.remove('show');
         $(document).find('[data-error="textarea"]').removeClass('is-invalid');
         $(document).find('[data-error="span"]').text('');
         d.getElementById('form').removeAttribute('data-form');
@@ -100,8 +105,7 @@ d.addEventListener('submit', (e)=>{
     if(e.target.matches('#form')){
         if(e.target.hasAttribute('data-form')){
             e.preventDefault();
-            d.querySelector('.spinner-border').style.display = 'inline-block';
-            d.getElementById('btnGuardar').setAttribute('disabled', true);
+            d.querySelector('.overlay').classList.add('show');
             $(document).find('[data-error="textarea"]').removeClass('is-invalid');
             $(document).find('[data-error="span"]').text('');
             const datos = new FormData(e.target);
@@ -115,8 +119,7 @@ d.addEventListener('submit', (e)=>{
                 const objeto = error.response.data.errors; //creamos el objeto para luego recorrerlo
                 if (error.response.data.hasOwnProperty('errors')) //preguntamos si exite la propiedad donde se almacenan los errores false/true
                 {
-                    d.querySelector('.spinner-border').style.display = 'none';
-                    d.getElementById('btnGuardar').removeAttribute('disabled');
+                    d.querySelector('.overlay').classList.remove('show');
                     for (let key in  objeto)
                     {
                         d.getElementById(key).classList.add('is-invalid');

@@ -1,5 +1,7 @@
 @extends('layouts.plantillabase')
 
+@section('title', 'Reporte Ítems / Servicios')
+
 @section('contenido')
 <style>
     table{

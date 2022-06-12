@@ -29,7 +29,7 @@ class EvaluacionRequest extends FormRequest
         
         switch ($fecha_actual->month) {
             case 2: case 3:
-                $resultado_esperado = '';
+                // $resultado_esperado = '';
                 break;
 
             case 4: case 5: case 6:
@@ -48,11 +48,19 @@ class EvaluacionRequest extends FormRequest
                 }
                 break;
 
-            case 10: case 11: case 12:
+            case 10: case 11:
                 if ($this->isMethod('post')) { 
                     $resultado_esperado = $this->route('corto_plazo_accion')->planificacion->tercer_trimestre;
                 } elseif ($this->isMethod('put')){ 
                     $resultado_esperado = $this->route('evaluacion')->corto_plazo_accion->planificacion->tercer_trimestre;
+                }
+                break;
+
+            case 12: case 1:
+                if ($this->isMethod('post')) { 
+                    $resultado_esperado = $this->route('corto_plazo_accion')->planificacion->cuarto_trimestre;
+                } elseif ($this->isMethod('put')){ 
+                    $resultado_esperado = $this->route('evaluacion')->corto_plazo_accion->planificacion->cuarto_trimestre;
                 }
                 break;
             

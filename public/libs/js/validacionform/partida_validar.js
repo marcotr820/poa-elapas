@@ -1,4 +1,20 @@
 const d = document;
+const Toast = Swal.mixin({
+   toast: true,
+   position: 'top-right',
+   iconColor: 'white',
+   customClass: {
+      popup: 'colored-toast'
+   },
+   showConfirmButton: false,
+   timer: 1500,
+   showClass: {
+      popup: 'animate__animated animate__fadeInUp'
+   },
+   hideClass: {
+      popup: 'animate__animated animate__fadeOutUp'
+   }
+})
 
 function edit(partida_uuid){
    d.getElementById('form').onsubmit = function(e){
@@ -112,7 +128,12 @@ d.addEventListener('submit', (e)=>{
 					$('#partidas').DataTable().ajax.reload(null, false);
 				})
 				.catch(function (error) {
-               toastr["error"]("No se pudo eliminar el registro");
+               Toast.fire({
+                  padding: '6px',
+                  width: '320px',
+                  icon: 'error',
+                  title: 'Error al realizar la acción'
+               })
 				});
 			}
 		})

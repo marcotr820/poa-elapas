@@ -1,4 +1,7 @@
 @extends('layouts.plantillabase')
+
+@section('title', 'Determinación de Requerimientos')
+
 @section('contenido')
 <style>
     table {

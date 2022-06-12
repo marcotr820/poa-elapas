@@ -24,7 +24,7 @@ class UsuarioController extends Controller
         // $users = Usuario::with('roles')->get();
         if($request->ajax()){
             $query = Usuario::join("trabajadores", "trabajadores.id", "=", "usuarios.trabajador_id")
-                ->select('usuarios.id', 'usuarios.usuario', 'usuarios.uuid', 'trabajadores.nombre')->with('roles');
+                ->select('usuarios.id', 'usuarios.usuario', 'usuarios.uuid', 'usuarios.trabajador_id', 'trabajadores.nombre')->with('roles');
             return datatables($query)->make(true);
         }
         
@@ -73,6 +73,9 @@ class UsuarioController extends Controller
 
     public function destroy(Usuario $usuario)
     {
+        if($usuario->trabajador_id == 1){
+            abort(500);
+        }
         $usuario->delete();
     }
 

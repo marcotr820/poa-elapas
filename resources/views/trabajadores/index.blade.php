@@ -1,5 +1,7 @@
 @extends('layouts.plantillabase')
 
+@section('title', 'Trabajadores')
+
 @section('contenido')
     <div class="card">
         <h5 class="card-header py-1 d-flex justify-content-between align-items-center">
@@ -54,12 +56,20 @@
                 data: 'uuid',
 					render: function( data, type, row)
 					{
-						return `
-                        <div class="btn-group">
-							<button class="boton blue" data-edit="" onclick="edit('${data}')"><i class="fas fa-pen"></i></button>
-							<button class="boton red ml-2" data-delete="" onclick="delet('${data}')"><i class="fas fa-times-circle"></i></button>
-                        </div>
-						`;
+                        if(row.id == 1){
+                            return `
+                            <div class="btn-group">
+                                <button class="boton blue" data-edit="" onclick="edit('${data}')"><i class="fas fa-pen"></i></button>
+                            </div>
+                            `;
+                        }else{
+                            return `
+                            <div class="btn-group">
+                                <button class="boton blue" data-edit="" onclick="edit('${data}')"><i class="fas fa-pen"></i></button>
+                                <button class="boton red ml-2" data-delete="" onclick="delet('${data}')"><i class="fas fa-times-circle"></i></button>
+                            </div>
+                            `;
+                        }
 					}
             }
         ],

@@ -1,5 +1,7 @@
 @extends('layouts.plantillabase')
 
+@section('title', 'Roles')
+
 @section('contenido')
     <!-- CSRF Token -->
     {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}

@@ -1,4 +1,6 @@
-  @extends('layouts.plantillabase')
+@extends('layouts.plantillabase')
+
+@section('title', 'Planificación y Evaluación')
 
 @section('contenido')
     <div class="card p-2">

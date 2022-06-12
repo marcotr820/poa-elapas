@@ -1,4 +1,4 @@
-<div class="modal fade animado" id="modal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade animado" id="modal" data-backdrop="static" data-keyboard="false" tabindex="" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             {{--  --}}

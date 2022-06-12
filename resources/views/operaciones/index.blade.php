@@ -1,5 +1,7 @@
 @extends('layouts.plantillabase')
 
+@section('title', 'Operaciones')
+
 @section('contenido')
     <div class="card">
         <h5 class="card-header">

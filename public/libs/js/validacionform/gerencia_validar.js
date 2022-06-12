@@ -1,16 +1,20 @@
 const d = document;
-toastr.options = {
-    "closeButton": true,
-    "debug": false,
-    "newestOnTop": false,
-    "progressBar": false,
-    "positionClass": "toast-top-right",
-    "preventDuplicates": false,
-    "onclick": null,
-    "showDuration": "500",
-    "hideDuration": "1000",
-    "timeOut": "1500"
-}
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-right',
+    iconColor: 'white',
+    customClass: {
+       popup: 'colored-toast'
+    },
+    showConfirmButton: false,
+    timer: 1500,
+    showClass: {
+       popup: 'animate__animated animate__fadeInUp'
+    },
+    hideClass: {
+       popup: 'animate__animated animate__fadeOutUp'
+    }
+})
 
 function edit(gerencia_uuid){
     d.getElementById('form').onsubmit = function(e){
@@ -133,7 +137,12 @@ d.addEventListener('submit', (e)=>{
                     },
                     error:function()
                     {
-                        toastr["error"]("No se pudo realizar la accion!");
+                        Toast.fire({
+                            padding: '6px',
+                            width: '320px',
+                            icon: 'error',
+                            title: 'Error al realizar la acción'
+                        })
                     }
                 })
             }

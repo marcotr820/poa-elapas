@@ -1,4 +1,7 @@
 @extends('layouts.plantillabase')
+
+@section('title', 'Index POA')
+
 @section('contenido')
 <style>
     .contenedor{
@@ -23,6 +26,9 @@
         <div class="index-content">
             <p>Plan Operativo Anual | ELAPAS</p>
             <p>Bienvenido.</p>
+            {{-- @foreach (auth('usuario')->user()->roles as $rol)
+                {{ $rol->name }} <br>
+            @endforeach --}}
         </div>
     </div>
 

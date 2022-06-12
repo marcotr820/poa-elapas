@@ -21,7 +21,8 @@ class UnidadSeeder extends Seeder
             'jefatura de planificacion y proyectos',
             'relaciones publicas y gestion social',
             'auditoria interna',
-            'odeco'
+            'odeco',
+            'gerencia general'
         ];
         foreach($unidades_gerencia_general as $unidad){
             Unidades::create([
@@ -32,7 +33,8 @@ class UnidadSeeder extends Seeder
 
         $unidades_gerencia_administrativa = [
             'jefatura financiera y contable',
-            'jefatura administrativa y personal'
+            'jefatura administrativa y personal',
+            'gerencia administrativa'
         ];
         foreach($unidades_gerencia_administrativa as $unidad){
             Unidades::create([
@@ -43,7 +45,8 @@ class UnidadSeeder extends Seeder
 
         $unidades_gerencia_comercial = [
             'jefatura atc y control mora',
-            'jefatura medicion y facturacion'
+            'jefatura medicion y facturacion',
+            'gerencia comercial'
         ];
         foreach($unidades_gerencia_comercial as $unidad){
             Unidades::create([
@@ -58,7 +61,8 @@ class UnidadSeeder extends Seeder
             'jefatura red de agua',
             'jefatura red de alcantarillado',
             'jefatura ptar',
-            'jefatura control de calidad'
+            'jefatura control de calidad',
+            'gerencia tecnica'
         ];
         foreach($unidades_gerencia_tecnica as $unidad){
             Unidades::create([

@@ -1,4 +1,4 @@
-<div class="modal fade animado" id="modal" tabindex="" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade animado" id="modal" data-backdrop="static" data-keyboard="false" tabindex="" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             {{--  --}}
@@ -27,8 +27,7 @@
                         <div class="col-md-8">
                             <div class="form-group">
                                 <label for=""><b>Unidad <span class="text-danger">*</span></b></label>
-                                <select data-error="select" id="unidad_id" class="form-control select2"
-                                    name="unidad_id" required>
+                                <select data-error="select" id="unidad_id" class="form-control select2" name="unidad_id" required>
                                     <option value="">Seleccione...</option>
                                     @foreach ($unidades as $unidad)
                                         <option value="{{ $unidad->id }}">{{ $unidad->nombre_unidad }}</option>

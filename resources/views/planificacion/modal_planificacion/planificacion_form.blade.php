@@ -1,6 +1,11 @@
 <div class="modal fade animado" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
    <div class="modal-dialog">
      <div class="modal-content">
+        {{-- OVERLAY --}}
+        <div class="overlay">
+          <i class="fas fa-2x fa-sync fa-spin"></i>
+        </div>
+      {{--  --}}
        <div class="modal-header">
          <h5 class="modal-title text-dark" id="exampleModalLabel"></h5>
          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -57,8 +62,8 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" id="confirm_delete" class="btn btn-danger">Borrar</button>
-          <button type="button" class="btn btn-light" data-dismiss="modal" id="btncancelar">Cancelar</button>
+          <button type="submit" id="confirm_delete" class="boton red">Borrar</button>
+          <button type="button" class="boton default" data-dismiss="modal" id="btncancelar">Cancelar</button>
         </div>
       </form>
 

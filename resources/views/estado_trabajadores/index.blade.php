@@ -1,4 +1,7 @@
 @extends('layouts.plantillabase')
+
+@section('title', 'Estados Trabajadores')
+
 @section('contenido')
     <div class="card">
         <div class="d-flex justify-content-between bg-light p-2">

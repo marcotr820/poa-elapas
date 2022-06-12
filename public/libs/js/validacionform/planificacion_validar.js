@@ -1,4 +1,21 @@
 const d = document;
+const Toast = Swal.mixin({
+   toast: true,
+   position: 'top-right',
+   iconColor: 'white',
+   customClass: {
+      popup: 'colored-toast'
+   },
+   showConfirmButton: false,
+   timer: 1500,
+   showClass: {
+      popup: 'animate__animated animate__fadeInUp'
+   },
+   hideClass: {
+      popup: 'animate__animated animate__fadeOutUp'
+   }
+})
+
 d.querySelector('.alert').style.display = 'none';
 
 function delet(planificacion_uuid){
@@ -19,7 +36,8 @@ function delet(planificacion_uuid){
 
 d.addEventListener('click', (e)=>{
    if(e.target.matches('#nuevo') || e.target.matches('#nuevo *'))
-   { 
+   {
+      d.querySelector('.overlay').classList.remove('show');
       d.querySelectorAll('[data-error="input"]').forEach((el)=>{ el.classList.remove('is-invalid') });
       d.querySelectorAll('[data-error="span"]').forEach((el)=>{ el.textContent = '' });
       d.getElementById('form_planificacion').reset();
@@ -58,6 +76,7 @@ d.addEventListener('submit', (e)=>{
          }
          else
          {
+            d.querySelector('.overlay').classList.add('show');
             const datos = new FormData(e.target);
             axios.post('/planificacion/'+ corto_plazo_uuid, datos) //enviamos todos los input del form
             .then(function (response) {
@@ -71,14 +90,15 @@ d.addEventListener('submit', (e)=>{
                const objeto = error.response.data.errors; //creamos el objeto para luego recorrerlo
                if (error.response.data.hasOwnProperty('errors')) //preguntamos si exite la propiedad donde se almacenan los errores false/true
                {
-                   for (let key in  objeto) 
-                   {
-                     // console.log(key);
-                     // console.log(objeto[key]);
-                     key !== 'error_validacion'? 
-                        (d.getElementById(key).classList.add('is-invalid'), d.getElementById(key+'-error').textContent = objeto[key]) 
-                        : (d.getElementById(key+'-error').textContent = objeto[key]);
-                   }
+                  d.querySelector('.overlay').classList.remove('show');
+                  for (let key in  objeto) 
+                  {
+                  // console.log(key);
+                  // console.log(objeto[key]);
+                  key !== 'error_validacion'? 
+                     (d.getElementById(key).classList.add('is-invalid'), d.getElementById(key+'-error').textContent = objeto[key]) 
+                     : (d.getElementById(key+'-error').textContent = objeto[key]);
+                  }
                }
             });
          }

@@ -1,21 +1,25 @@
 const d = document;
-toastr.options = {
-    "closeButton": true,
-    "debug": false,
-    "newestOnTop": false,
-    "progressBar": false,
-    "positionClass": "toast-top-right",
-    "preventDuplicates": false,
-    "onclick": null,
-    "showDuration": "500",
-    "hideDuration": "1000",
-    "timeOut": "1500"
-}
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-right',
+    iconColor: 'white',
+    customClass: {
+       popup: 'colored-toast'
+    },
+    showConfirmButton: false,
+    timer: 1500,
+    showClass: {
+       popup: 'animate__animated animate__fadeInUp'
+    },
+    hideClass: {
+       popup: 'animate__animated animate__fadeOutUp'
+    }
+})
+
 function edit(meta_uuid){
     d.getElementById('form').onsubmit = function(e){
         if(! e.target.hasAttribute('data-form')){
-            d.querySelector('.spinner-border').style.display = 'inline-block';
-            d.getElementById('btnGuardar').setAttribute('disabled', true);
+            d.querySelector('.overlay').classList.add('show');
             $(document).find('[data-error="span"]').text('');
             $(document).find('[data-error="textarea"]').removeClass('is-invalid');
             axios.put('/metas/'+ meta_uuid,{
@@ -26,11 +30,10 @@ function edit(meta_uuid){
                 $('#metas').DataTable().ajax.reload(); // tabla_actividades.ajax.reload(null, false);
             })
             .catch(function (error){
-                d.querySelector('.spinner-border').style.display = 'none';
-                d.getElementById('btnGuardar').removeAttribute('disabled');
                 const objeto = error.response.data.errors; //creamos el objeto para luego recorrerlo
                 if (error.response.data.hasOwnProperty('errors')) //preguntamos si exite la propiedad donde se almacenan los errores false/true
                 {
+                    d.querySelector('.overlay').classList.remove('show');
                     for (let key in  objeto) 
                     {
                         d.getElementById(key).classList.add('is-invalid');
@@ -52,8 +55,13 @@ function delet(meta_uuid){
             $('#metas').DataTable().ajax.reload();
         })
         .catch(function (error){
-            toastr["error"]("No se pudo realizar la accion!");
             $('#modal_delete').modal('hide');
+            Toast.fire({
+                padding: '6px',
+                width: '320px',
+                icon: 'error',
+                title: 'Error al realizar la acción'
+            })
         })
     }
 }
@@ -68,8 +76,7 @@ d.addEventListener('click', (e)=>{
 
     if(e.target.matches('#nuevo') || e.target.matches('#nuevo *'))
     {
-        d.querySelector('.spinner-border').style.display = 'none';
-        d.getElementById('btnGuardar').removeAttribute('disabled');
+        d.querySelector('.overlay').classList.remove('show');
         $("#form").trigger("reset");
         $("#modal .modal-title").text("Nueva Meta"); 
         $("#modal").modal("show");
@@ -81,8 +88,7 @@ d.addEventListener('click', (e)=>{
 
     if(e.target.matches('[data-edit]') || e.target.matches('[data-edit] *'))
     {
-        d.querySelector('.spinner-border').style.display = 'none';
-        d.getElementById('btnGuardar').removeAttribute('disabled');
+        d.querySelector('.overlay').classList.remove('show');
         d.getElementById('form').removeAttribute('data-form');
         $(document).find('[data-error="span"]').text('');
         $(document).find('[data-error="textarea"]').removeClass('is-invalid');
@@ -111,8 +117,7 @@ d.addEventListener('submit', (e)=>{
         e.preventDefault();
         if(e.target.hasAttribute('data-form'))
         {
-            d.querySelector('.spinner-border').style.display = 'inline-block';
-            d.getElementById('btnGuardar').setAttribute('disabled', true);
+            d.querySelector('.overlay').classList.add('show');
             $(document).find('[data-error="span"]').text('');
             $(document).find('[data-error="textarea"]').removeClass('is-invalid');
             const datos = new FormData(e.target);
@@ -121,15 +126,13 @@ d.addEventListener('submit', (e)=>{
                 // console.log(response);
                 $('#metas').DataTable().ajax.reload(null, false);
                 $('#modal').modal('hide');
-                toastr["success"]("Accion realizada con exito");
             })
             .catch(function (error) {
-                d.querySelector('.spinner-border').style.display = 'none';
-                d.getElementById('btnGuardar').removeAttribute('disabled');
                 // console.log(error.response.data.errors);
                 const objeto = error.response.data.errors; //creamos el objeto para luego recorrerlo
                 if (error.response.data.hasOwnProperty('errors')) //preguntamos si exite la propiedad donde se almacenan los errores false/true
                 {
+                    d.querySelector('.overlay').classList.remove('show');
                     for (let key in  objeto)
                     {
                         d.getElementById(key).classList.add('is-invalid');

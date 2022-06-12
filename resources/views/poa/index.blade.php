@@ -1,5 +1,7 @@
 @extends('layouts.plantillabase')
 
+@section('title', 'Crear POA')
+
 @section('contenido')
     <div class="card">
         <div class="card-header">

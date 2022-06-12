@@ -1,4 +1,6 @@
 @extends('layouts.plantillabase')
+@section('title', 'Determininación de Operaciones y Tareas')
+
 @section('contenido')
     <style>
         table {

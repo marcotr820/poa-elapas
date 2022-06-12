@@ -1,4 +1,21 @@
 const d = document;
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-right',
+    iconColor: 'white',
+    customClass: {
+       popup: 'colored-toast'
+    },
+    showConfirmButton: false,
+    timer: 1500,
+    showClass: {
+       popup: 'animate__animated animate__fadeInUp'
+    },
+    hideClass: {
+       popup: 'animate__animated animate__fadeOutUp'
+    }
+})
+
 function edit(unidad_uuid){
     d.getElementById('form').onsubmit = function(e){
         if(! e.target.hasAttribute('data-form')){
@@ -123,11 +140,11 @@ d.addEventListener('submit', (e)=>{
                     },
                     error:function()
                     {
-                        Swal.fire({
+                        Toast.fire({
+                            padding: '6px',
+                            width: '320px',
                             icon: 'error',
-                            html: "No se pudo eliminar el registro",
-                            width: '20%',
-                            confirmButtonText: 'Aceptar',
+                            title: 'Error al realizar la acción'
                         })
                     }
                 })

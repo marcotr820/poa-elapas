@@ -1,23 +1,26 @@
 const d = document;
-toastr.options = {
-    "closeButton": true,
-    "debug": false,
-    "newestOnTop": false,
-    "progressBar": false,
-    "positionClass": "toast-top-right",
-    "preventDuplicates": false,
-    "onclick": null,
-    "showDuration": "500",
-    "hideDuration": "1000",
-    "timeOut": "1500"
-}
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-right',
+    iconColor: 'white',
+    customClass: {
+       popup: 'colored-toast'
+    },
+    showConfirmButton: false,
+    timer: 1500,
+    showClass: {
+       popup: 'animate__animated animate__fadeInUp'
+    },
+    hideClass: {
+       popup: 'animate__animated animate__fadeOutUp'
+    }
+})
 
 function edit(operacion_uuid){
 	d.getElementById('form').onsubmit = function(e){
 		if(! e.target.hasAttribute('data-form')){
 			e.preventDefault();
-			d.querySelector('.spinner-border').style.display = 'inline-block';
-			d.getElementById('btnGuardar').disabled = true;
+			d.querySelector('.overlay').classList.add('show');
 			axios.put('/operaciones/'+operacion_uuid, {
 				nombre_operacion: d.getElementById('nombre_operacion').value
 			})
@@ -31,8 +34,7 @@ function edit(operacion_uuid){
 				let objeto = error.response.data.errors; //creamos el objeto para luego recorrerlo
 				if (error.response.data.hasOwnProperty('errors')) //preguntamos si exite la propiedad donde se almacenan los errores false/true
 				{
-					d.querySelector('.spinner-border').style.display = 'none';
-					d.getElementById('btnGuardar').disabled = false;
+					d.querySelector('.overlay').classList.remove('show');
 					for (let key in  objeto) 
 					{
 						//console.log(key);
@@ -58,12 +60,13 @@ function delet(operacion_uuid){
 			$('#operaciones').DataTable().ajax.reload(null, false);
 		})
 		.catch(function (error) {
-			// toastr["error"]("No se pudo realizar la accion!");
-			Swal.fire({
-				icon: 'error',
-				text: "No se pudo Realizar la accion.",
-				width: '20%',
-			})
+			$('#modal_delete').modal('hide');
+			Toast.fire({
+                padding: '6px',
+                width: '320px',
+                icon: 'error',
+                title: 'Error al realizar la acción'
+            })
 		});
 	}
 }
@@ -76,8 +79,7 @@ d.addEventListener('click', (e) => {
 
     if (e.target.matches('#nuevo') || e.target.matches('#nuevo *')) //matches busca un selector valido y responde true o false
     {
-		d.querySelector('.spinner-border').style.display = 'none';
-		d.getElementById('btnGuardar').disabled = false;
+		d.querySelector('.overlay').classList.remove('show');
     	d.querySelector('#modal .modal-title').textContent = "Nueva Operacion";
 		d.getElementById('form').setAttribute('data-form', '');
     	d.getElementById('form').reset(); //limpiar inputs formulario al abrirlo
@@ -87,8 +89,7 @@ d.addEventListener('click', (e) => {
     }
 
 	if(e.target.matches('[data-edit]') || e.target.matches('[data-edit] *')){
-		d.querySelector('.spinner-border').style.display = 'none';
-		d.getElementById('btnGuardar').disabled = false;
+		d.querySelector('.overlay').classList.remove('show');
 		d.getElementById('form').removeAttribute('data-form');
 		d.querySelectorAll('[data-error="textarea"]').forEach(el => { el.classList.remove('is-invalid') }); //limpiamos el input del error
 		d.querySelectorAll('[data-error="span"]').forEach(el => { el.textContent = '' }); //limpiamos el span del error
@@ -114,8 +115,7 @@ d.addEventListener('submit', (e) =>{
 		d.querySelectorAll('[data-error="textarea"]').forEach( (el) => { el.classList.remove('is-invalid') });
 		if (e.target.hasAttribute('data-form'))
 		{	//POST
-			d.querySelector('.spinner-border').style.display = 'inline-block';
-			d.getElementById('btnGuardar').disabled = true;
+			d.querySelector('.overlay').classList.add('show');
 			const datos = new FormData(e.target);
 			axios.post('/operaciones/'+accion_corto_uuid, datos)
 			.then(function (response) {
@@ -128,8 +128,7 @@ d.addEventListener('submit', (e) =>{
 				let objeto = error.response.data.errors; //creamos el objeto para luego recorrerlo
 				if (error.response.data.hasOwnProperty('errors')) //preguntamos si exite la propiedad donde se almacenan los errores resp(false/true)
 				{
-					d.querySelector('.spinner-border').style.display = 'none';
-					d.getElementById('btnGuardar').disabled = false;
+					d.querySelector('.overlay').classList.remove('show');
 					for (let key in  objeto) 
 					{
 						//console.log(key);

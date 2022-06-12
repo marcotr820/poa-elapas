@@ -18,7 +18,7 @@ class PoaController extends Controller
     public function index(Request $request)
     {
         // si el trabajador no tiene su tado poa en 1 lanzara error 403
-        // abort_if(auth('usuario')->user()->trabajador->poa_status != 1, 403);
+        abort_if(auth('usuario')->user()->trabajador->poa_status != 1, 403);
 
         $date = Carbon::now()->addYear();
         $pilares = Pilares::select('gestion_pilar')

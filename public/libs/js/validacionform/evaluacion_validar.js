@@ -1,4 +1,20 @@
 const d = document;
+const Toast = Swal.mixin({
+   toast: true,
+   position: 'top-right',
+   iconColor: 'white',
+   customClass: {
+      popup: 'colored-toast'
+   },
+   showConfirmButton: false,
+   timer: 1500,
+   showClass: {
+      popup: 'animate__animated animate__fadeInUp'
+   },
+   hideClass: {
+      popup: 'animate__animated animate__fadeOutUp'
+   }
+})
 
 // calculo del presupuesto restante
 // const presupuesto_restante = d.querySelector('[data-restante]').value;
@@ -10,6 +26,7 @@ function edit(evaluacion_uuid) {
    d.getElementById('form').onsubmit = function(e){
       if(! e.target.hasAttribute('data-form'))
       {
+         d.querySelector('.overlay').classList.add('show');
          d.querySelectorAll('[data-error="input"]').forEach((el)=>{ el.classList.remove('is-invalid') });
          d.querySelectorAll('[data-error="span"]').forEach((el)=>{ el.textContent = '' });
          axios.put('/evaluacion/' + evaluacion_uuid, {
@@ -22,6 +39,7 @@ function edit(evaluacion_uuid) {
          })
          .catch(function (error){
             // console.log(error.response.data.errors);
+            d.querySelector('.overlay').classList.remove('show');
             if (error.response.data.hasOwnProperty('errors')){
                const objeto = error.response.data.errors;
                for (let key in  objeto) {
@@ -37,6 +55,7 @@ function edit(evaluacion_uuid) {
 d.addEventListener('click', (e)=>{
    if(e.target.matches('#nuevo') || e.target.matches('#nuevo *'))
    {
+      d.querySelector('.overlay').classList.remove('show');
       d.getElementById('form').reset();
       d.getElementById('form').setAttribute('data-form', '');
       d.querySelectorAll('[data-error="input"]').forEach((el)=>{ el.classList.remove('is-invalid') });
@@ -47,6 +66,7 @@ d.addEventListener('click', (e)=>{
 
    if(e.target.matches('[data-edit]'))
    {
+      d.querySelector('.overlay').classList.remove('show');
       d.getElementById('form').removeAttribute('data-form');
       d.querySelectorAll('[data-error="input"]').forEach((el)=>{ el.classList.remove('is-invalid') });
       d.querySelectorAll('[data-error="span"]').forEach((el)=>{ el.textContent = '' });
@@ -73,6 +93,7 @@ d.addEventListener('submit', (e)=>{
       d.querySelectorAll('[data-error="span"]').forEach((el)=>{ el.textContent = '' });
       if(e.target.hasAttribute('data-form'))
       {
+         d.querySelector('.overlay').classList.add('show');
          const datos = new FormData(e.target);
          axios.post('/evaluacion/' + corto_plazo_accion_uuid, datos)
          .then(function (resp){
@@ -81,6 +102,7 @@ d.addEventListener('submit', (e)=>{
          })
          .catch(function (error){
             // console.log(error.response.data.errors);
+            d.querySelector('.overlay').classList.remove('show');
             if (error.response.data.hasOwnProperty('errors')){
                const objeto = error.response.data.errors;
                for (let key in  objeto) {

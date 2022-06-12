@@ -1,5 +1,7 @@
 @extends('layouts.plantillabase')
 
+@section('title', 'Partidas')
+
 @section('contenido')
 <style>
     .table-loading{

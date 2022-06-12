@@ -1,5 +1,7 @@
 @extends('layouts.plantillabase')
 
+@section('title', 'Lista POA')
+
 @section('css')
 <style>
     table {

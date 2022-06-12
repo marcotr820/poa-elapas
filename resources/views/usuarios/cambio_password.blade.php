@@ -1,4 +1,7 @@
 @extends('layouts.plantillabase')
+
+@section('title', 'Cambio de Password')
+
 @section('contenido')
     <div class="card border-dark" style="width: 35rem;">
         <div class="card-header border-dark">Cambio de Contraseña</div>

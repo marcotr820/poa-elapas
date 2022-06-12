@@ -1,5 +1,7 @@
 @extends('layouts.plantillabase')
 
+@section('title', 'Resultados')
+
 @section('contenido')
     <div class="card">
         <div class="bg-light p-2">

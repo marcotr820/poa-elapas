@@ -1,6 +1,11 @@
-<div class="modal fade animado" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade animado" id="modal" tabindex="-1" data-backdrop="static" data-keyboard="false" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
+        {{-- OVERLAY --}}
+        <div class="overlay">
+          <i class="fas fa-2x fa-sync fa-spin"></i>
+        </div>
+      {{--  --}}
         <div class="modal-header">
           <h5 class="modal-title"></h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -44,10 +49,7 @@
           </div>
           
           <div class="modal-footer">
-            <button type="submit" id="btnGuardar" class="boton blue">
-              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-              Guardar
-            </button>
+            <button type="submit" id="btnGuardar" class="boton blue">Guardar</button>
             <button type="button" class="boton default" data-dismiss="modal" id="btncancelar">Cancelar</button>
           </div>
         </form>
