@@ -15,7 +15,7 @@ class GerenciaController extends Controller
         // abort_if(!auth('usuario')->user()->can('super-admi'), 403, 'error');
         if($request->ajax())
         {
-            $query = Gerencias::select('id', 'nombre_gerencia', 'uuid');
+            $query = Gerencias::select('id', 'nombre_gerencia', 'uuid')->orderBy('id');
             return datatables($query)->make(true);
             // return datatables()
             //     ->eloquent(Gerencias::query()->select('id', 'nombre_gerencia', 'uuid'))

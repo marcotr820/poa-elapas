@@ -25,20 +25,19 @@ class PilarRequest extends FormRequest
     public function rules()
     {
         $gestion = Carbon::now()->addYear();
-        $min_gestion = Carbon::now()->subYears(2);
+        $min_gestion = Carbon::now()->addYear();
+        // $min_gestion = Carbon::now()->subYear(1);
         return [
-            'nombre_pilar' => ['required','string'],
-            'gestion_pilar' => ['required','numeric',"min:$min_gestion","max:$gestion->year"],
+            'nombre_pilar' => ['required', 'string'],
+            'gestion_pilar' => ['required', 'numeric', "max:$gestion->year", "min:$min_gestion->year"],
         ];
     }
 
     public function messages()
     {
-        $min_gestion = Carbon::now()->subYears(2)->year;
         return [
             'gestion_pilar.required' => 'El campo gestion es requerido.',
             'gestion_pllar.numeric' => 'El campo gestion debe ser un numero',
-            'gestion_pilar.min' => "El campo gestion debe ser mayor a $min_gestion."
         ];
     }
 }

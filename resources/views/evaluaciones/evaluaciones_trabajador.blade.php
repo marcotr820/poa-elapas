@@ -19,7 +19,7 @@
         <div class="card-body">
             <h5 class="card-title">Lista Evaluaciones</h5>
             @if ($trabajador->corto_plazo_acciones->count())
-                <table id="table" width="100%">
+                <table class="table table-striped" id="table" width="100%">
                     <thead hidden>
                         <tr><td></td></tr>
                     </thead>
@@ -64,14 +64,26 @@
                                                         @foreach ($corto_plazo_accion->evaluaciones as $evaluacion)
                                                             <tr>
                                                                 <td>{{ ucfirst( str_replace("_", " ", $evaluacion->trimestre) ) }}</td>
-                                                                <td>{{ $evaluacion->resultado_esperado }}%</td>
-                                                                <td>{{ $evaluacion->resultado_logrado }}%</td>
-                                                                <td>{{ $evaluacion->eficacia }}%</td>
+                                                                <td>{{ $evaluacion->resultado_esperado }} %</td>
+                                                                <td>{{ $evaluacion->resultado_logrado }} %</td>
+                                                                <td>{{ $evaluacion->eficacia }} %</td>
                                                                 <td>{{ number_format($evaluacion->presupuesto, 2, '.', ',') }} Bs.</td>
                                                                 <td>{{ number_format($evaluacion->presupuesto_ejecutado, 2, '.', ',') }} Bs.</td>
-                                                                <td>{{ $evaluacion->ejecucion }}%</td>
-                                                                <td>{{ $evaluacion->relacion_avance }}%</td>
+                                                                <td>{{ $evaluacion->ejecucion }} %</td>
+                                                                <td>{{ $evaluacion->relacion_avance }} %</td>
                                                             </tr>
+                                                            @if ($loop->last)
+                                                                <tr>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td class="text-center"><b>Total:</b></td>
+                                                                    <td>{{ number_format($corto_plazo_accion->evaluaciones->sum('presupuesto_ejecutado'), 2, '.', ',') }} Bs.</td>
+                                                                    <td>{{ $corto_plazo_accion->evaluaciones->sum('ejecucion') }} %</td>
+                                                                    <td></td>
+                                                                </tr>
+                                                            @endif
                                                         @endforeach
                                                     </tbody>
                                                 </table>

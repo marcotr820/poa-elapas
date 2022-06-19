@@ -1,5 +1,7 @@
 @extends('layouts.plantillabase')
 
+@section('title', 'Ver POA Unidad')
+
 @section('contenido')
     <div class="card">
         <h5 class="card-header">Acciones Corto Plazo Unidad</h5>

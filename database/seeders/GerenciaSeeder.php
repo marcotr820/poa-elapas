@@ -14,7 +14,7 @@ class GerenciaSeeder extends Seeder
      */
     public function run()
     {
-        $gerencias = ['GERENCIA GENERAL', 'GERENCIA ADMINISTRATIVA', 'GERENCIA COMERCIAL', 'GERENCIA TECNICA'];
+        $gerencias = ['GERENCIA ADMINISTRATIVA', 'GERENCIA COMERCIAL', 'GERENCIA TECNICA'];
         foreach($gerencias as $gerencia){
             Gerencias::create([
                 'nombre_gerencia' => $gerencia

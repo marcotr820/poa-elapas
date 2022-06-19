@@ -17,14 +17,13 @@ class ItemController extends Controller
     {
         if($request->ajax())
         {
-            $items = Actividades::join('items', 'actividades.id', '=', 'items.actividad_id')
-                ->join('partidas', 'items.partida_id', '=', 'partidas.id')
-                ->select('items.*', 'partidas.nombre_partida')
-                ->where('actividades.id', $actividad->id);
+            $items = Items::with('partida')->where('actividad_id', $actividad->id);
 
-            return datatables()
-                ->eloquent($items)
-                ->toJson();
+            return datatables($items)
+                ->addColumn('status_accion_corto_plazo', function($items){
+                    return $items->actividad->operacion->corto_plazo_accion->status;
+                })
+                ->make(true);
         }
         $partidas = Partidas::pluck('nombre_partida', 'id');
         $accion = $actividad->operacion->corto_plazo_accion;

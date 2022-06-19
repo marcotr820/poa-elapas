@@ -5,7 +5,7 @@
 @section('contenido')
     <div class="card">
         <div class="card-header">
-            <h5 class="m-0">POA lista de objetivos Especificos</h5>
+            <h5 class="m-0">POA lista de Objetivos Especificos</h5>
         </div>
         <div class="card-body">
             <table id="poa" class="table table-striped table-sm display" style="width:100%">

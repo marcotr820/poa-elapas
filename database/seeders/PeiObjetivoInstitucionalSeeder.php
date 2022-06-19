@@ -21,5 +21,14 @@ class PeiObjetivoInstitucionalSeeder extends Seeder
             'gerencia_id' => '1',
             'mediano_plazo_accion_id' => '2' 
         ]);
+
+        // DATOS PRUEBA GESTION ANTERIOR 2022
+        PeiObjetivosEspecificos::create([
+            'objetivo_institucional' => 'PEI OBJETIVO ESPECIFICO PRUEBA 2022',
+            'ponderacion' => 20,
+            'indicador_proceso' => 'DETALE PRUEBA',
+            'gerencia_id' => '1',
+            'mediano_plazo_accion_id' => '4' 
+        ]);
     }
 }

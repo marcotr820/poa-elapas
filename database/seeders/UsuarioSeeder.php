@@ -18,7 +18,7 @@ class UsuarioSeeder extends Seeder
     public function run()
     {
         Usuario::create([
-            'usuario' => '123',
+            'usuario' => '10381494',
             'password' => Hash::make('123'),
             'trabajador_id' => '1',
             'remember_token' => Str::random(10)

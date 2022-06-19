@@ -8,7 +8,7 @@
             <table class="table table-sm m-0" width="100%">
                 <tr>
                     <td width="12%"><h6><b>Acción Corto Plazo:</b></h6></td>
-                    <td><h6 class="ml-1">{!!$operacion->corto_plazo_accion->accion_corto_plazo!!}</h6></td>
+                    <td><h6 class="ml-1">{{$operacion->corto_plazo_accion->accion_corto_plazo}}</h6></td>
                 </tr>
                 <tr>
                     <td><h6 class="m-0"><b>Operación:</b></h6></td>
@@ -20,7 +20,9 @@
             Lista de Actividades
             <div>
                 <a href="javascript:history.back()" class="boton red"><i class="fas fa-arrow-left"></i> Volver Atrás</a>
-                <button type="button" id="nuevo" class="boton blue ml-2"><i class="fas fa-plus"></i> Nueva Actividad</button>
+                @if ($operacion->corto_plazo_accion->status != 'monitoreo')
+                    <button type="button" id="nuevo" class="boton blue ml-2"><i class="fas fa-plus"></i> Nueva Actividad</button>
+                @endif
             </div>
         </h5>
         <div class="card-body">
@@ -29,9 +31,9 @@
                     <tr>
                         <td width='5%'>ID</td>
                         <td>ACTIVIDAD</td>
-                        <td width="20%">RESULTADO ESPERADO</td>
+                        <td width="20%">RESULTADOS INTERMEDIOS ESPERADOS</td>
                         <td>ITEMS PRESUPUESTO EJECUTADO</td>
-                        <td width='22%'></td>
+                        <td width='22%'>ACCIONES</td>
                     </tr>
                 </thead>
             </table>
@@ -65,14 +67,23 @@
                     data: 'uuid',
                     render: function( data, type, row)
                     {
-                        return `
-                        <div class="btn-group">
-                            <button class="boton blue" data-edit="" onclick="edit('${data}')"><i class="fas fa-pen"></i></button>
-                            <button class="boton red ml-2" data-delete="" onclick="delet('${data}')"><i class="fas fa-times-circle"></i></button>
-                            <button class='boton info ml-3' data-tareas="">Tareas</a>
-                            <button class='boton green ml-2' data-items="">Items</a>
-                        </div>
-                        `;
+                        if(row.status_accion_corto_plazo == 'monitoreo'){
+                            return `
+                            <div class="btn-group">
+                                <button class='boton info ml-3' data-tareas="">Tareas</a>
+                                <button class='boton green ml-2' data-items="">Items</a>
+                            </div>
+                            `;
+                        } else {
+                            return `
+                            <div class="btn-group">
+                                <button class="boton blue" data-edit="" onclick="edit('${data}')"><i class="fas fa-pen"></i></button>
+                                <button class="boton red ml-2" data-delete="" onclick="delet('${data}')"><i class="fas fa-times-circle"></i></button>
+                                <button class='boton info ml-3' data-tareas="">Tareas</a>
+                                <button class='boton green ml-2' data-items="">Items</a>
+                            </div>
+                            `;
+                        }
                     }
                 }
             ],

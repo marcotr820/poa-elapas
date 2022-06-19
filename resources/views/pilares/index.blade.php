@@ -7,7 +7,7 @@
         <h5 class="card-header py-1 d-flex justify-content-between align-items-center">
             Lista de Pilares
             <div>
-                <button class="boton default mr-1" data-directriz=""><i class="fas fa-file-pdf"></i> Directriz PDF</button>
+                {{-- <button class="boton default mr-1" data-directriz=""><i class="fas fa-file-pdf"></i> Directriz PDF</button> --}}
                 <button class="boton blue" id="nuevo"><i class="fas fa-plus"></i> Nuevo Pilar</button>
             </div>
         </h5>
@@ -18,7 +18,7 @@
                         <td width="5%">ID</td>
                         <td>PILAR</td>
                         <td>GESTION</td>
-                        <td width="17%"></td>
+                        <td width="17%">ACCIONES</td>
                     </tr>
                 </thead>
             </table>

@@ -393,7 +393,7 @@ input::placeholder { text-transform: none; } /* placeholder */
 -----------------------*/
 table.dataTable td {
     font-size: 12px;
-    padding: 6px 9px;
+    padding: 8px 9px;
     vertical-align: middle;
 }
 table thead tr td{
@@ -656,7 +656,7 @@ table thead tr td{
 }
 
 .green{
-    color: #004d00;
+    color: #00802b;
 }
 .green:hover{
     background-color: #004d00;

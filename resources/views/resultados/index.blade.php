@@ -17,7 +17,7 @@
         <h5 class="card-header py-1 d-flex justify-content-between align-items-center">
             Lista de Resultados
             <div>
-                <a href="{{ url()->previous() }}" class="boton red mr-3"><i class="fas fa-arrow-left"></i> Volver Atrás</a>
+                <a href="javascript:history.back()" class="boton red mr-3"><i class="fas fa-arrow-left"></i> Volver Atrás</a>
                 <button class="boton blue" id="nuevo"><i class="fas fa-plus-circle"></i> Nuevo Resultado</button>
             </div>
         </h5>
@@ -27,7 +27,7 @@
                     <tr>
                         <td width="5%">ID</td>
                         <td>RESULTADO</td>
-                        <td width="25%"></td>
+                        <td width="25%">ACCIONES</td>
                     </tr>
                 </thead>
             </table>

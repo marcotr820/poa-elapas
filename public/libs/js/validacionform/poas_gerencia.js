@@ -12,7 +12,7 @@ d.addEventListener('change', (e) => {
         if(gerencia_uuid != ""){
             document.querySelector('.loading').style.display = 'block';
             document.querySelector('.table-loading').classList.remove('show');
-            $('#table').DataTable({
+             var t = $('#table').DataTable({
                 "destroy": true, /*metodo para destruir la tabla que tenemos al inicio y remplazarla por una nueva con nuevos datos*/
                 "processing": true,
                 "serverSide": true,
@@ -53,6 +53,11 @@ d.addEventListener('change', (e) => {
                         }
                     }
                 ],
+                "drawCallback": function(){
+                    var api = this.api();
+                    var json = api.ajax.json();
+                    $( api.column(0).footer() ).html('<h5><b>Total Programado:</b> ' + json.total_programado + ' Bs.</h5>');
+                },
                 "language": {
                     "url": URL
                 },
@@ -61,6 +66,7 @@ d.addEventListener('change', (e) => {
                     document.querySelector('.loading').style.display = 'none';
                 }
             });
+            // t.row.add(['1']).draw();
         }
 
     }

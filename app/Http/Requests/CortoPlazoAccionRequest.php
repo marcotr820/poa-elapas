@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CortoPlazoAccionRequest extends FormRequest
@@ -23,8 +24,10 @@ class CortoPlazoAccionRequest extends FormRequest
      */
     public function rules()
     {
+        $year_creacion = Carbon::now()->addYear()->year;
+        // $year_creacion = 2022;
         return [
-            'gestion' => ['required', 'digits:4', 'numeric'],
+            'gestion' => ['required', 'digits:4', 'numeric', "max:$year_creacion", "min:$year_creacion"],
             'accion_corto_plazo' => 'required',
             'resultado_esperado' => ['required', 'numeric', 'min:0', 'max:100'],
             'presupuesto_programado' => ['required', 'numeric', 'min:0'],

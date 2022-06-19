@@ -18,7 +18,9 @@
             Lista de Operaciones
             <div>
                 <a href="javascript:history.back()" class="boton red"><i class="fas fa-arrow-left"></i> Volver Atrás</a>
-                <button type="button" id="nuevo" class="boton blue ml-2"><i class="fas fa-plus"></i> Nueva Operacion</button>
+                @if ($corto_plazo_accion->status != 'monitoreo')
+                    <button type="button" id="nuevo" class="boton blue ml-2"><i class="fas fa-plus"></i> Nueva Operacion</button>
+                @endif
             </div>
         </h5>
         <div class="card-body">
@@ -27,7 +29,7 @@
                     <tr>
                         <td width='5%'>ID</td>
                         <td>OPERACION</td>
-                        <td width="20%"></td>
+                        <td width="20%">ACCIONES</td>
                     </tr>
                 </thead>
             </table>
@@ -52,17 +54,25 @@
             columns: [
                 { data: 'id'},
                 { data: 'nombre_operacion'},
-                {
-                    data: 'uuid',
+                { 
+                    data: 'uuid' ,
                     render: function( data, type, row)
                     {
-                        return `
-                        <div class="btn-group">
-                            <button class="boton blue" data-edit="" onclick="edit('${data}')"><i class="fas fa-pen"></i></button>
-                            <button class="boton red ml-1" data-delete="" onclick="delet('${data}')"><i class="fas fa-times-circle"></i></button>
-                            <button class='boton default ml-4' data-actividades="">Actividades</a>
-                        </div>
-                        `;
+                        if(row.corto_plazo_accion.status == 'monitoreo'){
+                            return `
+                            <div class="btn-group">
+                                <button class='boton default ml-4' data-actividades="">Actividades</a>
+                            </div>
+                            `;
+                        } else {
+                            return `
+                            <div class="btn-group">
+                                <button class="boton blue" data-edit="" onclick="edit('${data}')"><i class="fas fa-pen"></i></button>
+                                <button class="boton red ml-1" data-delete="" onclick="delet('${data}')"><i class="fas fa-times-circle"></i></button>
+                                <button class='boton default ml-4' data-actividades="">Actividades</a>
+                            </div>
+                            `;
+                        }
                     }
                 }
             ],

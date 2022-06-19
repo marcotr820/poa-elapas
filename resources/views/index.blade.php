@@ -24,8 +24,9 @@
             <img src="{{ asset('libs/img/logo_gota_agua.png') }}" alt="..." width="170px">
         </div>
         <div class="index-content">
-            <p>Plan Operativo Anual | ELAPAS</p>
-            <p>Bienvenido.</p>
+            <h3>Plan Operativo Anual | ELAPAS</h3>
+            <h3>Bienvenido.</h3>
+            <h3>Iniciado Sesión como: <span class="badge badge-secondary">{{ ucwords(strtolower(auth('usuario')->user()->trabajador->nombre)) }}</span></h3>
             {{-- @foreach (auth('usuario')->user()->roles as $rol)
                 {{ $rol->name }} <br>
             @endforeach --}}

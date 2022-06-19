@@ -121,7 +121,7 @@ class CortoPlazoAccionController extends Controller
             'presupuesto_programado' => $request->presupuesto_programado,
             'fecha_inicio' => $request->fecha_inicio,
             'fecha_fin' => $request->fecha_fin,
-            'status' => '1'
+            'status' => 'presentado'
         ]);
     }
 

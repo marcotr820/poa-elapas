@@ -6,6 +6,9 @@
 <style>
     table{
         font-size: 11px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-weight: 600;
+        text-align: center;
     }
     table tr td{
         border: 0.5px solid #b3b3b3;
@@ -24,7 +27,7 @@
         </div>
         <div class="card-body">
             <h5 class="card-title">Lista de tareas especificas</h5>
-            <table width="100%">
+            <table width="100%" id="table">
                 <thead style="background-color: skyblue; text-align: center;">
                     <tr>
                         <td width="5%">ID</td>
@@ -49,4 +52,5 @@
 @endsection
 
 @section('js')
+
 @endsection

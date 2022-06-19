@@ -36,6 +36,7 @@ class DeterminarRequerimientosController extends Controller
             ->join('metas', 'metas.id', '=', 'resultados.meta_id')
             ->join('pilares', 'pilares.id', '=', 'metas.pilar_id')
             ->select('corto_plazo_acciones.*')
+            ->orderBy('corto_plazo_acciones.id', 'asc')
             ->where('pilares.gestion_pilar', $gestion)
             ->where('unidades.id', $unidad->id)
             ->get();
@@ -46,19 +47,51 @@ class DeterminarRequerimientosController extends Controller
         return view('reporte_requerimientos.index', compact('unidad', 'corto_plazo_acciones'));
     }
 
-    public function requerimientos_pdf(Unidades $unidad){
-        $corto_plazo_acciones = CortoPlazoAcciones::join('trabajadores', 'trabajadores.id', '=', 'corto_plazo_acciones.trabajador_id')
+    public function requerimientos_pdf(Unidades $unidad)
+    {
+        $date = Carbon::now()->addYear();
+            $pilares = Pilares::select('gestion_pilar')
+                ->groupBy('gestion_pilar')
+                ->orderBy('gestion_pilar', 'ASC')
+                ->get();
+        if ($pilares->count()) {
+            // si existe un pilar para la gestion siguiente se buscara los pilares con la gestion siguiente, si no se mostrara los pilares de la ultima gestion creada
+            if ($pilares->last()->gestion_pilar == $date->year) {
+                $gestion = $date->year;
+            }else{
+                $gestion = $pilares->last()->gestion_pilar;
+            }
+        }
+
+        if (isset($gestion)) {
+            $corto_plazo_acciones = CortoPlazoAcciones::join('trabajadores', 'trabajadores.id', '=', 'corto_plazo_acciones.trabajador_id')
             ->join('unidades', 'unidades.id', '=', 'trabajadores.unidad_id')
+            ->join('pei_objetivos_especificos', 'pei_objetivos_especificos.id', '=', 'corto_plazo_acciones.pei_objetivo_especifico_id')
+            ->join('mediano_plazo_acciones', 'mediano_plazo_acciones.id', '=', 'pei_objetivos_especificos.mediano_plazo_accion_id')
+            ->join('resultados', 'resultados.id', 'mediano_plazo_acciones.resultado_id')
+            ->join('metas', 'metas.id', '=', 'resultados.meta_id')
+            ->join('pilares', 'pilares.id', '=', 'metas.pilar_id')
             ->select('corto_plazo_acciones.*')
-            ->where('unidades.id', $unidad->id)->get();
+            ->orderBy('corto_plazo_acciones.id', 'asc')
+            ->where('pilares.gestion_pilar', $gestion)
+            ->where('unidades.id', $unidad->id)
+            ->get();
+        } else {
+            $corto_plazo_acciones = [];
+        }
         // return view('reporte_operaciones_tareas.reporte_pdf', compact('trabajador', 'acciones_corto_plazo'));
         $view = view('reporte_requerimientos.pdf_requerimientos', compact('unidad', 'corto_plazo_acciones'));
         $html = $view->render();
         PDF::SetTitle('Reporte Determinación Requerimientos');
         // Custom Header
         $gerencia = $unidad->gerencia;
-        $gestion = Pilares::select('gestion_pilar')->groupBy('gestion_pilar')->orderBy('gestion_pilar', 'ASC')->get()->last();
-        PDF::setHeaderCallback(function($pdf) use ($gestion, $gerencia, $unidad) {
+        if(Pilares::count()){
+            $v = Pilares::select('gestion_pilar')->groupBy('gestion_pilar')->orderBy('gestion_pilar', 'ASC')->get()->last();
+            $gestion_pilar = $v->gestion_pilar;
+        } else {
+            $gestion_pilar = 'nulo';
+        }
+        PDF::setHeaderCallback(function($pdf) use ($gestion_pilar, $gerencia, $unidad) {
             $image_file = K_PATH_IMAGES.'logo_elapas.png'; //vendor/tecnickcom/examples/images
             $pdf->Image($image_file, 5, 2, 32, '', 'PNG', '', 'T', false, 200, '', false, false, 0, false, false, false);
             // Set font
@@ -72,7 +105,7 @@ class DeterminarRequerimientosController extends Controller
             $pdf->Ln(1);
             $pdf->Cell(0, 5, "Unidad: $unidad->nombre_unidad", 0, 1, 'C', 0, '', 0, false, 'M', 'M');
             $pdf->Ln(1);
-            $pdf->Cell(0, 5, "Gestion: $gestion->gestion_pilar", 0, 1, 'C', 0, '', 0, false, 'M', 'M');
+            $pdf->Cell(0, 5, "Gestion: $gestion_pilar", 0, 1, 'C', 0, '', 0, false, 'M', 'M');
         });
         // Custom Footer
         PDF::setFooterCallback(function($pdf) {

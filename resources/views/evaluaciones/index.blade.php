@@ -9,7 +9,7 @@
     }
     table td{
         padding: 5px;
-        border: 0.5px solid #999999;
+        border: 0.5px solid #b3b3b3;
     }
 </style>
     <div class="card">
@@ -20,12 +20,20 @@
             <p class="mb-2"><b>Fecha Fin:</b> {{ $corto_plazo_accion->fecha_fin }}</p>
             <p class="mb-2"><b>Presupuesto Restante:</b> {{ number_format($corto_plazo_accion->presupuesto_programado - $corto_plazo_accion->evaluaciones->sum('presupuesto_ejecutado'), 2, '.', ',') }} Bs.</p>
             <div>
-                <a href="{{ route('planificacion_evaluacion') }}" class="boton red"><i class="fas fa-arrow-left"></i> Volver Atrás</a>
+                {{-- <a href="{{ route('planificacion_evaluacion') }}" class="boton red"><i class="fas fa-arrow-left"></i> Volver Atrás</a> --}}
+                <a href="{{ route('acciones_corto_plazo.evaluacion') }}" class="boton red"><i class="fas fa-arrow-left"></i> Volver Atrás</a>
             </div>
         </div>
         <div class="card-header d-flex justify-content-between align-items-center">
             <h5 class="m-0">Lista de Evaluaciones</h5>
             {{-- verificamos que estamos dentro de las fechas que tenemos que evaluarnos para mostrar el boton de evaluar --}}
+            
+            @if (!$corto_plazo_accion->planificacion()->exists())
+                <div class="alert m-0 py-1 px-2 bg-danger text-white" role="alert">
+                    Por favor Registre su Planificación.
+                </div>
+            @endif
+
             @if (!empty($trimestre))
                 {{-- verificamos si la evaluacion ya tiene un registro para no repetir evaluaciones por trimestre --}}
                 @if (!$corto_plazo_accion->evaluaciones->where('trimestre', $trimestre)->first())
@@ -78,9 +86,11 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td>total:</td>
+                                <td class="text-center"><b>Total:</b></td>
                                 <td>{{ number_format($corto_plazo_accion->evaluaciones->sum('presupuesto_ejecutado'), 2, '.', ',') }} Bs.</td>
                                 <td>{{ $corto_plazo_accion->evaluaciones->sum('ejecucion') }}%</td>
+                                <td></td>
+                                <td></td>
                             </tr>
                         @endif
                     @empty

@@ -31,4 +31,8 @@ class Partidas extends Model
             $model->uuid =  (string) Str::uuid().round(microtime(true) * 1000);
         });
     }
+
+    public function items(){
+        return $this->hasMany(Items::class, 'partida_id');
+    }
 }

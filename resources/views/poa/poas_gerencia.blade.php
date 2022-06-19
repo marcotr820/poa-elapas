@@ -1,5 +1,7 @@
 @extends('layouts.plantillabase')
 
+@section('title', 'Ver POA Gerencias')
+
 @section('contenido')
 <style>
     .table-loading{
@@ -38,6 +40,13 @@
                         </tr>
                     </thead>
                     <tbody></tbody>
+                    <tfoot>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
                 </table>
             </article>
         </div>
@@ -48,14 +57,15 @@
     <script src="{{asset('libs/js/validacionform/poas_gerencia.js')}}"></script>
     <script>
         var URL = "{{ asset('libs/datatables/es-ES.json') }}";
-        $('#table').DataTable({
-            "language": {
-                "url": "{{ asset('libs/datatables/es-ES.json') }}"
-            },
-            "initComplete": function( settings, json ) {
-                document.querySelector('.table-loading').classList.add('show');
-                document.querySelector('.loading').style.display = 'none';
-            },
-        });
+        var t = $('#table').DataTable({
+                    "language": {
+                        "url": "{{ asset('libs/datatables/es-ES.json') }}"
+                    },
+                    "initComplete": function( settings, json ) {
+                        document.querySelector('.table-loading').classList.add('show');
+                        document.querySelector('.loading').style.display = 'none';
+                    },
+                });
+        // t.row.add(['1', '.2', '.3']).draw(false);
     </script>
 @endsection

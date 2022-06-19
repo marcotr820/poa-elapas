@@ -23,7 +23,7 @@
             </div>
 
             <div class="form-group">
-              <label for=""><b>Ponderacion <span class="text-danger">*</span></b></label>
+              <label for=""><b>Ponderacion (%)<span class="text-danger">*</span></b></label>
               <input type="text" data-error="input" class="form-control" name="ponderacion" id="ponderacion" required>
               <span class="text-danger" data-error="span" id="ponderacion-error"></span>
             </div>

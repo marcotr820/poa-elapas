@@ -32,7 +32,10 @@ class RoleSeeder extends Seeder
 
         // TRABAJADOR
         Permission::create(['guard_name' => 'usuario', 'name' => 'VER-POA'])->assignRole($role3);
-        Permission::create(['guard_name' => 'usuario', 'name' => 'VER-PLANIFICACION-EVALUACION-POA'])->assignRole($role3);
+        // Permission::create(['guard_name' => 'usuario', 'name' => 'VER-PLANIFICACION-EVALUACION-POA'])->assignRole($role3);
+        Permission::create(['guard_name' => 'usuario', 'name' => 'VER-PLANIFICACION'])->assignRole($role3);
+        Permission::create(['guard_name' => 'usuario', 'name' => 'VER-EVALUACION'])->assignRole($role3);
+        
 
         // GERENTE
         Permission::create(['guard_name' => 'usuario', 'name' => 'VER-POA-UNIDADES-GERENCIA'])->assignRole($role4);

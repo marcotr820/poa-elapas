@@ -2,6 +2,7 @@ const d = document;
 function update(accion_uuid){
     d.getElementById('form').onsubmit = function (e){
         e.preventDefault();
+        d.querySelector('.overlay').classList.add('show');
         let datosform = $(e.target).serializeArray();
         $.ajax({
             url:"/update_status_corto_plazo_accion/"+ accion_uuid,
@@ -64,7 +65,7 @@ function cambio (){
                     render: function(data, type, row) {
                         switch(data){
                             case 'editar': 
-                                return `<span class="badge badge-warning p-1"><b>EDICION</b></span>`;
+                                return `<span class="badge badge-primary p-1"><b>EDICION</b></span>`;
                             break;
 
                             case 'presentado': 
@@ -76,7 +77,7 @@ function cambio (){
                             break;
 
                             case 'monitoreo': 
-                                return `<span class="badge badge-primary p-1">MONITOREO</span>`;
+                                return `<span class="badge badge-warning p-1">MONITOREO</span>`;
                             break;
                         }
                     }
@@ -86,7 +87,7 @@ function cambio (){
                     render: function(data, type, row) {
                         switch(row.status){
                             case 'editar': 
-                                return `<button class="boton yellow" data-accion="" onclick="update('${data}')"><i class="fas fa-cogs"></i></button>`;
+                                return `<button class="boton blue" data-accion="" onclick="update('${data}')"><i class="fas fa-cogs"></i></button>`;
                             break;
 
                             case 'presentado': 
@@ -98,7 +99,7 @@ function cambio (){
                             break;
 
                             case 'monitoreo':
-                                return `<button class="boton yellow" data-accion="" onclick="update('${data}')"><i class="fas fa-cogs"></i></button>`;
+                                return `<button class="boton default" data-accion="" onclick="update('${data}')"><i class="fas fa-cogs"></i></button>`;
                             break;
 
                             // default: return `<button class="btn btn-primary btn-sm" data-accion="" onclick="update('${data}')"><i class="fas fa-cogs"></i></button>`;
@@ -113,6 +114,7 @@ function cambio (){
 // EVENTO CLICK
 d.addEventListener('click', (e)=>{
     if(e.target.matches('[data-accion]') || e.target.matches('[data-accion] *')){
+        d.querySelector('.overlay').classList.remove('show');
         let data = $('#table').DataTable().row($(e.target).parents('tr') ).data();
         axios.get('/status_corto_plazo_accion/' + data.uuid) //enviamos todos los input del form
         .then(function (resp) {

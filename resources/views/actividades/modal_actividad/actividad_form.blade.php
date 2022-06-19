@@ -22,7 +22,7 @@
               <span class="text-danger" data-error="span" id="nombre_actividad-error"></span>
             </div>
             <div class="form-group">
-              <label class="col-form-label"><b>Resultado Esperado <span class="text-danger">*</span></b></label>
+              <label class="col-form-label"><b>Resultado Intermedio Esperado <span class="text-danger">*</span></b></label>
               <input type="text" id="resultado_esperado" name="resultado_esperado" data-error="input" class="form-control" required>
               <span class="text-danger" data-error="span" id="resultado_esperado-error"></span>
             </div>

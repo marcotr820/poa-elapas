@@ -21,7 +21,7 @@
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="" class="col-form-label"><b>Usuario:</b></label>
+                        <label for="" class="col-form-label"><b>Usuario: <span class="text-danger">*</span> </b></label>
                         <select class="form-control select2" data-error="select" id="trabajador_id" name="trabajador_id"
                             style="width:100%;" required>
                             <option value="">seleccione...</option>
@@ -30,7 +30,7 @@
                     </div>
 
                     <div class="form-group" data-block="input">
-                        <label for="Password"><b>Password:</b></label>
+                        <label for="Password"><b>Password: <span class="text-danger">*</span> </b></label>
                         <input class="validacion form-control" data-error="input" type="password" id="password"
                             name="password">
                         <span class="text-danger" data-error="span" id="password-error"></span>

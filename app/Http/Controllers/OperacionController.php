@@ -24,9 +24,12 @@ class OperacionController extends Controller
 
         if($request->ajax())
         {
-            $operaciones = Operaciones::where('corto_plazo_accion_id', $corto_plazo_accion->id);
-            return datatables()
-                ->eloquent($operaciones)
+            $operaciones = Operaciones::with('corto_plazo_accion')->where('corto_plazo_accion_id', $corto_plazo_accion->id);
+            return datatables($operaciones)
+                // ->addColumn('status', function($operaciones){
+                //     return $operaciones->corto_plazo_accion->status;
+                // })
+                // ->eloquent($operaciones)
                 ->toJson();
         }
         return view('operaciones.index', compact('corto_plazo_accion'));

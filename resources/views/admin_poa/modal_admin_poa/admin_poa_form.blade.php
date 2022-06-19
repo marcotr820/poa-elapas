@@ -1,6 +1,11 @@
 <div class="modal fade animado" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
+            {{-- OVERLAY --}}
+            <div class="overlay">
+                <i class="fas fa-2x fa-sync fa-spin"></i>
+            </div>
+            {{--  --}}
             <div class="modal-header">
                 <h5 class="modal-title">Cambiar Estado Accion Corto Plazo</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -29,7 +34,7 @@
                             <option value="editar">Editar Presupuesto</option>
                             <option value="presentado">Presentado</option>
                             <option value="aprobado">Aprobar Presupuesto</option>
-                            <option value="monitoreo">Vista Monitoreo</option>
+                            <option value="monitoreo">Solo Monitoreo</option>
                         </select>
                     </div>
 

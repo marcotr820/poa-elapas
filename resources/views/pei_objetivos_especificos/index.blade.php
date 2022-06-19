@@ -37,8 +37,8 @@
                         <td width="40%">OBJETIVO ESPECIFICO</td>
                         <td width="10%">PONDERACION</td>
                         <td width="18%">INDICADOR DE PROCESO</td>
-                        <td>GERENCIA</td>
-                        <td width="10%"></td>
+                        <td>GERENCIA RESPONSABLE</td>
+                        <td width="10%">ACCIONES</td>
                     </tr>
                 </thead>
             </table>

@@ -19,7 +19,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label class="col-form-label"><b>Nombre Permiso:</b></label>
+                                <label class="col-form-label"><b>Nombre Permiso: <span class="text-danger">*</span> </b></label>
                                 <input class="form-control" data-error="input" name="nombre_permiso"
                                     id="nombre_permiso" placeholder="Ingrese el nombre del permiso..." required>
                                 <span class="text-danger" data-error="span" id="nombre_permiso-error"></span>

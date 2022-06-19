@@ -29,9 +29,9 @@
             <table id="acciones_mediano_plazo" class="table table-striped table-sm display" style="width:100%">
                 <thead class="thead" style="background-color: skyblue">
                     <tr>
-                        <td>ID</td>
+                        <td width="5%">ID</td>
                         <td>ACCION MEDIANO PLAZO</td>
-                        <td width="23%"></td>
+                        <td width="23%">ACCIONES</td>
                     </tr>
                 </thead>
             </table>

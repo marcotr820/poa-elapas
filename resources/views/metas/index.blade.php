@@ -13,7 +13,7 @@
         <h5 class="card-header py-1 d-flex justify-content-between align-items-center">
             Lista de Metas
             <div>
-                <a href="{{ url()->previous() }}" class="boton red mr-2"><i class="fas fa-arrow-left"></i> Volver Atrás</a>
+                <a href="javascript:history.back()" class="boton red mr-2"><i class="fas fa-arrow-left"></i> Volver Atrás</a>
                 <button class="boton blue" id="nuevo"><i class="fas fa-plus"></i> Nueva Meta</button>
             </div>
         </h5>
@@ -23,7 +23,7 @@
                     <tr>
                         <td width="5%">ID</td>
                         <td>META</td>
-                        <td width="17%"></td>
+                        <td width="18%">ACCIONES</td>
                     </tr>
                 </thead>
             </table>

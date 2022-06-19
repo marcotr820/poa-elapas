@@ -2,49 +2,113 @@
 
 @section('title', 'Items Servicios')
 
+@section('css')
+    <style>
+        .skill-box{
+            padding: 0 15px;
+            width: 75%;
+        }
+        .skill-box .title{
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .skill-box .skill-bar{
+            height: 15px;
+            width: 100%;
+            margin-top: 5px;
+            border-radius: 6px;
+            background: rgba(0,0,0,0.2)
+        }
+        .skill-bar .skill-per{
+            position: relative;
+            display: block;
+            height: 100%;
+            /* width: 20%; */
+            border-radius: 6px;
+            background: #004D99;
+            animation: progress 1.2s ease-in-out;
+        }
+        @keyframes progress{
+            0%{
+                width: 0%;
+                opacity: 0.5;
+            }
+            100%{
+                opacity: 1;
+            }
+        }
+        .skill-per .tip{
+            color: #fff;
+            padding: 1px 3px;
+            position: absolute;
+            right: -12px;
+            top: -28px;
+            font-size: 12px;
+            border-radius: 4px;
+            background-color: #000;
+            z-index: 1;
+        }
+        .tip::before{
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            bottom: -4px;
+            background-color: #000;
+            left: 50%;
+            transform: translateX(-50%) rotate(45deg);
+            z-index: -1;
+        }
+    </style>
+@endsection
+
 @section('contenido')
     <div class="card border-dark">
-        <h5 class="card-header border-dark p-2 pb-0">
-            <table class="table table-sm m-0" width="100%">
-                <tr>
-                    <td width="15%"><h6><b>Acción Corto Plazo:</b></h6></td>
-                    <td><h6>{!!$actividad->operacion->corto_plazo_accion->accion_corto_plazo!!}</h6></td>
-                </tr>
-                <tr>
-                    <td><h6><b>Presupuesto Asignado:</b></h6></td>
-                    <td><h6>{!!number_format($actividad->operacion->corto_plazo_accion->presupuesto_programado, 2, ".", ",")!!} Bs.</h6></td>
-                </tr>
-                <tr>
-                    <td><h6><b>Operación:</b></h6></td>
-                    <td><h6>{!!$actividad->operacion->nombre_operacion!!}</h6></td>
-                </tr>
-                <tr>
-                    <td><h6><b>Actividad:</b></h6></td>
-                    <td><h6>{{$actividad->nombre_actividad}}</h6></td>
-                </tr>
-                <tr>
-                    <td><h6><b>Presupuesto Restante:</b></h6></td>
-                    <td><h6>{{ number_format($actividad->operacion->corto_plazo_accion->presupuesto_programado - $accion->items->sum('presupuesto'), 2, '.', ',') }} Bs.</h6></td>
-                </tr>
-                <tr>
-                    <td><h6 class="m-0"><b>Presupuesto Ejecutado:</b></h6></td>
-                    <td class="d-flex flex-row">
-                        <h6 class="m-0 mr-2 d-inline-block" style="width: 15%">{{number_format($accion->items->sum('presupuesto'), 2, '.', ',')}} Bs.</h6>
-                        <div class="progress border border-dark" style="height: 18px; width: 85%;">
-                            <div class="progress-bar" role="progressbar" 
-                                style="width:{{ ($accion->items->sum('presupuesto')/$accion->presupuesto_programado)*100 }}%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                {{ round(($accion->items->sum('presupuesto')/$accion->presupuesto_programado)*100, 2) }}%
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </h5>
+        <div class="bg-light p-2">
+            <div class="d-flex">
+                <label class="font-weight-bold pr-2">Acción Corto Plazo:</label>
+                <p class="m-0">{{$actividad->operacion->corto_plazo_accion->accion_corto_plazo}}</p>
+            </div>
+            <div class="d-flex">
+                <label class="font-weight-bold pr-2">Presupuesto Asignado:</label>
+                <p class="m-0">{{number_format($actividad->operacion->corto_plazo_accion->presupuesto_programado, 2, ".", ",")}} Bs.</p>
+            </div>
+            <div class="d-flex">
+                <label class="font-weight-bold pr-2">Operación:</label>
+                <p class="m-0">{{$actividad->operacion->nombre_operacion}}</p>
+            </div>
+            <div class="d-flex">
+                <label class="font-weight-bold pr-2">Actividad:</label>
+                <p class="m-0">{{$actividad->nombre_actividad}}</p>
+            </div>
+            <div class="d-flex">
+                <label class="font-weight-bold pr-2">Presupuesto Restante:</label>
+                <p class="m-0">{{ number_format($actividad->operacion->corto_plazo_accion->presupuesto_programado - $accion->items->sum('presupuesto'), 2, '.', ',') }} Bs.</p>
+            </div>
+            <div class="d-flex justify-content-between">
+                <div class="d-flex">
+                    <label class="font-weight-bold pr-2">Presupuesto Ejecutado:</label>
+                    <p class="m-0">{{number_format($accion->items->sum('presupuesto'), 2, '.', ',')}} Bs.</p>
+                </div>
+                <div class="skill-box">
+                    <span class="title">Porcentaje Ejecutado:</span>
+                    <div class="skill-bar">
+                        <span class="skill-per">
+                            <span class="tip">{{ round(($accion->items->sum('presupuesto')/$accion->presupuesto_programado)*100) }}%</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <h5 class="card-header border-dark py-1 d-flex justify-content-between align-items-center">
             Lista de Items
             <div>
                 <a href="javascript:history.back()" class="boton red"><i class="fas fa-arrow-left"></i> Volver Atrás</a>
-                <button type="button" id="nuevo" class="boton blue ml-2"><i class="fas fa-plus"></i> Nuevo Item</button>
+                @if ($actividad->operacion->corto_plazo_accion->status != 'monitoreo')
+                    <button type="button" id="nuevo" class="boton blue ml-2"><i class="fas fa-plus"></i> Nuevo Item</button>
+                @endif
             </div>
         </h5>
         <div class="card-body">
@@ -56,7 +120,7 @@
                         <td>FECHA REQUERIDA</td>
                         <td>PRESUPUESTO</td>
                         <td>PARTIDA</td>
-                        <td width="12%"></td>
+                        <td width="12%">ACCIONES</td>
                     </tr>
                 </thead>
             </table>
@@ -72,6 +136,9 @@
     
     <script src="{{asset('libs/js/validacionform/item_validar.js')}}"></script>
     <script>
+        var total_progress = '{{ round(($accion->items->sum('presupuesto')/$accion->presupuesto_programado)*100) }}%';
+        document.querySelector('.skill-per').style.width = total_progress;
+
         var actividad_uuid = "{!!$actividad->uuid!!}";
         $('#items').DataTable({
             "serverSide": true,
@@ -88,17 +155,21 @@
                         return number;
                     }
                 },
-                { data: 'nombre_partida', name: 'partidas.nombre_partida'},
+                { data: 'partida.nombre_partida', name: 'partida.nombre_partida'},
                 {
                     data: 'uuid',
                     render: function( data, type, row)
                     {
-                        return `
-                        <div class="btn-group">
-                            <button class="boton blue" data-edit="" onclick="edit('${data}')"><i class="fas fa-pen"></i></button>
-                            <button class="boton red ml-2" data-delete="" onclick="delet('${data}')"><i class="fas fa-times-circle"></i></button>
-                        </div>
-                        `;
+                        if(row.status_accion_corto_plazo == 'monitoreo'){
+                            return null;
+                        } else {
+                            return `
+                            <div class="btn-group">
+                                <button class="boton blue" data-edit="" onclick="edit('${data}')"><i class="fas fa-pen"></i></button>
+                                <button class="boton red ml-2" data-delete="" onclick="delet('${data}')"><i class="fas fa-times-circle"></i></button>
+                            </div>
+                            `;
+                        }
                     }
                 }
             ],

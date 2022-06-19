@@ -142,7 +142,7 @@ class PoaController extends Controller
             }
         }
         if (isset($gestion)){
-            $query = Unidades::where('gerencia_id', $gerencia->id)
+            $query = Unidades::query()->where('gerencia_id', $gerencia->id)
                 ->addSelect(['suma_presupuesto_acciones' => CortoPlazoAcciones::selectRaw('SUM(presupuesto_programado)')
                 ->join('trabajadores', 'trabajadores.id', '=', 'corto_plazo_acciones.trabajador_id')
                 ->join('pei_objetivos_especificos', 'pei_objetivos_especificos.id', '=', 'corto_plazo_acciones.pei_objetivo_especifico_id')
@@ -154,7 +154,12 @@ class PoaController extends Controller
                 ->where('pilares.gestion_pilar', $gestion)
             ]);
             // ->get();
-            return datatables($query)->make(true);
+
+            $total_presupuesto_programado = $query->get()->sum('suma_presupuesto_acciones');
+
+            return datatables($query)
+            ->with('total_programado', number_format($total_presupuesto_programado, 2, '.', ','))
+            ->make(true);
         } else {
             return datatables([])->make(true);
         }

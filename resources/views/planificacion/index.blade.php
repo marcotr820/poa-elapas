@@ -4,16 +4,11 @@
 
 @section('contenido')
     <div class="card">
-        <div class="card-header">
+        <div class="card-header py-1">
             {{-- {{ $url_anterior }} --}}
-            <b>Accion Corto Plazo:</b> {{$corto_plazo_accion->accion_corto_plazo}}
-            <table class="table table-borderless m-0 mt-2">
-                <tr>
-                    <td class="p-0"><b>FECHA INICIO:</b> {{$corto_plazo_accion->fecha_inicio}}</td>
-                    <td class="p-0"><b>FECHA FIN:</b> {{$corto_plazo_accion->fecha_fin}}</td>
-                    <td class="p-0">AAA</td>
-                </tr>
-            </table>
+            <p class="m-0 mb-1"><b>Accion Corto Plazo:</b> {{$corto_plazo_accion->accion_corto_plazo}}</p>
+            <p class="m-0 mb-1"><b>Fecha Inicio:</b> {{$corto_plazo_accion->fecha_inicio}}</p>
+            <p class="m-0 mb-1"><b>Fecha Fin:</b> {{$corto_plazo_accion->fecha_fin}}</p>
         </div>
         <div class="card-header d-flex justify-content-between align-items-center py-2">
             Lista Planificacion

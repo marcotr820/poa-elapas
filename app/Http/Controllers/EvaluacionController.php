@@ -25,7 +25,7 @@ class EvaluacionController extends Controller
             // if($fecha_actual >= $fecha_inicio && $fecha_actual <= $fecha_fin){
                 switch ($fecha_actual->month) {
                     case 4: case 5: case 6:
-                        if($corto_plazo_accion->planificacion->primer_trimestre !== 0){
+                        if($corto_plazo_accion->planificacion->primer_trimestre != 0){
                             $resultado_esperado = $corto_plazo_accion->planificacion->primer_trimestre;
                             $trimestre = "primer_trimestre";
                         }
@@ -33,7 +33,7 @@ class EvaluacionController extends Controller
                         break;
                         
                     case 7: case 8: case 9:
-                        if($corto_plazo_accion->planificacion->segundo_trimestre !== 0){
+                        if($corto_plazo_accion->planificacion->segundo_trimestre != 0){
                             $resultado_esperado = $corto_plazo_accion->planificacion->segundo_trimestre;
                             $trimestre = "segundo_trimestre";
                         }
@@ -41,7 +41,7 @@ class EvaluacionController extends Controller
                         break;
 
                     case 10: case 11:
-                        if($corto_plazo_accion->planificacion->tercer_trimestre !== 0){
+                        if($corto_plazo_accion->planificacion->tercer_trimestre != 0){
                             $resultado_esperado = $corto_plazo_accion->planificacion->tercer_trimestre;
                             $trimestre = "tercer_trimestre";
                         }
@@ -49,7 +49,7 @@ class EvaluacionController extends Controller
                         break;
                     
                     case 12: 
-                        if($corto_plazo_accion->planificacion->cuarto_trimestre !== 0){
+                        if($corto_plazo_accion->planificacion->cuarto_trimestre != 0){
                             $resultado_esperado = $corto_plazo_accion->planificacion->cuarto_trimestre;
                             $trimestre = "cuarto_trimestre";
                         }
@@ -59,7 +59,7 @@ class EvaluacionController extends Controller
                     case 1:
                         if($fecha_fin->year < $fecha_actual->year)
                         {
-                            if($corto_plazo_accion->planificacion->cuarto_trimestre !== 0)
+                            if($corto_plazo_accion->planificacion->cuarto_trimestre != 0)
                             {
                                 $resultado_esperado = $corto_plazo_accion->planificacion->cuarto_trimestre;
                                 $trimestre = "cuarto_trimestre";
@@ -175,18 +175,17 @@ class EvaluacionController extends Controller
 
     public function ver_evaluaciones(Trabajadores $trabajador)
     {
-        $date = Carbon::now()->addYear();
-        $pilares = Pilares::select('gestion_pilar')
-            ->groupBy('gestion_pilar')
-            ->orderBy('gestion_pilar', 'ASC')
-            ->get();
+        $date = Carbon::now();
+        $pilares = Pilares::select('gestion_pilar')->groupBy('gestion_pilar')->orderBy('gestion_pilar', 'ASC')->get();
 
         if ($pilares->count()) {
             // si existe un pilar para la gestion siguiente se buscara los pilares con la gestion siguiente, si no se mostrara los pilares de la ultima gestion creada
             if ($pilares->last()->gestion_pilar == $date->year) {
                 $gestion = $date->year;
             }else{
-                $gestion = $pilares->last()->gestion_pilar;
+                // mostramos los datos de un año antes del ultimo pilar encontrado
+                // $gestion = Carbon::createFromDate($pilares->last()->gestion_pilar)->subYear()->year;    //funcion correcta
+                $gestion = Carbon::createFromDate($pilares->last()->gestion_pilar)->year;    //funcion adelantando año
             }
         }
 
@@ -206,5 +205,41 @@ class EvaluacionController extends Controller
             $corto_plazo_acciones = [];
         }
         return view('evaluaciones.evaluaciones_trabajador', compact('trabajador', 'corto_plazo_acciones'));
+    }
+
+    public function acciones_corto_plazo_evaluacion()
+    {
+        abort_if(auth('usuario')->user()->trabajador->poa_evaluacion != 1, 403);
+
+        $date = Carbon::now();
+        $pilares = Pilares::select('gestion_pilar')->groupBy('gestion_pilar')->orderBy('gestion_pilar', 'ASC')->get();
+
+        if ($pilares->count()) {
+            // si existe un pilar para la gestion siguiente se buscara los pilares con la gestion siguiente, si no se mostrara los pilares de la ultima gestion creada
+            if ($pilares->last()->gestion_pilar == $date->year) {
+                $gestion = $date->year;
+            }else{
+                // mostramos los datos de un año antes del ultimo pilar encontrado
+                // $gestion = Carbon::createFromDate($pilares->last()->gestion_pilar)->subYear()->year;     //funcion correcta
+                $gestion = Carbon::createFromDate($pilares->last()->gestion_pilar)->year;        //funcion alterada adelantando año
+            }
+        }
+
+        if (isset($gestion)){
+            $corto_plazo_acciones = CortoPlazoAcciones::join('trabajadores', 'trabajadores.id', '=', 'corto_plazo_acciones.trabajador_id')
+            ->join('unidades', 'unidades.id', '=', 'trabajadores.unidad_id')
+            ->join('pei_objetivos_especificos', 'pei_objetivos_especificos.id', '=', 'corto_plazo_acciones.pei_objetivo_especifico_id')
+            ->join('mediano_plazo_acciones', 'mediano_plazo_acciones.id', '=', 'pei_objetivos_especificos.mediano_plazo_accion_id')
+            ->join('resultados', 'resultados.id', 'mediano_plazo_acciones.resultado_id')
+            ->join('metas', 'metas.id', '=', 'resultados.meta_id')
+            ->join('pilares', 'pilares.id', '=', 'metas.pilar_id')
+            ->select('corto_plazo_acciones.*')
+            ->where('pilares.gestion_pilar', $gestion)  //**************
+            ->where('unidades.id', auth('usuario')->user()->trabajador->unidad->id)
+            ->where('corto_plazo_acciones.status', 'aprobado')->get();
+        } else {
+            $corto_plazo_acciones = [];
+        }
+        return view('evaluaciones.accion_corto_plazo_evaluacion', compact('corto_plazo_acciones'));
     }
 }

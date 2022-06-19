@@ -14,9 +14,11 @@ class TareaEspecificaController extends Controller
         if($request->ajax())
         {
             $tareas_especificas = TareasEspecificas::where('actividad_id', $actividad->id);
-            return datatables()
-                ->eloquent($tareas_especificas)
-                ->toJson();
+            return datatables($tareas_especificas)
+                ->addColumn('status_accion_corto_plazo', function($tareas_especificas){
+                    return $tareas_especificas->actividad->operacion->corto_plazo_accion->status;
+                })
+                ->make(true);
         }
         return view('tareas_especificas.index', compact('actividad'));
     }

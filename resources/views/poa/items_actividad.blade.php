@@ -6,6 +6,8 @@
 <style>
     table{
         font-size: 11px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-weight: 600;
         text-align: center;
     }
     table tr td{

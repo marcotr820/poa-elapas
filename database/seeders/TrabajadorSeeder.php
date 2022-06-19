@@ -17,13 +17,13 @@ class TrabajadorSeeder extends Seeder
     {
         Trabajadores::create([
             'documento' => '10381494',
-            'nombre' => 'MARCO ANTONIO',
-            'cargo' => 'JEFE DE UNIDAD',
+            'nombre' => 'MARCO ANTONIO TICONA RIOS',
+            'cargo' => 'SOPORTE',
             'poa_status' => '0',
             'poa_evaluacion' => '0',
             'unidad_id' => '1'
         ]);
 
-        Trabajadores::factory(5)->create();
+        Trabajadores::factory(4)->create();
     }
 }

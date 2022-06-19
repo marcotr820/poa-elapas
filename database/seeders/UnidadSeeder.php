@@ -15,21 +15,21 @@ class UnidadSeeder extends Seeder
      */
     public function run()
     {
-        $unidades_gerencia_general = [
-            'sistemas informaticos',
-            'asesoria juridica',
-            'jefatura de planificacion y proyectos',
-            'relaciones publicas y gestion social',
-            'auditoria interna',
-            'odeco',
-            'gerencia general'
-        ];
-        foreach($unidades_gerencia_general as $unidad){
-            Unidades::create([
-                'nombre_unidad' => Str::upper($unidad),
-                'gerencia_id' => '1'
-            ]);
-        }
+        // $unidades_gerencia_general = [
+        //     'sistemas informaticos',
+        //     'asesoria juridica',
+        //     'jefatura de planificacion y proyectos',
+        //     'relaciones publicas y gestion social',
+        //     'auditoria interna',
+        //     'odeco',
+        //     'gerencia general'
+        // ];
+        // foreach($unidades_gerencia_general as $unidad){
+        //     Unidades::create([
+        //         'nombre_unidad' => Str::upper($unidad),
+        //         'gerencia_id' => '1'
+        //     ]);
+        // }
 
         $unidades_gerencia_administrativa = [
             'jefatura financiera y contable',
@@ -39,7 +39,7 @@ class UnidadSeeder extends Seeder
         foreach($unidades_gerencia_administrativa as $unidad){
             Unidades::create([
                 'nombre_unidad' => Str::upper($unidad),
-                'gerencia_id' => '2'
+                'gerencia_id' => '1'
             ]);
         }
 
@@ -51,7 +51,7 @@ class UnidadSeeder extends Seeder
         foreach($unidades_gerencia_comercial as $unidad){
             Unidades::create([
                 'nombre_unidad' => Str::upper($unidad),
-                'gerencia_id' => '3'
+                'gerencia_id' => '2'
             ]);
         }
         
@@ -67,7 +67,7 @@ class UnidadSeeder extends Seeder
         foreach($unidades_gerencia_tecnica as $unidad){
             Unidades::create([
                 'nombre_unidad' => Str::upper($unidad),
-                'gerencia_id' => '4'
+                'gerencia_id' => '3'
             ]);
         }
     }

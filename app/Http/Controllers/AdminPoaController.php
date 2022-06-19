@@ -49,7 +49,9 @@ class AdminPoaController extends Controller
             }
         }
         
-        $objetivos_especificos = PeiObjetivosEspecificos::join('gerencias', 'gerencias.id', '=', 'pei_objetivos_especificos.gerencia_id')
+        if(isset($gestion))
+        {
+            $objetivos_especificos = PeiObjetivosEspecificos::join('gerencias', 'gerencias.id', '=', 'pei_objetivos_especificos.gerencia_id')
             ->join('mediano_plazo_acciones', 'mediano_plazo_acciones.id', '=', 'pei_objetivos_especificos.mediano_plazo_accion_id')
             ->join('resultados', 'resultados.id', '=', 'mediano_plazo_acciones.resultado_id')
             ->join('metas', 'metas.id', '=', 'resultados.meta_id')
@@ -57,6 +59,10 @@ class AdminPoaController extends Controller
             ->select('pei_objetivos_especificos.*', 'gerencias.nombre_gerencia')
             ->where('pilares.gestion_pilar', $gestion)
             ->withCount('corto_plazo_acciones')->get();
+        } else {
+            $objetivos_especificos = [];
+        }
+        
         return view('admin_poa.index', compact('objetivos_especificos'));
     }
 

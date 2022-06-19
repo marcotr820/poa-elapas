@@ -31,4 +31,8 @@ class TareasEspecificas extends Model
         });
     }
 
+    public function actividad(){
+        return $this->belongsTo(Actividades::class, 'actividad_id');
+    }
+
 }

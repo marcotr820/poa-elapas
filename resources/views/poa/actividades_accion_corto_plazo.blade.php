@@ -5,7 +5,9 @@
 @section('contenido')
 <style>
     table{
-        font-size: 10px;
+        font-size: 11px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-weight: 600;
     }
     table thead{
         text-align: center;
@@ -22,7 +24,7 @@
     <div class="card">
         <div class="card-header">
             <div>
-                <p class="m-0"><strong>Unidad:</strong> enviar $unidad</p>
+                <p class="m-0"><strong>Unidad:</strong> {{ $accion_corto_plazo->trabajador->unidad->nombre_unidad }}</p>
                 <p class="m-0"><strong>Accion Corto Plazo:</strong> {{$accion_corto_plazo->accion_corto_plazo}}</p>
                 <a href="{{ route('poa.ver_poas') }}" class="boton red mt-2"><i class="fas fa-arrow-left"></i> Volver Atras</a>
             </div>

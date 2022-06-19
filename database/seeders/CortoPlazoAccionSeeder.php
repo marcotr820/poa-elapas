@@ -24,17 +24,17 @@ class CortoPlazoAccionSeeder extends Seeder
         
         foreach ($cpas as $value) {
             CortoPlazoAcciones::create([
-                'gestion' => '2022',
+                'gestion' => '2023',
                 'accion_corto_plazo' => Str::upper($value),
                 'resultado_esperado' => 25,
                 'presupuesto_programado' => rand(5000, 10000),
-                'fecha_inicio' => date('2022-03-03'),
-                'fecha_fin' => date('2022-07-03'),
+                'fecha_inicio' => date('2023-02-03'),
+                'fecha_fin' => date('2023-07-03'),
                 'trabajador_id' => '3',
                 'pei_objetivo_especifico_id' => '1'
             ]);
         }
 
-        // CortoPlazoAcciones::factory(1)->create();
+        CortoPlazoAcciones::factory(20)->create();
     }
 }

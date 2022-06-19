@@ -31,7 +31,7 @@
         </div>
         <div class="card-header py-1">
             <a href="{{ route('poa.ver_poas') }}" class="boton red"><i class="fas fa-arrow-left"></i> Volver atras</a>
-            <a href="{{ route('requerimientos.pdf', $unidad) }}" target="_blank" class="boton default">Generar PDF</a>
+            <a href="{{ route('requerimientos.pdf', $unidad) }}" target="_blank" class="boton default"><i class="fas fa-file-pdf"></i> Generar PDF</a>
         </div>
         <div class="card-body px-1">
             <table id="" width="100%">
@@ -80,7 +80,7 @@
                                     }
                                     echo  $row_op > 1 ? "rowspan='$row_op'" : '';
                                     ?>
-                                    >{{ $op->nombre_operacion }}11</td>
+                                    >{{ $op->nombre_operacion }}</td>
                                     {{-- primera actividad primera operacion --}}
                                     @forelse ($op->actividades as $act)
                                         @if ($loop->first)
@@ -92,7 +92,7 @@
                                             }
                                             echo $row_act > 1 ? "rowspan='$row_act'" : '';
                                             ?>
-                                            >{{$act->nombre_actividad}}ññ</td>
+                                            >{{$act->nombre_actividad}}</td>
                                             {{-- primer item primera actividad --}}
                                             @forelse ($act->items as $item)
                                                 @if ($loop->first)
@@ -132,7 +132,7 @@
                             @foreach ($var_act->items as $item)
                                 @if (!$loop->first)
                                     <tr>
-                                        <td>{{$item->bien_servicio}}uu</td>
+                                        <td>{{$item->bien_servicio}}</td>
                                         <td>{{$item->fecha_requerida}}</td>
                                         <td>{{$item->partida->codigo_partida}}</td>
                                         <td>{{number_format($item->presupuesto, 2, ".", ",")}} Bs.</td>
@@ -154,11 +154,11 @@
                                             }
                                         echo $row_act > 1 ? "rowspan='$row_act'" : '';
                                         ?>
-                                        >{{$act->nombre_actividad}} D_A</td>
+                                        >{{$act->nombre_actividad}}</td>
                                         @forelse ($act->items as $item)
                                             @if ($loop->first)
                                                 <?php $var_act = $act; ?>
-                                                <td>{{$item->bien_servicio}}pp</td>
+                                                <td>{{$item->bien_servicio}}</td>
                                                 <td>{{$item->fecha_requerida}}</td>
                                                 <td>{{$item->partida->codigo_partida}}</td>
                                                 <td>{{number_format($item->presupuesto, 2, ".", ",")}} Bs.</td>
@@ -176,7 +176,7 @@
                                         @foreach ($var_act->items as $item)
                                             @if (!$loop->first)
                                                 <tr>
-                                                    <td>{{$item->bien_servicio}}mm</td>
+                                                    <td>{{$item->bien_servicio}}</td>
                                                     <td>{{$item->fecha_requerida}}</td>
                                                     <td>{{$item->partida->codigo_partida}}</td>
                                                     <td>{{number_format($item->presupuesto, 2, ".", ",")}} Bs.</td>
@@ -209,7 +209,7 @@
                                     }
                                     echo  $row_op > 1 ? "rowspan='$row_op'" : '';
                                     ?>
-                                    >{{ $op->nombre_operacion }}vv</td>
+                                    >{{ $op->nombre_operacion }}</td>
                                     {{-- primera actividad demas operaciones --}}
                                     @forelse ($op->actividades as $act)
                                         @if ($loop->first)
@@ -221,7 +221,7 @@
                                             }
                                             echo $row_act > 1 ? "rowspan='$row_act'" : '';
                                             ?>
-                                            >{{$act->nombre_actividad}}ss</td>
+                                            >{{$act->nombre_actividad}}</td>
                                             {{-- primer item primera actividad demas operaciones --}}
                                             @forelse ($act->items as $item)
                                                 @if ($loop->first)
@@ -274,11 +274,11 @@
                                                 }
                                                 echo $row_act > 1 ? "rowspan='$row_act'" : '';
                                                 ?>
-                                                >{{$act->nombre_actividad}} ++</td>
+                                                >{{$act->nombre_actividad}}</td>
                                                 {{-- primera item demas actividades demas operaciones --}}
                                                 @forelse ($act->items as $item)
                                                     @if ($loop->first)
-                                                        <td>{{$item->bien_servicio}}yy</td>
+                                                        <td>{{$item->bien_servicio}}</td>
                                                         <td>{{$item->fecha_requerida}}</td>
                                                         <td>{{$item->partida->codigo_partida}}</td>
                                                         <td>{{number_format($item->presupuesto, 2, ".", ",")}} Bs.</td>

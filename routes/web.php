@@ -17,6 +17,7 @@ use App\Http\Controllers\MetaController;
 use App\Http\Controllers\NotificacionController;
 use App\Http\Controllers\OperacionController;
 use App\Http\Controllers\PartidaController;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\PeiObjetivoEspecificoController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PilarController;
@@ -122,6 +123,7 @@ Route::group(['middleware' => ['auth:usuario']], function(){
 
     //************************************** PARTIDAS *************************************************/
     Route::resource('/partidas', PartidaController::class)->only('index', 'store', 'update', 'destroy');
+    Route::get('/pdf_partidas_grupo', [PdfController::class, 'pdf_partida_grupo'])->name('pdf_partidas_grupo');
 
     //*************************************** Creacion VER POAS ***********************************
     Route::get('poa', [PoaController::class, 'index'])->name('poa.index');
@@ -145,7 +147,8 @@ Route::group(['middleware' => ['auth:usuario']], function(){
     Route::get('/planificacion_evaluacion', [CortoPlazoAccionController::class, 'planificacion_evaluacion'])->name('planificacion_evaluacion');
 
     //************************************** PLANIFICACION ********************************/
-    Route::get('/planificacion/{corto_plazo_accion}', [PlanificacionController::class, 'index']);
+    Route::get('/acciones_corto_plazo/planificacion', [PlanificacionController::class, 'acciones_corto_plazo_planificacion'])->name('acciones_corto_plazo.planificacion');
+    Route::get('/planificacion/{corto_plazo_accion}', [PlanificacionController::class, 'index'])->name('planificacion.index');
     Route::post('/planificacion/{corto_plazo_accion}', [PlanificacionController::class, 'store']);
     Route::delete('planificacion/{planificacion}', [PlanificacionController::class, 'destroy']);
 
@@ -186,7 +189,8 @@ Route::group(['middleware' => ['auth:usuario']], function(){
     Route::resource('/items', ItemController::class)->only('update', 'destroy');
 
     /***************************************** EVALUACIONES ************************************/
-    Route::get('/evaluacion/{corto_plazo_accion}', [EvaluacionController::class, 'index']);
+    Route::get('/acciones_corto_plazo/evaluacion', [EvaluacionController::class, 'acciones_corto_plazo_evaluacion'])->name('acciones_corto_plazo.evaluacion');
+    Route::get('/evaluacion/{corto_plazo_accion}', [EvaluacionController::class, 'index'])->name('evaluacion.index');
     Route::post('/evaluacion/{corto_plazo_accion}', [EvaluacionController::class, 'store']);
     Route::get('/get_evaluacion/{evaluacion}', [EvaluacionController::class, 'get_evaluacion']);
     Route::put('/evaluacion/{evaluacion}', [EvaluacionController::class, 'update']);

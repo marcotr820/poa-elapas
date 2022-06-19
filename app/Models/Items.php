@@ -37,4 +37,8 @@ class Items extends Model
     public function partida(){
         return $this->belongsTo(Partidas::class, "partida_id");
     }
+
+    public function actividad(){
+        return $this->belongsTo(Actividades::class, 'actividad_id');
+    }
 }

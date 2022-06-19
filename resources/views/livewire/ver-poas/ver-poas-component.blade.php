@@ -74,12 +74,12 @@
                                 }
                                 echo  $row_op > 1 ? "rowspan='$row_op'" : '';
                                 ?>
-                                >{{ $op->nombre_operacion }}11</td>
+                                >{{ $op->nombre_operacion }}</td>
                                 {{-- primera actividad primera operacion --}}
                                 @forelse ($op->actividades as $act)
                                     @if ($loop->first)
                                         <?php $var_op = $op ?>
-                                        <td>{{$act->nombre_actividad}}ññ</td>
+                                        <td>{{$act->nombre_actividad}}</td>
                                         <td>{{$act->resultado_esperado}}</td>
                                         <td
                                             width="5%"
@@ -127,7 +127,7 @@
                         @foreach ($var_op->actividades as $act)
                             @if (!$loop->first)
                                 <tr>
-                                    <td>{{$act->nombre_actividad}} D_A</td>
+                                    <td>{{$act->nombre_actividad}}</td>
                                     <td>{{$act->resultado_esperado}}</td>
                                 </tr>
                             @endif
@@ -148,12 +148,12 @@
                                 }
                                 echo  $row_op > 1 ? "rowspan='$row_op'" : '';
                                 ?>
-                                >{{ $op->nombre_operacion }}vv</td>
+                                >{{ $op->nombre_operacion }}</td>
                                 {{-- primera actividad demas operaciones --}}
                                 @forelse ($op->actividades as $act)
                                     @if ($loop->first)
                                         <?php $var_op2 = $op ?>
-                                        <td>{{$act->nombre_actividad}}ss</td>
+                                        <td>{{$act->nombre_actividad}}</td>
                                         <td>{{$act->resultado_esperado}}</td>
                                     @endif
                                 @empty
@@ -167,7 +167,7 @@
                                 @foreach ($var_op2->actividades as $act)
                                     @if (!$loop->first)
                                         <tr>
-                                            <td>{{$act->nombre_actividad}} ++</td>
+                                            <td>{{$act->nombre_actividad}}</td>
                                             <td>{{$act->resultado_esperado}}</td>
                                         </tr>
                                     @endif

@@ -111,6 +111,7 @@
                             <ul class="submenu">
                                 <li><a href="{{route('pilares.index')}}" class="pl-4"></i><span class="pl-2">Pilares</span></a></li>
                                 <li><a href="{{route('partidas.index')}}" class="pl-4"></i><span class="pl-2">Partidas</span></a></li>
+                                <li><a href="{{route('directriz_pdf')}}" class="pl-4" target="_blank"></i><span class="pl-2">Reporte Directriz</span></a></li>
                             </ul>
                         </li>
                     @endcan
@@ -149,6 +150,24 @@
                         <a href="{{route('planificacion_evaluacion')}}" class="titulo">
                             <i class="fas fa-boxes"></i>
                             <span class="pl-2">Planificacion y Evaluacion POA</span>
+                        </a>
+                    </li>
+                    @endcan
+
+                    @can('VER-PLANIFICACION')
+                    <li class="bloque">
+                        <a href="{{route('acciones_corto_plazo.planificacion')}}" class="titulo">
+                            <i class="fas fa-boxes"></i>
+                            <span class="pl-2">Planificación POA</span>
+                        </a>
+                    </li>
+                    @endcan
+
+                    @can('VER-EVALUACION')
+                    <li class="bloque">
+                        <a href="{{route('acciones_corto_plazo.evaluacion')}}" class="titulo">
+                            <i class="fas fa-award"></i>
+                            <span class="pl-2">Evaluación POA</span>
                         </a>
                     </li>
                     @endcan
@@ -228,8 +247,8 @@
                 
             </div><!--************ div QUE TERMINA EL CONTENIDO DEL CUERPO DE LA PAGINA ***************-->
 
-            <footer class="footer">
-               <h5 class="text-muted">Sistema POA</h5>
+            <footer class="footer class="align-middle">
+               <span class="text-muted">Sistema POA {{ date('Y') }}</span>
             </footer>
 
             {{-- ****** scroll topboton para subir hacia arriba *****--}}

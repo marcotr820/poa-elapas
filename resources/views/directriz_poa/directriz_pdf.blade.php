@@ -18,7 +18,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($pilares as $pilar)
+        @forelse ($pilares as $pilar)
             <tr>
                 <td
                 <?php $row_pil = 0;
@@ -70,7 +70,7 @@
                 @foreach ($var_result->acciones_mediano_plazo as $amp)
                     @if (! $loop->first)
                         <tr>
-                            <td>{{$amp->accion_mediano_plazo}}pppp</td>
+                            <td>{{$amp->accion_mediano_plazo}}</td>
                         </tr>
                     @endif
                 @endforeach
@@ -86,7 +86,7 @@
                             <?php
                             echo($res->acciones_mediano_plazo->count() > 1 ? 'rowspan="'.$res->acciones_mediano_plazo->count().'"' : '');    
                             ?>
-                            >{{$res->nombre_resultado}}ooooooo</td>
+                            >{{$res->nombre_resultado}}</td>
                             {{-- primera accion mediano plazo demas resultados primera meta --}}
                             @foreach ($res->acciones_mediano_plazo as $amp)
                                 @if ($loop->first)
@@ -119,7 +119,7 @@
                             }
                             echo($row_meta > 1 ? 'rowspan="'.($row_meta + 1).'"' : '');
                         ?>
-                        >{{$meta->nombre_meta}}ss</td>
+                        >{{$meta->nombre_meta}}</td>
                         {{-- primer resultado demas metas --}}
                         @foreach ($meta->resultados as $res)
                             @if ($loop->first)
@@ -158,7 +158,7 @@
                                 <?php
                                     echo($res->acciones_mediano_plazo->count() > 1 ? 'rowspan="'.$res->acciones_mediano_plazo->count().'"' : '');
                                 ?>
-                                >{{$res->nombre_resultado}}55555</td>
+                                >{{$res->nombre_resultado}}</td>
                                 {{-- primera accion mediano plazo demas resultados demas metas --}}
                                 @foreach ($res->acciones_mediano_plazo as $amp)
                                     @if ($loop->first)
@@ -178,6 +178,10 @@
                     {{--  --}}
                 @endif
             @endforeach
-        @endforeach
+        @empty
+            <tr>
+                <td colspan="4" style="text-align: center;">No se encontraron resultados.</td>
+            </tr>
+        @endforelse
     </tbody>
 </table>

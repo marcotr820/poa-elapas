@@ -38,7 +38,7 @@
                         <td>TRABAJADOR</td>
                         <td>UNIDAD</td>
                         <td>GERENCIA</td>
-                        <td width="13%">FECHA SOLICITADA</td>
+                        <td width="13%">FECHA REQUERIDA</td>
                     </tr>
                 </thead>
             </table>

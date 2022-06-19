@@ -26,26 +26,31 @@ class PresupuestosRequeridosController extends Controller
         
     }
 
-    public function presupuestos_pdf($f_inicio = '', $f_fin = '')
+    public function presupuestos_pdf($f_inicio = null, $f_fin = null)
     {
-        $datos = CortoPlazoAcciones::get()->whereBetween('fecha_inicio', [$f_inicio, $f_fin]);
+        // return "hi";
+        is_null($f_fin) ? $data_fecha_fin = 'nulo' : $data_fecha_fin = $f_fin;
+        is_null($f_inicio) ? $data_fecha_inicio = 'nulo' : $data_fecha_inicio = $f_inicio;
+        
+        $fecha = "Fecha Desde: $data_fecha_inicio Hasta: $data_fecha_fin"; 
+
+        $datos = CortoPlazoAcciones::with('trabajador.unidad.gerencia')->get()->whereBetween('fecha_inicio', [$f_inicio, $f_fin]);
         $view = view('presupuestos_requeridos.presupuestos_pdf', compact('datos'));
         $html = $view->render();
-        PDF::SetTitle('TITULO_ejemplooo');
+        PDF::SetTitle('Reporte Presupuestos Requeridos');
         // Custom Header
-        PDF::setHeaderCallback(function($pdf) {
+        PDF::setHeaderCallback(function($pdf) use ($fecha) {
             $image_file = K_PATH_IMAGES.'logo_elapas.png'; //vendor/tecnickcom/examples/images
             $pdf->Image($image_file, 5, 2, 32, '', 'PNG', '', 'T', false, 200, '', false, false, 0, false, false, false);
             // Set font
-            $pdf->Ln(3); /*centrar y dar margin-top al title ESPACIO ENTRE LINEAS*/
+            $pdf->Ln(4); /*centrar y dar margin-top al title ESPACIO ENTRE LINEAS*/
             $pdf->SetFont('helvetica', 'B', 12);
             // Title
-            $pdf->Cell(0, 7, 'Reporte PDF TCPDF!!!', 0, 1, 'C', 0, '', 0, false, 'M', 'M');
+            $pdf->Cell(0, 7, 'Reporte Presupuestos Requeridos', 0, 1, 'C', 0, '', 0, false, 'M', 'M');
             $pdf->Ln(1); /*ESPACIO ENTRE LINEAS*/
             $pdf->SetFont('helvetica', '', 10);
-            $pdf->Cell(0, 5, 'Trabajador:', 0, 1, 'C', 0, '', 0, false, 'M', 'M');
-            $pdf->Ln(2);
-            $pdf->Cell(0, 5, 'Gestion:____ Gerengia:____', 0, 1, 'C', 0, '', 0, false, 'M', 'M');
+            $pdf->Ln(1);
+            $pdf->Cell(0, 5, "$fecha", 0, 1, 'C', 0, '', 0, false, 'M', 'M');
         });
         // Custom Footer
         PDF::setFooterCallback(function($pdf) {

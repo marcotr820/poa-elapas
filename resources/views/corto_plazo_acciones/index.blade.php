@@ -34,7 +34,7 @@
                         <td width="15%">PRESUPUESTO PROGRAMADO</td>
                         <td width="8%">FECHA INICIO</td>
                         <td width="8%">FECHA FIN</td>
-                        <td width="10%"></td>
+                        <td width="10%">ACCIONES</td>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -97,9 +97,7 @@
                             break;
 
                             case 'monitoreo':
-                                return `
-                                <button class='boton default'>monitoreo</button>
-                                `;
+                                return '<button class="boton bg-primary text-white" data-operaciones="">Operaciones</button>';
                             break;
                         }
                     }

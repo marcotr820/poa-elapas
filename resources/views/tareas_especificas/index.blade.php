@@ -24,7 +24,9 @@
             Lista de Tareas Especificas
             <div>
                 <a href="javascript:history.back()" class="boton red"><i class="fas fa-arrow-left"></i> Volver Atrás</a>
-                <button type="button" id="nuevo" class="boton blue ml-2"><i class="fas fa-plus"></i> Nueva Tarea</button>
+                @if ($actividad->operacion->corto_plazo_accion->status != 'monitoreo')
+                    <button type="button" id="nuevo" class="boton blue ml-2"><i class="fas fa-plus"></i> Nueva Tarea Especifica</button>
+                @endif
             </div>
         </h5>
         <div class="card-body">
@@ -34,7 +36,7 @@
                         <td width='5%'>ID</td>
                         <td>TAREA ESPECIFICA</td>
                         {{-- <th>RESULTADO ESPERADO</th> --}}
-                        <td width="15%"></td>
+                        <td width="15%">ACCIONES</td>
                     </tr>
                 </thead>
             </table>
@@ -62,12 +64,16 @@
                     data: 'uuid',
                     render: function( data, type, row)
                     {
-                        return `
-                        <div class="btn-group">
-                            <button class="boton blue" data-edit="" onclick="edit('${data}')"><i class="fas fa-pen"></i></button>
-                            <button class="boton red ml-2" data-delete="" onclick="delet('${data}')"><i class="fas fa-times-circle"></i></button>
-                        </div>
-                        `;
+                        if(row.status_accion_corto_plazo == 'monitoreo'){
+                            return '';
+                        } else {
+                            return `
+                            <div class="btn-group">
+                                <button class="boton blue" data-edit="" onclick="edit('${data}')"><i class="fas fa-pen"></i></button>
+                                <button class="boton red ml-2" data-delete="" onclick="delet('${data}')"><i class="fas fa-times-circle"></i></button>
+                            </div>
+                            `;
+                        }
                     }
                 }
             ],

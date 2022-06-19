@@ -9,10 +9,12 @@ d.addEventListener('click', (e)=>{
          window.open ('/presupuestos_pdf/'+ fecha_inicio + '/' + fecha_fin);
       }
       else{
+         
          Swal.fire({
+            title: 'Error!!',
+            text: "Las fechas son requeridas",
             icon: 'error',
-            text: "Las Fechas son requeridas",
-            width: '20%',
+            confirmButtonText: 'Aceptar',
          })
       }
    }

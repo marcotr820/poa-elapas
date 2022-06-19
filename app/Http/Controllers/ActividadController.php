@@ -20,6 +20,9 @@ class ActividadController extends Controller
                 ->addColumn('items_presupuesto', function (Actividades $actividades){
                     return $actividades->items()->sum('presupuesto');
                 })
+                ->addColumn('status_accion_corto_plazo', function($actividades){
+                    return $actividades->operacion->corto_plazo_accion->status;
+                })
                 ->make(true);
         }
         // $operacion = Operaciones::findOrFail($operacion_id);
@@ -30,7 +33,7 @@ class ActividadController extends Controller
     {
         Actividades::create([
             'nombre_actividad' => Str::upper($request->nombre_actividad),
-            'resultado_esperado' => $request->resultado_esperado,
+            'resultado_esperado' => Str::upper($request->resultado_esperado),
             'operacion_id' => $operacion->id
         ]);
     }
@@ -40,7 +43,7 @@ class ActividadController extends Controller
         // $actividad->update($request->only(['nombre_actividad', 'resultado_esperado']));
         $actividad->update([
             'nombre_actividad' => Str::upper($request->nombre_actividad),
-            'resultado_esperado' => $request->resultado_esperado
+            'resultado_esperado' =>Str::upper($request->resultado_esperado)
         ]);
         // return $request->all();
     }

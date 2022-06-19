@@ -7,7 +7,7 @@
         <h5 class="card-header py-1 d-flex justify-content-between align-items-center">
             Lista Trabajadores
             <div>
-                <button type="button" id="nuevo" class="boton blue"><i class="fas fa-plus"></i> Nuevo Trabajador</button>
+                <button type="butto1n" id="nuevo" class="boton blue"><i class="fas fa-plus"></i> Nuevo Trabajador</button>
             </div>
         </h5>
         <div class="card-body">

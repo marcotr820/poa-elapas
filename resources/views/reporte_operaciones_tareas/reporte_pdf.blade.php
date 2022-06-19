@@ -1,6 +1,6 @@
 <style>
    table th, td{
-      border: 0.5px solid black;
+      border: 0.5px solid #8c8c8c;
    }
    table{
       font-size: 7px;
@@ -18,7 +18,7 @@
             <th>ACTIVIDADES</th>
             <th>RESULTADOS INTERMEDIOS ESPERADOS</th>
             <th>TAREAS ESPECIFICAS</th>
-            <th>UNIDAD EJECUTORA</th>
+            {{-- <th>UNIDAD EJECUTORA</th> --}}
         </tr>
     </thead>
     <tbody>
@@ -56,7 +56,7 @@
                         }
                         echo  $row_op > 1 ? 'rowspan="'.$row_op.'"' : '';
                         ?>
-                        >{{ $op->nombre_operacion }}11</td>
+                        >{{ $op->nombre_operacion }}</td>
                         {{-- primera actividad primera operacion --}}
                         @forelse ($op->actividades as $act)
                             @if ($loop->first)
@@ -68,14 +68,14 @@
                                 }
                                 echo $row_act > 1 ? 'rowspan="'.$row_act.'"' : '';
                                 ?>
-                                >{{$act->nombre_actividad}}ññ</td>
+                                >{{$act->nombre_actividad}}</td>
                                 <td <?php echo $row_act > 1 ? 'rowspan="'.$row_act.'"' : ''; ?> >{{$act->resultado_esperado}}</td>
                                 {{-- primera tarea_especifica primera actividad --}}
                                 @forelse ($act->tareas_especificas as $tar)
                                     @if ($loop->first)
                                     <?php $var_act = $act; ?>
                                         <td>{{$tar->nombre_tarea}}</td>
-                                        <td>unidad ejecjutora</td>
+                                        {{-- <td>unidad ejecjutora</td> --}}
                                     @endif
                                 @empty
                                     <td></td>
@@ -103,8 +103,8 @@
                 @foreach ($var_act->tareas_especificas as $tar)
                     @if (!$loop->first)
                         <tr>
-                            <td>{{$tar->nombre_tarea}}uu</td>
-                            <td>unidad ejecjutora UU</td>
+                            <td>{{$tar->nombre_tarea}}</td>
+                            {{-- <td>unidad ejecjutora</td> --}}
                         </tr>
                     @endif
                 @endforeach
@@ -123,13 +123,13 @@
                                 }
                             echo $row_act > 1 ? 'rowspan="'.$row_act.'"' : '';
                             ?>
-                            >{{$act->nombre_actividad}} D_A</td>
+                            >{{$act->nombre_actividad}}</td>
                             <td <?php echo $row_act > 1 ? 'rowspan="'.$row_act.'"' : ''; ?> >{{$act->resultado_esperado}}</td>
                             @forelse ($act->tareas_especificas as $tar)
                                 @if ($loop->first)
                                     <?php $var_act = $act; ?>
-                                    <td>{{$tar->nombre_tarea}}pp</td>
-                                    <td>unidad ejecjutora KK</td>
+                                    <td>{{$tar->nombre_tarea}}</td>
+                                    {{-- <td>unidad ejecjutora</td> --}}
                                 @endif
                             @empty
                                 <td></td>
@@ -142,8 +142,8 @@
                             @foreach ($var_act->tareas_especificas as $tar)
                                 @if (!$loop->first)
                                     <tr>
-                                        <td>{{$tar->nombre_tarea}}mm</td>
-                                        <td>unidad ejecutora MM</td>
+                                        <td>{{$tar->nombre_tarea}}</td>
+                                        {{-- <td>unidad ejecutora</td> --}}
                                     </tr>
                                 @endif
                             @endforeach
@@ -173,7 +173,7 @@
                         }
                         echo  $row_op > 1 ? 'rowspan="'.$row_op.'"' : '';
                         ?>
-                        >{{ $op->nombre_operacion }}vv</td>
+                        >{{ $op->nombre_operacion }}</td>
                         {{-- primera actividad demas operaciones --}}
                         @forelse ($op->actividades as $act)
                             @if ($loop->first)
@@ -185,14 +185,14 @@
                                 }
                                 echo $row_act > 1 ? 'rowspan="'.$row_act.'"' : '';
                                 ?>
-                                >{{$act->nombre_actividad}}ss</td>
+                                >{{$act->nombre_actividad}}</td>
                                 <td <?php echo $row_act > 1 ? 'rowspan="'.$row_act.'"' : ''; ?> >{{$act->resultado_esperado}}</td>
                                 {{-- primera tareas especifica primera actividad demas operaciones --}}
                                 @forelse ($act->tareas_especificas as $tar)
                                     @if ($loop->first)
                                         <?php $var_act = $act; ?>
                                         <td>{{$tar->nombre_tarea}}</td>
-                                        <td>unidad ejecutora tt</td>
+                                        {{-- <td>unidad ejecutora</td> --}}
                                     @endif
                                 @empty
                                     <td></td>
@@ -213,7 +213,7 @@
                             @if (!$loop->first)
                                 <tr>
                                     <td>{{$tar->nombre_tarea}}</td>
-                                    <td>unidad ejecutora NN3</td>
+                                    {{-- <td>unidad ejecutora</td> --}}
                                 </tr>
                             @endif
                         @endforeach
@@ -237,8 +237,8 @@
                                     {{-- primera tarea especifica demas actividades demas operaciones --}}
                                     @forelse ($act->tareas_especificas as $tar)
                                         @if ($loop->first)
-                                            <td>{{$tar->nombre_tarea}}yy</td>
-                                            <td>unidad ejecutora yy</td>
+                                            <td>{{$tar->nombre_tarea}}</td>
+                                            {{-- <td>unidad ejecutora</td> --}}
                                         @endif
                                     @empty
                                         <td></td>
@@ -251,7 +251,7 @@
                                     @if (!$loop->first)
                                         <tr>
                                             <td>{{$tar->nombre_tarea}}</td>
-                                            <td>unidad ejecutora ee</td>
+                                            {{-- <td>unidad ejecutora</td> --}}
                                         </tr>
                                     @endif
                                 @endforeach

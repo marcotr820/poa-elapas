@@ -45,12 +45,21 @@ class DirectrizPoaController extends Controller
         //     ])
         //     ->get();
 
-        $pilares = Pilares::select('id', 'nombre_pilar', 'uuid', 'gestion_pilar')->where('gestion_pilar', date('Y')+1)->get();
+        $last_pilar_year = Pilares::select('gestion_pilar')->orderBy('gestion_pilar', 'desc')->first();
+        if($last_pilar_year){
+            $pilares = Pilares::select('id', 'nombre_pilar', 'uuid', 'gestion_pilar')->where('gestion_pilar', $last_pilar_year->gestion_pilar)->get();
+        } else {
+            $pilares = [];
+        }
         $view = view('directriz_poa.directriz_pdf', compact('pilares'));
         $html = $view->render();
         PDF::SetTitle('Directriz POA');
         // Custom Header
-        $gestion = $pilares->first()->gestion_pilar;
+        if($last_pilar_year){
+            $gestion = $last_pilar_year->gestion_pilar;
+        } else {
+            $gestion = 'nulo';
+        }
         PDF::setHeaderCallback(function($pdf) use ($gestion){
             $image_file = K_PATH_IMAGES.'logo_elapas.png'; //vendor/tecnickcom/examples/images
             $pdf->Image($image_file, 5, 2, 32, '', 'PNG', '', 'T', false, 200, '', false, false, 0, false, false, false);
