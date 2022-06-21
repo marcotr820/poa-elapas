@@ -18,166 +18,204 @@
         </tr>
     </thead>
     <tbody>
-        @forelse ($pilares as $pilar)
+        @forelse ($pilares as $p)
             <tr>
                 <td
-                <?php $row_pil = 0;
-                    if ($pilar->metas->count() > 1) { $row_pil += $pilar->metas->count() - 1; }
-                    foreach ($pilar->metas as $meta) {
-                        if ($meta->resultados->count() > 1) { $row_pil += $meta->resultados->count() - 1; }
-                        foreach ($meta->resultados as $res) {
-                            if($res->acciones_mediano_plazo->count() > 1){ $row_pil +=  $res->acciones_mediano_plazo->count() - 1; }
+                <?php 
+                $row_pilar = 0;
+                if ($p->metas->count() >= 1) { $row_pilar += $p->metas->count(); }
+                foreach ($p->metas as $m) {
+                    if($m->resultados->count() > 1){
+                        $row_pilar += $m->resultados->count() - 1;
+                        foreach ($m->resultados as $r) {
+                            if ($r->acciones_mediano_plazo->count() > 1) {
+                                $row_pilar += $r->acciones_mediano_plazo->count() - 1;
+                            }
                         }
                     }
-                echo($row_pil > 1 ? 'rowspan="'.($row_pil + 1).'"' : '');
+                }
+                echo $row_pilar > 1 ? 'rowspan="'.$row_pilar.'"' : '';
                 ?>
-                >{{$pilar->nombre_pilar}}</td>
-                @foreach ($pilar->metas as $meta)
+                >{{ $p->nombre_pilar }}</td>
+                @forelse ($p->metas as $m)
                     @if ($loop->first)
-                    <?php $var_meta = $meta; ?>
-                        {{-- primera meta primer pilar --}}
+                        {{-- primera meta --}}
                         <td
                         <?php $row_meta = 0;
-                            if($meta->resultados->count() > 1){ $row_meta += $meta->resultados->count() - 1; }
-                            foreach ($meta->resultados as $res) {
-                                if($res->acciones_mediano_plazo->count() > 1){ $row_meta += $res->acciones_mediano_plazo->count() - 1; }
+                        if ($m->resultados->count() >= 1) { $row_meta += $m->resultados->count(); }
+                        foreach ($m->resultados as $r) {
+                            if ($r->acciones_mediano_plazo->count() > 1) {
+                                $row_meta += $r->acciones_mediano_plazo->count() - 1;
                             }
-                            echo($row_meta > 1 ? 'rowspan="'.($row_meta + 1).'"' : '');
+                        }
+                        echo  $row_meta > 1 ? 'rowspan="'.$row_meta.'"' : '';
                         ?>
-                        >{{$meta->nombre_meta}}</td>
-                        @foreach ($meta->resultados as $res)
+                        >{{ $m->nombre_meta }}</td>
+                        @forelse ($m->resultados as $r)
+                            {{-- primer resultado primera meta --}}
+                            <?php $var_m = $m; ?>
                             @if ($loop->first)
-                            <?php $var_result = $res; ?>
-                                {{-- primer resultado primera meta --}}
                                 <td
-                                <?php 
-                                    echo($res->acciones_mediano_plazo->count() > 1 ? 'rowspan="'.$res->acciones_mediano_plazo->count().'"' : ''); 
+                                <?php $row_resultado = 0;
+                                if ($r->acciones_mediano_plazo->count() >= 1) { $row_resultado += $r->acciones_mediano_plazo->count(); }
+                                echo  $row_resultado > 1 ? 'rowspan="'.$row_resultado.'"' : '';
                                 ?>
-                                >{{$res->nombre_resultado}}</td>
-                                @foreach ($res->acciones_mediano_plazo as $amp)
+                                >{{ $r->nombre_resultado }}</td>
+                                @forelse ($r->acciones_mediano_plazo as $amp)
+                                {{-- primera accion mediano plazo primer resultado --}}
+                                    <?php $var_r = $r; ?>
                                     @if ($loop->first)
-                                        {{-- primera accion mediano plazo primer resultado --}}
-                                        <td>{{$amp->accion_mediano_plazo}}</td>
+                                        <td>{{ $amp->accion_mediano_plazo }}</td>
                                     @endif
-                                @endforeach
+                                @empty
+                                @endforelse
                             @endif
-                        @endforeach
+                        @empty
+                        @endforelse
                     @endif
-                @endforeach
+                @empty
+                @endforelse
             </tr>
-            {{-- demas acciones mediano plazo primer resultado --}}
-            @if (isset($var_result))
-                @foreach ($var_result->acciones_mediano_plazo as $amp)
-                    @if (! $loop->first)
+
+            @if (isset($var_r))
+                @forelse ($var_r->acciones_mediano_plazo as $amp)
+                    @if (!$loop->first)
                         <tr>
-                            <td>{{$amp->accion_mediano_plazo}}</td>
+                            <td>{{ $amp->accion_mediano_plazo }}</td>
                         </tr>
                     @endif
-                @endforeach
-                <?php $var_result = null; ?>
+                @empty
+                @endforelse
+                <?php unset($var_r) ?>
             @endif
 
-            {{-- demas resultados primera meta--}}
-            @if (isset($var_meta))
-                @foreach ($var_meta->resultados as $res)
-                    @if (! $loop->first)
+            @if (isset($var_m))
+                @foreach ($var_m->resultados as $r)
+                    @if (!$loop->first)
+                        {{-- demas resultados primera meta --}}
                         <tr>
                             <td
-                            <?php
-                            echo($res->acciones_mediano_plazo->count() > 1 ? 'rowspan="'.$res->acciones_mediano_plazo->count().'"' : '');    
+                            <?php $row_resultado = 0;
+                            if ($r->acciones_mediano_plazo->count() >= 1) { $row_resultado += $r->acciones_mediano_plazo->count(); }
+                            echo  $row_resultado > 1 ? 'rowspan="'.$row_resultado.'"' : '';
                             ?>
-                            >{{$res->nombre_resultado}}</td>
-                            {{-- primera accion mediano plazo demas resultados primera meta --}}
-                            @foreach ($res->acciones_mediano_plazo as $amp)
+                            >{{ $r->nombre_resultado }}###</td>
+                            {{-- primer accion mediano plazo demas resultados --}}
+                            @foreach ($r->acciones_mediano_plazo as $amp)
+                            <?php $var_r = $r; ?>
                                 @if ($loop->first)
-                                    <td>{{$amp->accion_mediano_plazo}}</td>
+                                    <td>{{ $amp->accion_mediano_plazo }}</td>
                                 @endif
                             @endforeach
                         </tr>
-                        {{-- demas acciones mediano plazo demas resultados primera meta --}}
-                        @foreach ($res->acciones_mediano_plazo as $amp)
-                            @if (! $loop->first)
-                                <tr>
-                                    <td>{{$amp->accion_mediano_plazo}}</td>
-                                </tr>
-                            @endif
-                        @endforeach
+
+                        {{-- demas acciones mediano plazo demas resultados --}}
+                        @if (isset($var_r))
+                            @foreach ($var_r->acciones_mediano_plazo as $amp)
+                                @if (!$loop->first)
+                                    <tr>
+                                        <td>{{ $amp->accion_mediano_plazo }}_00</td>
+                                    </tr>
+                                @endif
+                            @endforeach
+                            <?php unset($var_r) ?>
+                        @endif
+
                     @endif
                 @endforeach
-                <?php $var_meta = null; ?>
+                <?php unset($var_m) ?>
             @endif
 
-            {{-- demas metas --}}
-            @foreach ($pilar->metas as $meta)
-                @if (! $loop->first)
+            @forelse ($p->metas as $m)
+                @if (!$loop->first)
+                    {{-- demas metas --}}
                     <tr>
                         <td
                         <?php $row_meta = 0;
-                            if($meta->resultados->count() > 1){ $row_meta += $meta->resultados->count() - 1; }
-                            foreach ($meta->resultados as $res) {
-                                if ($res->acciones_mediano_plazo->count() > 1) { $row_meta += $res->acciones_mediano_plazo->count() - 1; }
+                        if ($m->resultados->count() >= 1) { $row_meta += $m->resultados->count(); }
+                        foreach ($m->resultados as $r) {
+                            if ($r->acciones_mediano_plazo->count() > 1) {
+                                $row_meta += $r->acciones_mediano_plazo->count() - 1;
                             }
-                            echo($row_meta > 1 ? 'rowspan="'.($row_meta + 1).'"' : '');
+                        }
+                        echo  $row_meta > 1 ? 'rowspan="'.$row_meta.'"' : '';
                         ?>
-                        >{{$meta->nombre_meta}}</td>
-                        {{-- primer resultado demas metas --}}
-                        @foreach ($meta->resultados as $res)
+                        >{{ $m->nombre_meta }}</td>
+                        {{-- demas metas primer resultado --}}
+                        @foreach ($m->resultados as $r)
                             @if ($loop->first)
-                            <?php $var_res = $res; ?>
+                                <?php $var_m = $m; ?>
+                                {{-- primer resultado demas metas --}}
                                 <td
-                                <?php
-                                    echo($res->acciones_mediano_plazo->count() > 1 ? 'rowspan="'.$res->acciones_mediano_plazo->count().'"' : '');    
+                                <?php $row_resultado = 0;
+                                if ($r->acciones_mediano_plazo->count() >= 1) { $row_resultado += $r->acciones_mediano_plazo->count(); }
+                                echo  $row_resultado > 1 ? 'rowspan="'.$row_resultado.'"' : '';
                                 ?>
-                                >{{$res->nombre_resultado}}</td>
-                                {{-- primera accion mediano plazo primer resultado demas metas --}}
-                                @foreach ($res->acciones_mediano_plazo as $amp)
+                                >{{ $r->nombre_resultado }}+</td>
+
+                                {{-- primer accion mediano plazo  --}}
+                                @foreach ($r->acciones_mediano_plazo as $amp)
+                                    <?php $var_r = $r; ?>
                                     @if ($loop->first)
-                                        <td>{{$amp->accion_mediano_plazo}}</td>
+                                        <td>{{ $amp->accion_mediano_plazo }}</td>
                                     @endif
                                 @endforeach
                             @endif
                         @endforeach
                     </tr>
-                    {{-- demas acciones mediano plazo primera operacion demas metas --}}
-                    @if (isset($var_res))
-                        @foreach ($var_res->acciones_mediano_plazo as $amp)
-                            @if (! $loop->first)
+
+                    {{-- demas acciones mediano primer resultado --}}
+                    @if (isset($var_r))
+                        @foreach ($var_r->acciones_mediano_plazo as $amp)
+                            @if (!$loop->first)
                             <tr>
-                                <td>{{$amp->accion_mediano_plazo}}</td>
+                                <td>{{ $amp->accion_mediano_plazo }}</td>
                             </tr>
                             @endif
                         @endforeach
-                        <?php $var_res = null; ?>
+                        <?php unset($var_r) ?>
                     @endif
 
-                    {{-- demas resultados demas metas --}}
-                    @foreach ($meta->resultados as $res)
-                        @if (! $loop->first)
+                    @if (isset($var_m))
+                        @foreach ($m->resultados as $r)
+                            {{-- demas resultados demas metas --}}
+                            @if (!$loop->first)
                             <tr>
                                 <td
-                                <?php
-                                    echo($res->acciones_mediano_plazo->count() > 1 ? 'rowspan="'.$res->acciones_mediano_plazo->count().'"' : '');
+                                <?php $row_resultado = 0;
+                                if ($r->acciones_mediano_plazo->count() >= 1) { $row_resultado += $r->acciones_mediano_plazo->count(); }
+                                echo  $row_resultado > 1 ? 'rowspan="'.$row_resultado.'"' : '';
                                 ?>
-                                >{{$res->nombre_resultado}}</td>
-                                {{-- primera accion mediano plazo demas resultados demas metas --}}
-                                @foreach ($res->acciones_mediano_plazo as $amp)
+                                >{{ $r->nombre_resultado }}1</td>
+                                {{--  --}}
+                                @foreach ($r->acciones_mediano_plazo as $amp)
+                                    <?php $var_r = $r; ?>
                                     @if ($loop->first)
-                                        <td>{{$amp->accion_mediano_plazo}}</td>
+                                        <td>{{ $amp->accion_mediano_plazo }}</td>
                                     @endif
                                 @endforeach
                             </tr>
-                            @foreach ($res->acciones_mediano_plazo as $amp)
-                                @if (! $loop->first)
-                                    <tr>
-                                        <td>{{$amp->accion_mediano_plazo}}</td>
-                                    </tr>
-                                @endif
-                            @endforeach
-                        @endif
-                    @endforeach
-                    {{--  --}}
+
+                            {{--  --}}
+                            @if (isset($var_r))
+                                @foreach ($var_r->acciones_mediano_plazo as $amp)
+                                    @if (!$loop->first)
+                                        <tr>
+                                            <td>{{ $amp->accion_mediano_plazo }}</td>
+                                        </tr>
+                                    @endif
+                                @endforeach
+                                <?php unset($var_r) ?>
+                            @endif
+
+                            @endif
+                        @endforeach
+                        <?php unset($var_m) ?>
+                    @endif
+
                 @endif
-            @endforeach
+            @empty
+            @endforelse
         @empty
             <tr>
                 <td colspan="4" style="text-align: center;">No se encontraron resultados.</td>

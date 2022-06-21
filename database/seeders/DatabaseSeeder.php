@@ -58,6 +58,7 @@ class DatabaseSeeder extends Seeder
         // $this->call(CortoPlazoAccionSeeder::class);
         // $this->call(OperacionSeeder::class);
         // $this->call(ActividadSeeder::class);
+        
         // $this->call(TareaEspecificaSeeder::class);
         // $this->call(ItemSeeder::class);
 

@@ -104,14 +104,14 @@
                                                 @endif
                                             @empty
                                                 <td></td>
-                                                <td></td>
+                                                {{-- <td></td> --}}
                                             @endforelse
                                         @endif
                                     @empty
                                         <td></td>
                                         <td></td>
                                         <td></td>
-                                        <td></td>
+                                        {{-- <td></td> --}}
                                     @endforelse
                                 @endif
                             @empty
@@ -119,7 +119,7 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td></td>
+                                {{-- <td></td> --}}
                             @endforelse
                         </tr>
 
@@ -158,7 +158,7 @@
                                             @endif
                                         @empty
                                             <td></td>
-                                            <td></td>
+                                            {{-- <td></td> --}}
                                         @endforelse
                                     </tr>
 
@@ -221,14 +221,14 @@
                                                 @endif
                                             @empty
                                                 <td></td>
-                                                <td></td>
+                                                {{-- <td></td> --}}
                                             @endforelse
                                         @endif
                                     @empty
                                         <td></td>
                                         <td></td>
                                         <td></td>
-                                        <td></td>
+                                        {{-- <td></td> --}}
                                     @endforelse
                                 </tr>
 
@@ -257,7 +257,7 @@
                                                 }
                                                 echo $row_act > 1 ? "rowspan='$row_act'" : '';
                                                 ?>
-                                                >{{$act->nombre_actividad}} ++</td>
+                                                >{{$act->nombre_actividad}}</td>
                                                 <td <?php echo $row_act > 1 ? "rowspan='$row_act'" : ''; ?> >{{$act->resultado_esperado}}</td>
                                                 {{-- primera tarea especifica demas actividades demas operaciones --}}
                                                 @forelse ($act->tareas_especificas as $tar)
@@ -267,7 +267,7 @@
                                                     @endif
                                                 @empty
                                                     <td></td>
-                                                    <td></td>
+                                                    {{-- <td></td> --}}
                                                 @endforelse
                                             </tr>
 

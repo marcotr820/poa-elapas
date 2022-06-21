@@ -23,6 +23,7 @@ class CreateItemsTable extends Migration
             $table->string('uuid', 49)->unique();
             $table->foreign('partida_id')->references('id')->on('partidas');
             $table->foreign('actividad_id')->references('id')->on('actividades');
+            $table->timestamps();
         });
     }
 

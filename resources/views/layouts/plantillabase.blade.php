@@ -94,7 +94,7 @@
                                 <li class="bloque">
                                     <a href="{{route('poa.index')}}" class="titulo">
                                         <i class="far fa-chart-bar"></i>
-                                        <span class="pl-2">Plan Operativo Anual</span>
+                                        <span class="pl-2">Formular POA</span>
                                     </a>
                                 </li>
                             {{-- @endif --}}
@@ -135,6 +135,13 @@
                         </a>
                     </li>
                     @endcan
+
+                    <li class="bloque">
+                        <a href="{{route('consolidar.poa.index')}}" class="titulo">
+                            <i class="far fa-calendar-check"></i>
+                            <span class="pl-2">Consolidar POA</span>
+                        </a>
+                    </li>
 
                     @can('VER-PRESUPUESTOS-REQUERIDOS')
                     <li class="bloque">

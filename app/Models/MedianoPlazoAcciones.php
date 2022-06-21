@@ -35,4 +35,8 @@ class MedianoPlazoAcciones extends Model
     public function resultado(){
         return $this->belongsTo(Resultados::class);
     }
+
+    public function pei_objetivos_especificos(){
+        return $this->hasMany(PeiObjetivosEspecificos::class, 'mediano_plazo_accion_id');
+    }
 }

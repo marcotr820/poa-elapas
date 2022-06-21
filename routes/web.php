@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\ActividadController;
 use App\Http\Controllers\AdminPoaController;
+use App\Http\Controllers\ConsolidarPOAController;
 use App\Http\Controllers\CortoPlazoAccionController;
 use App\Http\Controllers\DatatableController;
 use App\Http\Controllers\DeterminarOperacionesTareasController;
@@ -123,6 +124,7 @@ Route::group(['middleware' => ['auth:usuario']], function(){
 
     //************************************** PARTIDAS *************************************************/
     Route::resource('/partidas', PartidaController::class)->only('index', 'store', 'update', 'destroy');
+    Route::get('/partidas_gestion', [PartidaController::class, 'partida_gestion'])->name('partidas.gestion');
     Route::get('/pdf_partidas_grupo', [PdfController::class, 'pdf_partida_grupo'])->name('pdf_partidas_grupo');
 
     //*************************************** Creacion VER POAS ***********************************
@@ -219,4 +221,7 @@ Route::group(['middleware' => ['auth:usuario']], function(){
     Route::get('presupuestos_requeridos', [PresupuestosRequeridosController::class, 'lista_presupuestos'])->name('index.presupuestos');
     Route::get('presupuestos_pdf/{f_inicio?}/{f_fin?}', [PresupuestosRequeridosController::class, 'presupuestos_pdf'])->name('presupuestos.pdf');
 
+    /************************************** CONSOLIDAR POA ******************************************/
+    Route::get('consolidar_poa', [ConsolidarPOAController::class, 'index'])->name('consolidar.poa.index');
+    Route::get('pdf_consolidar', [ConsolidarPOAController::class, 'pdf_consolidar'])->name('pdf.consolidar');
 });

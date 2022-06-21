@@ -25,7 +25,8 @@ class ItemController extends Controller
                 })
                 ->make(true);
         }
-        $partidas = Partidas::pluck('nombre_partida', 'id');
+        // $partidas = Partidas::pluck('nombre_partida', 'id');
+        $partidas = Partidas::select('id', 'codigo_partida', 'nombre_partida')->get();
         $accion = $actividad->operacion->corto_plazo_accion;
         return view('items.index', compact('actividad', 'partidas', 'accion'));
     }

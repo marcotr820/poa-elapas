@@ -19,7 +19,7 @@
         <h5 class="card-header py-1 d-flex justify-content-between align-items-center">
             Lista Partidas
             <div>
-                <a href="{{ route('pdf_partidas_grupo') }}" class="boton default"><i class="fas fa-file-pdf"></i> Generar Reporte PDF</a>
+                <a href="{{ route('partidas.gestion') }}" class="boton default" target="_blank">Generar Reporte Por Gestión</a>
                 <button type="button" id="nuevo" class="boton blue"><i class="fas fa-plus-circle"></i> Nuevo Partida</button>
             </div>
         </h5>

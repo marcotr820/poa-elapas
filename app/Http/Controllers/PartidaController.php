@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PartidaRequest;
 use App\Models\Partidas;
+use App\Models\Pilares;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
@@ -16,6 +17,19 @@ class PartidaController extends Controller
 
     public function index(Request $request)
     {
+        // return Partidas::with(["items" => function($q){
+        //     $q->select('items.*')
+        //     ->join('actividades', 'actividades.id', '=', 'items.actividad_id')
+        //     ->join('operaciones', 'operaciones.id', '=', 'actividades.operacion_id')
+        //     ->join('corto_plazo_acciones', 'corto_plazo_acciones.id', '=', 'operaciones.corto_plazo_accion_id')
+        //     ->join('pei_objetivos_especificos', 'pei_objetivos_especificos.id', '=', 'corto_plazo_acciones.pei_objetivo_especifico_id')
+        //     ->join('mediano_plazo_acciones', 'mediano_plazo_acciones.id', '=', 'pei_objetivos_especificos.mediano_plazo_accion_id')
+        //     ->join('resultados', 'resultados.id', '=', 'mediano_plazo_acciones.resultado_id')
+        //     ->join('metas', 'metas.id', '=', 'resultados.meta_id')
+        //     ->join('pilares', 'pilares.id', '=', 'metas.pilar_id')
+        //     ->where('pilares.gestion_pilar', 2023);
+        // }])->get();
+
         // $array = [];
         // $partidas = Partidas::get();
         // $i = 0;
@@ -73,5 +87,11 @@ class PartidaController extends Controller
     public function destroy(Partidas $partida)
     {
         $partida->delete();
+    }
+
+    public function partida_gestion()
+    {
+        $gestiones = Pilares::select('gestion_pilar')->orderBy('gestion_pilar', 'asc')->get();
+        return view('partidas.reporte_por_gestion', compact('gestiones'));
     }
 }

@@ -18,22 +18,20 @@ class PartidaSeeder extends Seeder
         // si la tabla tiene hijos que tengan su llave foranea no se debe usar truncate 
         // Partidas::truncate();
   
-        $csvFile = fopen(base_path("database/data/partidas.csv"), "r");
-  
-        $firstline = false;
-        while (($data = fgetcsv($csvFile, 2000, ";")) !== FALSE) {
-            if (!$firstline) {
-                Partidas::create([
-                    "codigo_partida" => $data['1'],
-                    "nombre_partida" => $data['2'],
-                    "tipo_partida" => $data['3']
-                ]);    
-            }
-            $firstline = false;
-        }
-   
-        fclose($csvFile);
+        // $csvFile = fopen(base_path("database/data/partidas.csv"), "r");
+        // $firstline = false;
+        // while (($data = fgetcsv($csvFile, 2000, ";")) !== FALSE) {
+        //     if (!$firstline) {
+        //         Partidas::create([
+        //             "codigo_partida" => $data['1'],
+        //             "nombre_partida" => $data['2'],
+        //             "tipo_partida" => $data['3']
+        //         ]);    
+        //     }
+        //     $firstline = false;
+        // }
+        // fclose($csvFile);
 
-        // Partidas::factory(3)->create();
+        Partidas::factory(3)->create();
     }
 }

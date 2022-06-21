@@ -44,8 +44,8 @@
                <label for=""><b>Partida <span class="text-danger">*</span></b></label>
                <select class="form-control select2" name="partida_id" data-error="select" id="partida_id" style="width:100%;" required>
                   <option value="" selected>Seleccione...</option>
-                  @foreach ($partidas as $id => $partida)
-                    <option value="{{$id}}">{{$partida}}</option>
+                  @foreach ($partidas as $partida)
+                    <option value="{{ $partida->id }}">{{ $partida->codigo_partida }} - {{ $partida->nombre_partida }}</option>
                   @endforeach
                </select>
                <span class="text-danger" data-error="span" id="partida_id-error"></span>
