@@ -207,6 +207,7 @@ Route::group(['middleware' => ['auth:usuario']], function(){
 
     /****************************************** DIRECTRIZ_POA ******************************************/
     // Route::resource('/directriz_poa', DirectrizPoaController::class)->only('index');
+    Route::get('/directriz', [DirectrizPoaController::class, 'index'])->name('directriz.index');
     Route::get('/directriz_pdf', [DirectrizPoaController::class, 'directriz_pdf'])->name('directriz_pdf');
 
     /************************************** REPORTE OPERACIONES Y TAREAS ******************************************/

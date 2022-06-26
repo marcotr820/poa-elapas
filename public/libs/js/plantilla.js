@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', (e)=>{
     //******************************** LOADER
     $(window).on ('load', function (){
         $('#loader').delay(100).fadeOut('slow');
-        $('#loader-wrapper').delay(100).fadeOut('slow');
+        $('#loader-wrapper').delay(120).fadeOut('slow');
     });
 
     /**************** Menu Sidebar ***************/

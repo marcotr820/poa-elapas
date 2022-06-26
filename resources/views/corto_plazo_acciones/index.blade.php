@@ -3,20 +3,19 @@
 @section('title', 'Acciones Corto Plazo')
 
 @section('contenido')
-
     <div class="card">
-        <h5 class="card-header">
-            <table style="vertical-align: center;">
+        <div class="bg-light p-2">
+            <table class="table table-bordered table-sm m-0">
                 <tr>
-                    <td width="13%"><h6><b>Objetivo Gestion:</b></h6></td>
-                    <td class="pl-1"><h6>{{$pei_objetivo_especifico->objetivo_institucional}}</h6></td>
+                    <td width="15%" class="font-weight-bold">Obejtivo Institucional</td>
+                    <td>{{$pei_objetivo_especifico->objetivo_institucional}}</td>
                 </tr>
                 <tr>
-                    <td><h6 class="m-0"><strong>Gerencia:</strong></h6></td>
-                    <td><h6 class="m-0 pl-1">{{$pei_objetivo_especifico->gerencia->nombre_gerencia}}</h6></td>
+                    <td width="15%" class="font-weight-bold">Gerencia</td>
+                    <td>{{ $pei_objetivo_especifico->gerencia->nombre_gerencia }}</td>
                 </tr>
             </table>
-        </h5>
+        </div>
         <h5 class="card-header py-1 d-flex justify-content-between align-items-center">
             Lista Acciones Corto Plazo
             <div>

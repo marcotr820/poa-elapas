@@ -75,6 +75,7 @@ class CortoPlazoAccionController extends Controller
         {
             $acciones_corto_plazo = CortoPlazoAcciones::where('pei_objetivo_especifico_id', $pei_objetivo_especifico->id)
                 ->select('corto_plazo_acciones.*')
+                ->orderBy('id', 'asc')
                 ->where('trabajador_id', Auth::guard('usuario')->user()->trabajador->id);
 
             return DataTables::of($acciones_corto_plazo) //de la consulta usamos el $status para usarlo en la vista de los botones

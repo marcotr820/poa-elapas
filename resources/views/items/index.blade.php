@@ -5,8 +5,8 @@
 @section('css')
     <style>
         .skill-box{
-            padding: 0 15px;
-            width: 75%;
+            padding: 0;
+            width: 100%;
         }
         .skill-box .title{
             display: block;
@@ -66,42 +66,45 @@
 @section('contenido')
     <div class="card border-dark">
         <div class="bg-light p-2">
-            <div class="d-flex">
-                <label class="font-weight-bold pr-2">Acción Corto Plazo:</label>
-                <p class="m-0">{{$actividad->operacion->corto_plazo_accion->accion_corto_plazo}}</p>
-            </div>
-            <div class="d-flex">
-                <label class="font-weight-bold pr-2">Presupuesto Asignado:</label>
-                <p class="m-0">{{number_format($actividad->operacion->corto_plazo_accion->presupuesto_programado, 2, ".", ",")}} Bs.</p>
-            </div>
-            <div class="d-flex">
-                <label class="font-weight-bold pr-2">Operación:</label>
-                <p class="m-0">{{$actividad->operacion->nombre_operacion}}</p>
-            </div>
-            <div class="d-flex">
-                <label class="font-weight-bold pr-2">Actividad:</label>
-                <p class="m-0">{{$actividad->nombre_actividad}}</p>
-            </div>
-            <div class="d-flex">
-                <label class="font-weight-bold pr-2">Presupuesto Restante:</label>
-                <p class="m-0">{{ number_format($actividad->operacion->corto_plazo_accion->presupuesto_programado - $accion->items->sum('presupuesto'), 2, '.', ',') }} Bs.</p>
-            </div>
-            <div class="d-flex justify-content-between">
-                <div class="d-flex">
-                    <label class="font-weight-bold pr-2">Presupuesto Ejecutado:</label>
-                    <p class="m-0">{{number_format($accion->items->sum('presupuesto'), 2, '.', ',')}} Bs.</p>
-                </div>
-                <div class="skill-box">
-                    <span class="title">Porcentaje Ejecutado:</span>
-                    <div class="skill-bar">
-                        <span class="skill-per">
-                            <span class="tip">{{ round(($accion->items->sum('presupuesto')/$accion->presupuesto_programado)*100) }}%</span>
-                        </span>
-                    </div>
-                </div>
-            </div>
+            <table class="table table-bordered table-sm m-0">
+                <tr>
+                    <td width="15%" class="font-weight-bold">Acción Corto Plazo</td>
+                    <td>{{$actividad->operacion->corto_plazo_accion->accion_corto_plazo}}</td>
+                </tr>
+                <tr>
+                    <td width="15%" class="font-weight-bold">Ppto. Asignado</td>
+                    <td>{{number_format($actividad->operacion->corto_plazo_accion->presupuesto_programado, 2, ".", ",")}} Bs.</td>
+                </tr>
+                <tr>
+                    <td width="15%" class="font-weight-bold">Operación</td>
+                    <td>{{$actividad->operacion->nombre_operacion}}</td>
+                </tr>
+                <tr>
+                    <td width="15%" class="font-weight-bold">Actividad</td>
+                    <td>{{$actividad->nombre_actividad}}</td>
+                </tr>
+                <tr>
+                    <td width="15%" class="font-weight-bold">Ppto. Restante</td>
+                    <td>{{ number_format($actividad->operacion->corto_plazo_accion->presupuesto_programado - $accion->items->sum('presupuesto'), 2, '.', ',') }} Bs.</td>
+                </tr>
+                <tr>
+                    <td width="15%" class="font-weight-bold">Ppto. Ejecutado</td>
+                    <td>{{number_format($accion->items->sum('presupuesto'), 2, '.', ',')}} Bs.</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="skill-box">
+                            <span class="title">Porcentaje Ejecutado:</span>
+                            <div class="skill-bar">
+                                <span class="skill-per">
+                                    <span class="tip">{{ round(($accion->items->sum('presupuesto')/$accion->presupuesto_programado)*100) }}%</span>
+                                </span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </div>
-
         <h5 class="card-header border-dark py-1 d-flex justify-content-between align-items-center">
             Lista de Items
             <div>

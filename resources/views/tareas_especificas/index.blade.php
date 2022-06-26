@@ -4,19 +4,19 @@
 
 @section('contenido')
     <div class="card">
-        <div class="card-header p-2 pb-0">
-            <table class="table table-sm m-0" width="100%">
+        <div class="bg-light p-2">
+            <table class="table table-bordered table-sm m-0">
                 <tr>
-                    <td width="12%"><h6><b>Acción Corto Plazo:</b></h6></td>
-                    <td><h6>{!!$actividad->operacion->corto_plazo_accion->accion_corto_plazo!!}</h6></td>
+                    <td width="15%" class="font-weight-bold">Acción Corto Plazo</td>
+                    <td>{{$actividad->operacion->corto_plazo_accion->accion_corto_plazo}}</td>
                 </tr>
                 <tr>
-                    <td><h6><b>Operación:</b></h6></td>
-                    <td><h6>{!!$actividad->operacion->nombre_operacion!!}</h6></td>
+                    <td width="15%" class="font-weight-bold">Operación</td>
+                    <td>{{$actividad->operacion->nombre_operacion}}</td>
                 </tr>
                 <tr>
-                    <td><h6><b>Actividad:</b></h6></td>
-                    <td><h6 class="m-0">{{$actividad->nombre_actividad}}</h6></td>
+                    <td width="15%" class="font-weight-bold">Actividad</td>
+                    <td>{{$actividad->nombre_actividad}}</td>
                 </tr>
             </table>
         </div>

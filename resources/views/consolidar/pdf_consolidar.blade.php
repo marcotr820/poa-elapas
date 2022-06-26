@@ -1,490 +1,844 @@
 <style>
-    table th, td{
-        border: 0.5px solid #000;
+    table{
         font-size: 6px;
-        text-align: center;
-        vertical-align: middle;
     }
-    table td{
-        font-size: 5px;
+    .datos-head{
+        background-color: #eee;
+        font-size: 7px;
     }
 </style>
-<table cellspacing="0" cellpadding="5">
-    <thead>
-    <tr style="background-color:#686D76;color:white;font-weight:bold;">
-        <th rowspan="2">Pilar</th>
-        <th rowspan="2">Meta</th>
-        <th rowspan="2">Resultado</th>
-        <th rowspan="2">Accion mediano plazo</th>
-        <th rowspan="2">Objetivo de Area</th>
-        <th rowspan="2">Accion corto plazo</th>
-        <th rowspan="2">Operaciones</th>
-        <th rowspan="2">Actividades</th>
-        <th rowspan="2">Tareas</th>
-        <th rowspan="2">Requerimiento (bien / servicio)</th>
-        <th colspan="2">Presupuesto</th>
-        <th colspan="4">Cronograma de ejecucion por trimestre</th>
-    </tr>
-    <tr>
-        <th>Gasto</th>
-        <th>Invercion</th>
-        <th>1ER</th>
-        <th>2DO</th>
-        <th>3RO</th>
-        <th>4TO</th>
-    </tr>
-    </thead>
-    <tbody>
-        @forelse ($pilares as $p)
-            <tr>
-                <td
-                <?php 
-                $row_pilar = 0;
-                if ($p->metas->count() >= 1) { $row_pilar += $p->metas->count(); }
-                foreach ($p->metas as $m) {
-                    if($m->resultados->count() > 1){
-                        $row_pilar += $m->resultados->count() - 1;
-                        foreach ($m->resultados as $r) {
-                            if ($r->acciones_mediano_plazo->count() > 1) {
-                                $row_pilar += $r->acciones_mediano_plazo->count() - 1;
+<?php $total_programado = 0; ?>
+@forelse ($mediano_plazo_acciones as $mpa)
+    @if ($mpa->pei_objetivos_especificos->count())
+        <table cellspacing="0" cellpadding="2" border="0.5" class="datos-head">
+            <thead>
+                <tr>
+                    <td width="12%"><b>Pilar</b></td>
+                    <td width="88%">{{ $mpa->resultado->meta->pilar->nombre_pilar }}</td>
+                </tr>
+                <tr>
+                    <td width="12%"><b>Meta</b></td>
+                    <td width="88%">{{ $mpa->resultado->meta->nombre_meta }}</td>
+                </tr>
+                <tr>
+                    <td width="12%"><b>Resultado</b></td>
+                    <td width="88%">{{ $mpa->resultado->nombre_resultado }}</td>
+                </tr>
+                <tr>
+                    <td width="12%"><b>Acción Mediano Plazo</b></td>
+                    <td width="88%">{{ $mpa->accion_mediano_plazo }}</td>
+                </tr>
+            </thead>
+        </table>
+        {{--  --}}
+        <table cellspacing="0" cellpadding="3" border="0.5" style="margin-bottom: 10px;">
+            <thead>
+                <tr style="text-align: center;font-weight:bold;background-color: #eee;">
+                    <th rowspan="2">Objetivo Institucional Específico</th>
+                    <th rowspan="2">Accion corto plazo Gestion {{ $gestion }}</th>
+                    <th rowspan="2">Presupuesto Programado Gestion {{ $gestion }}</th>
+                    <th rowspan="2">fecha prevista de inicio</th>
+                    <th rowspan="2">fecha prevista de finalización</th>
+                    {{-- <th rowspan="2">Resultado esperado Gestion {{ $gestion }}</th> --}}
+                    <th rowspan="2">Operaciones</th>
+                    <th rowspan="2">Actividades</th>
+                    <th rowspan="2">Tareas especificas</th>
+                    <th rowspan="2">Requerimiento (Bienes o Servicios)</th>
+                    <th rowspan="2">Presupuesto (Bs) (Bienes o Servicios)</th>
+                    <th colspan="4">Cronograma de Ejecución Accion Corto Plazo Por Trimestre</th>
+
+                </tr>
+                <tr style="text-align: center;font-weight:bold;background-color: #eee;">
+                    <th>1ER</th>
+                    <th>2DO</th>
+                    <th>3ER</th>
+                    <th>4TO</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($mpa->pei_objetivos_especificos as $obj)
+                    <tr>
+                        <td
+                        <?php $row_obj = 0;
+                        if ($obj->corto_plazo_acciones->count() >= 1) { $row_obj += $obj->corto_plazo_acciones->count(); }
+                        foreach ($obj->corto_plazo_acciones as $cpa) {
+                            if($cpa->operaciones->count() > 1){
+                                $row_obj += $cpa->operaciones->count() - 1;
+                                
                             }
-                            foreach ($r->acciones_mediano_plazo as $amp) {
-                                if ($amp->pei_objetivos_especificos->count() > 1) {
-                                    $row_pilar += $amp->pei_objetivos_especificos->count() - 1;
+                            foreach ($cpa->operaciones as $op) {
+                                if ($op->actividades->count() > 1) {
+                                    $row_obj += $op->actividades->count() - 1;
+                                }
+                                foreach ($op->actividades as $act) {
+                                    if ($act->items->count() > 1) {
+                                        $row_obj += $act->items->count() - 1;
+                                    }
+                                }
+                            }
+                        }
+                        echo $row_obj > 1 ? 'rowspan="'.$row_obj.'"' : '';
+                        ?>
+                        >{{ $obj->objetivo_institucional }}</td>
+                        {{--  --}}
+                        @forelse ($obj->corto_plazo_acciones as $cpa)
+                            <?php $var_obj = $obj ?>
+                            @if ($loop->first)
+                                <td
+                                <?php $row_cpa = 0;
+                                if ($cpa->operaciones->count() >= 1) { $row_cpa = $cpa->operaciones->count(); }
+                                foreach ($cpa->operaciones as $op) {
+                                    if($op->actividades->count() > 1){
+                                        $row_cpa += $op->actividades->count() - 1;
+                                    }
+                                    foreach ($op->actividades as $act) {
+                                        if ($act->items->count() > 1) {
+                                            $row_cpa += $act->items->count() - 1;
+                                        }
+                                    }
+                                }
+                                echo $row_cpa > 1 ? 'rowspan="'.$row_cpa.'"' : '';
+                                ?>
+                                >{{ $cpa->accion_corto_plazo }}</td>
+                                <td <?php echo $row_cpa > 1 ? 'rowspan="'.$row_cpa.'"' : ''; ?> >{{ $cpa->presupuesto_programado }}</td>
+                                <td <?php echo $row_cpa > 1 ? 'rowspan="'.$row_cpa.'"' : ''; ?> >{{ $cpa->fecha_inicio }}</td>
+                                <td <?php echo $row_cpa > 1 ? 'rowspan="'.$row_cpa.'"' : ''; ?> >{{ $cpa->fecha_fin }}</td>
+                                {{-- primera operacion --}}
+                                @forelse ($cpa->operaciones as $op)
+                                    <?php $var_cpa = $cpa; ?>
+                                    @if ($loop->first)
+                                        <td
+                                        <?php $row_op = 0;
+                                        if ($op->actividades->count() >= 1) { $row_op += $op->actividades->count(); }
+                                        foreach ($op->actividades as $act) {
+                                            if ($act->items->count() > 1) {
+                                                $row_op += $act->items->count() - 1;
+                                            }
+                                        }
+                                        echo $row_op > 1 ? 'rowspan="'.$row_op.'"' : '';
+                                        ?>
+                                        >{{ $op->nombre_operacion }}</td>
+                                        {{-- primera actividad --}}
+                                        @forelse ($op->actividades as $act)
+                                            <?php $var_op = $op; ?>
+                                            @if ($loop->first)
+                                                <td
+                                                <?php $row_act = 0;
+                                                if ($act->items->count() >= 1) { $row_act += $act->items->count(); }
+                                                echo $row_act > 1 ? 'rowspan="'.$row_act.'"' : '';
+                                                ?>
+                                                >{{ $act->nombre_actividad }}</td>
+                                                <td
+                                                <?php $row_act = 0;
+                                                if ($act->items->count() >= 1) { $row_act += $act->items->count(); }
+                                                echo $row_act > 1 ? 'rowspan="'.$row_act.'"' : '';
+                                                ?>
+                                                >
+                                                    <ul style="font-size: 5px;">
+                                                        @foreach ($act->tareas_especificas as $tar)
+                                                            <li>{{ $tar->nombre_tarea }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                </td>
+                                                {{-- primeta item --}}
+                                                @forelse ($act->items as $itm)
+                                                    <?php $var_act = $act ?>
+                                                    @if ($loop->first)
+                                                        <td>{{ $itm->bien_servicio }}</td>
+                                                        <td>{{ number_format($itm->presupuesto, 2, ".", ",") }} Bs.</td>
+                                                        <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->primer_trimestre != 0){echo $cpa->planificacion->primer_trimestre." %";} ?> </td>
+                                                        <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->segundo_trimestre != 0){echo $cpa->planificacion->segundo_trimestre." %";} ?></td>
+                                                        <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->tercer_trimestre != 0){echo $cpa->planificacion->tercer_trimestre." %";} ?></td>
+                                                        <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->cuarto_trimestre != 0){echo $cpa->planificacion->cuarto_trimestre." %";} ?></td>
+                                                    @endif
+
+                                                @empty
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->primer_trimestre != 0){echo $cpa->planificacion->primer_trimestre." %";} ?> </td>
+                                                    <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->segundo_trimestre != 0){echo $cpa->planificacion->segundo_trimestre." %";} ?></td>
+                                                    <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->tercer_trimestre != 0){echo $cpa->planificacion->tercer_trimestre." %";} ?></td>
+                                                    <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->cuarto_trimestre != 0){echo $cpa->planificacion->cuarto_trimestre." %";} ?></td>
+                                                @endforelse
+                                            @endif
+
+                                        @empty
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->primer_trimestre != 0){echo $cpa->planificacion->primer_trimestre." %";} ?> </td>
+                                            <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->segundo_trimestre != 0){echo $cpa->planificacion->segundo_trimestre." %";} ?></td>
+                                            <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->tercer_trimestre != 0){echo $cpa->planificacion->tercer_trimestre." %";} ?></td>
+                                            <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->cuarto_trimestre != 0){echo $cpa->planificacion->cuarto_trimestre." %";} ?></td>
+                                        @endforelse
+                                    @endif
+                                    
+                                @empty
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><?php if($cpa->planificacion()->exists() && $cpa->planificacion->primer_trimestre != 0){echo $cpa->planificacion->primer_trimestre." %";} ?></td>
+                                <td><?php if($cpa->planificacion()->exists() && $cpa->planificacion->segundo_trimestre != 0){echo $cpa->planificacion->segundo_trimestre." %";} ?></td>
+                                <td><?php if($cpa->planificacion()->exists() && $cpa->planificacion->tercer_trimestre != 0){echo $cpa->planificacion->tercer_trimestre." %";} ?></td>
+                                <td><?php if($cpa->planificacion()->exists() && $cpa->planificacion->cuarto_trimestre != 0){echo $cpa->planificacion->cuarto_trimestre." %";} ?></td>
+                                @endforelse
+                            @endif
+                        @empty
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        @endforelse
+                    </tr>
+
+                    {{-- demas items --}}
+                    @if (isset($var_act))
+                        @foreach ($var_act->items as $itm)
+                            @if (!$loop->first)
+                                <tr>
+                                    <td>{{ $itm->bien_servicio }}</td>
+                                    <td>{{ number_format($itm->presupuesto, 2, ".", ",") }} Bs.</td>
+                                </tr>
+                            @endif
+                        @endforeach
+                        <?php unset($var_act) ?>
+                    @endif
+
+                    {{-- demas activividades --}}
+                    @if (isset($var_op))
+                        @forelse ($var_op->actividades as $act)
+                            @if (!$loop->first)
+                                <tr>
+                                    <td
+                                    <?php $row_act = 0;
+                                    if ($act->items->count() >= 1) { $row_act += $act->items->count(); }
+                                    echo $row_act > 1 ? 'rowspan="'.$row_act.'"' : '';
+                                    ?>
+                                    >{{ $act->nombre_actividad }}</td>
+                                    <td
+                                    <?php $row_act = 0;
+                                    if ($act->items->count() >= 1) { $row_act += $act->items->count(); }
+                                    echo $row_act > 1 ? 'rowspan="'.$row_act.'"' : '';
+                                    ?>
+                                    >
+                                        <ul style="font-size: 5px;">
+                                            @foreach ($act->tareas_especificas as $tar)
+                                                <li>{{ $tar->nombre_tarea }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </td>
+                                    {{-- primer item --}}
+                                    @forelse ($act->items as $itm)
+                                        <?php $var_act = $act ?>
+                                        @if ($loop->first)
+                                            <td>{{ $itm->bien_servicio }}</td>
+                                            <td>{{ number_format($itm->presupuesto, 2, ".", ",") }} Bs.</td>
+                                        @endif
+                                    @empty
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    @endforelse
+                                </tr>
+                                {{-- demas items --}}
+                                @if (isset($var_act))
+                                    @foreach ($var_act->items as $itm)
+                                        @if (!$loop->first)
+                                            <tr>
+                                                <td>{{ $itm->bien_servicio }}</td>
+                                                <td>{{ number_format($itm->presupuesto, 2, ".", ",") }} Bs.</td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
+                                    <?php unset($var_act) ?>
+                                @endif
+                            @endif
+
+                        @empty
+                        
+                        @endforelse
+                        <?php unset($var_op) ?>
+                    @endif
+
+                    {{-- demas operaciones primera accion corto plazo --}}
+                    @if (isset($var_cpa))
+                        @foreach ($var_cpa->operaciones as $op)
+                            @if (!$loop->first)
+                                <tr>
+                                    <td
+                                    <?php $row_op = 0;
+                                    if ($op->actividades->count() >= 1) { $row_op += $op->actividades->count(); }
+                                    foreach ($op->actividades as $act) {
+                                        if ($act->items->count() > 1) {
+                                            $row_op += $act->items->count() - 1;
+                                        }
+                                    }
+                                    echo $row_op > 1 ? 'rowspan="'.$row_op.'"' : '';
+                                    ?>
+                                    >{{ $op->nombre_operacion }}</td>
+                                    {{-- primera actividad --}}
+                                    @forelse ($op->actividades as $act)
+                                        <?php $var_op = $op; ?>
+                                        @if ($loop->first)
+                                            <td
+                                            <?php $row_act = 0;
+                                            if ($act->items->count() >= 1) { $row_act += $act->items->count(); }
+                                            echo $row_act > 1 ? 'rowspan="'.$row_act.'"' : '';
+                                            ?>
+                                            >{{ $act->nombre_actividad }}</td>
+                                            <td
+                                            <?php $row_act = 0;
+                                            if ($act->items->count() >= 1) { $row_act += $act->items->count(); }
+                                            echo $row_act > 1 ? 'rowspan="'.$row_act.'"' : '';
+                                            ?>
+                                            >
+                                                <ul style="font-size: 5px;">
+                                                    @foreach ($act->tareas_especificas as $tar)
+                                                        <li>{{ $tar->nombre_tarea }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </td>
+                                            {{-- primera item --}}
+                                            @forelse ($act->items as $itm)
+                                                <?php $var_act = $act ?>
+                                                @if ($loop->first)
+                                                    <td>{{ $itm->bien_servicio }}</td>
+                                                    <td>{{ number_format($itm->presupuesto, 2, ".", ",") }} Bs.</td>
+                                                @endif
+                                            @empty
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            @endforelse
+                                        @endif
+
+                                    @empty
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    @endforelse
+                                </tr>
+
+                                {{-- demas items --}}
+                                @if (isset($var_act))
+                                    @forelse ($var_act->items as $itm)
+                                        @if (!$loop->first)
+                                            <tr>
+                                                <td>{{ $itm->bien_servicio }}</td>
+                                                <td>{{ number_format($itm->presupuesto, 2, ".", ",") }} Bs.</td>
+                                            </tr>
+                                        @endif
+                                    @empty
+                                    
+                                    @endforelse
+                                    <?php unset($var_act) ?>
+                                @endif
+
+                                {{-- demas actividades --}}
+                                @if (isset($var_op))
+                                    @forelse ($var_op->actividades as $act)
+                                        @if (!$loop->first)
+                                            <tr>
+                                                <td
+                                                <?php $row_act = 0;
+                                                if ($act->items->count() >= 1) { $row_act += $act->items->count(); }
+                                                echo $row_act > 1 ? 'rowspan="'.$row_act.'"' : '';
+                                                ?>
+                                                >{{ $act->nombre_actividad }}</td>
+                                                <td
+                                                <?php $row_act = 0;
+                                                if ($act->items->count() >= 1) { $row_act += $act->items->count(); }
+                                                echo $row_act > 1 ? 'rowspan="'.$row_act.'"' : '';
+                                                ?>
+                                                >
+                                                    <ul style="font-size: 5px;">
+                                                        @foreach ($act->tareas_especificas as $tar)
+                                                            <li>{{ $tar->nombre_tarea }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                </td>
+                                                {{-- primer item --}}
+                                                @forelse ($act->items as $itm)
+                                                    <?php $var_act = $act ?>
+                                                    @if ($loop->first)
+                                                        <td>{{ $itm->bien_servicio }}</td>
+                                                        <td>{{ number_format($itm->presupuesto, 2, ".", ",") }} Bs.</td>
+                                                    @endif
+                                                @empty
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                @endforelse
+                                            </tr>
+                                            {{-- demas items --}}
+                                            @if (isset($var_act))
+                                                @foreach ($var_act->items as $itm)
+                                                    @if (!$loop->first)
+                                                        <tr>
+                                                            <td>{{ $itm->bien_servicio }}</td>
+                                                            <td>{{ number_format($itm->presupuesto, 2, ".", ",") }} Bs.</td>
+                                                        </tr>
+                                                    @endif
+                                                @endforeach
+                                                <?php unset($var_act) ?>
+                                            @endif
+                                        @endif
+
+                                    @empty
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    @endforelse
+                                    <?php unset($var_op) ?>
+                                @endif
+                            @endif
+                        @endforeach
+                        <?php unset($var_cpa) ?>
+                    @endif
+                    
+                    {{-- demas acciones corto plazo --}}
+                    @if (isset($var_obj))
+                        @forelse ($var_obj->corto_plazo_acciones as $cpa)
+                            @if (!$loop->first)
+                                <tr>
+                                    <td
+                                    <?php $row_cpa = 0;
+                                    if ($cpa->operaciones->count() >= 1) { $row_cpa = $cpa->operaciones->count(); }
+                                    foreach ($cpa->operaciones as $op) {
+                                        if($op->actividades->count() > 1){
+                                            $row_cpa += $op->actividades->count() - 1;
+                                        }
+                                        foreach ($op->actividades as $act) {
+                                            if ($act->items->count() > 1) {
+                                                $row_cpa += $act->items->count() - 1;
+                                            }
+                                        }
+                                    }
+                                    echo $row_cpa > 1 ? 'rowspan="'.$row_cpa.'"' : '';
+                                    ?>
+                                    >{{ $cpa->accion_corto_plazo }}</td>
+                                    <td <?php echo $row_cpa > 1 ? 'rowspan="'.$row_cpa.'"' : ''; ?> >{{ $cpa->presupuesto_programado }}</td>
+                                    <td <?php echo $row_cpa > 1 ? 'rowspan="'.$row_cpa.'"' : ''; ?> >{{ $cpa->fecha_inicio }}</td>
+                                    <td <?php echo $row_cpa > 1 ? 'rowspan="'.$row_cpa.'"' : ''; ?> >{{ $cpa->fecha_fin }}</td>
+                                    {{-- primera operacion demas acciones corto plazo --}}
+                                    @forelse ($cpa->operaciones as $op)
+                                        <?php $var_cpa = $cpa; ?>
+                                        @if ($loop->first)
+                                            <td
+                                            <?php $row_op = 0;
+                                            if ($op->actividades->count() >= 1) { $row_op += $op->actividades->count(); }
+                                            foreach ($op->actividades as $act) {
+                                                if ($act->items->count() > 1) {
+                                                    $row_op += $act->items->count() - 1;
+                                                }
+                                            }
+                                            echo $row_op > 1 ? 'rowspan="'.$row_op.'"' : '';
+                                            ?>
+                                            >{{ $op->nombre_operacion }}</td>
+                                            {{--primera actividad --}}
+                                            @forelse ($op->actividades as $act)
+                                                <?php $var_op = $op; ?>
+                                                @if ($loop->first)
+                                                    <td
+                                                    <?php $row_act = 0;
+                                                    if ($act->items->count() >= 1) { $row_act += $act->items->count(); }
+                                                    echo $row_act > 1 ? 'rowspan="'.$row_act.'"' : '';
+                                                    ?>
+                                                    >{{ $act->nombre_actividad }}</td>
+                                                    <td
+                                                    <?php $row_act = 0;
+                                                    if ($act->items->count() >= 1) { $row_act += $act->items->count(); }
+                                                    echo $row_act > 1 ? 'rowspan="'.$row_act.'"' : '';
+                                                    ?>
+                                                    >
+                                                        <ul style="font-size: 5px;">
+                                                            @foreach ($act->tareas_especificas as $tar)
+                                                                <li>{{ $tar->nombre_tarea }}</li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </td>
+                                                    {{-- primeta item --}}
+                                                    @forelse ($act->items as $itm)
+                                                        <?php $var_act = $act ?>
+                                                        @if ($loop->first)
+                                                            <td>{{ $itm->bien_servicio }}</td>
+                                                            <td>{{ number_format($itm->presupuesto, 2, ".", ",") }} Bs.</td>
+                                                            <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->primer_trimestre != 0){echo $cpa->planificacion->primer_trimestre." %";} ?> </td>
+                                                            <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->segundo_trimestre != 0){echo $cpa->planificacion->segundo_trimestre." %";} ?></td>
+                                                            <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->tercer_trimestre != 0){echo $cpa->planificacion->tercer_trimestre." %";} ?></td>
+                                                            <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->cuarto_trimestre != 0){echo $cpa->planificacion->cuarto_trimestre." %";} ?></td>
+                                                        @endif
+
+                                                    @empty
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->primer_trimestre != 0){echo $cpa->planificacion->primer_trimestre." %";} ?> </td>
+                                                        <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->segundo_trimestre != 0){echo $cpa->planificacion->segundo_trimestre." %";} ?></td>
+                                                        <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->tercer_trimestre != 0){echo $cpa->planificacion->tercer_trimestre." %";} ?></td>
+                                                        <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->cuarto_trimestre != 0){echo $cpa->planificacion->cuarto_trimestre." %";} ?></td>
+                                                    @endforelse
+                                                @endif
+
+                                            @empty
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->primer_trimestre != 0){echo $cpa->planificacion->primer_trimestre." %";} ?> </td>
+                                                <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->segundo_trimestre != 0){echo $cpa->planificacion->segundo_trimestre." %";} ?></td>
+                                                <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->tercer_trimestre != 0){echo $cpa->planificacion->tercer_trimestre." %";} ?></td>
+                                                <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->cuarto_trimestre != 0){echo $cpa->planificacion->cuarto_trimestre." %";} ?></td>
+                                            @endforelse
+                                        @endif
+
+                                    @empty
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><?php if($cpa->planificacion()->exists() && $cpa->planificacion->primer_trimestre != 0){echo $cpa->planificacion->primer_trimestre." %";} ?></td>
+                                        <td><?php if($cpa->planificacion()->exists() && $cpa->planificacion->segundo_trimestre != 0){echo $cpa->planificacion->segundo_trimestre." %";} ?></td>
+                                        <td><?php if($cpa->planificacion()->exists() && $cpa->planificacion->tercer_trimestre != 0){echo $cpa->planificacion->tercer_trimestre." %";} ?></td>
+                                        <td><?php if($cpa->planificacion()->exists() && $cpa->planificacion->cuarto_trimestre != 0){echo $cpa->planificacion->cuarto_trimestre." %";} ?></td>
+                                    @endforelse
+                                </tr>
+
+                                {{-- demas items --}}
+                                @if (isset($var_act))
+                                    @foreach ($var_act->items as $itm)
+                                        @if (!$loop->first)
+                                            <tr>
+                                                <td>{{ $itm->bien_servicio }}</td>
+                                                <td>{{ number_format($itm->presupuesto, 2, ".", ",") }} Bs.</td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
+                                    <?php unset($var_act) ?>
+                                @endif
+
+                                {{-- demas actividades --}}
+                                @if (isset($var_op))
+                                    @forelse ($var_op->actividades as $act)
+                                        @if (!$loop->first)
+                                            <tr>
+                                                <td
+                                                <?php $row_act = 0;
+                                                if ($act->items->count() >= 1) { $row_act += $act->items->count(); }
+                                                echo $row_act > 1 ? 'rowspan="'.$row_act.'"' : '';
+                                                ?>
+                                                >{{ $act->nombre_actividad }}</td>
+                                                <td
+                                                <?php $row_act = 0;
+                                                if ($act->items->count() >= 1) { $row_act += $act->items->count(); }
+                                                echo $row_act > 1 ? 'rowspan="'.$row_act.'"' : '';
+                                                ?>
+                                                >
+                                                    <ul style="font-size: 5px;">
+                                                        @foreach ($act->tareas_especificas as $tar)
+                                                            <li>{{ $tar->nombre_tarea }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                </td>
+                                                {{-- primer item --}}
+                                                @forelse ($act->items as $itm)
+                                                    <?php $var_act = $act ?>
+                                                    @if ($loop->first)
+                                                        <td>{{ $itm->bien_servicio }}</td>
+                                                        <td>{{ number_format($itm->presupuesto, 2, ".", ",") }} Bs.</td>
+                                                    @endif
+                                                @empty
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                @endforelse
+                                            </tr>
+                                            {{-- demas items --}}
+                                            @if (isset($var_act))
+                                                @foreach ($var_act->items as $itm)
+                                                    @if (!$loop->first)
+                                                        <tr>
+                                                            <td>{{ $itm->bien_servicio }}</td>
+                                                            <td>{{ number_format($itm->presupuesto, 2, ".", ",") }} Bs.</td>
+                                                        </tr>
+                                                    @endif
+                                                @endforeach
+                                                <?php unset($var_act) ?>
+                                            @endif
+                                        @endif
+
+                                    @empty
+                                    
+                                    @endforelse
+                                    <?php unset($var_op) ?>
+                                @endif
+
+                                {{-- demas operaciones --}}
+                                @if (isset($var_cpa))
+                                    @forelse ($var_cpa->operaciones as $op)
+                                        @if (!$loop->first)
+                                            <tr>
+                                                <td
+                                                <?php $row_op = 0;
+                                                if ($op->actividades->count() >= 1) { $row_op += $op->actividades->count(); }
+                                                foreach ($op->actividades as $act) {
+                                                    if ($act->items->count() > 1) {
+                                                        $row_op += $act->items->count() - 1;
+                                                    }
+                                                }
+                                                echo $row_op > 1 ? 'rowspan="'.$row_op.'"' : '';
+                                                ?>
+                                                >{{ $op->nombre_operacion }}</td>
+                                                {{-- primera actvididad --}}
+                                                @forelse ($op->actividades as $act)
+                                                    <?php $var_op = $op; ?>
+                                                    @if ($loop->first)
+                                                        <td
+                                                        <?php $row_act = 0;
+                                                        if ($act->items->count() >= 1) { $row_act += $act->items->count(); }
+                                                        echo $row_act > 1 ? 'rowspan="'.$row_act.'"' : '';
+                                                        ?>
+                                                        >{{ $act->nombre_actividad }}</td>
+                                                        <td
+                                                        <?php $row_act = 0;
+                                                        if ($act->items->count() >= 1) { $row_act += $act->items->count(); }
+                                                        echo $row_act > 1 ? 'rowspan="'.$row_act.'"' : '';
+                                                        ?>
+                                                        >
+                                                            <ul style="font-size: 5px;">
+                                                                @foreach ($act->tareas_especificas as $tar)
+                                                                    <li>{{ $tar->nombre_tarea }}</li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </td>
+                                                        {{-- primer item --}}
+                                                        @forelse ($act->items as $itm)
+                                                            <?php $var_act = $act ?>
+                                                            @if ($loop->first)
+                                                                <td>{{ $itm->bien_servicio }}</td>
+                                                                <td>{{ number_format($itm->presupuesto, 2, ".", ",") }} Bs.</td>
+                                                            @endif
+                                                        @empty
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        @endforelse
+                                                    @endif
+
+                                                @empty
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                @endforelse
+                                            </tr>
+
+                                            {{-- demas items --}}
+                                            @if (isset($var_act))
+                                                @foreach ($var_act->items as $itm)
+                                                    @if (!$loop->first)
+                                                        <tr>
+                                                            <td>{{ $itm->bien_servicio }}</td>
+                                                            <td>{{ number_format($itm->presupuesto, 2, ".", ",") }} Bs.</td>
+                                                        </tr>
+                                                    @endif
+                                                @endforeach
+                                                <?php unset($var_act) ?>
+                                            @endif
+
+                                            {{-- demas actividades --}}
+                                            @if (isset($var_op))
+                                                @forelse ($var_op->actividades as $act)
+                                                    @if (!$loop->first)
+                                                        <tr>
+                                                            <td
+                                                            <?php $row_act = 0;
+                                                            if ($act->items->count() >= 1) { $row_act += $act->items->count(); }
+                                                            echo $row_act > 1 ? 'rowspan="'.$row_act.'"' : '';
+                                                            ?>
+                                                            >{{ $act->nombre_actividad }}</td>
+                                                            <td
+                                                            <?php $row_act = 0;
+                                                            if ($act->items->count() >= 1) { $row_act += $act->items->count(); }
+                                                            echo $row_act > 1 ? 'rowspan="'.$row_act.'"' : '';
+                                                            ?>
+                                                            >
+                                                                <ul style="font-size: 5px;">
+                                                                    @foreach ($act->tareas_especificas as $tar)
+                                                                        <li>{{ $tar->nombre_tarea }}</li>
+                                                                    @endforeach
+                                                                </ul>
+                                                            </td>
+                                                            {{-- primer item --}}
+                                                            @forelse ($act->items as $itm)
+                                                                <?php $var_act = $act ?>
+                                                                @if ($loop->first)
+                                                                    <td>{{ $itm->bien_servicio }}</td>
+                                                                    <td>{{ number_format($itm->presupuesto, 2, ".", ",") }} Bs.</td>
+                                                                @endif
+                                                            @empty
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            @endforelse
+                                                        </tr>
+                                                        {{-- demas items --}}
+                                                        @if (isset($var_act))
+                                                            @foreach ($var_act->items as $itm)
+                                                                @if (!$loop->first)
+                                                                    <tr>
+                                                                        <td>{{ $itm->bien_servicio }}</td>
+                                                                        <td>{{ number_format($itm->presupuesto, 2, ".", ",") }} Bs.</td>
+                                                                    </tr>
+                                                                @endif
+                                                            @endforeach
+                                                            <?php unset($var_act) ?>
+                                                        @endif
+                                                    @endif
+
+                                                @empty
+                                                
+                                                @endforelse
+                                                <?php unset($var_op) ?>
+                                            @endif
+
+                                        @endif
+
+                                    @empty
+                                    
+                                    @endforelse
+                                    <?php unset($var_cpa) ?>
+                                @endif
+                            @endif
+
+                        @empty
+                        
+                        @endforelse
+                        <?php unset($var_obj) ?>
+                    @endif
+
+                    
+
+                    {{-- contador de total pressupuestos --}}
+                    <?php
+                    foreach ($obj->corto_plazo_acciones as $cpa) {
+                        foreach ($cpa->operaciones as $op) {
+                            foreach ($op->actividades as $act) {
+                                foreach ($act->items as $itm) {
+                                    $total_programado += $itm->presupuesto;
                                 }
                             }
                         }
                     }
-                }
-                echo $row_pilar > 1 ? 'rowspan="'.$row_pilar.'"' : '';
-                ?>
-                >{{ $p->nombre_pilar }}</td>
-                @forelse ($p->metas as $m)
-                    @if ($loop->first)
-                        {{-- primera meta --}}
-                        <td
-                        <?php $row_meta = 0;
-                        if ($m->resultados->count() >= 1) { $row_meta += $m->resultados->count(); }
-                        foreach ($m->resultados as $r) {
-                            if ($r->acciones_mediano_plazo->count() > 1) {
-                                $row_meta += $r->acciones_mediano_plazo->count() - 1;
-                            }
-                            foreach ($r->acciones_mediano_plazo as $amp) {
-                                if ($amp->pei_objetivos_especificos->count() > 1) {
-                                    $row_meta += $amp->pei_objetivos_especificos->count() - 1;
+                    ?>
+                @empty
+                @endforelse
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    {{-- calculamos el total de presupuesto por accion mediano plazo --}}
+                    <?php $total_x_mediano_plazo_accion = 0;
+                    foreach ($mpa->pei_objetivos_especificos as $obj) {
+                        foreach ($obj->corto_plazo_acciones as $cpa) {
+                            foreach ($cpa->operaciones as $op) {
+                                foreach ($op->actividades as $act) {
+                                    foreach ($act->items as $itm) {
+                                        $total_x_mediano_plazo_accion += $itm->presupuesto;
+                                    }
                                 }
                             }
                         }
-                        echo  $row_meta > 1 ? 'rowspan="'.$row_meta.'"' : '';
-                        ?>
-                        >{{ $m->nombre_meta }}</td>
-                        @forelse ($m->resultados as $r)
-                            {{-- primer resultado primera meta --}}
-                            <?php $var_m = $m; ?>
-                            @if ($loop->first)
-                                <td
-                                <?php $row_resultado = 0;
-                                if ($r->acciones_mediano_plazo->count() >= 1) { $row_resultado += $r->acciones_mediano_plazo->count(); }
-                                foreach ($r->acciones_mediano_plazo as $amp) {
-                                    if ($amp->pei_objetivos_especificos->count() > 1) {
-                                        $row_resultado += $amp->pei_objetivos_especificos->count() - 1;
-                                    }
-                                }
-                                echo  $row_resultado > 1 ? 'rowspan="'.$row_resultado.'"' : '';
-                                ?>
-                                >{{ $r->nombre_resultado }}</td>
-                                @forelse ($r->acciones_mediano_plazo as $amp)
-                                {{-- primera accion mediano plazo primer resultado --}}
-                                    <?php $var_r = $r; ?>
-                                    @if ($loop->first)
-                                        <td
-                                        <?php $row_accion_mediano_plazo = 0;
-                                        if ($amp->pei_objetivos_especificos->count() >= 1) { $row_accion_mediano_plazo += $amp->pei_objetivos_especificos->count(); }
-                                        echo  $row_accion_mediano_plazo > 1 ? 'rowspan="'.$row_accion_mediano_plazo.'"' : '';
-                                        ?>
-                                        >{{ $amp->accion_mediano_plazo }}</td>
-                                        {{--  --}}
-                                        @foreach ($amp->pei_objetivos_especificos as $obj)
-                                            <?php $var_amp = $amp; ?>
-                                            @if ($loop->first)
-                                                <td>{{ $obj->objetivo_institucional }}</td>
-                                                <td>{{ $obj->gerencia->nombre_gerencia }}</td>
-                                            @endif
-                                        @endforeach
-                                    @endif
-                                @empty
-                                @endforelse
-                            @endif
-                        @empty
-                        @endforelse
-                    @endif
-                @empty
-                @endforelse
+                    }
+                    ?>
+                    <td><b>TOTAL</b></td>
+                    <td><b>{{ number_format($total_x_mediano_plazo_accion, 2, ".", ",") }} Bs.</b></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+        {{-- <br pagebreak="true" /> --}}
+        <table border="0">
+            <tr style="line-height: 20px;" > 
+            <td></td>
             </tr>
-            
-            {{--  --}}
-            @if (isset($var_amp))
-                @foreach ($var_amp->pei_objetivos_especificos as $obj)
-                    @if (!$loop->first)
-                        <tr>
-                            <td>{{ $obj->objetivo_institucional }}</td>
-                            <td>{{ $obj->gerencia->nombre_gerencia }}</td>
-                        </tr>
-                    @endif
-                @endforeach
-                <?php unset($var_amp) ?>
-            @endif
-            
-            {{--  --}}
-            @if (isset($var_r))
-                @forelse ($var_r->acciones_mediano_plazo as $amp)
-                    @if (!$loop->first)
-                        <tr>
-                            <td
-                            <?php $row_accion_mediano_plazo = 0;
-                            if ($amp->pei_objetivos_especificos->count() >= 1) { $row_accion_mediano_plazo += $amp->pei_objetivos_especificos->count(); }
-                            echo  $row_accion_mediano_plazo > 1 ? 'rowspan="'.$row_accion_mediano_plazo.'"' : '';
-                            ?>
-                            >{{ $amp->accion_mediano_plazo }}</td>
-                            {{-- primer objetivo demas acciones mediano plazo primer resultado primera meta --}}
-                            @foreach ($amp->pei_objetivos_especificos as $obj)
-                                <?php $var_amp = $amp; ?>
-                                @if ($loop->first)
-                                <td>{{ $obj->objetivo_institucional }}222</td>
-                                <td>{{ $obj->gerencia->nombre_gerencia }}</td>
-                                @endif
-                            @endforeach
-                        </tr>
+        </table>
+    @else
+    @endif
 
-                        {{--  --}}
-                        @if (isset($var_amp))
-                            @foreach ($var_amp->pei_objetivos_especificos as $obj)
-                                @if (!$loop->first)
-                                    <tr>
-                                        <td>{{ $obj->objetivo_institucional }}</td>
-                                        <td>{{ $obj->gerencia->nombre_gerencia }}</td>
-                                    </tr>
-                                @endif
-                            @endforeach
-                            <?php unset($var_amp) ?>
-                        @endif
-                        
-                    @endif
-                @empty
-                @endforelse
-                <?php unset($var_r) ?>
-            @endif
 
-            @if (isset($var_m))
-                @foreach ($var_m->resultados as $r)
-                    @if (!$loop->first)
-                        {{-- demas resultados primera meta --}}
-                        <tr>
-                            <td
-                            <?php $row_resultado = 0;
-                            if ($r->acciones_mediano_plazo->count() >= 1) { $row_resultado += $r->acciones_mediano_plazo->count(); }
-                            foreach ($r->acciones_mediano_plazo as $amp) {
-                                if ($amp->pei_objetivos_especificos->count() > 1) {
-                                    $row_resultado += $amp->pei_objetivos_especificos->count() - 1;
-                                }
-                            }
-                            echo  $row_resultado > 1 ? 'rowspan="'.$row_resultado.'"' : '';
-                            ?>
-                            >{{ $r->nombre_resultado }}###</td>
-                            {{-- primer accion mediano plazo demas resultados --}}
-                            @foreach ($r->acciones_mediano_plazo as $amp)
-                            <?php $var_r = $r; ?>
-                                @if ($loop->first)
-                                    <td
-                                    <?php $row_accion_mediano_plazo = 0;
-                                    if ($amp->pei_objetivos_especificos->count() >= 1) { $row_accion_mediano_plazo += $amp->pei_objetivos_especificos->count(); }
-                                    echo  $row_accion_mediano_plazo > 1 ? 'rowspan="'.$row_accion_mediano_plazo.'"' : '';
-                                    ?>
-                                    >{{ $amp->accion_mediano_plazo }}</td>
-                                    {{--  --}}
-                                    @foreach ($amp->pei_objetivos_especificos as $obj)
-                                        <?php $var_amp = $amp; ?>
-                                        @if ($loop->first)
-                                            <td>{{ $obj->objetivo_institucional }}</td>
-                                            <td>{{ $obj->gerencia->nombre_gerencia }}</td>
-                                        @endif
-                                    @endforeach
-                                @endif
-                            @endforeach
-                        </tr>
 
-                        {{--  --}}
-                        @if (isset($var_amp))
-                            @foreach ($var_amp->pei_objetivos_especificos as $obj)
-                                @if (!$loop->first)
-                                    <tr>
-                                        <td>{{ $obj->objetivo_institucional }}</td>
-                                        <td>{{ $obj->gerencia->nombre_gerencia }}</td>
-                                    </tr>
-                                @endif
-                            @endforeach
-                            <?php unset($var_amp) ?>
-                        @endif
-
-                        {{-- demas acciones mediano plazo demas resultados --}}
-                        @if (isset($var_r))
-                            @foreach ($var_r->acciones_mediano_plazo as $amp)
-                                @if (!$loop->first)
-                                    <tr>
-                                        <td
-                                        <?php $row_accion_mediano_plazo = 0;
-                                        if ($amp->pei_objetivos_especificos->count() >= 1) { $row_accion_mediano_plazo += $amp->pei_objetivos_especificos->count(); }
-                                        echo  $row_accion_mediano_plazo > 1 ? 'rowspan="'.$row_accion_mediano_plazo.'"' : '';
-                                        ?>
-                                        >{{ $amp->accion_mediano_plazo }}_00</td>
-                                        {{--  --}}
-                                        @foreach ($amp->pei_objetivos_especificos as $obj)
-                                            <?php $var_amp = $amp ?>
-                                            @if ($loop->first)
-                                                <td>{{ $obj->objetivo_institucional }}</td>
-                                                <td>{{ $obj->gerencia->nombre_gerencia }}</td>
-                                            @endif
-                                        @endforeach
-                                    </tr>
-
-                                    {{--  --}}
-                                    @if (isset($var_amp))
-                                        @foreach ($var_amp->pei_objetivos_especificos as $obj)
-                                            @if (!$loop->first)
-                                                <tr>
-                                                    <td>{{ $obj->objetivo_institucional }}</td>
-                                                    <td>{{ $obj->gerencia->nombre_gerencia }}</td>
-                                                </tr>
-                                            @endif
-                                        @endforeach
-                                        <?php unset($var_amp) ?>
-                                    @endif
-
-                                @endif
-                            @endforeach
-                            <?php unset($var_r) ?>
-                        @endif
-
-                    @endif
-                @endforeach
-                <?php unset($var_m) ?>
-            @endif
-
-            @forelse ($p->metas as $m)
-                @if (!$loop->first)
-                    {{-- demas metas --}}
-                    <tr>
-                        <td
-                        <?php $row_meta = 0;
-                        if ($m->resultados->count() >= 1) { $row_meta += $m->resultados->count(); }
-                        foreach ($m->resultados as $r) {
-                            if ($r->acciones_mediano_plazo->count() > 1) {
-                                $row_meta += $r->acciones_mediano_plazo->count() - 1;
-                            }
-                            foreach ($r->acciones_mediano_plazo as $amp) {
-                                if ($amp->pei_objetivos_especificos->count() > 1) {
-                                    $row_meta += $amp->pei_objetivos_especificos->count() - 1;
-                                }
-                            }
-                        }
-                        echo  $row_meta > 1 ? 'rowspan="'.$row_meta.'"' : '';
-                        ?>
-                        >{{ $m->nombre_meta }}</td>
-                        {{-- demas metas primer resultado --}}
-                        @foreach ($m->resultados as $r)
-                            @if ($loop->first)
-                                <?php $var_m = $m; ?>
-                                {{-- primer resultado demas metas --}}
-                                <td
-                                <?php $row_resultado = 0;
-                                if ($r->acciones_mediano_plazo->count() >= 1) { $row_resultado += $r->acciones_mediano_plazo->count(); }
-                                foreach ($r->acciones_mediano_plazo as $amp) {
-                                    if ($amp->pei_objetivos_especificos->count() > 1) {
-                                        $row_resultado += $amp->pei_objetivos_especificos->count() - 1;
-                                    }
-                                }
-                                echo  $row_resultado > 1 ? 'rowspan="'.$row_resultado.'"' : '';
-                                ?>
-                                >{{ $r->nombre_resultado }}+</td>
-
-                                {{-- primer accion mediano plazo  --}}
-                                @foreach ($r->acciones_mediano_plazo as $amp)
-                                    <?php $var_r = $r; ?>
-                                    @if ($loop->first)
-                                        <td
-                                        <?php $row_accion_mediano_plazo = 0;
-                                        if ($amp->pei_objetivos_especificos->count() >= 1) { $row_accion_mediano_plazo += $amp->pei_objetivos_especificos->count(); }
-                                        echo  $row_accion_mediano_plazo > 1 ? 'rowspan="'.$row_accion_mediano_plazo.'"' : '';
-                                        ?>
-                                        >{{ $amp->accion_mediano_plazo }}</td>
-                                        {{--  --}}
-                                        @foreach ($amp->pei_objetivos_especificos as $obj)
-                                            <?php $var_amp = $amp; ?>
-                                            @if ($loop->first)
-                                                <td>{{ $obj->objetivo_institucional }}</td>
-                                                <td>{{ $obj->gerencia->nombre_gerencia }}</td>
-                                            @endif
-                                        @endforeach
-                                    @endif
-                                @endforeach
-                            @endif
-                        @endforeach
-                    </tr>
-
-                    {{--  --}}
-                    @if (isset($var_amp))
-                        @foreach ($var_amp->pei_objetivos_especificos as $obj)
-                            @if (!$loop->first)
-                                <tr>
-                                    <td>{{ $obj->objetivo_institucional }}</td>
-                                    <td>{{ $obj->gerencia->nombre_gerencia }}</td>
-                                </tr>
-                            @endif
-                        @endforeach
-                        <?php unset($var_amp) ?>
-                    @endif
-
-                    {{-- demas acciones mediano primer resultado --}}
-                    @if (isset($var_r))
-                        @foreach ($var_r->acciones_mediano_plazo as $amp)
-                            @if (!$loop->first)
-                            <tr>
-                                <td
-                                <?php $row_accion_mediano_plazo = 0;
-                                if ($amp->pei_objetivos_especificos->count() >= 1) { $row_accion_mediano_plazo += $amp->pei_objetivos_especificos->count(); }
-                                echo  $row_accion_mediano_plazo > 1 ? 'rowspan="'.$row_accion_mediano_plazo.'"' : '';
-                                ?>
-                                >{{ $amp->accion_mediano_plazo }}22</td>
-                                {{--  --}}
-                                @foreach ($amp->pei_objetivos_especificos as $obj)
-                                    <?php $var_amp = $amp; ?>
-                                    @if ($loop->first)
-                                        <td>{{ $obj->objetivo_institucional }}</td>
-                                        <td>{{ $obj->gerencia->nombre_gerencia }}</td>
-                                    @endif
-                                @endforeach
-                            </tr>
-
-                            {{--  --}}
-                            @if (isset($var_amp))
-                                @foreach ($var_amp->pei_objetivos_especificos as $obj)
-                                    @if (!$loop->first)
-                                        <tr>
-                                            <td>{{ $obj->objetivo_institucional }}</td>
-                                            <td>{{ $obj->gerencia->nombre_gerencia }}</td>
-                                        </tr>
-                                    @endif
-                                @endforeach
-                                <?php unset($var_amp) ?>
-                            @endif
-
-                            @endif
-                        @endforeach
-                        <?php unset($var_r) ?>
-                    @endif
-
-                    @if (isset($var_m))
-                        @foreach ($m->resultados as $r)
-                            {{-- demas resultados demas metas --}}
-                            @if (!$loop->first)
-                            <tr>
-                                <td
-                                <?php $row_resultado = 0;
-                                if ($r->acciones_mediano_plazo->count() >= 1) { $row_resultado += $r->acciones_mediano_plazo->count(); }
-                                foreach ($r->acciones_mediano_plazo as $amp) {
-                                    if ($amp->pei_objetivos_especificos->count() > 1) {
-                                        $row_resultado += $amp->pei_objetivos_especificos->count() - 1;
-                                    }
-                                }
-                                echo  $row_resultado > 1 ? 'rowspan="'.$row_resultado.'"' : '';
-                                ?>
-                                >{{ $r->nombre_resultado }}1</td>
-                                {{--  --}}
-                                @foreach ($r->acciones_mediano_plazo as $amp)
-                                    <?php $var_r = $r; ?>
-                                    @if ($loop->first)
-                                        <td
-                                        <?php $row_accion_mediano_plazo = 0;
-                                        if ($amp->pei_objetivos_especificos->count() >= 1) { $row_accion_mediano_plazo += $amp->pei_objetivos_especificos->count(); }
-                                        echo  $row_accion_mediano_plazo > 1 ? 'rowspan="'.$row_accion_mediano_plazo.'"' : '';
-                                        ?>
-                                        >{{ $amp->accion_mediano_plazo }}33</td>
-                                        {{--  --}}
-                                        @foreach ($amp->pei_objetivos_especificos as $obj)
-                                            <?php $var_amp = $amp; ?>
-                                            @if ($loop->first)
-                                                <td>{{ $obj->objetivo_institucional }}</td>
-                                                <td>{{ $obj->gerencia->nombre_gerencia }}</td>
-                                            @endif
-                                        @endforeach
-                                    @endif
-                                @endforeach
-                            </tr>
-
-                            {{--  --}}
-                            @if (isset($var_amp))
-                                @foreach ($var_amp->pei_objetivos_especificos as $obj)
-                                    @if (!$loop->first)
-                                        <tr>
-                                            <td>{{ $obj->objetivo_institucional }}</td>
-                                            <td>{{ $obj->gerencia->nombre_gerencia }}</td>
-                                        </tr>
-                                    @endif
-                                @endforeach
-                                <?php unset($var_amp) ?>
-                            @endif
-
-                            {{--  --}}
-                            @if (isset($var_r))
-                                @foreach ($var_r->acciones_mediano_plazo as $amp)
-                                    @if (!$loop->first)
-                                        <tr>
-                                            <td
-                                            <?php $row_accion_mediano_plazo = 0;
-                                            if ($amp->pei_objetivos_especificos->count() >= 1) { $row_accion_mediano_plazo += $amp->pei_objetivos_especificos->count(); }
-                                            echo  $row_accion_mediano_plazo > 1 ? 'rowspan="'.$row_accion_mediano_plazo.'"' : '';
-                                            ?>
-                                            >{{ $amp->accion_mediano_plazo }}</td>
-                                            {{--  --}}
-                                            @foreach ($amp->pei_objetivos_especificos as $obj)
-                                                <?php $var_amp = $amp; ?>
-                                                @if ($loop->first)
-                                                    <td>{{ $obj->objetivo_institucional }}</td>
-                                                    <td>{{ $obj->gerencia->nombre_gerencia }}</td>
-                                                @endif
-                                            @endforeach
-                                        </tr>
-
-                                        {{--  --}}
-                                        @if (isset($var_amp))
-                                            @foreach ($var_amp->pei_objetivos_especificos as $obj)
-                                                @if (!$loop->first)
-                                                    <tr>
-                                                        <td>{{ $obj->objetivo_institucional }}</td>
-                                                        <td>{{ $obj->gerencia->nombre_gerencia }}</td>
-                                                    </tr>
-                                                @endif
-                                            @endforeach
-                                            <?php unset($var_amp) ?>
-                                        @endif
-
-                                    @endif
-                                @endforeach
-                                <?php unset($var_r) ?>
-                            @endif
-
-                            @endif
-                        @endforeach
-                        <?php unset($var_m) ?>
-                    @endif
-
-                @endif
-            @empty
-            @endforelse
-        @empty
+    @if ($loop->last)
+        <table cellspacing="0" cellpadding="2" border="0.5">
+            <tr style="font-weight:bold;  background-color: #002b80; color:#fff;">
+                <td>GERENCIA</td>
+                <td>TOTAL PPTP. PROGRAMADO</td>
+            </tr>
             <tr>
-                <td colspan="4" style="text-align: center;">No se encontraron resultados.</td>
+                <td>{{ $gerencia->nombre_gerencia }}</td>
+                <td>{{ number_format($total_programado, 2, ".", ",") }} Bs.</td>
             </tr>
-        @endforelse
-    </tbody>
-</table>
+        </table>
+    @endif
+
+@empty
+    <table cellspacing="0" cellpadding="5" border="0.5" style="font-size: 10px;text-align:center;">
+        <tr>
+            <td>No se encontraron resultados.</td>
+        </tr>
+    </table>
+@endforelse 

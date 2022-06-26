@@ -14,7 +14,7 @@ use Elibyy\TCPDF\Facades\TCPDF as PDF;
 class DirectrizPoaController extends Controller
 {
     public function index(){
-        $pilares = Pilares::query()->select('id', 'nombre_pilar')
+        $gestion_pilares = Pilares::select('gestion_pilar')->groupBy('gestion_pilar')->orderBy('gestion_pilar', 'asc')
             // ->addSelect([
             //     'total_metas_pilar' => Metas::selectRaw('COUNT(*)')
             //     ->whereColumn('metas.pilar_id', 'pilares.id')
@@ -31,10 +31,10 @@ class DirectrizPoaController extends Controller
             //     ->whereColumn('metas.pilar_id', 'pilares.id')
             // ])
             ->get();
-        return view('directriz_poa.index', compact('pilares'));
+        return view('directriz_poa.index', compact('gestion_pilares'));
     }
 
-    public function directriz_pdf()
+    public function directriz_pdf(Request $request)
     {
         // $pilares = Pilares::query()->select('id', 'nombre_pilar')
         //     ->addSelect([
@@ -45,18 +45,14 @@ class DirectrizPoaController extends Controller
         //     ])
         //     ->get();
 
-        $last_pilar_year = Pilares::select('gestion_pilar')->orderBy('gestion_pilar', 'desc')->first();
-        if($last_pilar_year){
-            $pilares = Pilares::select('id', 'nombre_pilar', 'uuid', 'gestion_pilar')->where('gestion_pilar', $last_pilar_year->gestion_pilar)->get();
-        } else {
-            $pilares = [];
-        }
+        $pilares = Pilares::where('gestion_pilar', $request->gestion)->orderBy('id', 'asc')->with('metas.resultados.acciones_mediano_plazo.pei_objetivos_especificos')->get();
+
         $view = view('directriz_poa.directriz_pdf', compact('pilares'));
         $html = $view->render();
         PDF::SetTitle('Directriz POA');
         // Custom Header
-        if($last_pilar_year){
-            $gestion = $last_pilar_year->gestion_pilar;
+        if($pilares){
+            $gestion = $request->gestion;
         } else {
             $gestion = 'nulo';
         }

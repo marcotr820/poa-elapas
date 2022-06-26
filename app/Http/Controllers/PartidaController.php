@@ -91,7 +91,7 @@ class PartidaController extends Controller
 
     public function partida_gestion()
     {
-        $gestiones = Pilares::select('gestion_pilar')->orderBy('gestion_pilar', 'asc')->get();
+        $gestiones = Pilares::select('gestion_pilar')->groupBy('gestion_pilar')->orderBy('gestion_pilar', 'asc')->get();
         return view('partidas.reporte_por_gestion', compact('gestiones'));
     }
 }

@@ -11,7 +11,7 @@ class PdfController extends Controller
     public function pdf_partida_grupo(Request $request)
     {
         $gestion = $request->gestion;
-        PDF::SetTitle('Partidas Por Grupo');
+        PDF::SetTitle('Generar Reporte');
         PDF::setHeaderCallback(function($pdf) use ($gestion){
             $image_file = K_PATH_IMAGES.'logo_elapas.png'; //vendor/tecnickcom/examples/images
             $pdf->Image($image_file, 5, 2, 32, '', 'PNG', '', 'T', false, 200, '', false, false, 0, false, false, false);
@@ -20,7 +20,7 @@ class PdfController extends Controller
             $pdf->SetFont('helvetica', 'B', 12);
             // Title
             $pdf->Ln(2); /*ESPACIO ENTRE LINEAS*/
-            $pdf->Cell(0, 7, 'Reporte Grupo Partida', 0, 1, 'C', 0, '', 0, false, 'M', 'M');
+            $pdf->Cell(0, 7, 'Reporte Por Grupo Partida', 0, 1, 'C', 0, '', 0, false, 'M', 'M');
             $pdf->Ln(1); /*ESPACIO ENTRE LINEAS*/
             $pdf->SetFont('helvetica', '', 10);
             $pdf->Ln(1);

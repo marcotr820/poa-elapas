@@ -5,10 +5,12 @@
 @section('contenido')
     <div class="card">
         <div class="bg-light p-2">
-            <div class="d-flex">
-                <label class="font-weight-bold m-0 pr-2">Pilar:</label>
-                <p class="m-0">{{ $pilar->nombre_pilar }}</p>
-            </div>
+            <table class="table table-bordered table-sm m-0">
+                <tr>
+                    <td width="10%" class="font-weight-bold">Pilar</td>
+                    <td>{{ $pilar->nombre_pilar }}</td>
+                </tr>
+            </table>
         </div>
         <h5 class="card-header py-1 d-flex justify-content-between align-items-center">
             Lista de Metas

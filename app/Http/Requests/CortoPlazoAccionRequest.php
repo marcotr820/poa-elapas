@@ -31,8 +31,8 @@ class CortoPlazoAccionRequest extends FormRequest
             'accion_corto_plazo' => 'required',
             'resultado_esperado' => ['required', 'numeric', 'min:0', 'max:100'],
             'presupuesto_programado' => ['required', 'numeric', 'min:0'],
-            'fecha_inicio' => ['required'],
-            'fecha_fin' => ['required']
+            'fecha_inicio' => ['required', "after_or_equal:2023-01-01"],
+            'fecha_fin' => ['required', "before_or_equal:2023-12-31"]
         ];
     }
 }

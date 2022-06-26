@@ -21,7 +21,7 @@ class AdminPoaController extends Controller
     
     public function listar_acciones(Request $request, PeiObjetivosEspecificos $pei){
         if($request->ajax()){
-            $acciones = CortoPlazoAcciones::where('pei_objetivo_especifico_id', $pei->id);
+            $acciones = CortoPlazoAcciones::where('pei_objetivo_especifico_id', $pei->id)->orderBy('id', 'asc');
             return datatables()
                 ->eloquent($acciones)
                 ->toJson();

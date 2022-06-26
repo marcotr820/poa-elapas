@@ -4,18 +4,18 @@
 
 @section('contenido')
     <div class="card">
-        <h5 class="card-header p-2 pb-0">
-            <table class="table table-sm m-0" width="100%">
+        <div class="bg-light p-2">
+            <table class="table table-bordered table-sm m-0">
                 <tr>
-                    <td width="12%"><h6><b>Acción Corto Plazo:</b></h6></td>
-                    <td><h6 class="ml-1">{{$operacion->corto_plazo_accion->accion_corto_plazo}}</h6></td>
+                    <td width="15%" class="font-weight-bold">Acción Corto Plazo</td>
+                    <td>{{$operacion->corto_plazo_accion->accion_corto_plazo}}</td>
                 </tr>
                 <tr>
-                    <td><h6 class="m-0"><b>Operación:</b></h6></td>
-                    <td><h6 class="m-0 ml-1">{{$operacion->nombre_operacion}}</h6></td>
+                    <td width="15%" class="font-weight-bold">Operación</td>
+                    <td>{{$operacion->corto_plazo_accion->accion_corto_plazo}}</td>
                 </tr>
             </table>
-        </h5>
+        </div>
         <h5 class="card-header py-1 d-flex justify-content-between align-items-center">
             Lista de Actividades
             <div>
@@ -80,7 +80,7 @@
                                 <button class="boton blue" data-edit="" onclick="edit('${data}')"><i class="fas fa-pen"></i></button>
                                 <button class="boton red ml-2" data-delete="" onclick="delet('${data}')"><i class="fas fa-times-circle"></i></button>
                                 <button class='boton info ml-3' data-tareas="">Tareas</a>
-                                <button class='boton green ml-2' data-items="">Items</a>
+                                <button class='boton default ml-2' data-items="">Items</a>
                             </div>
                             `;
                         }

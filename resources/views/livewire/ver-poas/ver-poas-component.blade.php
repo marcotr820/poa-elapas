@@ -82,7 +82,7 @@
                                         <td>{{$act->nombre_actividad}}</td>
                                         <td>{{$act->resultado_esperado}}</td>
                                         <td
-                                            width="5%"
+                                            width="10%"
                                             <?php $row_btn = 0;
                                             if ($acp->operaciones->count() >= 1) { $row_btn += $acp->operaciones->count(); }
                                             foreach ($acp->operaciones as $op) {
@@ -93,14 +93,14 @@
                                             echo $row_btn > 1 ?  "rowspan='$row_btn'" : '';
                                             ?>
                                         >
-                                            <a href="{{ route('actividades_accion_corto_plazo', $acp->uuid) }}" class="boton blue" target="_blank">Ver</a>
+                                            <a href="{{ route('actividades_accion_corto_plazo', $acp->uuid) }}" class="boton blue" target="_blank">Ver detalle</a>
                                         </td>
                                     @endif
                                 @empty
                                     <td></td>
                                     <td></td>
                                     <td
-                                    width="5%"
+                                    width="10%"
                                     <?php $row_btn = 0;
                                     if ($acp->operaciones->count() >= 1) { $row_btn += $acp->operaciones->count(); }
                                     foreach ($acp->operaciones as $op) {
@@ -110,7 +110,7 @@
                                     }
                                     echo $row_btn > 1 ?  "rowspan='$row_btn'" : '';
                                     ?>
-                                    ><a href="{{ route('actividades_accion_corto_plazo', $acp->uuid) }}" class="boton blue" target="_blank">Ver</a>
+                                    ><a href="{{ route('actividades_accion_corto_plazo', $acp->uuid) }}" class="boton blue" target="_blank">Ver detalle</a>
                                     </td>
                                 @endforelse
                             @endif

@@ -4,16 +4,14 @@
 
 @section('contenido')
     <div class="card">
-        <h5 class="card-header">
-            <table>
-                <thead>
-                    <tr>
-                        <td><h6 class="m-0"><b>Acción Corto Plazo:</b></h6></td>
-                        <td><h6 class="m-0 pl-1">{{$corto_plazo_accion->accion_corto_plazo}}</h6></td>
-                    </tr>
-                </thead>
+        <div class="bg-light p-2">
+            <table class="table table-bordered table-sm m-0">
+                <tr>
+                    <td width="15%" class="font-weight-bold">Acción Corto Plazo</td>
+                    <td>{{$corto_plazo_accion->accion_corto_plazo}}</td>
+                </tr>
             </table>
-        </h5>
+        </div>
         <h5 class="card-header py-1 d-flex justify-content-between align-items-center">
             Lista de Operaciones
             <div>

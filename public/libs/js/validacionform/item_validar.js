@@ -93,6 +93,7 @@ d.addEventListener('click', (e)=>{
 
    if(e.target.matches('#nuevo') || e.target.matches('#nuevo *'))
    {
+      $('#partida_id').val(null).trigger('change'); //indicamos que el select2 su selected sea null al momento de abrir el modal e insertar un registro
       d.querySelector('.overlay').classList.remove('show');
       d.querySelectorAll('[data-error="textarea"]').forEach((el)=>{ el.classList.remove('is-invalid') });
       d.querySelectorAll('[data-error="input"]').forEach((el)=>{ el.classList.remove('is-invalid') });

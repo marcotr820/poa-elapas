@@ -37,7 +37,7 @@
 					<label for=""><strong>Documento / CI</strong></label>
 						<div class="input-group mb-2">
 							<!--preguntamos si hay algun error en el capo con name usuario si hay imprime is-invalid-->
-							<input type="number" name="usuario" class="form-control {{$errors->has('usuario') ? 'is-invalid' : ''}}" value="{{old('usuario')}}" placeholder="Usuario..." autocomplete="off" required>
+							<input type="number" name="usuario" class="form-control {{$errors->has('usuario') ? 'is-invalid' : ''}}" value="{{old('usuario')}}" placeholder="Documento..." autocomplete="off" required>
 						</div>
 						<span class="text-danger">@error('usuario') {{ $message }} @enderror</span>
 					</div>

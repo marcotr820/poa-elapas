@@ -49,10 +49,12 @@
 			<div id="loader-wrapper">
 				<div id="loader">
 					<div class="loader-ellips">
+                        {{-- <i class="fas fa-3x fa-cog fa-spin text-light"></i> --}}
+                        <i class="fas fa-2x fa-circle-notch fa-spin text-light"></i>
+					  {{-- <span class="loader-ellips__dot"></span>
 					  <span class="loader-ellips__dot"></span>
 					  <span class="loader-ellips__dot"></span>
-					  <span class="loader-ellips__dot"></span>
-					  <span class="loader-ellips__dot"></span>
+					  <span class="loader-ellips__dot"></span> --}}
 					</div>
 				</div>
 			</div>
@@ -111,7 +113,7 @@
                             <ul class="submenu">
                                 <li><a href="{{route('pilares.index')}}" class="pl-4"></i><span class="pl-2">Pilares</span></a></li>
                                 <li><a href="{{route('partidas.index')}}" class="pl-4"></i><span class="pl-2">Partidas</span></a></li>
-                                <li><a href="{{route('directriz_pdf')}}" class="pl-4" target="_blank"></i><span class="pl-2">Reporte Directriz</span></a></li>
+                                <li><a href="{{route('directriz.index')}}" class="pl-4" target="_blank"></i><span class="pl-2">Reporte Directriz</span></a></li>
                             </ul>
                         </li>
                     @endcan

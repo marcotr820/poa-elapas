@@ -4,12 +4,12 @@
       font-size: 7px;
     }
     th, td{
-      border:.5px solid #8c8c8c;
+      border:.5px solid #000;
     } 
 </style>
 <table width="100%" style="padding: 5px;">
    <thead>
-      <tr style="background-color: skyblue;">
+      <tr style="background-color: #ddd;">
          <th><strong>ACCION CORTO PLAZO</strong></th>
          <th><strong>PRESUPUESTO REQUERIDO</strong></th>
          <th><strong>TRABAJADOR</strong></th>

@@ -5,22 +5,24 @@
 @section('contenido')
     <div class="card">
         <div class="bg-light p-2">
-            <div class="d-flex">
-                <label class="font-weight-bold pr-2">Pilar:</label>
-                <p class="m-0">{{$mediano_plazo_accion->resultado->meta->pilar->nombre_pilar}}</p>
-            </div>
-            <div class="d-flex">
-                <label class="font-weight-bold pr-2">Meta:</label>
-                <p class="m-0">{{$mediano_plazo_accion->resultado->meta->nombre_meta}}</p>
-            </div>
-            <div class="d-flex">
-                <label class="font-weight-bold pr-2">Resultado:</label>
-                <p class="m-0">{{$mediano_plazo_accion->resultado->nombre_resultado}}</p>
-            </div>
-            <div class="d-flex">
-                <label class="font-weight-bold m-0 pr-2">Acción Mediano Plazo:</label>
-                <p class="m-0">{{$mediano_plazo_accion->accion_mediano_plazo}}</p>
-            </div>
+            <table class="table table-bordered table-sm m-0">
+                <tr>
+                    <td width="15%" class="font-weight-bold">Pilar</td>
+                    <td>{{$mediano_plazo_accion->resultado->meta->pilar->nombre_pilar}}</td>
+                </tr>
+                <tr>
+                    <td width="15%" class="font-weight-bold">Meta</td>
+                    <td>{{$mediano_plazo_accion->resultado->meta->nombre_meta}}</td>
+                </tr>
+                <tr>
+                    <td width="15%" class="font-weight-bold">Resultado</td>
+                    <td>{{$mediano_plazo_accion->resultado->nombre_resultado}}</td>
+                </tr>
+                <tr>
+                    <td width="15%" class="font-weight-bold">Acción Mediano Plazo</td>
+                    <td>{{$mediano_plazo_accion->accion_mediano_plazo}}</td>
+                </tr>
+            </table>
         </div>
         <h5 class="card-header py-1 d-flex justify-content-between align-items-center">
             Lista PEI Objetivos Institucional Especificos

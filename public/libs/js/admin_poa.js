@@ -1,4 +1,5 @@
 const d = document;
+$('.js-example-basic-single').select2();
 function update(accion_uuid){
     d.getElementById('form').onsubmit = function (e){
         e.preventDefault();
