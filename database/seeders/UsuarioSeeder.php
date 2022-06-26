@@ -17,26 +17,37 @@ class UsuarioSeeder extends Seeder
      */
     public function run()
     {
+        // administrador
         Usuario::create([
             'usuario' => '10381494',
             'password' => Hash::make('123'),
             'trabajador_id' => '1',
             'remember_token' => Str::random(10)
-        ])->assignRole('Admin');
+        ])->assignRole('ADMIN');
 
+        // planificador
         Usuario::create([
-            'usuario' => '456',
+            'usuario' => '1081273',
             'password' => Hash::make('123'),
             'trabajador_id' => '2',
             'remember_token' => Str::random(10)
-        ])->assignRole('Planificador');
+        ])->assignRole('PLANIFICADOR');
 
+        // trabajador
         Usuario::create([
-            'usuario' => '789',
+            'usuario' => '46428060',
             'password' => Hash::make('123'),
             'trabajador_id' => '3',
             'remember_token' => Str::random(10)
-        ])->assignRole('Trabajador');
+        ])->assignRole('TRABAJADOR');
+
+        // GERENTE
+        Usuario::create([
+            'usuario' => '12319351',
+            'password' => Hash::make('123'),
+            'trabajador_id' => '4',
+            'remember_token' => Str::random(10)
+        ])->assignRole('GERENTE');
 
         //despues de crear nuestro usuarios por defecto llamamos al factory para que se ejecute
         // Usuario::factory(1)->create();

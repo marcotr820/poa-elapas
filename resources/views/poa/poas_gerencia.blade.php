@@ -20,9 +20,9 @@
         <div class="card-body">
             <form>
                 <div class="form-group">
-                    <label for="">Gerencia <span class="text-danger">*</span></label>
+                    <label><b>Gerencia</b> <span class="text-danger">*</span></label>
                     <select class="form-control" id="gerencia" name="gerencia">
-                        <option value="" disabled selected>Seleccione</option>
+                        <option value="" disabled selected>__Seleccione__</option>
                         @foreach ($gerencias as $g)
                             <option value="{{ $g->uuid }}">{{ $g->nombre_gerencia }}</option>
                         @endforeach

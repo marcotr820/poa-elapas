@@ -14,7 +14,8 @@ class UnidadController extends Controller
         if($request->ajax())
         {
             $query = Unidades::join("gerencias", "gerencias.id", "=", "unidades.gerencia_id")
-                ->select("unidades.id", "unidades.nombre_unidad", "unidades.gerencia_id", "unidades.uuid", "gerencias.nombre_gerencia");
+                ->select("unidades.id", "unidades.nombre_unidad", "unidades.gerencia_id", "unidades.uuid", "gerencias.nombre_gerencia")
+                ->orderBy('id', 'asc');
             return datatables($query)->make(true);
             // return datatables()
             //     ->eloquent($unidades)

@@ -1,12 +1,12 @@
 <style>
     table{
         border-collapse: collapse;
-        font-size: 7px;
+        font-size: 6px;
         text-align: center;
     }
     th, td{
         /* border:.5px solid #a6a6a6; */
-        border:.5px solid #8c8c8c;
+        border:.5px solid #000;
     } 
 </style>
 {{-- <table width="50%">
@@ -38,7 +38,7 @@
 <p>****************************************</p> --}}
 <table id="" width="100%" style="padding: 5px;">
     <thead>
-        <tr style="background-color: skyblue;">
+        <tr style="background-color: #ddd;font-weight: bold;">
             <th>ACCION CORTO PLAZO</th>
             <th>OPERACIONES</th>
             <th>ACTIVIDADES</th>

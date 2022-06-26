@@ -15,13 +15,13 @@ class PilarSeeder extends Seeder
     public function run()
     {
         Pilares::create([
-            'nombre_pilar' => 'UNIVERSALIZACION DE LOS SERVICIOS BASICOS',
-            'gestion_pilar' => '2023'
-        ]);
-
-        Pilares::create([
-            'nombre_pilar' => 'PILAR PRUEBA 2022',
+            'nombre_pilar' => 'UNIVERSALIZACION DE LOS SERVICIOS BASICOS 2022',
             'gestion_pilar' => '2022'
         ]);
+
+        // Pilares::create([
+        //     'nombre_pilar' => 'UNIVERSALIZACION DE LOS SERVICIOS BASICOS',
+        //     'gestion_pilar' => '2023'
+        // ]);
     }
 }

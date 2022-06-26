@@ -17,7 +17,7 @@ class RoleController extends Controller
 
         if($request->ajax())
         {
-            $query = Role::select('id', 'name');
+            $query = Role::select('id', 'name')->orderBy('id', 'asc');
             return datatables($query)->make(true);
             // return datatables()
             //     ->eloquent($roles)

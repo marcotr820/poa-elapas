@@ -14,60 +14,132 @@ class TareaEspecificaSeeder extends Seeder
      */
     public function run()
     {
-        $tareas_act1 = [
-            'COTIZAR'
+        // PILAR 2022
+        $TAR_ACT1 = [
+            'REALIZAR COTIZACIONES',
+            'CONTRATACIÓN DE MEDIOS DE COMUNICACIÓN',
+            'PUBLICIDAD EN PRENSA ESCRITA'
         ];
-        foreach($tareas_act1 as $tar){
+        foreach($TAR_ACT1 as $tar){
             TareasEspecificas::create([
                 'nombre_tarea' => $tar,
                 'actividad_id' => '1'
             ]);
         }
 
-        $tareas_act2 = [
-            'LLENAR FORMULARIOS DE ADQUISICION DE MATERIAL',
-            'HACER FIRMAR LOS FORMULARIOS',
-            'REALIZAR CERTIFICACION PRESUPUESTARIA',
-            'ENTREGAR CERTIFICACIONES A ADQUISICIONES'
+        $TAR_ACT2 = [
+            'REALIZAR TRIPTICOS',
+            'ELABORACIÓN DE AFICHES',
+            'MEJORAMIENTO DEL COMPONENTE SOCIAL DE LA EMPRESA CON LOS USUARIOS'
         ];
-        foreach($tareas_act2 as $tar){
+        foreach($TAR_ACT2 as $tar){
             TareasEspecificas::create([
                 'nombre_tarea' => $tar,
                 'actividad_id' => '2'
             ]);
         }
 
-        $tareas_act3 = [
-            'REALIZAR INFORME DE RECEPCION'
+        $TAR_ACT3 = [
+            'PROGRAMAR CORTES',
+            'RECEPCIONAR TRAMITES',
+            'ELABORACIÓN DE PROCEDIMIENTOS'
         ];
-        foreach($tareas_act3 as $tar){
+        foreach($TAR_ACT3 as $tar){
             TareasEspecificas::create([
                 'nombre_tarea' => $tar,
                 'actividad_id' => '3'
             ]);
         }
 
-        $tareas_act4 = [
-            'CONFIGURAR SERVIDOR'
+        $TAR_ACT4 = [
+            'COMPRAR ACCESORIOS NECESARIOS',
+            'RECEPCIÓ Y EVALUACIÓN DE DOCUMENTOS'
         ];
-        foreach($tareas_act4 as $tar){
+        foreach($TAR_ACT4 as $tar){
             TareasEspecificas::create([
                 'nombre_tarea' => $tar,
                 'actividad_id' => '4'
             ]);
         }
-
-        $tareas_act5 = [
-            'COTIZAR SERVIDOR',
-            'INICIAR PROCESO DE ADQUISICION',
-            'CONTRATAR SERVICIO'
+        
+        $TAR_ACT5 = [
+            'ALQUILAR EQUIPOS',
+            'MANTENIMIENTO Y REPARACIÓN DE VEHIVULOS, MAQUINARIA Y EQUIPOS'
         ];
-        foreach($tareas_act5 as $tar){
+        foreach($TAR_ACT5 as $tar){
             TareasEspecificas::create([
                 'nombre_tarea' => $tar,
                 'actividad_id' => '5'
             ]);
         }
+
+        $TAR_ACT6 = [
+            'COMPRA DE COMBUSTIBLES LUBRICANTES Y DERIVADOS PARA CONSUMO',
+            'COMPRA DE UTILES Y MATERIALES ELÉCTRONICOS'
+        ];
+        foreach($TAR_ACT6 as $tar){
+            TareasEspecificas::create([
+                'nombre_tarea' => $tar,
+                'actividad_id' => '6'
+            ]);
+        }
+
+
+        // PILAR 2023
+        // $tareas_act1 = [
+        //     'COTIZAR'
+        // ];
+        // foreach($tareas_act1 as $tar){
+        //     TareasEspecificas::create([
+        //         'nombre_tarea' => $tar,
+        //         'actividad_id' => '1'
+        //     ]);
+        // }
+
+        // $tareas_act2 = [
+        //     'LLENAR FORMULARIOS DE ADQUISICION DE MATERIAL',
+        //     'HACER FIRMAR LOS FORMULARIOS',
+        //     'REALIZAR CERTIFICACION PRESUPUESTARIA',
+        //     'ENTREGAR CERTIFICACIONES A ADQUISICIONES'
+        // ];
+        // foreach($tareas_act2 as $tar){
+        //     TareasEspecificas::create([
+        //         'nombre_tarea' => $tar,
+        //         'actividad_id' => '2'
+        //     ]);
+        // }
+
+        // $tareas_act3 = [
+        //     'REALIZAR INFORME DE RECEPCION'
+        // ];
+        // foreach($tareas_act3 as $tar){
+        //     TareasEspecificas::create([
+        //         'nombre_tarea' => $tar,
+        //         'actividad_id' => '3'
+        //     ]);
+        // }
+
+        // $tareas_act4 = [
+        //     'CONFIGURAR SERVIDOR'
+        // ];
+        // foreach($tareas_act4 as $tar){
+        //     TareasEspecificas::create([
+        //         'nombre_tarea' => $tar,
+        //         'actividad_id' => '4'
+        //     ]);
+        // }
+
+        // $tareas_act5 = [
+        //     'COTIZAR SERVIDOR',
+        //     'INICIAR PROCESO DE ADQUISICION',
+        //     'CONTRATAR SERVICIO'
+        // ];
+        // foreach($tareas_act5 as $tar){
+        //     TareasEspecificas::create([
+        //         'nombre_tarea' => $tar,
+        //         'actividad_id' => '5'
+        //     ]);
+        // }
 
         // TareasEspecificas::factory(7)->create();
     }

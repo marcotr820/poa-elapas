@@ -1,9 +1,9 @@
 <style>
    table th, td{
-      border: 0.5px solid #8c8c8c;
+      border: 0.5px solid #000;
    }
    table{
-      font-size: 7px;
+      font-size: 6px;
       border-collapse: collapse;
       text-align:center;
    }
@@ -11,7 +11,7 @@
 
 <table id="operaciones_tareas" width="100%" style="padding: 4px;">
     <thead>
-        <tr style="background-color: skyblue">
+        <tr style="background-color: #ddd; font-weight:bold;">
             <th>ACCION CORTO PLAZO</th>
             <th>RESULTADO ESPERADO GESTION</th>
             <th>OPERACIONES</th>

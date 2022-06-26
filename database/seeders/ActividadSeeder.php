@@ -14,12 +14,12 @@ class ActividadSeeder extends Seeder
      */
     public function run()
     {
-        $actividades_op1 = [
-            'COTIZACION',
-            'INICIAR PROCESOS DE ADQUISICION',
-            'COMPRA DE LOS DISCOS DUROS'
+        // PILAR 2022
+        $ACT_OP1 = [
+            'CONTRATACIÓN DE EMPRESA CONSULTORA',
+            'REUNIONES DE COODICACIÓN DE PROYECTOS'
         ];
-        foreach($actividades_op1 as $act){
+        foreach($ACT_OP1 as $act){
             Actividades::create([
                 'nombre_actividad' => $act,
                 'resultado_esperado' => rand(10,90),
@@ -27,10 +27,11 @@ class ActividadSeeder extends Seeder
             ]);
         }
 
-        $actividades_op2 = [
-            'CONFIGURACION DE SERVIDOR COMO RAID 5'
+        $ACT_OP2 = [
+            'IMPLEMENTACION DE TECNICAS PARA MEJORAR EL SISTEMA DE LECTURAS',
+            'REALIZAR PROGRAMACIÓN DE CORTES Y RECONEXIONES'
         ];
-        foreach($actividades_op2 as $act){
+        foreach($ACT_OP2 as $act){
             Actividades::create([
                 'nombre_actividad' => $act,
                 'resultado_esperado' => rand(10,90),
@@ -38,16 +39,66 @@ class ActividadSeeder extends Seeder
             ]);
         }
 
-        $actividades_op3 = [
-            'ADQUIRIR SERVICIOS'
+        $ACT_OP3 = [
+            'ELABORACIÓN DE INFORMES DE EVALUACIÓN DE LA EMPRESA',
+            'COORDINACION DE LOS PROCESOS DE GESTIÓN'
         ];
-        foreach($actividades_op3 as $act){
+        foreach($ACT_OP3 as $act){
             Actividades::create([
                 'nombre_actividad' => $act,
                 'resultado_esperado' => rand(10,90),
                 'operacion_id' => '3'
             ]);
         }
+
+        $ACT_OP4 = [
+            'RECEPCION DE TRAMITES DE INSTALACIONES NUEVAS',
+            'INFORMACIÓN DE OTROS SERVICIOS Y TRAMITES'
+        ];
+        foreach($ACT_OP4 as $act){
+            Actividades::create([
+                'nombre_actividad' => $act,
+                'resultado_esperado' => rand(10,90),
+                'operacion_id' => '4'
+            ]);
+        }
+
+
+        // PILAR 2023
+        // $actividades_op1 = [
+        //     'COTIZACION',
+        //     'INICIAR PROCESOS DE ADQUISICION',
+        //     'COMPRA DE LOS DISCOS DUROS'
+        // ];
+        // foreach($actividades_op1 as $act){
+        //     Actividades::create([
+        //         'nombre_actividad' => $act,
+        //         'resultado_esperado' => rand(10,90),
+        //         'operacion_id' => '1'
+        //     ]);
+        // }
+
+        // $actividades_op2 = [
+        //     'CONFIGURACION DE SERVIDOR COMO RAID 5'
+        // ];
+        // foreach($actividades_op2 as $act){
+        //     Actividades::create([
+        //         'nombre_actividad' => $act,
+        //         'resultado_esperado' => rand(10,90),
+        //         'operacion_id' => '2'
+        //     ]);
+        // }
+
+        // $actividades_op3 = [
+        //     'ADQUIRIR SERVICIOS'
+        // ];
+        // foreach($actividades_op3 as $act){
+        //     Actividades::create([
+        //         'nombre_actividad' => $act,
+        //         'resultado_esperado' => rand(10,90),
+        //         'operacion_id' => '3'
+        //     ]);
+        // }
 
         // Actividades::factory(6)->create();
     }

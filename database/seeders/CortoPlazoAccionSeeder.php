@@ -15,26 +15,46 @@ class CortoPlazoAccionSeeder extends Seeder
      */
     public function run()
     {
-        $cpas = [
-            'RESGUARDAR LA INFORMACIÓN EMPRESARIAL',
-            'RESGUARDAR LA INFRAESTUCTURA TECNOLOGICA DE ATAQUES CIBERNETICOS',
-            'BRINDAR DE SERVICIO DE INTERNET',
-            'MANTENIMIENTO DE LOS SISTEMAS DE ELAPAS'
+        // PILAR 2022
+        $cpa2022 = [
+            'IMPLEMENTACIÓN DE MEDIDAS COMPLEMENTARIAS',
+            'SEGUIMIENTO A LOS DESEMBOLOS DE CONTRAPARTES LOCALES COMPROMETIDAS CON LA CIF, DEL GAMS / GADCH.'
         ];
-        
-        foreach ($cpas as $value) {
+        foreach ($cpa2022 as $val) {
             CortoPlazoAcciones::create([
-                'gestion' => '2023',
-                'accion_corto_plazo' => Str::upper($value),
+                'gestion' => '2022',
+                'accion_corto_plazo' => Str::upper($val),
                 'resultado_esperado' => 25,
-                'presupuesto_programado' => rand(5000, 10000),
-                'fecha_inicio' => date('2023-02-03'),
-                'fecha_fin' => date('2023-07-03'),
+                'presupuesto_programado' => 250000,
+                'fecha_inicio' => date('2022-02-03'),
+                'fecha_fin' => date('2022-07-03'),
+                'status' => 'aprobado',
                 'trabajador_id' => '3',
                 'pei_objetivo_especifico_id' => '1'
             ]);
         }
 
-        CortoPlazoAcciones::factory(20)->create();
+        // PILAR 2023
+        // $cpas = [
+        //     'RESGUARDAR LA INFORMACIÓN EMPRESARIAL',
+        //     'RESGUARDAR LA INFRAESTUCTURA TECNOLOGICA DE ATAQUES CIBERNETICOS',
+        //     'BRINDAR DE SERVICIO DE INTERNET',
+        //     'MANTENIMIENTO DE LOS SISTEMAS DE ELAPAS'
+        // ];
+        
+        // foreach ($cpas as $value) {
+        //     CortoPlazoAcciones::create([
+        //         'gestion' => '2023',
+        //         'accion_corto_plazo' => Str::upper($value),
+        //         'resultado_esperado' => 25,
+        //         'presupuesto_programado' => rand(50000, 100000),
+        //         'fecha_inicio' => date('2023-02-03'),
+        //         'fecha_fin' => date('2023-07-03'),
+        //         'trabajador_id' => '3',
+        //         'pei_objetivo_especifico_id' => '1'
+        //     ]);
+        // }
+
+        // CortoPlazoAcciones::factory(20)->create();
     }
 }

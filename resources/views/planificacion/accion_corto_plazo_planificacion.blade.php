@@ -9,7 +9,7 @@
         }
     </style>
     <div class="card">
-        <h5 class="card-header">Lista Acciones Corto Plazo Planificar</h5>
+        <h5 class="card-header">Planificar Acciones Corto Plazo</h5>
         <div class="card-body">
             <table class="table table-striped" id="table">
                 <thead class="" style="background-color: skyblue">

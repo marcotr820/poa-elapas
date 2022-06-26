@@ -35,7 +35,10 @@ class ConsolidarPOAController extends Controller
         $gerencia = Gerencias::where('uuid', $request->gerencia)->firstOrFail();
         $gestion = $request->gestion;
 
-        $mediano_plazo_acciones = MedianoPlazoAcciones::select('mediano_plazo_acciones.*')->with(['pei_objetivos_especificos' => function($q) use ($gerencia){
+        // wherehas solo devolvera las acciones mediano plazo que contengan la condicion dada
+        $mediano_plazo_acciones = MedianoPlazoAcciones::select('mediano_plazo_acciones.*')->whereHas('pei_objetivos_especificos', function($q) use ($gerencia){
+            $q->where('gerencia_id', $gerencia->id);
+        })->with(['pei_objetivos_especificos' => function($q) use ($gerencia){
             // 'corto_plazo_acciones.operaciones.actividades.tareas_especificas'
             $q->where('gerencia_id', $gerencia->id)->with(['corto_plazo_acciones' => function($query){
                 $query->where('status', 'aprobado')->Orwhere('status', 'monitoreo');
@@ -46,8 +49,22 @@ class ConsolidarPOAController extends Controller
         ->join('pilares', 'pilares.id', '=', 'metas.pilar_id')
         ->where('pilares.gestion_pilar', $request->gestion)
         ->orderBy('id', 'asc')
-        // ->limit(2)
         ->get();
+
+        // return $mediano_plazo_acciones = MedianoPlazoAcciones::select('mediano_plazo_acciones.*')->with(['pei_objetivos_especificos' => function($q) use ($gerencia){
+        //     // 'corto_plazo_acciones.operaciones.actividades.tareas_especificas'
+        //     $q->where('gerencia_id', $gerencia->id)->with(['corto_plazo_acciones' => function($query){
+        //         $query->where('status', 'aprobado')->Orwhere('status', 'monitoreo');
+        //     }])->orderBy('id', 'asc');
+        // }])
+        // ->join('resultados', 'resultados.id', '=', 'mediano_plazo_acciones.resultado_id')
+        // ->join('metas', 'metas.id', '=', 'resultados.meta_id')
+        // ->join('pilares', 'pilares.id', '=', 'metas.pilar_id')
+        // ->where('pilares.gestion_pilar', $request->gestion)
+        // ->orderBy('id', 'asc')
+        // // ->limit(2)
+        // ->get();
+
         // return view('consolidar.pdf_consolidar', compact('pilares'));
         $view = view('consolidar.pdf_consolidar', compact('mediano_plazo_acciones', 'gestion', 'gerencia'));
 

@@ -49,8 +49,10 @@
 			<div id="loader-wrapper">
 				<div id="loader">
 					<div class="loader-ellips">
-                        {{-- <i class="fas fa-3x fa-cog fa-spin text-light"></i> --}}
-                        <i class="fas fa-2x fa-circle-notch fa-spin text-light"></i>
+                        {{-- <i class="fas fa-2x fa-circle-notch fa-spin text-light"></i> --}}
+                        <div class="spinner-border text-light" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
 					  {{-- <span class="loader-ellips__dot"></span>
 					  <span class="loader-ellips__dot"></span>
 					  <span class="loader-ellips__dot"></span>
@@ -140,7 +142,7 @@
 
                     <li class="bloque">
                         <a href="{{route('consolidar.poa.index')}}" class="titulo">
-                            <i class="far fa-calendar-check"></i>
+                            <i class="far fa-star"></i>
                             <span class="pl-2">Consolidar POA</span>
                         </a>
                     </li>

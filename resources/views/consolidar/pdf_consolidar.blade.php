@@ -100,7 +100,7 @@
                                 echo $row_cpa > 1 ? 'rowspan="'.$row_cpa.'"' : '';
                                 ?>
                                 >{{ $cpa->accion_corto_plazo }}</td>
-                                <td <?php echo $row_cpa > 1 ? 'rowspan="'.$row_cpa.'"' : ''; ?> >{{ $cpa->presupuesto_programado }}</td>
+                                <td <?php echo $row_cpa > 1 ? 'rowspan="'.$row_cpa.'"' : ''; ?> >{{ number_format($cpa->presupuesto_programado, 2, ".", ",") }} Bs.</td>
                                 <td <?php echo $row_cpa > 1 ? 'rowspan="'.$row_cpa.'"' : ''; ?> >{{ $cpa->fecha_inicio }}</td>
                                 <td <?php echo $row_cpa > 1 ? 'rowspan="'.$row_cpa.'"' : ''; ?> >{{ $cpa->fecha_fin }}</td>
                                 {{-- primera operacion --}}
@@ -448,7 +448,7 @@
                                     echo $row_cpa > 1 ? 'rowspan="'.$row_cpa.'"' : '';
                                     ?>
                                     >{{ $cpa->accion_corto_plazo }}</td>
-                                    <td <?php echo $row_cpa > 1 ? 'rowspan="'.$row_cpa.'"' : ''; ?> >{{ $cpa->presupuesto_programado }}</td>
+                                    <td <?php echo $row_cpa > 1 ? 'rowspan="'.$row_cpa.'"' : ''; ?> >{{ number_format($cpa->presupuesto_programado, 2, ".", ",") }} Bs.</td>
                                     <td <?php echo $row_cpa > 1 ? 'rowspan="'.$row_cpa.'"' : ''; ?> >{{ $cpa->fecha_inicio }}</td>
                                     <td <?php echo $row_cpa > 1 ? 'rowspan="'.$row_cpa.'"' : ''; ?> >{{ $cpa->fecha_fin }}</td>
                                     {{-- primera operacion demas acciones corto plazo --}}

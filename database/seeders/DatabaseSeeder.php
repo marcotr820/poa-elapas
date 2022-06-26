@@ -49,18 +49,18 @@ class DatabaseSeeder extends Seeder
         $this->call(UsuarioSeeder::class);
         $this->call(PartidaSeeder::class);
 
-        // $this->call(PilarSeeder::class);
-        // $this->call(MetaSeeder::class);
-        // $this->call(ResultadoSeeder::class);
-        // $this->call(MedianoPlazoAccionSeeder::class);
-        // $this->call(PeiObjetivoInstitucionalSeeder::class);
+        $this->call(PilarSeeder::class);
+        $this->call(MetaSeeder::class);
+        $this->call(ResultadoSeeder::class);
+        $this->call(MedianoPlazoAccionSeeder::class);
+        $this->call(PeiObjetivoInstitucionalSeeder::class);
 
-        // $this->call(CortoPlazoAccionSeeder::class);
-        // $this->call(OperacionSeeder::class);
-        // $this->call(ActividadSeeder::class);
+        $this->call(CortoPlazoAccionSeeder::class);
+        $this->call(OperacionSeeder::class);
+        $this->call(ActividadSeeder::class);
         
-        // $this->call(TareaEspecificaSeeder::class);
-        // $this->call(ItemSeeder::class);
+        $this->call(TareaEspecificaSeeder::class);
+        $this->call(ItemSeeder::class);
 
         // Planificaciones::factory(1)->create(); //para el metodo numberBetween debe crearse menos del 50% del los registros del padre 
         // Evaluaciones::factory(2)->create();

@@ -29,7 +29,7 @@
             {{-- verificamos que estamos dentro de las fechas que tenemos que evaluarnos para mostrar el boton de evaluar --}}
             
             @if (!$corto_plazo_accion->planificacion()->exists())
-                <div class="alert m-0 py-1 px-2 bg-danger text-white" role="alert">
+                <div class="alert alert-danger border-danger m-0" role="alert">
                     Por favor Registre su Planificación.
                 </div>
             @endif

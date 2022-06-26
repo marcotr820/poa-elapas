@@ -56,7 +56,7 @@ d.addEventListener('change', (e) => {
                 "drawCallback": function(){
                     var api = this.api();
                     var json = api.ajax.json();
-                    $( api.column(0).footer() ).html('<h5><b>Total Programado:</b> ' + json.total_programado + ' Bs.</h5>');
+                    $( api.column(0).footer() ).html('<h5><b>Total Ppto. Programado:</b> ' + json.total_programado + ' Bs.</h5>');
                 },
                 "language": {
                     "url": URL

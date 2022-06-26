@@ -22,7 +22,7 @@
 			</div>
 			
 			@if (session()->has('error_login'))
-				<div class="alert alert-danger alert-dismissible fade show m-0" role="alert">
+				<div class="alert alert-danger alert-dismissible fade show border border-danger m-0" role="alert">
 					<strong>{!!session('error_login')!!}</strong>
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
