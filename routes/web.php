@@ -126,6 +126,9 @@ Route::group(['middleware' => ['auth:usuario']], function(){
     Route::resource('/partidas', PartidaController::class)->only('index', 'store', 'update', 'destroy');
     Route::get('/partidas_gestion', [PartidaController::class, 'partida_gestion'])->name('partidas.gestion');
     Route::get('/pdf_partidas_grupo', [PdfController::class, 'pdf_partida_grupo'])->name('pdf_partidas_grupo');
+    Route::get('/pdf_sub_grupos_partidas', [PdfController::class, 'pdf_sub_grupos_partidas'])->name('pdf_sub_grupos_partidas');
+    Route::get('/pdf_gerencia_grupo_partidas', [PdfController::class, 'pdf_gerencia_grupo_partidas'])->name('pdf_gerencia_grupo_partidas');
+    Route::get('/pdf_gerencia_subgrupo_partidas', [PdfController::class, 'pdf_gerencia_subgrupo_partidas'])->name('pdf_gerencia_subgrupo_partidas');
 
     //*************************************** Creacion VER POAS ***********************************
     Route::get('poa', [PoaController::class, 'index'])->name('poa.index');

@@ -39,7 +39,7 @@ class OperacionSeeder extends Seeder
 
         // PILAR 2023
         // $operaciones_acc1 = [
-        //     'ADQUISICION DE DISCOS DUROS PARA SERVIOR',
+        //     'ADQUISICION DE DISCOS DUROS PARA SERVIDOR',
         //     'CONFIGURACION DEL SERVIDOR CON EL FIN DE SACAR REPALDOS',
         //     'CONTRATACION DE SERVICIOS DE BACKUP EN LA NUBE'
         // ];

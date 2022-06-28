@@ -27,7 +27,7 @@ class CortoPlazoAccionSeeder extends Seeder
                 'resultado_esperado' => 25,
                 'presupuesto_programado' => 250000,
                 'fecha_inicio' => date('2022-02-03'),
-                'fecha_fin' => date('2022-07-03'),
+                'fecha_fin' => date('2022-08-03'),
                 'status' => 'aprobado',
                 'trabajador_id' => '3',
                 'pei_objetivo_especifico_id' => '1'

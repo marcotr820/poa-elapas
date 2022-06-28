@@ -15,10 +15,10 @@
                     <div class="col-xs-2">
                         <label>Seleccione la Gestión.</label>
                         <select class="form-control" name="gestion" id="" required>
-                          <option value="">__ Seleccione __</option>
-                          @foreach ($gestion_pilares as $g)
-                              <option value="{{ $g->gestion_pilar }}">{{ $g->gestion_pilar }}</option>
-                          @endforeach
+                            <option value="">__ Seleccione __</option>
+                            @foreach ($gestion_pilares as $g)
+                                <option value="{{ $g->gestion_pilar }}">{{ $g->gestion_pilar }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>

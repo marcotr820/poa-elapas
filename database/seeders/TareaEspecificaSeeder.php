@@ -84,6 +84,28 @@ class TareaEspecificaSeeder extends Seeder
             ]);
         }
 
+        $TAR_ACT7 = [
+            'MANTENIMIENTO Y REPARACIÓN DE INMUEBLES.',
+            'OTROS GASTOS DE MANTENIMIENTO Y REPARACIÓN EN CANAL DE ADUCCIÓN.'
+        ];
+        foreach($TAR_ACT7 as $tar){
+            TareasEspecificas::create([
+                'nombre_tarea' => $tar,
+                'actividad_id' => '7'
+            ]);
+        }
+
+        $TAR_ACT8 = [
+            'GASTOS DESTINADOS AL PAGO DE REFRIGERIOS AL PERSONAL DE LAS INSTITUCIONES PUBLICAS.',
+            'OTRAS CONSTRUCCIONES Y MEJORAS DE BIENES PUBLICOS DE DOMINIO PRIVADO.'
+        ];
+        foreach($TAR_ACT8 as $tar){
+            TareasEspecificas::create([
+                'nombre_tarea' => $tar,
+                'actividad_id' => '8'
+            ]);
+        }
+
 
         // PILAR 2023
         // $tareas_act1 = [

@@ -37,6 +37,7 @@
                     <th rowspan="2">Objetivo Institucional Específico</th>
                     <th rowspan="2">Accion corto plazo Gestion {{ $gestion }}</th>
                     <th rowspan="2">Presupuesto Programado Gestion {{ $gestion }}</th>
+                    <th rowspan="2">Unidad Responsable</th>
                     <th rowspan="2">fecha prevista de inicio</th>
                     <th rowspan="2">fecha prevista de finalización</th>
                     {{-- <th rowspan="2">Resultado esperado Gestion {{ $gestion }}</th> --}}
@@ -45,6 +46,7 @@
                     <th rowspan="2">Tareas especificas</th>
                     <th rowspan="2">Requerimiento (Bienes o Servicios)</th>
                     <th rowspan="2">Presupuesto (Bs) (Bienes o Servicios)</th>
+                    <th rowspan="2">Partida</th>
                     <th colspan="4">Cronograma de Ejecución Accion Corto Plazo Por Trimestre</th>
 
                 </tr>
@@ -101,6 +103,7 @@
                                 ?>
                                 >{{ $cpa->accion_corto_plazo }}</td>
                                 <td <?php echo $row_cpa > 1 ? 'rowspan="'.$row_cpa.'"' : ''; ?> >{{ number_format($cpa->presupuesto_programado, 2, ".", ",") }} Bs.</td>
+                                <td <?php echo $row_cpa > 1 ? 'rowspan="'.$row_cpa.'"' : ''; ?> >unidad resp</td>
                                 <td <?php echo $row_cpa > 1 ? 'rowspan="'.$row_cpa.'"' : ''; ?> >{{ $cpa->fecha_inicio }}</td>
                                 <td <?php echo $row_cpa > 1 ? 'rowspan="'.$row_cpa.'"' : ''; ?> >{{ $cpa->fecha_fin }}</td>
                                 {{-- primera operacion --}}
@@ -146,6 +149,7 @@
                                                     @if ($loop->first)
                                                         <td>{{ $itm->bien_servicio }}</td>
                                                         <td>{{ number_format($itm->presupuesto, 2, ".", ",") }} Bs.</td>
+                                                        <td>{{ $itm->partida->codigo_partida }}</td>
                                                         <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->primer_trimestre != 0){echo $cpa->planificacion->primer_trimestre." %";} ?> </td>
                                                         <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->segundo_trimestre != 0){echo $cpa->planificacion->segundo_trimestre." %";} ?></td>
                                                         <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->tercer_trimestre != 0){echo $cpa->planificacion->tercer_trimestre." %";} ?></td>
@@ -210,6 +214,7 @@
                                 <tr>
                                     <td>{{ $itm->bien_servicio }}</td>
                                     <td>{{ number_format($itm->presupuesto, 2, ".", ",") }} Bs.</td>
+                                    <td>{{ $itm->partida->codigo_partida }}</td>
                                 </tr>
                             @endif
                         @endforeach
@@ -245,6 +250,7 @@
                                         @if ($loop->first)
                                             <td>{{ $itm->bien_servicio }}</td>
                                             <td>{{ number_format($itm->presupuesto, 2, ".", ",") }} Bs.</td>
+                                            <td>{{ $itm->partida->codigo_partida }}</td>
                                         @endif
                                     @empty
                                     <td></td>
@@ -262,6 +268,7 @@
                                             <tr>
                                                 <td>{{ $itm->bien_servicio }}</td>
                                                 <td>{{ number_format($itm->presupuesto, 2, ".", ",") }} Bs.</td>
+                                                <td>{{ $itm->partida->codigo_partida }}</td>
                                             </tr>
                                         @endif
                                     @endforeach
@@ -319,6 +326,7 @@
                                                 @if ($loop->first)
                                                     <td>{{ $itm->bien_servicio }}</td>
                                                     <td>{{ number_format($itm->presupuesto, 2, ".", ",") }} Bs.</td>
+                                                    <td>{{ $itm->partida->codigo_partida }}</td>
                                                 @endif
                                             @empty
                                             <td></td>
@@ -349,6 +357,7 @@
                                             <tr>
                                                 <td>{{ $itm->bien_servicio }}</td>
                                                 <td>{{ number_format($itm->presupuesto, 2, ".", ",") }} Bs.</td>
+                                                <td>{{ $itm->partida->codigo_partida }}</td>
                                             </tr>
                                         @endif
                                     @empty
@@ -386,6 +395,7 @@
                                                     @if ($loop->first)
                                                         <td>{{ $itm->bien_servicio }}</td>
                                                         <td>{{ number_format($itm->presupuesto, 2, ".", ",") }} Bs.</td>
+                                                        <td>{{ $itm->partida->codigo_partida }}</td>
                                                     @endif
                                                 @empty
                                                 <td></td>
@@ -403,6 +413,7 @@
                                                         <tr>
                                                             <td>{{ $itm->bien_servicio }}</td>
                                                             <td>{{ number_format($itm->presupuesto, 2, ".", ",") }} Bs.</td>
+                                                            <td>{{ $itm->partida->codigo_partida }}</td>
                                                         </tr>
                                                     @endif
                                                 @endforeach
@@ -449,6 +460,7 @@
                                     ?>
                                     >{{ $cpa->accion_corto_plazo }}</td>
                                     <td <?php echo $row_cpa > 1 ? 'rowspan="'.$row_cpa.'"' : ''; ?> >{{ number_format($cpa->presupuesto_programado, 2, ".", ",") }} Bs.</td>
+                                    <td <?php echo $row_cpa > 1 ? 'rowspan="'.$row_cpa.'"' : ''; ?> >Unidad resp</td>
                                     <td <?php echo $row_cpa > 1 ? 'rowspan="'.$row_cpa.'"' : ''; ?> >{{ $cpa->fecha_inicio }}</td>
                                     <td <?php echo $row_cpa > 1 ? 'rowspan="'.$row_cpa.'"' : ''; ?> >{{ $cpa->fecha_fin }}</td>
                                     {{-- primera operacion demas acciones corto plazo --}}
@@ -494,6 +506,7 @@
                                                         @if ($loop->first)
                                                             <td>{{ $itm->bien_servicio }}</td>
                                                             <td>{{ number_format($itm->presupuesto, 2, ".", ",") }} Bs.</td>
+                                                            <td>{{ $itm->partida->codigo_partida }}</td>
                                                             <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->primer_trimestre != 0){echo $cpa->planificacion->primer_trimestre." %";} ?> </td>
                                                             <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->segundo_trimestre != 0){echo $cpa->planificacion->segundo_trimestre." %";} ?></td>
                                                             <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->tercer_trimestre != 0){echo $cpa->planificacion->tercer_trimestre." %";} ?></td>
@@ -542,6 +555,7 @@
                                             <tr>
                                                 <td>{{ $itm->bien_servicio }}</td>
                                                 <td>{{ number_format($itm->presupuesto, 2, ".", ",") }} Bs.</td>
+                                                <td>{{ $itm->partida->codigo_partida }}</td>
                                             </tr>
                                         @endif
                                     @endforeach
@@ -577,6 +591,7 @@
                                                     @if ($loop->first)
                                                         <td>{{ $itm->bien_servicio }}</td>
                                                         <td>{{ number_format($itm->presupuesto, 2, ".", ",") }} Bs.</td>
+                                                        <td>{{ $itm->partida->codigo_partida }}</td>
                                                     @endif
                                                 @empty
                                                 <td></td>
@@ -594,6 +609,7 @@
                                                         <tr>
                                                             <td>{{ $itm->bien_servicio }}</td>
                                                             <td>{{ number_format($itm->presupuesto, 2, ".", ",") }} Bs.</td>
+                                                            <td>{{ $itm->partida->codigo_partida }}</td>
                                                         </tr>
                                                     @endif
                                                 @endforeach
@@ -651,6 +667,7 @@
                                                             @if ($loop->first)
                                                                 <td>{{ $itm->bien_servicio }}</td>
                                                                 <td>{{ number_format($itm->presupuesto, 2, ".", ",") }} Bs.</td>
+                                                                <td>{{ $itm->partida->codigo_partida }}</td>
                                                             @endif
                                                         @empty
                                                         <td></td>
@@ -681,6 +698,7 @@
                                                         <tr>
                                                             <td>{{ $itm->bien_servicio }}</td>
                                                             <td>{{ number_format($itm->presupuesto, 2, ".", ",") }} Bs.</td>
+                                                            <td>{{ $itm->partida->codigo_partida }}</td>
                                                         </tr>
                                                     @endif
                                                 @endforeach
@@ -716,6 +734,7 @@
                                                                 @if ($loop->first)
                                                                     <td>{{ $itm->bien_servicio }}</td>
                                                                     <td>{{ number_format($itm->presupuesto, 2, ".", ",") }} Bs.</td>
+                                                                    <td>{{ $itm->partida->codigo_partida }}</td>
                                                                 @endif
                                                             @empty
                                                             <td></td>
@@ -733,6 +752,7 @@
                                                                     <tr>
                                                                         <td>{{ $itm->bien_servicio }}</td>
                                                                         <td>{{ number_format($itm->presupuesto, 2, ".", ",") }} Bs.</td>
+                                                                        <td>{{ $itm->partida->codigo_partida }}</td>
                                                                     </tr>
                                                                 @endif
                                                             @endforeach
@@ -788,6 +808,7 @@
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td></td>
                     {{-- calculamos el total de presupuesto por accion mediano plazo --}}
                     <?php $total_x_mediano_plazo_accion = 0;
                     foreach ($mpa->pei_objetivos_especificos as $obj) {
@@ -804,6 +825,7 @@
                     ?>
                     <td><b>TOTAL</b></td>
                     <td><b>{{ number_format($total_x_mediano_plazo_accion, 2, ".", ",") }} Bs.</b></td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>

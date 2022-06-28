@@ -66,7 +66,7 @@ class ActividadSeeder extends Seeder
 
         // PILAR 2023
         // $actividades_op1 = [
-        //     'COTIZACION',
+        //     'COTIZACIÓN',
         //     'INICIAR PROCESOS DE ADQUISICION',
         //     'COMPRA DE LOS DISCOS DUROS'
         // ];

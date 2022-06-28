@@ -145,7 +145,7 @@ class ItemSeeder extends Seeder
             'actividad_id' => '8'
         ]);
         Items::create([
-            'bien_servicio' => 'TONER PARA IMPRESORAS DE DIFERENTES CATACTERISTICAS.',
+            'bien_servicio' => 'TONER PARA IMPRESORAS DE DIFERENTES CARACTERISTICAS.',
             'fecha_requerida' => '2022-05-02',
             'presupuesto' => '10000',
             'partida_id' => '350',
@@ -155,7 +155,7 @@ class ItemSeeder extends Seeder
         // PILAR 2023
         // $items_act3 = [
         //     'COMPRAR DOS DISCOS DUROS DE TRESCIENTOS GB PARA SERVIDOR DELL',
-        //     'COMPRAR DOS CABLES DATA PARA DISCOS DUROS'
+        //     'COMPRAR DOS CABLES SATA PARA DISCOS DUROS'
         // ];
 
         // foreach($items_act3 as $itm){

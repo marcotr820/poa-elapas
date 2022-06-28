@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PartidaRequest;
+use App\Models\Gerencias;
 use App\Models\Partidas;
 use App\Models\Pilares;
 use Illuminate\Support\Str;
@@ -91,7 +92,8 @@ class PartidaController extends Controller
 
     public function partida_gestion()
     {
+        $gerencias = Gerencias::get();
         $gestiones = Pilares::select('gestion_pilar')->groupBy('gestion_pilar')->orderBy('gestion_pilar', 'asc')->get();
-        return view('partidas.reporte_por_gestion', compact('gestiones'));
+        return view('partidas.reporte_por_gestion', compact('gestiones', 'gerencias'));
     }
 }

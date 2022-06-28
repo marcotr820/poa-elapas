@@ -43,7 +43,7 @@
                             <td>{{$item->id}}</td>
                             <td>{{$item->bien_servicio}}</td>
                             <td>{{$item->fecha_requerida}}</td>
-                            <td>{{$item->partida->nombre_partida}}</td>
+                            <td>{{ $item->partida->codigo_partida }} - {{$item->partida->nombre_partida}}</td>
                             <td>{{number_format($item->presupuesto, 2, '.', ',')}} Bs.</td>
                         </tr>
                     @empty

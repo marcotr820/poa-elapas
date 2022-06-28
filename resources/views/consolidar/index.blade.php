@@ -6,7 +6,7 @@
     <div class="card">
         <h5 class="card-header bg-dark text-white">Generar Reporte POA Por Gerencia</h5>
         <div class="card-body border border-dark">
-            <form action="{{ route('pdf.consolidar') }}" autocomplete="off">
+            <form action="{{ route('pdf.consolidar') }}" target="_blank">
                 @csrf   @method('GET')
                 <div class="form-group">
                     <div class="row">

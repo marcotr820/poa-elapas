@@ -115,7 +115,7 @@
                             <ul class="submenu">
                                 <li><a href="{{route('pilares.index')}}" class="pl-4"></i><span class="pl-2">Pilares</span></a></li>
                                 <li><a href="{{route('partidas.index')}}" class="pl-4"></i><span class="pl-2">Partidas</span></a></li>
-                                <li><a href="{{route('directriz.index')}}" class="pl-4" target="_blank"></i><span class="pl-2">Reporte Directriz</span></a></li>
+                                <li><a href="{{route('directriz.index')}}" class="pl-4"></i><span class="pl-2">Reporte Directriz</span></a></li>
                             </ul>
                         </li>
                     @endcan

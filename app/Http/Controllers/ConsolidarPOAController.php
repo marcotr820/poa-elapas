@@ -41,7 +41,9 @@ class ConsolidarPOAController extends Controller
         })->with(['pei_objetivos_especificos' => function($q) use ($gerencia){
             // 'corto_plazo_acciones.operaciones.actividades.tareas_especificas'
             $q->where('gerencia_id', $gerencia->id)->with(['corto_plazo_acciones' => function($query){
-                $query->where('status', 'aprobado')->Orwhere('status', 'monitoreo');
+                $query->where('status', 'aprobado')
+                    ->Orwhere('status', 'monitoreo')
+                    ->with('operaciones.actividades.items');
             }])->orderBy('id', 'asc');
         }])
         ->join('resultados', 'resultados.id', '=', 'mediano_plazo_acciones.resultado_id')
