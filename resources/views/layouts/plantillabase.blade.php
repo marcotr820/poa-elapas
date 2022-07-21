@@ -50,7 +50,7 @@
 				<div id="loader">
 					<div class="loader-ellips">
                         {{-- <i class="fas fa-2x fa-circle-notch fa-spin text-light"></i> --}}
-                        <div class="spinner-border text-light" role="status">
+                        <div class="spinner-border text-primary" role="status">
                             <span class="sr-only">Loading...</span>
                         </div>
 					  {{-- <span class="loader-ellips__dot"></span>
@@ -114,8 +114,8 @@
                             </a>
                             <ul class="submenu">
                                 <li><a href="{{route('pilares.index')}}" class="pl-4"></i><span class="pl-2">Pilares</span></a></li>
-                                <li><a href="{{route('partidas.index')}}" class="pl-4"></i><span class="pl-2">Partidas</span></a></li>
                                 <li><a href="{{route('directriz.index')}}" class="pl-4"></i><span class="pl-2">Reporte Directriz</span></a></li>
+                                <li><a href="{{route('partidas.index')}}" class="pl-4"></i><span class="pl-2">Partidas</span></a></li>
                             </ul>
                         </li>
                     @endcan
@@ -133,7 +133,7 @@
                     <li class="bloque">
                         <a href="{{route('admin_poa.index')}}" class="titulo">
                             <i class="fas fa-stream"></i>
-                            <span class="pl-2">Administrar estados POA</span>
+                            <span class="pl-2">Administrar Estados POA</span>
                             <span class="badge badge-primary badge-pill" id="notificacion"></span>
                             {{-- <span class="badge" id="notificacion"></span> --}}
                         </a>
@@ -141,9 +141,9 @@
                     @endcan
 
                     <li class="bloque">
-                        <a href="{{route('consolidar.poa.index')}}" class="titulo">
-                            <i class="far fa-star"></i>
-                            <span class="pl-2">Consolidar POA</span>
+                        <a href="{{route('poa.ver_poas')}}" class="titulo">
+                            <i class="far fa-folder-open"></i>
+                            <span class="pl-2">Ver Poas Detalle Unidad</span>
                         </a>
                     </li>
 
@@ -151,7 +151,7 @@
                     <li class="bloque">
                         <a href="{{route('index.presupuestos')}}" class="titulo">
                             <i class="far fa-calendar-check"></i>
-                            <span class="pl-2">Presupuestos requeridos</span>
+                            <span class="pl-2">Presupuestos Requeridos</span>
                         </a>
                     </li>
                     @endcan
@@ -183,18 +183,22 @@
                     </li>
                     @endcan
 
-                    <li class="bloque">
-                        <a href="{{route('poa.ver_poas')}}" class="titulo">
-                            <i class="far fa-folder-open"></i>
-                            <span class="pl-2">Ver Poas</span>
-                        </a>
-                    </li>
+                    
 
                     @can('VER-POA-UNIDADES-GERENCIA')
                     <li class="bloque">
                         <a href="{{route('poas.gerencia')}}" class="titulo">
                             <i class="fas fa-address-card"></i>
                             <span class="pl-2">POA Gerencia</span>
+                        </a>
+                    </li>
+                    @endcan
+
+                    @can('CONSOLIDAR-POA')
+                    <li class="bloque">
+                        <a href="{{route('consolidar.poa.index')}}" class="titulo">
+                            <i class="far fa-star"></i>
+                            <span class="pl-2">Consolidar POA</span>
                         </a>
                     </li>
                     @endcan

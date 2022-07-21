@@ -17,14 +17,16 @@ class MetaSeeder extends Seeder
     {
         // pilar 2022
         Metas::create([
+            // id 1
             'nombre_meta' => Str::upper('El 100% de las bolivianas y los bolivianos cuentan con servicios de agua y alcantarillado sanitario'),
             'pilar_id' => '1'
         ]);
 
         // pilar 2023
-        // Metas::create([
-        //     'nombre_meta' => Str::upper('El 100% de las bolivianas y los bolivianos cuentan con servicios de agua y alcantarillado sanitario'),
-        //     'pilar_id' => '2'
-        // ]);
+        Metas::create([
+            // id 2
+            'nombre_meta' => Str::upper('El 100% de las bolivianas y los bolivianos cuentan con servicios de agua y alcantarillado sanitario'),
+            'pilar_id' => '2'
+        ]);
     }
 }

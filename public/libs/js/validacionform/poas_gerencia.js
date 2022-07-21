@@ -56,8 +56,15 @@ d.addEventListener('change', (e) => {
                 "drawCallback": function(){
                     var api = this.api();
                     var json = api.ajax.json();
-                    $( api.column(0).footer() ).html('<h5><b>Total Ppto. Programado:</b> ' + json.total_programado + ' Bs.</h5>');
+                    $( api.column(0).footer() ).html('<h5 style="margin:0;"><b>Total Ppto. Programado:</b> ' + json.total_programado + ' Bs.</h5>');
                 },
+                "columnDefs": [
+                    {
+                        "targets": -1, // your case last column
+                        "className": "text-center",
+                        // "width": "4%"
+                    }
+                ],
                 "language": {
                     "url": URL
                 },

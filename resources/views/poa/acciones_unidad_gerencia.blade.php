@@ -10,7 +10,7 @@
             <h6 class="card-title"><strong>Unidad:</strong> {{ $unidad->nombre_unidad }}</h6>
             <h6 class="card-title"><strong>Total Programado:</strong> {{ number_format($corto_plazo_acciones->sum("presupuesto_programado"), 2, '.', ',') }} Bs.</h6>
             <a href="{{ url()->previous() }}" class="boton red mb-3"><i class="fas fa-arrow-left"></i> Volver Atras</a>
-            <table class="table table-striped" id="table">
+            <table class="table table-striped table-bordered" id="table">
                 <thead style="background-color: skyblue;">
                     <td>ACCION CORTO PLAZO</td>
                     <td>PRESUPUESTO PROGRAMADO</td>

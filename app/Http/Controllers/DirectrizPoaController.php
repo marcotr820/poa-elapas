@@ -13,7 +13,13 @@ use Illuminate\Support\Facades\DB;
 use Elibyy\TCPDF\Facades\TCPDF as PDF;
 class DirectrizPoaController extends Controller
 {
-    public function index(){
+    public function __construct()
+    {
+        $this->middleware(['role:PLANIFICADOR']);
+    }
+
+    public function index()
+    {
         $gestion_pilares = Pilares::select('gestion_pilar')->groupBy('gestion_pilar')->orderBy('gestion_pilar', 'asc')
             // ->addSelect([
             //     'total_metas_pilar' => Metas::selectRaw('COUNT(*)')

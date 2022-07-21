@@ -20,12 +20,12 @@
             </div>
         </h5>
         <div class="card-body">
-            <table id="metas" class="table table-striped display table-sm" style="width:100%">
+            <table id="metas" class="table table-striped table-sm table-bordered" style="width:100%">
                 <thead class="thead" style="background-color: skyblue;">
                     <tr>
                         <td width="5%">ID</td>
                         <td>META</td>
-                        <td width="18%">ACCIONES</td>
+                        <td width="20%">ACCIONES</td>
                     </tr>
                 </thead>
             </table>
@@ -58,6 +58,13 @@
                         </div>
                         `;
                     }
+                }
+            ],
+            "columnDefs": [
+                {
+                    "targets": -1, // your case last column
+                    "className": "text-center",
+                    // "width": "4%"
                 }
             ],
             "language": {

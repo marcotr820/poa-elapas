@@ -19,7 +19,7 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                  <label class="col-form-label"><b>Nombre Operacion <span class="text-danger">*</span></b></label>
+                  <label class="col-form-label"><b>Nombre Operación <span class="text-danger">*</span></b></label>
                   <textarea class="form-control" data-error="textarea" name="nombre_operacion" id="nombre_operacion" rows="3" required></textarea>
                   <span class="text-danger" data-error="span" id="nombre_operacion-error"></span>
                 </div>

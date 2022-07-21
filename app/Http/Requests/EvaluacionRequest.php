@@ -25,7 +25,7 @@ class EvaluacionRequest extends FormRequest
     public function rules()
     {
         // $fecha_actual = Carbon::now();
-        $fecha_actual = Carbon::createFromDate("2022-04-01");
+        $fecha_actual = Carbon::createFromDate("2023-04-01");
         
         switch ($fecha_actual->month) {
             case 2: case 3:

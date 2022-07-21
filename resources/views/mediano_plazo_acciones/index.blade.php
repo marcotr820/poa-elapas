@@ -28,12 +28,12 @@
             </div>
         </h5>
         <div class="card-body">
-            <table id="acciones_mediano_plazo" class="table table-striped table-sm display" style="width:100%">
+            <table id="acciones_mediano_plazo" class="table table-striped table-sm table-bordered" style="width:100%">
                 <thead class="thead" style="background-color: skyblue">
                     <tr>
                         <td width="5%">ID</td>
                         <td>ACCION MEDIANO PLAZO</td>
-                        <td width="23%">ACCIONES</td>
+                        <td width="22%">ACCIONES</td>
                     </tr>
                 </thead>
             </table>
@@ -63,10 +63,17 @@
                         <div class="btn-group">
                             <button class="boton blue" data-edit="" onclick="edit('${data}')"><i class="fas fa-pen"></i></button>
                             <button class="boton red ml-1" data-delete="" onclick="delet('${data}')"><i class="fas fa-times-circle"></i></button>
-                            <button class='boton default ml-4' data-objetivo_gestion="">objetivo gestion</a>
+                            <button class='boton default ml-4' data-objetivo_gestion="">objetivo gestión</a>
                         </div>
                         `;
                     }
+                }
+            ],
+            "columnDefs": [
+                {
+                    "targets": -1, // your case last column
+                    "className": "text-center",
+                    // "width": "4%"
                 }
             ],
             "language": {

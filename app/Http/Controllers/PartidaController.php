@@ -13,6 +13,7 @@ class PartidaController extends Controller
 {
     public function __construct(){
         // solo los usuarios con los permisos especificados podran ingresar a los metodos
+        $this->middleware(['role:PLANIFICADOR']);
         $this->middleware(['permission:VER-DIRECTRIZ|edit-articles']);
     }
 

@@ -24,16 +24,16 @@
             </div>
         </h5>
         <div class="card-body">
-            <table id="corto_plazo_acciones" class="table table-striped table-sm display" style="width:100%">
+            <table id="corto_plazo_acciones" class="table table-striped table-sm table-bordered" style="width:100%">
                 <thead class="thead" style="background-color: skyblue;">
                     <tr>
-                        <td width="20%">ACCION CORTO PLAZO</td>
-                        <td width="6%">GESTION</td>
-                        <td width="12%">RESULTADO ESPERADO</td>
+                        <td width="30%">ACCION CORTO PLAZO</td>
+                        <td width="5%">GESTION</td>
+                        <td width="10%">RESULTADO ESPERADO</td>
                         <td width="15%">PRESUPUESTO PROGRAMADO</td>
-                        <td width="8%">FECHA INICIO</td>
-                        <td width="8%">FECHA FIN</td>
-                        <td width="10%">ACCIONES</td>
+                        <td width="15%">FECHA INICIO</td>
+                        <td width="10%">FECHA FIN</td>
+                        <td width="15%">ACCIONES</td>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -100,6 +100,13 @@
                             break;
                         }
                     }
+                }
+            ],
+            "columnDefs": [
+                {
+                    "targets": -1, // your case last column
+                    "className": "text-center",
+                    // "width": "4%"
                 }
             ],
             "language": {

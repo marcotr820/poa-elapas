@@ -1,6 +1,6 @@
 <style>
     table{
-        font-size: 6px;
+        font-size: 5px;
     }
     .datos-head{
         background-color: #eee;
@@ -47,7 +47,7 @@
                     <th rowspan="2">Requerimiento (Bienes o Servicios)</th>
                     <th rowspan="2">Presupuesto (Bs) (Bienes o Servicios)</th>
                     <th rowspan="2">Partida</th>
-                    <th colspan="4">Cronograma de Ejecución Accion Corto Plazo Por Trimestre</th>
+                    <th colspan="4">Cronograma de Ejecución Accion Corto Plazo Por Trimestre / (100%)</th>
 
                 </tr>
                 <tr style="text-align: center;font-weight:bold;background-color: #eee;">
@@ -82,7 +82,7 @@
                         echo $row_obj > 1 ? 'rowspan="'.$row_obj.'"' : '';
                         ?>
                         >{{ $obj->objetivo_institucional }}</td>
-                        {{--  --}}
+                        {{-- corto plazo acciones --}}
                         @forelse ($obj->corto_plazo_acciones as $cpa)
                             <?php $var_obj = $obj ?>
                             @if ($loop->first)
@@ -103,7 +103,7 @@
                                 ?>
                                 >{{ $cpa->accion_corto_plazo }}</td>
                                 <td <?php echo $row_cpa > 1 ? 'rowspan="'.$row_cpa.'"' : ''; ?> >{{ number_format($cpa->presupuesto_programado, 2, ".", ",") }} Bs.</td>
-                                <td <?php echo $row_cpa > 1 ? 'rowspan="'.$row_cpa.'"' : ''; ?> >unidad resp</td>
+                                <td <?php echo $row_cpa > 1 ? 'rowspan="'.$row_cpa.'"' : ''; ?> >{{ $cpa->trabajador->unidad->nombre_unidad }}</td>
                                 <td <?php echo $row_cpa > 1 ? 'rowspan="'.$row_cpa.'"' : ''; ?> >{{ $cpa->fecha_inicio }}</td>
                                 <td <?php echo $row_cpa > 1 ? 'rowspan="'.$row_cpa.'"' : ''; ?> >{{ $cpa->fecha_fin }}</td>
                                 {{-- primera operacion --}}
@@ -159,6 +159,7 @@
                                                 @empty
                                                     <td></td>
                                                     <td></td>
+                                                    <td></td>
                                                     <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->primer_trimestre != 0){echo $cpa->planificacion->primer_trimestre." %";} ?> </td>
                                                     <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->segundo_trimestre != 0){echo $cpa->planificacion->segundo_trimestre." %";} ?></td>
                                                     <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->tercer_trimestre != 0){echo $cpa->planificacion->tercer_trimestre." %";} ?></td>
@@ -167,6 +168,7 @@
                                             @endif
 
                                         @empty
+                                            <td></td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -184,6 +186,7 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
+                                <td></td>
                                 <td><?php if($cpa->planificacion()->exists() && $cpa->planificacion->primer_trimestre != 0){echo $cpa->planificacion->primer_trimestre." %";} ?></td>
                                 <td><?php if($cpa->planificacion()->exists() && $cpa->planificacion->segundo_trimestre != 0){echo $cpa->planificacion->segundo_trimestre." %";} ?></td>
                                 <td><?php if($cpa->planificacion()->exists() && $cpa->planificacion->tercer_trimestre != 0){echo $cpa->planificacion->tercer_trimestre." %";} ?></td>
@@ -191,6 +194,8 @@
                                 @endforelse
                             @endif
                         @empty
+                        <td></td>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -460,7 +465,7 @@
                                     ?>
                                     >{{ $cpa->accion_corto_plazo }}</td>
                                     <td <?php echo $row_cpa > 1 ? 'rowspan="'.$row_cpa.'"' : ''; ?> >{{ number_format($cpa->presupuesto_programado, 2, ".", ",") }} Bs.</td>
-                                    <td <?php echo $row_cpa > 1 ? 'rowspan="'.$row_cpa.'"' : ''; ?> >Unidad resp</td>
+                                    <td <?php echo $row_cpa > 1 ? 'rowspan="'.$row_cpa.'"' : ''; ?> >{{ $cpa->trabajador->unidad->nombre_unidad }}</td>
                                     <td <?php echo $row_cpa > 1 ? 'rowspan="'.$row_cpa.'"' : ''; ?> >{{ $cpa->fecha_inicio }}</td>
                                     <td <?php echo $row_cpa > 1 ? 'rowspan="'.$row_cpa.'"' : ''; ?> >{{ $cpa->fecha_fin }}</td>
                                     {{-- primera operacion demas acciones corto plazo --}}
@@ -516,6 +521,7 @@
                                                     @empty
                                                         <td></td>
                                                         <td></td>
+                                                        <td></td>
                                                         <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->primer_trimestre != 0){echo $cpa->planificacion->primer_trimestre." %";} ?> </td>
                                                         <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->segundo_trimestre != 0){echo $cpa->planificacion->segundo_trimestre." %";} ?></td>
                                                         <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->tercer_trimestre != 0){echo $cpa->planificacion->tercer_trimestre." %";} ?></td>
@@ -528,6 +534,7 @@
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
+                                                <td></td>
                                                 <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->primer_trimestre != 0){echo $cpa->planificacion->primer_trimestre." %";} ?> </td>
                                                 <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->segundo_trimestre != 0){echo $cpa->planificacion->segundo_trimestre." %";} ?></td>
                                                 <td rowspan="<?php if($row_cpa > 1){echo $row_cpa;} ?>"> <?php if($cpa->planificacion()->exists() && $cpa->planificacion->tercer_trimestre != 0){echo $cpa->planificacion->tercer_trimestre." %";} ?></td>
@@ -536,6 +543,7 @@
                                         @endif
 
                                     @empty
+                                        <td></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
@@ -835,7 +843,7 @@
         </table>
         {{-- <br pagebreak="true" /> --}}
         <table border="0">
-            <tr style="line-height: 20px;" > 
+            <tr style="line-height: 20px;"> 
             <td></td>
             </tr>
         </table>

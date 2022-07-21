@@ -28,7 +28,7 @@ class TrabajadorController extends Controller
                     'trabajadores.id', 'trabajadores.documento', 'trabajadores.nombre', 'trabajadores.cargo',
                     'trabajadores.unidad_id', 'trabajadores.uuid',
                     'gerencias.nombre_gerencia', 'unidades.nombre_unidad'
-                );
+                )->orderBy('id', 'asc');
             
             return datatables($query)->make(true);
             //retornamos los datos ajax formato json con la libreria yajra para poder convertirlo en JSON

@@ -31,7 +31,13 @@ use App\Http\Controllers\TareaEspecificaController;
 use App\Http\Controllers\TrabajadorController;
 use App\Http\Controllers\UnidadController;
 use App\Http\Controllers\UsuarioController;
+use App\Models\Gerencias;
 use Illuminate\Support\Facades\Route;
+
+// eliminar
+Route::get('/data', function () {
+    return Gerencias::get();
+});
 
 Route::get('/pruebas', [NotificacionController::class, 'pruebas']);
 
@@ -163,6 +169,7 @@ Route::group(['middleware' => ['auth:usuario']], function(){
     Route::put('update_status_corto_plazo_accion/{corto_plazo_accion}', [AdminPoaController::class, 'update_status_corto_plazo_accion']);
     Route::get('data_pei/{pei}', [AdminPoaController::class, 'data_pei']);
     Route::get('listar_acciones/{pei}', [AdminPoaController::class, 'listar_acciones']);
+    Route::get('get_objetivos_ajax', [AdminPoaController::class, 'get_objetivos_ajax'])->name("get_objetivos_ajax");
 
     //*********************************** NOTIFICACIONES ********************************
     Route::get('notificacion', [NotificacionController::class, 'CountStatusAccionesCorto']);
@@ -200,6 +207,7 @@ Route::group(['middleware' => ['auth:usuario']], function(){
     Route::get('/get_evaluacion/{evaluacion}', [EvaluacionController::class, 'get_evaluacion']);
     Route::put('/evaluacion/{evaluacion}', [EvaluacionController::class, 'update']);
     Route::get('/ver_evaluaciones/{trabajador}', [EvaluacionController::class, 'ver_evaluaciones'])->name('ver_evaluaciones');
+    Route::get('/reporte_evaluaciones/{trabajador}', [EvaluacionController::class, 'reporte_evaluaciones'])->name('reporte_evaluaciones');
 
     /****************************************** ROLES ******************************************/
     Route::resource('/roles', RoleController::class)->only('index', 'store', 'update', 'destroy');

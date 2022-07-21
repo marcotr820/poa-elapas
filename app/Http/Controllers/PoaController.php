@@ -15,6 +15,11 @@ use Illuminate\Support\Facades\DB;
 
 class PoaController extends Controller
 {
+    public function __construct()
+    {
+        // $this->middleware(['role:TRABAJADOR']);
+    }
+
     public function index(Request $request)
     {
         // si el trabajador no tiene su tado poa en 1 lanzara error 403
@@ -158,8 +163,8 @@ class PoaController extends Controller
             $total_presupuesto_programado = $query->get()->sum('suma_presupuesto_acciones');
 
             return datatables($query)
-            ->with('total_programado', number_format($total_presupuesto_programado, 2, '.', ','))
-            ->make(true);
+                ->with('total_programado', number_format($total_presupuesto_programado, 2, '.', ','))
+                ->make(true);
         } else {
             return datatables([])->make(true);
         }

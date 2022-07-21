@@ -32,26 +32,28 @@ class ConsolidarPOAController extends Controller
 
     public function pdf_consolidar(Request $request)
     {
-        $gerencia = Gerencias::where('uuid', $request->gerencia)->firstOrFail();
         $gestion = $request->gestion;
+        abort_if( !Pilares::where('gestion_pilar', $gestion)->exists(), 404);
+
+        $gerencia = Gerencias::where('uuid', $request->gerencia)->firstOrFail();
 
         // wherehas solo devolvera las acciones mediano plazo que contengan la condicion dada
         $mediano_plazo_acciones = MedianoPlazoAcciones::select('mediano_plazo_acciones.*')->whereHas('pei_objetivos_especificos', function($q) use ($gerencia){
-            $q->where('gerencia_id', $gerencia->id);
-        })->with(['pei_objetivos_especificos' => function($q) use ($gerencia){
-            // 'corto_plazo_acciones.operaciones.actividades.tareas_especificas'
-            $q->where('gerencia_id', $gerencia->id)->with(['corto_plazo_acciones' => function($query){
-                $query->where('status', 'aprobado')
-                    ->Orwhere('status', 'monitoreo')
-                    ->with('operaciones.actividades.items');
-            }])->orderBy('id', 'asc');
-        }])
-        ->join('resultados', 'resultados.id', '=', 'mediano_plazo_acciones.resultado_id')
-        ->join('metas', 'metas.id', '=', 'resultados.meta_id')
-        ->join('pilares', 'pilares.id', '=', 'metas.pilar_id')
-        ->where('pilares.gestion_pilar', $request->gestion)
-        ->orderBy('id', 'asc')
-        ->get();
+                $q->where('gerencia_id', $gerencia->id);
+            })->with(['pei_objetivos_especificos' => function($q) use ($gerencia){
+                // 'corto_plazo_acciones.operaciones.actividades.tareas_especificas'
+                $q->where('gerencia_id', $gerencia->id)->with(['corto_plazo_acciones' => function($query){
+                    $query->where('status', 'aprobado')
+                        ->Orwhere('status', 'monitoreo')
+                        ->with('operaciones.actividades.items');
+                }])->orderBy('id', 'asc');
+            }])
+            ->join('resultados', 'resultados.id', '=', 'mediano_plazo_acciones.resultado_id')
+            ->join('metas', 'metas.id', '=', 'resultados.meta_id')
+            ->join('pilares', 'pilares.id', '=', 'metas.pilar_id')
+            ->where('pilares.gestion_pilar', $request->gestion)
+            ->orderBy('id', 'asc')
+            ->get();
 
         // return $mediano_plazo_acciones = MedianoPlazoAcciones::select('mediano_plazo_acciones.*')->with(['pei_objetivos_especificos' => function($q) use ($gerencia){
         //     // 'corto_plazo_acciones.operaciones.actividades.tareas_especificas'
@@ -79,7 +81,7 @@ class ConsolidarPOAController extends Controller
             $pdf->Ln(3); /*centrar y dar margin-top al title ESPACIO ENTRE LINEAS*/
             $pdf->SetFont('helvetica', 'B', 11);
             // Title
-            $pdf->Cell(0, 7, 'Reporte Plan Operativo Anual', 0, 1, 'C', 0, '', 0, false, 'M', 'M');
+            $pdf->Cell(0, 7, 'Reporte Consolidado Plan Operativo Anual', 0, 1, 'C', 0, '', 0, false, 'M', 'M');
             // $pdf->Ln(1); /*ESPACIO ENTRE LINEAS*/
             $pdf->SetFont('helvetica', '', 9);
             $pdf->Ln(1);

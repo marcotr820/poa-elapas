@@ -25,14 +25,14 @@
             </table>
         </div>
         <h5 class="card-header py-1 d-flex justify-content-between align-items-center">
-            Lista PEI Objetivos Institucional Especificos
+            Lista Objetivos Institucional Especificos
             <div>
                 <a href="javascript:history.back()" class="boton red mr-3"><i class="fas fa-arrow-left"></i> Volver Atrás</a>
                 <button type="button" id="nuevo" class="boton blue"><i class="fas fa-plus-circle"></i> Nueva Objetivo Gestion</button>
             </div>
         </h5>
         <div class="card-body">
-            <table id="pei_objetivos_especificos" class="table table-striped table-sm display" style="width:100%">
+            <table id="pei_objetivos_especificos" class="table table-striped table-sm table-bordered" style="width:100%">
                 <thead class="thead" style="background-color: skyblue">
                     <tr>
                         <td width="5%">ID</td>
@@ -89,6 +89,13 @@
                         `;
                     }
                 },
+            ],
+            "columnDefs": [
+                {
+                    "targets": -1, // your case last column
+                    "className": "text-center",
+                    // "width": "4%"
+                }
             ],
             "language": {
                 "url" : "{{ asset('libs/datatables/es-ES.json') }}"

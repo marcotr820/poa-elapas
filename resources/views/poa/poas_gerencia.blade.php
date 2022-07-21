@@ -31,20 +31,18 @@
             </form>
             <h5 class="loading m-0 mt-2">Loading...</h5>
             <article class="table-loading">
-                <table id="table" class="table table-striped table-sm display" style="width:100%">
+                <table id="table" class="table table-striped table-sm table-bordered" style="width:100%">
                     <thead class="thead" style="background-color: skyblue;">
                         <tr>
-                            <td width="40%">UNIDAD</td>
+                            <td width="45%">UNIDAD</td>
                             <td width="40%">PRESUPUESTO PROGRAMADO</td>
-                            <td width="20%">ACCIONES</td>
+                            <td width="15%">ACCIONES</td>
                         </tr>
                     </thead>
                     <tbody></tbody>
                     <tfoot>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td colspan="3"></td>
                         </tr>
                     </tfoot>
                 </table>

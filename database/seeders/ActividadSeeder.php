@@ -17,7 +17,7 @@ class ActividadSeeder extends Seeder
         // PILAR 2022
         $ACT_OP1 = [
             'CONTRATACIÓN DE EMPRESA CONSULTORA',
-            'REUNIONES DE COODICACIÓN DE PROYECTOS'
+            'REUNIONES DE COORDICACIÓN DE PROYECTOS'
         ];
         foreach($ACT_OP1 as $act){
             Actividades::create([
@@ -64,7 +64,44 @@ class ActividadSeeder extends Seeder
         }
 
 
-        // PILAR 2023
+        // PILAR 2023 ******************************************************************************************************
+        Actividades::create([
+            // id = 9
+            'nombre_actividad' => "CONTRATAR  SERVICIOS NO PERSONALES",
+            'resultado_esperado' => rand(10,90),
+            'operacion_id' => '5'
+        ]);
+        Actividades::create([
+            // id = 10
+            'nombre_actividad' => "ADQUIRIR MATERIALES Y SUMINISTROS",
+            'resultado_esperado' => rand(10,90),
+            'operacion_id' => '5'
+        ]);
+        Actividades::create([
+            // id = 11
+            'nombre_actividad' => "ELABORAR CRONOGRAMA DE ACTIVIDADES PARA LA OPERACIÓN",
+            'resultado_esperado' => rand(10,90),
+            'operacion_id' => '6'
+        ]);
+        Actividades::create([
+            // id = 12
+            'nombre_actividad' => "REALIZAR PLANIFICACIÓN CONTROL Y SEGUIMIENTO",
+            'resultado_esperado' => rand(10,90),
+            'operacion_id' => '6'
+        ]);
+        Actividades::create([
+            // id = 13
+            'nombre_actividad' => "OPTIMIZAR EL TRANSPORTE DE AGUA CRUDA A TODAS LAS AREAS.",
+            'resultado_esperado' => rand(10,90),
+            'operacion_id' => '7'
+        ]);
+        Actividades::create([
+            // id = 14
+            'nombre_actividad' => "GARANTIZAR LA OPERACIÓN Y MANTENIMIENTO DE LOS SISTEMAS DE ADUCCIÓN.",
+            'resultado_esperado' => rand(10,90),
+            'operacion_id' => '7'
+        ]);
+
         // $actividades_op1 = [
         //     'COTIZACIÓN',
         //     'INICIAR PROCESOS DE ADQUISICION',

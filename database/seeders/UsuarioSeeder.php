@@ -49,6 +49,15 @@ class UsuarioSeeder extends Seeder
             'remember_token' => Str::random(10)
         ])->assignRole('GERENTE');
 
+        // TRABAJADOR GERENCIA TECNICA
+        // UNIDAD JEFATURA DE ADUCCION
+        Usuario::create([
+            'usuario' => '32236840',
+            'password' => Hash::make('123'),
+            'trabajador_id' => '17',
+            'remember_token' => Str::random(10)
+        ])->assignRole('TRABAJADOR');
+
         //despues de crear nuestro usuarios por defecto llamamos al factory para que se ejecute
         // Usuario::factory(1)->create();
     }

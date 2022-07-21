@@ -26,14 +26,14 @@
         <div class="card-body">
             <h5 class="loading m-0">Loading...</h5>
             <article class="table-loading">
-                <table id="partidas" class="table table-striped display table-sm" style="width:100%">
+                <table id="partidas" class="table table-striped table-sm table-bordered" style="width:100%">
                     <thead class="thead border-dark" style="background-color: skyblue;">
                         <tr>
                             <td width='5%'>ID</td>
                             <td>PARTIDA</td>
                             <td>CODIGO PARTIDA</td>
                             <td>TIPO PARTIDA</td>
-                            <td width="10%"></td>
+                            <td width="10%">ACCIONES</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -77,6 +77,13 @@
                         `;
                     },
                     orderable: false
+                }
+            ],
+            "columnDefs": [
+                {
+                    "targets": -1, // your case last column
+                    "className": "text-center",
+                    // "width": "4%"
                 }
             ],
             "language": {

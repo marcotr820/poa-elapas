@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 
 class PilarController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role:PLANIFICADOR']);
+    }
+
     public function index(Request $request){
         $date = Carbon::now()->addYear();
         $pilares = Pilares::select('gestion_pilar')

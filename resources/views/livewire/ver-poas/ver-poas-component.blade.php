@@ -28,7 +28,7 @@
         <thead style="text-align: center; background-color: #ccccff;">
             <tr>
                 <th width="22%">ACCIONES CORTO PLAZO</th>
-                <th width="10%">RESULTADO ESPERADO GESTION</th>
+                <th width="10%">RESULTADO ESPERADO DE GESTION (%)</th>
                 <th width="20%">OPERACIONES</th>
                 <th width="20%">ACTIVIDADES</th>
                 <th width="15%">RESULTADOS INTERMEDIOS ESPERADOS</th>

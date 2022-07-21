@@ -4,34 +4,40 @@
 
 @section('contenido')
 <style>
-    table{
+    #table{
         font-size: 11px;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         font-weight: 600;
     }
-    table thead{
+    #table thead{
         text-align: center;
     }
-    table tr td{
+    #table tr td{
         border: 0.5px solid #b3b3b3;
         padding: 3px 5px;
     }
-    table .boton{
+    #table .boton{
         padding: 2px 7px;
         font-size: 10px;
     }
 </style>
     <div class="card">
         <div class="card-header">
-            <div>
-                <p class="m-0"><strong>Unidad:</strong> {{ $accion_corto_plazo->trabajador->unidad->nombre_unidad }}</p>
-                <p class="m-0"><strong>Accion Corto Plazo:</strong> {{$accion_corto_plazo->accion_corto_plazo}}</p>
-                <a href="{{ route('poa.ver_poas') }}" class="boton red mt-2"><i class="fas fa-arrow-left"></i> Volver Atras</a>
-            </div>
+            <table class="table table-bordered table-sm m-0">
+                <tr>
+                    <td width="15%" class="font-weight-bold">Unidad</td>
+                    <td>{{ $accion_corto_plazo->trabajador->unidad->nombre_unidad }}</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">Accion Corto Plazo</td>
+                    <td>{{$accion_corto_plazo->accion_corto_plazo}}</td>
+                </tr>
+            </table>
+            <a href="{{ route('poa.ver_poas') }}" class="boton red mt-2"><i class="fas fa-arrow-left"></i> Volver Atras</a>
         </div>
         <div class="card-body">
             <h5 class="card-title">Lista Actividades</h5>
-            <table width="100%">
+            <table id="table" width="100%">
                 <thead style="background-color: skyblue">
                     <tr>
                         <td>OPERACION</td>

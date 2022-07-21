@@ -9,19 +9,36 @@
     }
     table td{
         padding: 5px;
-        border: 0.5px solid #b3b3b3;
+        border: 0.5px solid #737373;
     }
 </style>
     <div class="card">
-        <div class="card-header">
-            <p class="mb-2"><b>Corto Plazo Accion:</b> {{$corto_plazo_accion->accion_corto_plazo}}</p>
-            <p class="mb-2"><b>Presupuesto Aprobado:</b> {{ number_format($corto_plazo_accion->presupuesto_programado, 2, '.', ',') }} Bs.</p>
-            <p class="mb-2"><b>Fecha Inicio:</b> {{ $corto_plazo_accion->fecha_inicio }}</p>
-            <p class="mb-2"><b>Fecha Fin:</b> {{ $corto_plazo_accion->fecha_fin }}</p>
-            <p class="mb-2"><b>Presupuesto Restante:</b> {{ number_format($corto_plazo_accion->presupuesto_programado - $corto_plazo_accion->evaluaciones->sum('presupuesto_ejecutado'), 2, '.', ',') }} Bs.</p>
+        <div class="bg-light p-2">
+            <table class="table table-bordered table-sm m-0" style="font-size: 14px;">
+                <tr>
+                    <td width="15%" class="font-weight-bold">Acción Corto Plazo</td>
+                    <td>{{$corto_plazo_accion->accion_corto_plazo}}</td>
+                </tr>
+                <tr>
+                    <td width="15%" class="font-weight-bold">Presupuesto Aprobado:</td>
+                    <td>{{ number_format($corto_plazo_accion->presupuesto_programado, 2, '.', ',') }} Bs.</td>
+                </tr>
+                <tr>
+                    <td width="15%" class="font-weight-bold">Fecha Inicio</td>
+                    <td>{{ $corto_plazo_accion->fecha_inicio }}</td>
+                </tr>
+                <tr>
+                    <td width="15%" class="font-weight-bold">Fecha Fin</td>
+                    <td>{{ $corto_plazo_accion->fecha_fin }}</td>
+                </tr>
+                <tr>
+                    <td width="15%" class="font-weight-bold">Presupuesto Restante</td>
+                    <td>{{ number_format($corto_plazo_accion->presupuesto_programado - $corto_plazo_accion->evaluaciones->sum('presupuesto_ejecutado'), 2, '.', ',') }} Bs.</td>
+                </tr>
+            </table>
             <div>
                 {{-- <a href="{{ route('planificacion_evaluacion') }}" class="boton red"><i class="fas fa-arrow-left"></i> Volver Atrás</a> --}}
-                <a href="{{ route('acciones_corto_plazo.evaluacion') }}" class="boton red"><i class="fas fa-arrow-left"></i> Volver Atrás</a>
+                <a href="{{ route('acciones_corto_plazo.evaluacion') }}" class="boton red mt-2"><i class="fas fa-arrow-left"></i> Volver Atrás</a>
             </div>
         </div>
         <div class="card-header d-flex justify-content-between align-items-center">

@@ -65,6 +65,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PlanificacionSeeder::class);
 
         // Planificaciones::factory(1)->create(); //para el metodo numberBetween debe crearse menos del 50% del los registros del padre 
-        // Evaluaciones::factory(2)->create();
+        $this->call(EvaluacionSeeder::class);
     }
 }

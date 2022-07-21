@@ -11,6 +11,11 @@ use function PHPUnit\Framework\isNull;
 
 class RoleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role:ADMIN']);
+    }
+
     public function index(Request $request)
     {
         // return $role->users;

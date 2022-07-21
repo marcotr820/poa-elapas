@@ -1,4 +1,4 @@
-@extends('layouts.plantillabase')
+{{-- @extends('layouts.plantillabase')
 
 @section('title', 'Planificación y Evaluación')
 
@@ -75,4 +75,4 @@
 
     <script src="{{asset('libs/js/validacionform/planificacion_evaluacion.js')}}"></script>
 
-@endsection
+@endsection --}}

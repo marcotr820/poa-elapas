@@ -61,6 +61,8 @@ d.addEventListener('submit', (e)=>{
       e.preventDefault();
       if(e.target.hasAttribute('data-form'))
       {
+         d.querySelectorAll('[data-error="input"]').forEach((el)=>{ el.classList.remove('is-invalid') });
+         d.querySelectorAll('[data-error="span"]').forEach((el)=>{ el.textContent = '' });
          const lista = d.querySelectorAll('#lista input');
          var bb = 0;
          lista.forEach((el)=>{

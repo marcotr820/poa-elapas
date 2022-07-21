@@ -13,14 +13,15 @@
             </div>
         </h5>
         <div class="card-body">
-            <table id="usuarios" class="table table-striped table-sm display" style="width:100%">
+            <table id="usuarios" class="table table-striped table-sm table-bordered" style="width:100%">
                 <thead class="thead" style="background-color: skyblue;">
                     <tr>
                         <td width="5%">ID</td>
                         <td width="15%">USUARIO</td>
-                        <td width="40%">ROL</th>
+                        <td width="20%">ROL</th>
                         <td width="20%">TRABAJADOR</td>
-                        <td width="10%"></td>
+                        <td width="20%">AREA RESPONSABLE</td>
+                        <td width="10%">ACCIONES</td>
                     </tr>
                 </thead>
             </table>
@@ -56,6 +57,12 @@
                 },
                 { data: 'nombre', name:'trabajadores.nombre'},
                 {
+                    data: 'trabajador.unidad.nombre_unidad',
+                    render: function(data, type, row) {
+                        return row.trabajador.unidad.nombre_unidad;
+                    }
+                },
+                {
                     data: 'uuid',
                         render: function( data, type, row)
                         {
@@ -74,6 +81,13 @@
                                 `;
                             }   
                         }
+                }
+            ],
+            'columnDefs': [
+                {
+                    "targets": -1, // your case last column
+                    "className": "text-center",
+                    // "width": "4%"
                 }
             ],
             "language": {

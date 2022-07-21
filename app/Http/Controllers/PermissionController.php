@@ -8,6 +8,11 @@ use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role:ADMIN']);
+    }
+
     public function index(Request $request)
     {
         // $permiso = Permission::find(10);

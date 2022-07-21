@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 class CortoPlazoAcciones extends Model
 {
     use HasFactory;
-    use \Staudenmeir\EloquentHasManyDeep\HasRelationships;
+    use \Staudenmeir\EloquentHasManyDeep\HasRelationships;  ////importamos para poder usar hasmanydeep
 
     public $timestamps = false;
 

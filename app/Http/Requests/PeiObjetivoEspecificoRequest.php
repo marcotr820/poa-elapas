@@ -26,7 +26,7 @@ class PeiObjetivoEspecificoRequest extends FormRequest
         return [
             //
             'objetivo_institucional' => 'required',
-            'ponderacion' => 'required|numeric|max:100',
+            'ponderacion' => 'required|numeric|min:1|max:100',
             'indicador_proceso' => ['required'],
             'gerencia_id' => 'required'
         ];

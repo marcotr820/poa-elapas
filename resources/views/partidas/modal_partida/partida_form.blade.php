@@ -38,7 +38,7 @@
                       <select id="tipo_partida" name="tipo_partida" data-error="select" required class="form-control custom-select">
                         <option value="" disabled selected>Seleccione...</option>
                         <option value="FUNCIONAMIENTO">FUNCIONAMIENTO</option>
-                        <option value="INVERSION">INVERSION</option>
+                        <option value="INVERSIÓN">INVERSIÓN</option>
                       </select>
                       <span class="text-danger" data-error="span" id="tipo_partida-error"></span>
                   </div>

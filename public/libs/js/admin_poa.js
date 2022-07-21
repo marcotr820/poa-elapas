@@ -32,11 +32,12 @@ function update(accion_uuid){
     
 }
 
-// EVENTO CHANGE
-function cambio (){
-    if(d.querySelector('.select2').value != ''){
-        var pei_uuid = d.querySelector('.select2').value;
-        axios.get('/data_pei/' + pei_uuid)
+// EVENTO CHANGE CAMBIO
+$('.select2').on('select2:select', function (e) {
+    var data = e.params.data;
+    // console.log(data.uuid);
+    var obj_uuid = data.uuid;
+        axios.get('/data_pei/' + obj_uuid)
         .then(function (resp) {
             d.querySelector('.objetivo_especifico').innerHTML = resp.data.objetivo_institucional;
             d.querySelector('.gerencia').textContent = resp.data.nombre_gerencia;
@@ -49,7 +50,7 @@ function cambio (){
             "processing": true,
             "serverSide": true,
             "ajax": {
-               "url": "/listar_acciones/"+pei_uuid,
+               "url": "/listar_acciones/"+obj_uuid,
                "type": "GET"
             },
             columns: [
@@ -107,10 +108,21 @@ function cambio (){
                         }
                     }
                 }
+            ],
+            "drawCallback": function(){
+                var api = this.api();
+                var json = api.ajax.json();
+                $( api.column(0).footer() ).html('<h5 style="margin:0;"><b>Total Ppto. Programado:</b> ' + json.total_programado + ' Bs.</h5>');
+            },
+            "columnDefs": [
+                {
+                    "targets": -1, // your case last column
+                    "className": "text-center",
+                    // "width": "4%"
+                }
             ]
         });
-    }
-}
+});
 
 // EVENTO CLICK
 d.addEventListener('click', (e)=>{
@@ -120,17 +132,12 @@ d.addEventListener('click', (e)=>{
         axios.get('/status_corto_plazo_accion/' + data.uuid) //enviamos todos los input del form
         .then(function (resp) {
             d.getElementById('accion_corto_plazo').textContent = resp.data.accion_corto_plazo;
-            d.getElementById('presupuesto_accion').textContent = resp.data.presupuesto_programado;
+            const presupuesto = resp.data.presupuesto_programado.toLocaleString('es-MX');
+            d.getElementById('presupuesto_accion').textContent = presupuesto;
             d.getElementById('status').value = resp.data.status;
             $("#modal").modal("show");
         })
         .catch(function (error) {
         });
-    }
-
-    if(e.target.matches('.select2-selection__rendered')){
-        if(d.querySelector('.select2-search__field') != null){
-            d.querySelector('.select2-search__field').focus();
-        }   
     }
 });

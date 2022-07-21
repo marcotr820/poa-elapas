@@ -70,7 +70,7 @@ d.addEventListener('click', (e)=>{
       d.querySelector('.modal-title').textContent = 'Editar Partida';
       d.getElementById('nombre_partida').value = data['nombre_partida'];
       d.getElementById('codigo_partida').value = data['codigo_partida'];
-      d.getElementById('tipo_partida').value = data['tipo_partida'];
+      d.getElementById('tipo_partida').value = data.tipo_partida;
       d.getElementById('form').removeAttribute('data-form');
       d.querySelectorAll('[data-error="input"]').forEach( (el) => { el.classList.remove('is-invalid') }); //limpiamos el input del error
       d.querySelectorAll('[data-error="select"]').forEach( (el) => { el.classList.remove('is-invalid') }); //limpiamos el select del error

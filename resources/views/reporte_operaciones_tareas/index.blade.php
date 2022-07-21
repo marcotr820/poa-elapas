@@ -6,7 +6,7 @@
     <style>
         table {
             margin: 6px 0;
-            font-size: 0.65rem;
+            font-size: 10px;
             font-weight: 600;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             text-align: center;
@@ -18,16 +18,20 @@
         }
     </style>
     <div class="card">
-        <div class="card-header py-1">
+        <div class="bg-light p-2">
             <div>
                 <strong>Determinacion de Operaciones y Tareas</strong>
             </div>
-            <div>
-                <strong>Gerencia:</strong> {{ $unidad->gerencia->nombre_gerencia }}
-            </div>
-            <div>
-                <strong>Unidad:</strong> {{ $unidad->nombre_unidad }}
-            </div>
+            <table class="table table-bordered table-sm m-0" style="font-size: 12px; text-align:left;">
+                <tr>
+                    <td width="10%" class="font-weight-bold">Gerencia</td>
+                    <td>{{$unidad->gerencia->nombre_gerencia}}</td>
+                </tr>
+                <tr>
+                    <td width="10%" class="font-weight-bold">Unidad</td>
+                    <td>{{$unidad->nombre_unidad}}</td>
+                </tr>
+            </table>
         </div>
         <div class="card-header py-1">
             <a href="{{ route('poa.ver_poas') }}" class="boton red"><i class="fas fa-arrow-left"></i> Volver atras</a>
@@ -35,7 +39,7 @@
         </div>
         <div class="card-body px-1">
             <table id="operaciones_tareas" width="100%">
-                <thead style="background-color: #ccccff;">
+                <thead style="background-color: #ddd;">
                     <tr>
                         <th>ACCION CORTO PLAZO</th>
                         <th>RESULTADO ESPERADO GESTION</th>

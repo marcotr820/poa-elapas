@@ -115,7 +115,7 @@
             </div>
         </h5>
         <div class="card-body">
-            <table id="items" class="table table-striped table-sm display" style="width:100%">
+            <table id="items" class="table table-striped table-sm table-bordered" style="width:100%">
                 <thead class="thead" style="background-color: skyblue;">
                     <tr>
                         <td width='5%'>ID</td>
@@ -174,6 +174,13 @@
                             `;
                         }
                     }
+                }
+            ],
+            "columnDefs": [
+                {
+                    "targets": -1, // your case last column
+                    "className": "text-center",
+                    // "width": "4%"
                 }
             ],
             "language": {

@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 
 class MetaController extends Controller
 {
+    public function __construct()
+    {
+        // $this->middleware(['role:PLANIFICADOR']);
+    }
+
     public function index(Request $request, Pilares $pilar)
     {
         if($request->ajax())

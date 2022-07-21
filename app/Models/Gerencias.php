@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 class Gerencias extends Model
 {
     use HasFactory;
+    use \Staudenmeir\EloquentHasManyDeep\HasRelationships;  //importamos para poder usar hasmanydeep
 
     protected $table = 'gerencias';
 
@@ -40,5 +41,20 @@ class Gerencias extends Model
     //relacion uno a muchos
     public function pei_objetivos_especificos(){
         return $this->hasMany(PeiObjetivosEspecificos::class, 'gerencia_id');
+    }
+
+    public function items(){
+        return $this->hasManyDeep(
+            Items::class, //queremos llegar a items
+            [unidades::class, Trabajadores::class, CortoPlazoAcciones::class, Operaciones::class, Actividades::class], //atraves de
+            [
+                'gerencia_id',
+                'unidad_id',
+                'trabajador_id',
+                'corto_plazo_accion_id',
+                'operacion_id',
+                'actividad_id'
+            ]
+        );
     }
 }

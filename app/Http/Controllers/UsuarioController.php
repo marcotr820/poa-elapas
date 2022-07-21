@@ -15,6 +15,11 @@ use Yajra\DataTables\DataTables;
 
 class UsuarioController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role:ADMIN']);
+    }
+    
     public function selectTrabajador()
     {
         return Trabajadores::select('id', 'documento', 'nombre')->whereNotIn('id', Usuario::select('trabajador_id'))->get();
@@ -24,7 +29,7 @@ class UsuarioController extends Controller
         // $users = Usuario::with('roles')->get();
         if($request->ajax()){
             $query = Usuario::join("trabajadores", "trabajadores.id", "=", "usuarios.trabajador_id")
-                ->select('usuarios.id', 'usuarios.usuario', 'usuarios.uuid', 'usuarios.trabajador_id', 'trabajadores.nombre')->with('roles');
+                ->select('usuarios.id', 'usuarios.usuario', 'usuarios.uuid', 'usuarios.trabajador_id', 'trabajadores.nombre')->with('trabajador.unidad.gerencia', 'roles');
             return datatables($query)->make(true);
         }
         

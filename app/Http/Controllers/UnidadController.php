@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 
 class UnidadController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role:ADMIN']);
+    }
+
     public function index(Request $request){
         if($request->ajax())
         {

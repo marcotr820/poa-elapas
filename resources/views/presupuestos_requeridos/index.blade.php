@@ -30,7 +30,7 @@
             </div>
         </h5>
         <div class="card-body">
-            <table id="presupuestos" class="table table-striped table-sm display" style="width:100%">
+            <table id="presupuestos" class="table table-striped table-sm table-bordered" style="width:100%">
                 <thead class="thead" style="background-color: skyblue;">
                     <tr>
                         <td>ACCION CORTO PLAZO</td>

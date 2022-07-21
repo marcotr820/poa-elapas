@@ -34,15 +34,15 @@
             </div>
         </div>
         <div class="card-body">
-            <table id="estados_trabajadores" class="table table-striped table-sm display" style="width:100%">
+            <table id="estados_trabajadores" class="table table-striped table-sm table-bordered" style="width:100%">
                 <thead class="thead" style="background-color: skyblue">
                     <tr>
                         <td width='20%'>TRABAJADOR</td>
                         <td width='20%'>UNIDAD</td>
-                        <td width='20%'>GERENCIA</td>
+                        <td width='15%'>GERENCIA</td>
                         <td width='15%'>CREAR POA</td>
                         <td width='15%'>EVALUAR POA</td>
-                        <td>EVALUACIONES</td>
+                        <td width='15%'>EVALUACIONES</td>
                     </tr>
                 </thead>
             </table>
@@ -114,6 +114,13 @@
                     render: function(data, type, row){
                         return `<a href="/ver_evaluaciones/${data}" class="boton default">Ver Evaluación</a>`;
                     }
+                }
+            ],
+            "columnDefs": [
+                {
+                    "targets": -1, // your case last column
+                    "className": "text-center",
+                    // "width": "4%"
                 }
             ],
             "language": {

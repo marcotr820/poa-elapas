@@ -12,6 +12,11 @@ use Illuminate\Http\Request;
 
 class EstadoTrabajadorController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['role:PLANIFICADOR']);
+    }
+    
     public function index(Request $request)
     {
         if($request->ajax()){

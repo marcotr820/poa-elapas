@@ -8,6 +8,7 @@ use App\Models\Evaluaciones;
 use App\Models\Pilares;
 use App\Models\Trabajadores;
 use Carbon\Carbon;
+use Elibyy\TCPDF\Facades\TCPDF as PDF;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,7 @@ class EvaluacionController extends Controller
     public function index(CortoPlazoAcciones $corto_plazo_accion)
     {
         // $fecha_actual = Carbon::now();
-        $fecha_actual = Carbon::createFromDate("2022-04-01");
+        $fecha_actual = Carbon::createFromDate("2023-04-01");
 
         $fecha_inicio = Carbon::createFromDate($corto_plazo_accion->fecha_inicio);
         $fecha_fin = Carbon::createFromDate($corto_plazo_accion->fecha_fin);
@@ -87,7 +88,7 @@ class EvaluacionController extends Controller
     public function store(EvaluacionRequest $request, CortoPlazoAcciones $corto_plazo_accion)
     {
         // $fecha_actual = Carbon::now();
-        $fecha_actual = Carbon::createFromDate("2022-04-01");
+        $fecha_actual = Carbon::createFromDate("2023-04-01");
         switch ($fecha_actual->month) 
         {
             case 4: case 5: case 6:
@@ -122,7 +123,7 @@ class EvaluacionController extends Controller
         $fecha_inicio = Carbon::parse($corto_plazo_accion->fecha_inicio);
         $fecha_now = Carbon::now();
         $fecha_fin = Carbon::parse($corto_plazo_accion->fecha_fin);
-        $relacion_avance = round(($fecha_now->diffInDays($fecha_inicio) / ( $fecha_now->diffInDays($fecha_inicio) * $fecha_fin->diffInDays($fecha_now) ))*100, 2);
+        $relacion_avance = round(($fecha_now->diffInDays($fecha_inicio) / ( $fecha_now->diffInDays($fecha_inicio) + $fecha_fin->diffInDays($fecha_now) ))*100, 2);
         if (!empty($trimestre)) {
             Evaluaciones::create([
                 'resultado_esperado' => $resultado_esperado,
@@ -173,7 +174,7 @@ class EvaluacionController extends Controller
         ]);
     }
 
-    public function ver_evaluaciones(Trabajadores $trabajador)
+    public function ver_evaluaciones(Trabajadores $trabajador)  //vista del planificador para la lista de evaluaciones de un trabajador
     {
         $date = Carbon::now();
         $pilares = Pilares::select('gestion_pilar')->groupBy('gestion_pilar')->orderBy('gestion_pilar', 'ASC')->get();
@@ -198,16 +199,19 @@ class EvaluacionController extends Controller
             ->join('metas', 'metas.id', '=', 'resultados.meta_id')
             ->join('pilares', 'pilares.id', '=', 'metas.pilar_id')
             ->select('corto_plazo_acciones.*')
+            // ->with('evaluaciones')
             ->where('pilares.gestion_pilar', $gestion)
             ->where('unidades.id', $trabajador->unidad->id)
+            ->where('corto_plazo_acciones.status', 'aprobado')
+            ->orWhere('corto_plazo_acciones.status', 'monitoreo')
             ->get();
         } else {
             $corto_plazo_acciones = [];
         }
-        return view('evaluaciones.evaluaciones_trabajador', compact('trabajador', 'corto_plazo_acciones'));
+        return view('evaluaciones.evaluaciones_trabajador', compact('trabajador', 'corto_plazo_acciones', 'pilares'));
     }
 
-    public function acciones_corto_plazo_evaluacion()
+    public function acciones_corto_plazo_evaluacion()   //lista de las evaluaciones de trabajador
     {
         abort_if(auth('usuario')->user()->trabajador->poa_evaluacion != 1, 403);
 
@@ -241,5 +245,65 @@ class EvaluacionController extends Controller
             $corto_plazo_acciones = [];
         }
         return view('evaluaciones.accion_corto_plazo_evaluacion', compact('corto_plazo_acciones'));
+    }
+
+    public function reporte_evaluaciones(Request $request, Trabajadores $trabajador)
+    {
+        $gestion = $request->gestion;
+        abort_if( !Pilares::where('gestion_pilar', $gestion)->exists(), 404);
+        // si alguna accion a corto plazo no se lista es por que no tiene el presupuesto aprobado
+        $corto_plazo_acciones = CortoPlazoAcciones::with('evaluaciones')
+            ->join('pei_objetivos_especificos', 'pei_objetivos_especificos.id', '=', 'corto_plazo_acciones.pei_objetivo_especifico_id')
+            ->join('mediano_plazo_acciones', 'mediano_plazo_acciones.id', '=', 'pei_objetivos_especificos.mediano_plazo_accion_id')
+            ->join('resultados', 'resultados.id', 'mediano_plazo_acciones.resultado_id')
+            ->join('metas', 'metas.id', '=', 'resultados.meta_id')
+            ->join('pilares', 'pilares.id', '=', 'metas.pilar_id')
+            ->select('corto_plazo_acciones.*')
+            ->where('corto_plazo_acciones.trabajador_id', $trabajador->id)
+            ->where('pilares.gestion_pilar', $gestion)
+            ->where('corto_plazo_acciones.status', 'aprobado')->orWhere('corto_plazo_acciones.status', 'monitoreo')
+            ->get();
+
+        $unidad = $trabajador->unidad->nombre_unidad;
+        PDF::SetTitle('Generar Reporte');
+        PDF::setHeaderCallback(function($pdf) use ($gestion, $unidad, $trabajador){
+            $image_file = K_PATH_IMAGES.'logo_elapas.png'; //vendor/tecnickcom/examples/images
+            $pdf->Image($image_file, 5, 2, 32, '', 'PNG', '', 'T', false, 200, '', false, false, 0, false, false, false);
+            // Set font
+            $pdf->Ln(2); /*centrar y dar margin-top al title ESPACIO ENTRE LINEAS*/
+            $pdf->SetFont('helvetica', 'B', 10);
+            // Title
+            $pdf->Ln(1); /*ESPACIO ENTRE LINEAS*/
+            $pdf->Cell(0, 7, 'Reporte Evaluación', 0, 1, 'C', 0, '', 0, false, 'M', 'M');
+            $pdf->SetFont('helvetica', '', 8);
+            $pdf->Cell(0, 5, "Unidad: $unidad", 0, 1, 'C', 0, '', 0, false, 'M', 'M');
+            $pdf->Ln(1);
+            $pdf->Cell(0, 5, "Trabajador: $trabajador->nombre", 0, 1, 'C', 0, '', 0, false, 'M', 'M');
+            $pdf->Ln(1);
+            $pdf->Cell(0, 5, "Gestion: $gestion", 0, 1, 'C', 0, '', 0, false, 'M', 'M');
+        });
+
+        PDF::setFooterCallback(function($pdf) {
+            // Position at 15 mm from bottom
+            $pdf->SetY(-12);
+            // Set font
+            $pdf->SetFont('helvetica', 'I', 8);
+            // date_default_timezone_set('America/La_Paz');
+            // $fecha = date("Y-m-d H:i:s");
+            // Page number
+            $pdf->Cell(0,10,'',0,0,'L');
+            $pdf->Cell(10, 10, 'Página '.$pdf->getAliasNumPage().'/'.$pdf->getAliasNbPages(), 0, false, 'R', 0, '', 0, false, 'T', 'M');
+        });
+        PDF::SetMargins(5, 20, 5); //SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+        // set auto page breaks
+        PDF::SetAutoPageBreak(TRUE, 10);
+        // ---------------------------------------------------------
+        // add a page
+        PDF::AddPage('A4');
+        // return view('evaluaciones.reporte_evaluacion', compact('corto_plazo_acciones'));
+        $view = view('evaluaciones.reporte_evaluacion', compact('corto_plazo_acciones'));
+        $html = $view->render();
+        PDF::writeHTML($html, true, false, true, false, '');
+        PDF::Output('pdfXd.pdf', 'I');
     }
 }

@@ -46,8 +46,6 @@
         $('#operaciones').DataTable({
             "serverSide": true,
             "processing": true,
-            "pageLength": 8,
-            "lengthMenu": [[8, 15, 30, -1], [8, 15, 30, "Todos"]],
             "ajax": "/corto_plazo_acciones/{!!$corto_plazo_accion->uuid!!}/operaciones",
             columns: [
                 { data: 'id'},
@@ -72,6 +70,13 @@
                             `;
                         }
                     }
+                }
+            ],
+            "columnDefs": [
+                {
+                    "targets": -1, // your case last column
+                    "className": "text-center",
+                    // "width": "4%"
                 }
             ],
             "language": {

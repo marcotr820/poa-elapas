@@ -33,7 +33,7 @@
   
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for=""><b>Resultado Esperado:</b></label>
+                        <label for=""><b>Resultado Esperado (%)</b></label>
                         <input type="number" data-error="input" class="form-control" name="resultado_esperado" id="resultado_esperado" required>
                         <span class="text-danger" data-error="span" id="resultado_esperado-error"></span>
                     </div>

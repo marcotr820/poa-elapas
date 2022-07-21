@@ -13,7 +13,7 @@
         <div class="card-body">
             <div class="loading"><b><h5 class="m-0">Loading...</h5></b></div>
             <article style="display:none;">
-                <table id="trabajadores" class="table table-striped table-sm display" style="width:100%;">
+                <table id="trabajadores" class="table table-striped table-bordered table-sm" style="width:100%;">
                     <thead class="thead" style="background-color: skyblue">
                         <tr>
                             <td width="5%">ID</td>
@@ -22,7 +22,7 @@
                             <td width="15%">CARGO</td>
                             <td width="15%">UNIDAD</td>
                             <td width="15%">GERENCIA</td>
-                            <td width="10%"></td>
+                            <td width="10%">ACCIONES</td>
                         </tr>
                     </thead>
                 </table>
@@ -43,7 +43,7 @@
         // },
         "serverSide": true,
         "processing": true,
-        "order": [[ 0, "desc" ]],
+        // "order": [[ 0, "desc" ]],
         "ajax": "{{ route('trabajadores.index') }}",
         columns: [
             { data: 'id', name: 'trabajadores.id'},
@@ -71,6 +71,13 @@
                             `;
                         }
 					}
+            }
+        ],
+        'columnDefs': [
+            {
+                "targets": -1, // your case last column
+                "className": "text-center",
+                // "width": "4%"
             }
         ],
         "language": {

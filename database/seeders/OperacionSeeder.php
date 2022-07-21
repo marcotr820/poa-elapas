@@ -37,7 +37,24 @@ class OperacionSeeder extends Seeder
             ]);
         }
 
-        // PILAR 2023
+        // PILAR 2023 ****************************************************************************************************
+        Operaciones::create([
+            // id = 5
+            'nombre_operacion' => "CONTRATAR EQUIPOS Y MAQUINARIAS ADECUADAS PARA LA OPERACIÓN Y MANTENIMIENTO DE LOS SISTEMAS DE ADUCCIÓN",
+            'corto_plazo_accion_id' => '3'
+        ]);
+        Operaciones::create([
+            // id = 6
+            'nombre_operacion' => "GARANTIZAR LA OPERACIÓN Y MANTENIMIENTO DE LOS SISTEMAS DE ADUCCIÓN.",
+            'corto_plazo_accion_id' => '3'
+        ]);
+        Operaciones::create([
+            // id = 7
+            'nombre_operacion' => "ASEGURAR LA CONDUCCION DE AGUA CRUDA EN EL SISTEMA DE ADUCCIÓN CAJAMARCA.",
+            'corto_plazo_accion_id' => '3'
+        ]);
+        
+        
         // $operaciones_acc1 = [
         //     'ADQUISICION DE DISCOS DUROS PARA SERVIDOR',
         //     'CONFIGURACION DEL SERVIDOR CON EL FIN DE SACAR REPALDOS',

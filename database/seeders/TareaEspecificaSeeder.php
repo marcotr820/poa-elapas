@@ -107,7 +107,55 @@ class TareaEspecificaSeeder extends Seeder
         }
 
 
-        // PILAR 2023
+        // PILAR 2023 *********************************************************************************************************
+        TareasEspecificas::create([
+            'nombre_tarea' => "COTIZAR",
+            'actividad_id' => '9'
+        ]);
+        TareasEspecificas::create([
+            'nombre_tarea' => "REALIZAR FIRMA DE CONVENIOS",
+            'actividad_id' => '9'
+        ]);
+        TareasEspecificas::create([
+            'nombre_tarea' => "REALIZAR INSPECCIÓN DE EQUIPOS",
+            'actividad_id' => '10'
+        ]);
+        TareasEspecificas::create([
+            'nombre_tarea' => "MANTENIMIENTO Y REPARACIÓN DE VEHÍCULOS, MAQUINARIA Y EQUIPOS",
+            'actividad_id' => '10'
+        ]);
+        TareasEspecificas::create([
+            'nombre_tarea' => "EJECUCIÓN DE TAREAS SEGUN LO PROGRAMADO",
+            'actividad_id' => '11'
+        ]);
+        TareasEspecificas::create([
+            'nombre_tarea' => "REALIZAR RESPUESTAS A RECLAMOS",
+            'actividad_id' => '11'
+        ]);
+        TareasEspecificas::create([
+            'nombre_tarea' => "CONTROLAR PARAMETROS DE PROCESOS PARA OPTIMIZAR LA PRODUCCIÓN DE AGUA",
+            'actividad_id' => '12'
+        ]);
+        TareasEspecificas::create([
+            'nombre_tarea' => "INSTALACIÓN Y PUESTA EN MARCHA DE ELECTROBOMBA",
+            'actividad_id' => '12'
+        ]);
+        TareasEspecificas::create([
+            'nombre_tarea' => "IMPLEMENTAR EL SITEMA DE GESTIÓN DE MANTENIMIENTO PREVENTIVO",
+            'actividad_id' => '13'
+        ]);
+        TareasEspecificas::create([
+            'nombre_tarea' => "REALIZAR LA CALIBRACIÓN DE INSTRUMENTOS",
+            'actividad_id' => '13'
+        ]);
+        TareasEspecificas::create([
+            'nombre_tarea' => "CONEXIÓN DE EQUIPOS DE PLANTA POTABILIZADORA",
+            'actividad_id' => '14'
+        ]);
+        TareasEspecificas::create([
+            'nombre_tarea' => "INSTALACIÓN DE SENSORES.",
+            'actividad_id' => '14'
+        ]);
         // $tareas_act1 = [
         //     'COTIZAR'
         // ];

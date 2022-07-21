@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CortoPlazoAcciones;
 use App\Models\Gerencias;
 use App\Models\Partidas;
 use App\Models\Pilares;
@@ -14,6 +15,33 @@ class PdfController extends Controller
 {
     public function pdf_partida_grupo(Request $request)
     {
+        // $gestion = $request->gestion;
+        // return Gerencias::with(["items" => function($q) use ($gestion){
+        //     $q->select('items.*')
+        //     ->join('actividades as act1', 'act1.id', '=', 'items.actividad_id')
+        //     ->join('operaciones as op1', 'op1.id', '=', 'actividades.operacion_id')
+        //     ->join('corto_plazo_acciones as cpa1', 'cpa1.id', '=', 'operaciones.corto_plazo_accion_id')
+        //     ->join('pei_objetivos_especificos', 'pei_objetivos_especificos.id', '=', 'corto_plazo_acciones.pei_objetivo_especifico_id')
+        //     ->join('mediano_plazo_acciones', 'mediano_plazo_acciones.id', '=', 'pei_objetivos_especificos.mediano_plazo_accion_id')
+        //     ->join('resultados', 'resultados.id', '=', 'mediano_plazo_acciones.resultado_id')
+        //     ->join('metas', 'metas.id', '=', 'resultados.meta_id')
+        //     ->join('pilares', 'pilares.id', '=', 'metas.pilar_id')
+        //     ->where('pilares.gestion_pilar', $gestion);
+        // }])->get();
+
+        // $grupos_partidas = [];
+        // $i = 0;
+        // $partidas = Partidas::get();
+        // foreach ($partidas as $p) {
+        //     if($i != substr($p->codigo_partida, 0,1)){
+        //         $grupo = [];
+        //         array_push($grupo, $p->codigo_partida);
+        //         array_push($grupos_partidas, $grupo);
+        //         $i++;
+        //     }
+        // }
+        // // return $grupos_partidas;
+        
         $gestion = $request->gestion;
 
         abort_if( !Pilares::where('gestion_pilar', $gestion)->exists(), 404);

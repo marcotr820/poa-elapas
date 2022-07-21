@@ -317,4 +317,15 @@
             </tr>
         @endforelse
     </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="5"></td>
+            <td><b>TOTAL</b></td>
+            <?php $total = 0; ?>
+            @foreach ($corto_plazo_acciones as $cpa)
+                <?php $total += $cpa->items->sum('presupuesto') ?>
+            @endforeach
+            <td>{{number_format($total, 2, ".", ",")}} Bs.</td>
+        </tr>
+    </tfoot>
 </table>

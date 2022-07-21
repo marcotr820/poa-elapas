@@ -30,6 +30,7 @@ class RoleSeeder extends Seeder
         Permission::create(['guard_name' => 'usuario', 'name' => 'VER-ESTADOS-POA'])->assignRole($role2);
         Permission::create(['guard_name' => 'usuario', 'name' => 'VER-PRESUPUESTOS-REQUERIDOS'])->assignRole($role2);
         Permission::create(['guard_name' => 'usuario', 'name' => 'VER-REPORTES-POA'])->assignRole($role2);
+        Permission::create(['guard_name' => 'usuario', 'name' => 'CONSOLIDAR-POA'])->assignRole($role2);
 
         // TRABAJADOR
         Permission::create(['guard_name' => 'usuario', 'name' => 'VER-POA'])->assignRole($role3);
@@ -39,6 +40,6 @@ class RoleSeeder extends Seeder
         
 
         // GERENTE
-        Permission::create(['guard_name' => 'usuario', 'name' => 'VER-POA-UNIDADES-GERENCIA'])->assignRole($role4);
+        Permission::create(['guard_name' => 'usuario', 'name' => 'VER-POA-UNIDADES-GERENCIA'])->syncRoles($role4, $role2);
     }
 }

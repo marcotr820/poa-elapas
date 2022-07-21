@@ -23,50 +23,47 @@ class CortoPlazoAccionController extends Controller
         // ->addSelect(['count_planificacion' => Planificaciones::selectRaw('COUNT(*)')->whereColumn('corto_plazo_accion_id', 'corto_plazo_acciones.id')])
         // ->get();
 
-        // si el trabajador no tiene su tado poa en 1 lanzara error 403
-        abort_if(auth('usuario')->user()->trabajador->poa_status != 1, 403);
+        // if($request->ajax())
+        // {
+        //     $date = Carbon::now()->addYear();
+        //     $pilares = Pilares::select('gestion_pilar')->groupBy('gestion_pilar')->orderBy('gestion_pilar', 'ASC')->get();
 
-        if($request->ajax())
-        {
-            $date = Carbon::now()->addYear();
-            $pilares = Pilares::select('gestion_pilar')->groupBy('gestion_pilar')->orderBy('gestion_pilar', 'ASC')->get();
+        //     if ($pilares->count()) {
+        //         // si existe un pilar para la gestion siguiente se buscara los pilares con la gestion siguiente, si no se mostrara los pilares de la ultima gestion creada
+        //         if ($pilares->last()->gestion_pilar == $date->year) {
+        //             $gestion = $date->year;
+        //         }else{
+        //             $gestion = $pilares->last()->gestion_pilar;
+        //         }
+        //     }
 
-            if ($pilares->count()) {
-                // si existe un pilar para la gestion siguiente se buscara los pilares con la gestion siguiente, si no se mostrara los pilares de la ultima gestion creada
-                if ($pilares->last()->gestion_pilar == $date->year) {
-                    $gestion = $date->year;
-                }else{
-                    $gestion = $pilares->last()->gestion_pilar;
-                }
-            }
+        //     if (isset($gestion)){
+        //         $corto_plazo_acciones = CortoPlazoAcciones::join('trabajadores', 'trabajadores.id', '=', 'corto_plazo_acciones.trabajador_id')
+        //         ->join('unidades', 'unidades.id', '=', 'trabajadores.unidad_id')
+        //         ->join('pei_objetivos_especificos', 'pei_objetivos_especificos.id', '=', 'corto_plazo_acciones.pei_objetivo_especifico_id')
+        //         ->join('mediano_plazo_acciones', 'mediano_plazo_acciones.id', '=', 'pei_objetivos_especificos.mediano_plazo_accion_id')
+        //         ->join('resultados', 'resultados.id', 'mediano_plazo_acciones.resultado_id')
+        //         ->join('metas', 'metas.id', '=', 'resultados.meta_id')
+        //         ->join('pilares', 'pilares.id', '=', 'metas.pilar_id')
+        //         ->select('corto_plazo_acciones.*')
+        //         ->where('pilares.gestion_pilar', $gestion)
+        //         ->where('unidades.id', auth('usuario')->user()->trabajador->unidad->id)
+        //         ->where('corto_plazo_acciones.status', 'aprobado')
+        //         ->addSelect(['count_planificacion' => Planificaciones::selectRaw('COUNT(*)')->whereColumn('corto_plazo_accion_id', 'corto_plazo_acciones.id')]);
+        //     } else {
+        //         $corto_plazo_acciones = [];
+        //     }
 
-            if (isset($gestion)){
-                $corto_plazo_acciones = CortoPlazoAcciones::join('trabajadores', 'trabajadores.id', '=', 'corto_plazo_acciones.trabajador_id')
-                ->join('unidades', 'unidades.id', '=', 'trabajadores.unidad_id')
-                ->join('pei_objetivos_especificos', 'pei_objetivos_especificos.id', '=', 'corto_plazo_acciones.pei_objetivo_especifico_id')
-                ->join('mediano_plazo_acciones', 'mediano_plazo_acciones.id', '=', 'pei_objetivos_especificos.mediano_plazo_accion_id')
-                ->join('resultados', 'resultados.id', 'mediano_plazo_acciones.resultado_id')
-                ->join('metas', 'metas.id', '=', 'resultados.meta_id')
-                ->join('pilares', 'pilares.id', '=', 'metas.pilar_id')
-                ->select('corto_plazo_acciones.*')
-                ->where('pilares.gestion_pilar', $gestion)
-                ->where('unidades.id', auth('usuario')->user()->trabajador->unidad->id)
-                ->where('corto_plazo_acciones.status', 'aprobado')
-                ->addSelect(['count_planificacion' => Planificaciones::selectRaw('COUNT(*)')->whereColumn('corto_plazo_accion_id', 'corto_plazo_acciones.id')]);
-            } else {
-                $corto_plazo_acciones = [];
-            }
-
-            return datatables($corto_plazo_acciones)->make(true);
+        //     return datatables($corto_plazo_acciones)->make(true);
             
-            // return datatables()
-            //     ->eloquent($corto_plazo_acciones)
-            //     // ->addColumn('btn_planificacion_evaluacion', 'corto_plazo_acciones.btn_planificacion_evaluacion')
-            //     // ->rawColumns(['btn_planificacion_evaluacion'])
-            //     ->toJson();
-        }
+        //     // return datatables()
+        //     //     ->eloquent($corto_plazo_acciones)
+        //     //     // ->addColumn('btn_planificacion_evaluacion', 'corto_plazo_acciones.btn_planificacion_evaluacion')
+        //     //     // ->rawColumns(['btn_planificacion_evaluacion'])
+        //     //     ->toJson();
+        // }
 
-        return view('corto_plazo_acciones.lista_planificacion_evaluacion');
+        // return view('corto_plazo_acciones.lista_planificacion_evaluacion');
     }
 
     public function index(Request $request, PeiObjetivosEspecificos $pei_objetivo_especifico)

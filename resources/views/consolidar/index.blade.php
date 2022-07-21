@@ -4,7 +4,7 @@
 
 @section('contenido')
     <div class="card">
-        <h5 class="card-header bg-dark text-white">Generar Reporte POA Por Gerencia</h5>
+        <h5 class="card-header bg-dark text-white">Generar Reporte POA Consolidado Por Gerencia</h5>
         <div class="card-body border border-dark">
             <form action="{{ route('pdf.consolidar') }}" target="_blank">
                 @csrf   @method('GET')

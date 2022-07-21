@@ -38,7 +38,7 @@ class ItemController extends Controller
 
         // verificacion item no salga de los rangos fecha de la accion corto plazo
         if(! ( strtotime($request->fecha_requerida) >= strtotime($inicio) && strtotime($request->fecha_requerida) <= strtotime($fin) )){
-            throw ValidationException::withMessages(['fecha_requerida' => 'fecha fuera de rango']);
+            throw ValidationException::withMessages(['fecha_requerida' => "rangos validos entre $inicio hasta $fin"]);
         }
 
         // verificacion que no se sobrepase el presupuesto asignado

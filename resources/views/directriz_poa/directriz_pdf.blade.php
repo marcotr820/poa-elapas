@@ -14,6 +14,7 @@
             <th>RESULTADOS</th>
             <th>ACCIONES MEDIANO PLAZO</th>
             <th>OBJETIVO INSTITUCIONAL ESPECIFICO</th>
+            <th>PONDERACIÓN (%)</th>
             <th>AREA RESPONSABLE</th>
         </tr>
     </thead>
@@ -90,6 +91,7 @@
                                             <?php $var_amp = $amp; ?>
                                             @if ($loop->first)
                                                 <td>{{ $obj->objetivo_institucional }}</td>
+                                                <td>{{ $obj->ponderacion }} %</td>
                                                 <td>{{ $obj->gerencia->nombre_gerencia }}</td>
                                             @endif
                                         @empty
@@ -125,6 +127,7 @@
                     @if (!$loop->first)
                         <tr>
                             <td>{{ $obj->objetivo_institucional }}</td>
+                            <td>{{ $obj->ponderacion }} %</td>
                             <td>{{ $obj->gerencia->nombre_gerencia }}</td>
                         </tr>
                     @endif
@@ -150,6 +153,7 @@
                                 <?php $var_amp = $amp; ?>
                                 @if ($loop->first)
                                 <td>{{ $obj->objetivo_institucional }}</td>
+                                <td>{{ $obj->ponderacion }} %</td>
                                 <td>{{ $obj->gerencia->nombre_gerencia }}</td>
                                 @endif
                             @empty
@@ -164,6 +168,7 @@
                                 @if (!$loop->first)
                                     <tr>
                                         <td>{{ $obj->objetivo_institucional }}</td>
+                                        <td>{{ $obj->ponderacion }} %</td>
                                         <td>{{ $obj->gerencia->nombre_gerencia }}</td>
                                     </tr>
                                 @endif
@@ -210,6 +215,7 @@
                                         <?php $var_amp = $amp; ?>
                                         @if ($loop->first)
                                             <td>{{ $obj->objetivo_institucional }}</td>
+                                            <td>{{ $obj->ponderacion }} %</td>
                                             <td>{{ $obj->gerencia->nombre_gerencia }}</td>
                                         @endif
                                     @empty
@@ -230,6 +236,7 @@
                                 @if (!$loop->first)
                                     <tr>
                                         <td>{{ $obj->objetivo_institucional }}</td>
+                                        <td>{{ $obj->ponderacion }} %</td>
                                         <td>{{ $obj->gerencia->nombre_gerencia }}</td>
                                     </tr>
                                 @endif
@@ -255,6 +262,7 @@
                                             <?php $var_amp = $amp ?>
                                             @if ($loop->first)
                                                 <td>{{ $obj->objetivo_institucional }}</td>
+                                                <td>{{ $obj->ponderacion }} %</td>
                                                 <td>{{ $obj->gerencia->nombre_gerencia }}</td>
                                             @endif
                                         @empty
@@ -269,6 +277,7 @@
                                             @if (!$loop->first)
                                                 <tr>
                                                     <td>{{ $obj->objetivo_institucional }}</td>
+                                                    <td>{{ $obj->ponderacion }} %</td>
                                                     <td>{{ $obj->gerencia->nombre_gerencia }}</td>
                                                 </tr>
                                             @endif
@@ -337,6 +346,7 @@
                                             <?php $var_amp = $amp; ?>
                                             @if ($loop->first)
                                                 <td>{{ $obj->objetivo_institucional }}</td>
+                                                <td>{{ $obj->ponderacion }} %</td>
                                                 <td>{{ $obj->gerencia->nombre_gerencia }}</td>
                                             @endif
                                         @empty
@@ -365,6 +375,7 @@
                             @if (!$loop->first)
                                 <tr>
                                     <td>{{ $obj->objetivo_institucional }}</td>
+                                    <td>{{ $obj->ponderacion }} %</td>
                                     <td>{{ $obj->gerencia->nombre_gerencia }}</td>
                                 </tr>
                             @endif
@@ -390,6 +401,7 @@
                                     <?php $var_amp = $amp; ?>
                                     @if ($loop->first)
                                         <td>{{ $obj->objetivo_institucional }}</td>
+                                        <td>{{ $obj->ponderacion }} %</td>
                                         <td>{{ $obj->gerencia->nombre_gerencia }}</td>
                                     @endif
                                 @empty
@@ -404,6 +416,7 @@
                                     @if (!$loop->first)
                                         <tr>
                                             <td>{{ $obj->objetivo_institucional }}</td>
+                                            <td>{{ $obj->ponderacion }} %</td>
                                             <td>{{ $obj->gerencia->nombre_gerencia }}</td>
                                         </tr>
                                     @endif
@@ -449,6 +462,7 @@
                                             <?php $var_amp = $amp; ?>
                                             @if ($loop->first)
                                                 <td>{{ $obj->objetivo_institucional }}</td>
+                                                <td>{{ $obj->ponderacion }} %</td>
                                                 <td>{{ $obj->gerencia->nombre_gerencia }}</td>
                                             @endif
                                         @empty
@@ -469,6 +483,7 @@
                                     @if (!$loop->first)
                                         <tr>
                                             <td>{{ $obj->objetivo_institucional }}</td>
+                                            <td>{{ $obj->ponderacion }} %</td>
                                             <td>{{ $obj->gerencia->nombre_gerencia }}</td>
                                         </tr>
                                     @endif
@@ -492,6 +507,7 @@
                                                 <?php $var_amp = $amp; ?>
                                                 @if ($loop->first)
                                                     <td>{{ $obj->objetivo_institucional }}</td>
+                                                    <td>{{ $obj->ponderacion }} %</td>
                                                     <td>{{ $obj->gerencia->nombre_gerencia }}</td>
                                                 @endif
                                             @empty
@@ -506,6 +522,7 @@
                                                 @if (!$loop->first)
                                                     <tr>
                                                         <td>{{ $obj->objetivo_institucional }}</td>
+                                                        <td>{{ $obj->ponderacion }} %</td>
                                                         <td>{{ $obj->gerencia->nombre_gerencia }}</td>
                                                     </tr>
                                                 @endif

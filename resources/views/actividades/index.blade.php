@@ -12,7 +12,7 @@
                 </tr>
                 <tr>
                     <td width="15%" class="font-weight-bold">Operación</td>
-                    <td>{{$operacion->corto_plazo_accion->accion_corto_plazo}}</td>
+                    <td>{{$operacion->nombre_operacion}}</td>
                 </tr>
             </table>
         </div>
@@ -26,14 +26,14 @@
             </div>
         </h5>
         <div class="card-body">
-            <table id="actividades" class="table table-striped table-sm display" style="width:100%">
+            <table id="actividades" class="table table-striped table-sm table-bordered" style="width:100%">
                 <thead class="thead" style="background-color: skyblue">
                     <tr>
-                        <td width='5%'>ID</td>
-                        <td>ACTIVIDAD</td>
-                        <td width="20%">RESULTADOS INTERMEDIOS ESPERADOS</td>
-                        <td>ITEMS PRESUPUESTO EJECUTADO</td>
-                        <td width='22%'>ACCIONES</td>
+                        <td width="5%">ID</td>
+                        <td width="20%">ACTIVIDAD</td>
+                        <td width="25%">RESULTADOS INTERMEDIOS ESPERADOS</td>
+                        <td width="25%">ITEMS PRESUPUESTO EJECUTADO</td>
+                        <td width="25%"">ACCIONES</td>
                     </tr>
                 </thead>
             </table>
@@ -85,6 +85,13 @@
                             `;
                         }
                     }
+                }
+            ],
+            "columnDefs": [
+                {
+                    "targets": -1, // your case last column
+                    "className": "text-center",
+                    // "width": "4%"
                 }
             ],
             "language": {

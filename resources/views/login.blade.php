@@ -15,43 +15,34 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-	<div class="container">
-		<div class="card">
-			<div class="card-header">
-				<img src="{{asset('libs/css/login/img/login_elapas.png')}}" alt="">
-			</div>
-			
-			@if (session()->has('error_login'))
+	<div class="contenedor">
+		@if (session()->has('error_login'))
 				<div class="alert alert-danger alert-dismissible fade show border border-danger m-0" role="alert">
-					<strong>{!!session('error_login')!!}</strong>
+					{!!session('error_login')!!}
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-			@endif
+		@endif
 
-			<div class="card-body">
+		<div class="caja">
+			<div class="caja-header">
+				<img src="{{asset('libs/css/login/img/login_elapas.png')}}" alt="">
+			</div>
+			<div class="caja-body">
 				<form action="{{route('autenticacion')}}" method="POST">
-					@csrf
-					<div class="form-group">
-					<label for=""><strong>Documento / CI</strong></label>
-						<div class="input-group mb-2">
-							<!--preguntamos si hay algun error en el capo con name usuario si hay imprime is-invalid-->
-							<input type="number" name="usuario" class="form-control {{$errors->has('usuario') ? 'is-invalid' : ''}}" value="{{old('usuario')}}" placeholder="Documento..." autocomplete="off" required>
-						</div>
+					@csrf	@method('POST')
+					<div class="form-group mb-2">
+						<label>Documento / CI</label>
+						<input type="number" name="usuario" value="{{ old('usuario') }}" placeholder="Documento">
 						<span class="text-danger">@error('usuario') {{ $message }} @enderror</span>
 					</div>
-					
-					<div class="form-group">
-						<label for=""><strong>Password</strong></label>
-						<div class="input-group mb-2">
-							<input type="password" name="password" class="form-control {{$errors->has('password') ? 'is-invalid' : ''}}" placeholder="Password..." required>
-							{{-- <input type="password" name="password" class="form-control {{$errors->has('password') ? 'is-invalid' : ''}}" placeholder="Password..."> --}}
-						</div>
+					<div class="form-group mb-2">
+						<label>Contraseña</label>
+						<input type="password" name="password" placeholder="Contraseña">
 						<span class="text-danger">@error('password') {{ $message }} @enderror</span>
 					</div>
-
-					<button type="submit" class="btn btn-primary btn-block mt-4">Iniciar Sesión</button>
+					<button type="submit" class="btn btn-primary btn-block mt-3">Ingresar</button>
 				</form>
 			</div>
 		</div>
