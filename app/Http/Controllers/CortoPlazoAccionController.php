@@ -79,6 +79,10 @@ class CortoPlazoAccionController extends Controller
                 ->addColumn('planificacion', function (CortoPlazoAcciones $corto_plazo_accion){
                     return $corto_plazo_accion->planificacion()->count();
                 })
+                // contamos las evaluaciones que se tenga
+                ->addColumn('evaluaciones', function(CortoPlazoAcciones $corto_plazo_accion){
+                    return $corto_plazo_accion->evaluaciones()->count();
+                })
                 // ->rawColumns(['btn_corto_plazo'])
                 ->toJson();
         }
@@ -112,6 +116,13 @@ class CortoPlazoAccionController extends Controller
 
     public function update(CortoPlazoAccionRequest $request, CortoPlazoAcciones $corto_plazo_accion)
     {
+        $nuevo_presupuesto = $request->presupuesto_programado;
+        $total_ejecutado = $corto_plazo_accion->evaluaciones->sum('presupuesto_ejecutado');
+        if($nuevo_presupuesto < $total_ejecutado)
+        {
+            throw ValidationException::withMessages(["presupuesto_programado" => "No se puede asignar un presupuesto menor a $total_ejecutado Bs."]);
+        }
+
         $corto_plazo_accion->update([
             'gestion' => $request->gestion,
             'accion_corto_plazo' => Str::upper($request->accion_corto_plazo),

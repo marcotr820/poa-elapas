@@ -208,6 +208,9 @@ Route::group(['middleware' => ['auth:usuario']], function(){
     Route::put('/evaluacion/{evaluacion}', [EvaluacionController::class, 'update']);
     Route::get('/ver_evaluaciones/{trabajador}', [EvaluacionController::class, 'ver_evaluaciones'])->name('ver_evaluaciones');
     Route::get('/reporte_evaluaciones/{trabajador}', [EvaluacionController::class, 'reporte_evaluaciones'])->name('reporte_evaluaciones');
+    // Route::get('/evaluaciones_graficas/{trabajador}', [EvaluacionController::class, 'evaluaciones_graficas'])->name('evaluaciones_graficas');
+    // Route::get('/evaluaciones_presupuesto_grafica/{trabajador}', [EvaluacionController::class, 'evaluaciones_presupuesto_grafica'])->name('evaluaciones_presupuesto_graficas');
+    Route::get('/evaluacion_graficas/{corto_plazo_accion}', [EvaluacionController::class, 'evaluacion_graficas'])->name('evaluacion_graficas');
 
     /****************************************** ROLES ******************************************/
     Route::resource('/roles', RoleController::class)->only('index', 'store', 'update', 'destroy');

@@ -9,6 +9,7 @@ use App\Models\Pilares;
 use App\Models\Trabajadores;
 use Carbon\Carbon;
 use Elibyy\TCPDF\Facades\TCPDF as PDF;
+use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
 
@@ -305,5 +306,49 @@ class EvaluacionController extends Controller
         $html = $view->render();
         PDF::writeHTML($html, true, false, true, false, '');
         PDF::Output('pdfXd.pdf', 'I');
+    }
+
+    // public function evaluaciones_graficas(Request $request, Trabajadores $trabajador)
+    // {
+    //     if($request->ajax())
+    //     {   
+    //         return CortoPlazoAcciones::with('evaluaciones', 'planificacion')->get();
+    //     }
+
+    //     $corto_plazo_acciones = CortoPlazoAcciones::get();
+    //     $data = [];
+    //     $data['label'][] = 'Primer Trimestre';
+    //     $data['label'][] = 'Segundo Trimestre';
+    //     $data['label'][] = 'Tercer Trimestre';
+    //     $data['label'][] = 'Cuarto Trimestre';
+
+    //     foreach ($corto_plazo_acciones as $cpa) {
+    //         // $data['label'][] = $t->nombre;
+    //         $data['corto_plazo_acciones'][] = $cpa->accion_corto_plazo;
+    //         $data['resultado_esperado'][] = $cpa->resultado_esperado;
+    //     }
+    //     $data['data'] = json_encode($data);
+
+    //     // return $corto_plazo_acciones;
+
+    //     return view('evaluaciones.evaluaciones_graficas', $data);
+    // }
+
+    // public function evaluaciones_presupuesto_grafica(Request $request, Trabajadores $trabajador)
+    // {
+    //     if($request->ajax())
+    //     {   
+    //         return CortoPlazoAcciones::with('evaluaciones')->get();
+    //     }
+    //     return view('evaluaciones.evaluaciones_presupuesto_graficas');
+    // }
+
+    public function evaluacion_graficas(Request $request, CortoPlazoAcciones $corto_plazo_accion)
+    {
+        if($request->ajax())
+        {
+            return CortoPlazoAcciones::with('evaluaciones', 'planificacion')->where('uuid', $corto_plazo_accion->uuid)->first();
+        }
+        return view('evaluaciones.graficas_evaluacion_trabajador', compact('corto_plazo_accion'));
     }
 }

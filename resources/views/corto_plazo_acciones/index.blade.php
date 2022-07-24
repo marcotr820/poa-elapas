@@ -59,8 +59,9 @@
                 { data: 'resultado_esperado'},
                 { 
                     data: 'presupuesto_programado',
-                    render: function(data, type) {
+                    render: function(data, type, row) {
                     var number = $.fn.dataTable.render.number( ',', '.', 2, 'Bs ').display(data);
+                        // row.evaluaciones
                         return number;
                     }
                 },

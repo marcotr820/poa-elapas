@@ -31,6 +31,7 @@ function edit(accion_uuid){
                     $(document).find('[data-error="span"]').text('');
                 },
                 success:function(res){
+                    // console.log(res);
                     $('#corto_plazo_acciones').DataTable().ajax.reload(null, false);
                     $("#modal").modal("hide");
                 },
@@ -102,12 +103,21 @@ d.addEventListener('click', (e)=>{
     }
 
     if(e.target.matches('[data-edit]') || e.target.matches('[data-edit] *')){
+        // quitamos al hiden a los campos fechas al abrir el formulario
+        d.getElementById('fecha_inicio').parentElement.parentElement.hidden = false;
+        d.getElementById('fecha_fin').parentElement.parentElement.hidden = false;
+
         d.querySelector('.overlay').classList.remove('show');
         $(document).find('[data-error="input"]').removeClass('is-invalid');
         $(document).find('[data-error="textarea"]').removeClass('is-invalid');
         $(document).find('[data-error="span"]').text('');
         d.getElementById('form').removeAttribute('data-form');
         let data = $('#corto_plazo_acciones').DataTable().row($(e.target).parents('tr') ).data();
+        if(data.evaluaciones > 0){
+            // si la accion corto ya tiene evaluaciones se ocultara la fecha para que no pueda ser editada
+            d.getElementById('fecha_inicio').parentElement.parentElement.hidden = true;
+            d.getElementById('fecha_fin').parentElement.parentElement.hidden = true;
+        }
         $("#accion_corto_plazo").val(data.accion_corto_plazo);
         $("#gestion").val(data.gestion);
         $("#resultado_esperado").val(data.resultado_esperado);

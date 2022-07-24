@@ -15,7 +15,7 @@ class TrabajadorController extends Controller
 {
     public function __construct(){
         // solo los usuarios con los permisos especificados podran ingresar a los metodos
-        $this->middleware(['permission:SUPER-ADMIN|edit-articles']);
+        // $this->middleware(['permission:SUPER-ADMIN|edit-articles']);
     }
 
     public function index(Request $request){

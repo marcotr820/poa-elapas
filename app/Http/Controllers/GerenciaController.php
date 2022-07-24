@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\GerenciaRequest;
+use App\Models\CortoPlazoAcciones;
 use App\Models\Gerencias;
 use DateTime;
 use Illuminate\Support\Str;
@@ -12,14 +13,14 @@ class GerenciaController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['role:ADMIN']);
+        // $this->middleware(['role:ADMIN']);
     }
 
     public function index(Request $request){
         // return (string) Str::uuid().round(microtime(true) * 1000);
         // abort_if(!auth('usuario')->user()->can('super-admi'), 403, 'error');
         if($request->ajax())
-        {
+        {   
             $query = Gerencias::select('id', 'nombre_gerencia', 'uuid')->orderBy('id');
             return datatables($query)->make(true);
             // return datatables()
