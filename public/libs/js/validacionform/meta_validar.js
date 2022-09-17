@@ -23,6 +23,7 @@ function edit(meta_uuid){
             $(document).find('[data-error="span"]').text('');
             $(document).find('[data-error="textarea"]').removeClass('is-invalid');
             axios.put('/metas/'+ meta_uuid,{
+               //codigo_meta: d.getElementById('codigo_meta').value,
                 nombre_meta: d.getElementById('nombre_meta').value,
             })
             .then(function (resp){
@@ -84,6 +85,7 @@ d.addEventListener('click', (e)=>{
         //si cerramos el modal con errores al volver a abrirlo quitamos los errores anterires llamando a sus clases de cada elemento
         $(document).find('[data-error="span"]').text('');
         $(document).find('[data-error="textarea"]').removeClass('is-invalid');
+        $(document).find('[data-error="input"]').removeClass('is-invalid');
     }
 
     if(e.target.matches('[data-edit]') || e.target.matches('[data-edit] *'))
@@ -92,8 +94,10 @@ d.addEventListener('click', (e)=>{
         d.getElementById('form').removeAttribute('data-form');
         $(document).find('[data-error="span"]').text('');
         $(document).find('[data-error="textarea"]').removeClass('is-invalid');
+        $(document).find('[data-error="input"]').removeClass('is-invalid');
         // let data = tabla_metas.row($(this).parents('tr') ).data();
         let data = $('#metas').DataTable().row($(e.target).parents('tr') ).data();
+        $("#codigo_meta").val(data.codigo_meta);
         $("#nombre_meta").val(data.nombre_meta);
         $("#modal .modal-title").text("Editar Meta"); 
         $("#modal").modal("show");
@@ -120,6 +124,7 @@ d.addEventListener('submit', (e)=>{
             d.querySelector('.overlay').classList.add('show');
             $(document).find('[data-error="span"]').text('');
             $(document).find('[data-error="textarea"]').removeClass('is-invalid');
+            $(document).find('[data-error="input"]').removeClass('is-invalid');
             const datos = new FormData(e.target);
             axios.post('/metas/'+ pilar_uuid, datos) //enviamos todos los input del form
         	.then(function (response) {

@@ -16,6 +16,7 @@ class Resultados extends Model
     }
 
     protected $fillable = [
+        'codigo_resultado',
         'nombre_resultado',
         'meta_id'
     ];

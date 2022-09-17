@@ -16,11 +16,11 @@
             <table id="usuarios" class="table table-striped table-sm table-bordered" style="width:100%">
                 <thead class="thead" style="background-color: skyblue;">
                     <tr>
-                        <td width="5%">ID</td>
+                        {{-- <td width="5%">ID</td> --}}
                         <td width="15%">USUARIO</td>
                         <td width="20%">ROL</th>
                         <td width="20%">TRABAJADOR</td>
-                        <td width="20%">AREA RESPONSABLE</td>
+                        <td width="25%">AREA RESPONSABLE</td>
                         <td width="10%">ACCIONES</td>
                     </tr>
                 </thead>
@@ -45,7 +45,8 @@
                 // { data: 'usuario_id', name:'trabajadores.usuario_id'},
                 // { data: 'usuario', name:'usuarios.usuario' },
                 // { data: 'nombre', name:'trabajadores.nombre'},
-                { data: 'id'},
+                
+                // { data: 'id'},
                 { data: 'usuario'},
                 { 
                     data: 'roles', name: 'roles.name',

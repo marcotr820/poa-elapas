@@ -16,7 +16,7 @@
     </div>
 
     <div class="form-group mb-3">
-        <label class="font-weight-bold">Seleccione Objetivo Especifico:</label>
+        <label class="font-weight-bold">Seleccione Acción Institucional Especifica:</label>
         <select id="select2" class="select2" style="width: 100%, display:flex;">
             {{-- <option value=""> -- Seleccione Objetivo Institucional Especifico -- </option>
             @foreach ($objetivos_especificos as $obj)
@@ -29,7 +29,7 @@
         <div class="card-header p-2">
             <table class="table table-bordered table-sm m-0">
                 <tr>
-                    <td width="15%" class="font-weight-bold">OBJETIVO ESPECIFICO</td>
+                    <td width="22%" class="font-weight-bold">ACCIÓN INSTITUCIONAL ESPECÍFICA</td>
                     <td><span class="objetivo_especifico"></span></td>
                 </tr>
                 <tr>

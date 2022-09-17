@@ -15,6 +15,7 @@ class CreateResultadosTable extends Migration
     {
         Schema::create('resultados', function (Blueprint $table) {
             $table->id();
+            // $table->integer('codigo_resultado');
             $table->string('nombre_resultado');
             $table->unsignedBigInteger('meta_id');
             $table->string('uuid', 49)->unique();

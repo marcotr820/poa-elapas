@@ -16,6 +16,11 @@
         <form action="" method="POST" id="form" autocomplete="off">  
           @csrf
           <div class="modal-body p-3">
+            {{-- <div class="form-group">
+              <label for="" class="col-form-label"><b>Codigo Meta <span class="text-danger">*</span></b></label>
+              <input type="number" class="form-control" data-error="input" name="codigo_meta" id="codigo_meta">
+              <span class="text-danger" data-error="span" id="codigo_meta-error"></span>
+            </div> --}}
             <div class="form-group">
               <label for="" class="col-form-label"><b>Nombre Meta <span class="text-danger">*</span></b></label>
               <textarea name="nombre_meta" id="nombre_meta" data-error="textarea" class="form-control" cols="30" rows="3" required></textarea>

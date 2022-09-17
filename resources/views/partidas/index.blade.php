@@ -29,7 +29,7 @@
                 <table id="partidas" class="table table-striped table-sm table-bordered" style="width:100%">
                     <thead class="thead border-dark" style="background-color: skyblue;">
                         <tr>
-                            <td width='5%'>ID</td>
+                            {{-- <td width='5%'>ID</td> --}}
                             <td>PARTIDA</td>
                             <td>CODIGO PARTIDA</td>
                             <td>TIPO PARTIDA</td>
@@ -58,7 +58,7 @@
             "order": [0, "desc"],
             "ajax": "{{ route('partidas.index' )}}",
             columns: [
-                { data: 'id'},
+                // { data: 'id'},
                 { data: 'nombre_partida'},
                 { data: 'codigo_partida'},
                 { data: 'tipo_partida'},

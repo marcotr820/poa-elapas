@@ -11,6 +11,7 @@ class Metas extends Model
     use HasFactory;
 
     protected $fillable = [
+        'codigo_meta',
         'nombre_meta',
         'status',
         'pilar_id',

@@ -88,7 +88,7 @@ d.addEventListener('click', (e)=>{
         $(document).find('[data-error="select"]').removeClass('is-invalid');
         $(document).find('[data-error="textarea"]').removeClass('is-invalid');
         $("#form").trigger("reset");
-        $("#modal .modal-title").text("Nuevo Objetivo Institucional");
+        $("#modal .modal-title").text("Nueva Acción Institucional");
         d.getElementById('form').setAttribute('data-form', '');
         //si cerramos el modal con errores al volver a abrirlo quitamos los errores anterires llamando a sus clases de cada elemento
         $("#modal").modal("show");

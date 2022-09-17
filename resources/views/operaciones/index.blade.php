@@ -25,7 +25,7 @@
             <table id="operaciones" class="table table-bordered table-sm table-striped" style="width:100%">
                 <thead class="thead" style="background-color: skyblue;">
                     <tr>
-                        <td width='5%'>ID</td>
+                        {{-- <td width='5%'>ID</td> --}}
                         <td>OPERACION</td>
                         <td width="20%">ACCIONES</td>
                     </tr>
@@ -48,7 +48,7 @@
             "processing": true,
             "ajax": "/corto_plazo_acciones/{!!$corto_plazo_accion->uuid!!}/operaciones",
             columns: [
-                { data: 'id'},
+                // { data: 'id'},
                 { data: 'nombre_operacion'},
                 { 
                     data: 'uuid' ,

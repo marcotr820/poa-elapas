@@ -5,8 +5,20 @@
 @section('contenido')
    <div class="card">
       <div class="card-header">
-         <b>Acción Corto Plazo: </b> {{ $corto_plazo_accion->accion_corto_plazo }}
-         <br>
+         <table class="table table-bordered table-sm m-0">
+            <tr>
+               <td width="15%" class="font-weight-bold">Trabajador</td>
+               <td>{{ $corto_plazo_accion->trabajador->nombre }}</td>
+            </tr>
+            <tr>
+               <td width="15%" class="font-weight-bold">Unidad</td>
+               <td>{{ $corto_plazo_accion->trabajador->unidad->nombre_unidad }}</td>
+            </tr>
+            <tr>
+                <td width="15%" class="font-weight-bold">Acción Corto Plazo</td>
+                <td>{{ $corto_plazo_accion->accion_corto_plazo }} </td>
+            </tr>
+         </table>
          <a href="javascript:history.back()" class="boton red mt-2"><i class="fas fa-arrow-left"></i> Volver Atrás</a>
       </div>
       <div class="card-body">
@@ -42,7 +54,7 @@
          esperados.push(data.planificacion.segundo_trimestre);
          esperados.push(data.planificacion.tercer_trimestre);
          esperados.push(data.planificacion.cuarto_trimestre);
-
+         
          const logrados = [];
          var presupuesto_ejecutado = 0;
          data.evaluaciones.forEach(el => {
@@ -89,7 +101,7 @@
                   },
                   title: {
                   display: true,
-                  text: 'Gráfica Evaluación Trimestre'
+                  text: 'Gráfica Evaluación Trimestre Expresado En Porcentaje (%)'
                   }
                }
             }
@@ -137,7 +149,7 @@
                   },
                   title: {
                   display: true,
-                  text: 'Gráfica Presupuesto'
+                  text: 'Gráfica Presupuesto Expresado en (Bs.)'
                   }
                }
             }

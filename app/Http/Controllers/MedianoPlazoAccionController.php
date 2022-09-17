@@ -15,7 +15,8 @@ class MedianoPlazoAccionController extends Controller
         if($request->ajax())
         {
             $mediano_plazo_acciones = MedianoPlazoAcciones::join('resultados', 'resultados.id', '=', 'mediano_plazo_acciones.resultado_id')
-                    ->select('mediano_plazo_acciones.id', 'mediano_plazo_acciones.accion_mediano_plazo', 'mediano_plazo_acciones.uuid')
+                  //   ->select('mediano_plazo_acciones.id', 'mediano_plazo_acciones.codigo_mediano_plazo', 'mediano_plazo_acciones.accion_mediano_plazo', 'mediano_plazo_acciones.uuid')
+                  ->select('mediano_plazo_acciones.id', 'mediano_plazo_acciones.accion_mediano_plazo', 'mediano_plazo_acciones.uuid')
                     ->where('mediano_plazo_acciones.resultado_id', $resultado->id);
 
             return datatables()
@@ -29,6 +30,7 @@ class MedianoPlazoAccionController extends Controller
     public function store(MedianoPlazoAccionRequest $request, Resultados $resultado)
     {
         MedianoPlazoAcciones::create([
+            // 'codigo_mediano_plazo' => $request->codigo_mediano_plazo,
             'accion_mediano_plazo' => str::upper($request->accion_mediano_plazo),
             'resultado_id' => $resultado->id
         ]);
@@ -37,6 +39,7 @@ class MedianoPlazoAccionController extends Controller
     public function update(MedianoPlazoAccionRequest $request, MedianoPlazoAcciones $mediano_plazo_accion)
     {
         $mediano_plazo_accion->update([
+            // 'codigo_mediano_plazo' => $request->codigo_mediano_plazo,
             'accion_mediano_plazo' => str::upper($request->accion_mediano_plazo),
         ]);
     }

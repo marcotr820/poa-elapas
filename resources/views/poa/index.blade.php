@@ -5,14 +5,14 @@
 @section('contenido')
     <div class="card">
         <div class="card-header">
-            <h5 class="m-0">POA lista de Objetivos Especificos</h5>
+            <h5 class="m-0">POA lista de Acciones Institucionales Específicas</h5>
         </div>
         <div class="card-body">
             <table id="poa" class="table table-striped table-sm table-bordered" style="width:100%">
                 <thead class="thead" style="background-color: skyblue;">
                     <tr>
-                        <td width="5%">ID</td>
-                        <td width="25%">OBJETIVO ESPECIFICO</td>
+                        {{-- <td width="5%">ID</td> --}}
+                        <td width="30%">ACCIÓN INSTITUCIONAL ESPECÍFICA</td>
                         <td width="15%">PONDERACION</td>
                         <td width="20%">INDICADOR DE PROCESO</td>
                         <td width="15%">GERENCIA</td>
@@ -34,7 +34,7 @@
             "processing": true,
             "ajax": "{{ route('poa.index') }}",
             columns: [
-                { data: 'id', name:'pei_objetivos_especificos.id'},
+                // { data: 'id', name:'pei_objetivos_especificos.id'},
                 { data: 'objetivo_institucional', name:'pei_objetivos_especificos.objetivo_institucional'},
                 { data: 'ponderacion', name:'pei_objetivos_especificos.ponderacion',
                     render: function( data, type, row)

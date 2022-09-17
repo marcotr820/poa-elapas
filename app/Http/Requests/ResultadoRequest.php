@@ -24,6 +24,7 @@ class ResultadoRequest extends FormRequest
     public function rules()
     {
         return [
+            // 'codigo_resultado' => ['required', 'numeric', 'min:0', 'max:99'],
             'nombre_resultado' => 'required',
         ];
     }

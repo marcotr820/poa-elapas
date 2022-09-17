@@ -7,7 +7,7 @@
         <div class="bg-light p-2">
             <table class="table table-bordered table-sm m-0">
                 <tr>
-                    <td width="15%" class="font-weight-bold">Obejtivo Institucional</td>
+                    <td width="15%" class="font-weight-bold">Acción Institucional</td>
                     <td>{{$pei_objetivo_especifico->objetivo_institucional}}</td>
                 </tr>
                 <tr>
@@ -29,7 +29,7 @@
                     <tr>
                         <td width="30%">ACCION CORTO PLAZO</td>
                         <td width="5%">GESTION</td>
-                        <td width="10%">RESULTADO ESPERADO</td>
+                        <td width="10%">RESULTADO ESPERADO (%)</td>
                         <td width="15%">PRESUPUESTO PROGRAMADO</td>
                         <td width="15%">FECHA INICIO</td>
                         <td width="10%">FECHA FIN</td>

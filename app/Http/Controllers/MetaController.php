@@ -20,7 +20,8 @@ class MetaController extends Controller
         if($request->ajax())
         {
             $metas = Metas::join("pilares", "pilares.id", "=", "metas.pilar_id")
-                    ->select("metas.id", "metas.nombre_meta", "metas.uuid")
+                  //   ->select("metas.id", "metas.codigo_meta", "metas.nombre_meta", "metas.uuid")
+                  ->select("metas.id", "metas.nombre_meta", "metas.uuid")
                     ->where('metas.pilar_id', $pilar->id);
 
             return datatables()
@@ -35,6 +36,7 @@ class MetaController extends Controller
     public function store(MetaRequest $request,Pilares $pilar)
     {
         Metas::create([
+            // 'codigo_meta' => $request->codigo_meta,
             'nombre_meta' => str::upper($request->nombre_meta),
             'pilar_id' => $pilar->id,
         ]);
@@ -43,6 +45,7 @@ class MetaController extends Controller
     public function update(MetaRequest $request,Metas $meta)
     {
         $meta->update([
+            // 'codigo_meta' => $request->codigo_meta,
             'nombre_meta' => str::upper($request->nombre_meta),
         ]);
     }

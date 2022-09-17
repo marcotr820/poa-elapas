@@ -21,9 +21,11 @@ function edit(mediano_plazo_accion_uuid){
         if(! e.target.hasAttribute('data-form')){
             e.preventDefault();
             d.querySelector('.overlay').classList.add('show');
+            $(document).find('[data-error="input"]').removeClass('is-invalid');
             $(document).find('[data-error="textarea"]').removeClass('is-invalid');
             $(document).find('[data-error="span"]').text('');
             axios.put('/mediano_plazo_acciones/'+ mediano_plazo_accion_uuid, {
+               //codigo_mediano_plazo: d.getElementById('codigo_mediano_plazo').value,
                 accion_mediano_plazo: d.getElementById('accion_mediano_plazo').value,
             })
             .then(function (resp){
@@ -75,6 +77,7 @@ d.addEventListener('click', (e)=>{
 
     if(e.target.matches('#nuevo') || e.target.matches('#nuevo *')){
         d.querySelector('.overlay').classList.remove('show');
+        $(document).find('[data-error="input"]').removeClass('is-invalid');
         $(document).find('[data-error="textarea"]').removeClass('is-invalid');
         $(document).find('[data-error="span"]').text('');
         d.getElementById('form').setAttribute('data-form', '');
@@ -85,10 +88,12 @@ d.addEventListener('click', (e)=>{
 
     if(e.target.matches('[data-edit]') || e.target.matches('[data-edit] *')){
         d.querySelector('.overlay').classList.remove('show');
+        $(document).find('[data-error="input"]').removeClass('is-invalid');
         $(document).find('[data-error="textarea"]').removeClass('is-invalid');
         $(document).find('[data-error="span"]').text('');
         d.getElementById('form').removeAttribute('data-form');
         let data = $('#acciones_mediano_plazo').DataTable().row($(e.target).parents('tr') ).data();
+        $("#codigo_mediano_plazo").val(data.codigo_mediano_plazo);
         $("#accion_mediano_plazo").val(data.accion_mediano_plazo);
         $("#modal .modal-title").text("Editar Accion Mediano Plazo");
         $("#modal").modal("show");

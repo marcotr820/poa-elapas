@@ -29,8 +29,8 @@
             <table id="actividades" class="table table-striped table-sm table-bordered" style="width:100%">
                 <thead class="thead" style="background-color: skyblue">
                     <tr>
-                        <td width="5%">ID</td>
-                        <td width="20%">ACTIVIDAD</td>
+                        {{-- <td width="5%">ID</td> --}}
+                        <td width="25%">ACTIVIDAD</td>
                         <td width="25%">RESULTADOS INTERMEDIOS ESPERADOS</td>
                         <td width="25%">ITEMS PRESUPUESTO EJECUTADO</td>
                         <td width="25%"">ACCIONES</td>
@@ -53,7 +53,7 @@
             "processing": true,
             "ajax": "/operaciones/{!!$operacion->uuid!!}/actividades",
             columns: [
-                { data: 'id'},
+                // { data: 'id'},
                 { data: 'nombre_actividad'},
                 { data: 'resultado_esperado'},
                 {

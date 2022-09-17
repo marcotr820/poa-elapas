@@ -14,7 +14,7 @@
             <table id="unidades" class="table table-striped table-sm table-bordered" style="width:100%">
                 <thead class="thead" style="background-color: skyblue">
                     <tr>
-                        <td width="5%">ID</td>
+                        {{-- <td width="5%">ID</td> --}}
                         <td>UNIDAD</td>
                         <td>GERENCIA</td>
                         <td width="10%">ACCIONES</td>
@@ -37,7 +37,7 @@
         // "ajax": "{{ url('datatable/unidad') }}", //otra forma de llamar a la ruta por su url
         "ajax": "{{ route('unidades.index') }}",
         columns: [
-            {data: 'id', name: 'unidades.id'},
+            // {data: 'id', name: 'unidades.id'},
             {data: 'nombre_unidad', name: 'unidades.nombre_unidad'},
             {data: 'nombre_gerencia', name: 'gerencias.nombre_gerencia'},
             {

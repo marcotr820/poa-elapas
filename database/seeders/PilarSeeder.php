@@ -17,6 +17,7 @@ class PilarSeeder extends Seeder
         // 2022
         // id 1
         Pilares::create([
+            // 'codigo_pilar' => 2,
             'nombre_pilar' => 'UNIVERSALIZACIÓN DE LOS SERVICIOS BASICOS 2022',
             'gestion_pilar' => '2022'
         ]);
@@ -24,6 +25,7 @@ class PilarSeeder extends Seeder
         // 2023
         // id 2
         Pilares::create([
+            // 'codigo_pilar' => 2,
             'nombre_pilar' => 'UNIVERSALIZACIÓN DE LOS SERVICIOS BASICOS',
             'gestion_pilar' => '2023'
         ]);

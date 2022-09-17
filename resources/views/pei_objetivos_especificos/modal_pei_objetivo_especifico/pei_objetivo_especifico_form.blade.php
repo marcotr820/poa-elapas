@@ -17,7 +17,7 @@
           @csrf
           <div class="modal-body">
             <div class="form-group">
-              <label for="" class="col-form-label"><b>Objetivo Institucional Especifico <span class="text-danger">*</span></b></label>
+              <label for="" class="col-form-label"><b>Acción Institucional Especifica <span class="text-danger">*</span></b></label>
               <textarea name="objetivo_institucional" data-error="textarea" id="objetivo_institucional" class="form-control" rows="3" required></textarea>
               <span class="text-danger" data-error="span" id="objetivo_institucional-error"></span>
             </div>

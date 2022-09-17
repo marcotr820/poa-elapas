@@ -23,6 +23,12 @@
                             data-error="input" autocomplete="off" placeholder="Gerencia..." required>
                         <span class="text-danger" id="nombre_gerencia-error" data-error="span"></span>
                     </div>
+
+                    {{-- <input type="text" list="lst" class="form-control">
+                    <datalist id="lst">
+                        <option value="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores perferendis praesentium ea consequuntur. Officia expedita dicta laborum ratione minima cum!"></option>
+                    </datalist> --}}
+
                 </div>
 
                 <div class="modal-footer">

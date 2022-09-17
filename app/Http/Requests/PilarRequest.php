@@ -28,6 +28,7 @@ class PilarRequest extends FormRequest
         $min_gestion = Carbon::now()->addYear();
         // $min_gestion = Carbon::now()->subYear(1);
         return [
+            // 'codigo_pilar' => ['required', 'numeric', 'min:0', 'max:99'],
             'nombre_pilar' => ['required', 'string'],
             'gestion_pilar' => ['required', 'numeric', "max:$gestion->year", "min:$min_gestion->year"],
         ];

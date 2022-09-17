@@ -13,7 +13,7 @@
             <th>METAS</th>
             <th>RESULTADOS</th>
             <th>ACCIONES MEDIANO PLAZO</th>
-            <th>OBJETIVO INSTITUCIONAL ESPECIFICO</th>
+            <th>ACCIÓN INSTITUCIONAL ESPECIFICA</th>
             <th>PONDERACIÓN (%)</th>
             <th>AREA RESPONSABLE</th>
         </tr>
@@ -41,7 +41,9 @@
                 }
                 echo $row_pilar > 1 ? 'rowspan="'.$row_pilar.'"' : '';
                 ?>
-                >{{ $p->nombre_pilar }}</td>
+                >
+                  {{-- ( {{ $p->codigo_pilar }} )  --}}
+                  {{ $p->nombre_pilar }}</td>
                 @forelse ($p->metas as $m)
                     @if ($loop->first)
                         {{-- primera meta --}}
@@ -60,7 +62,9 @@
                         }
                         echo  $row_meta > 1 ? 'rowspan="'.$row_meta.'"' : '';
                         ?>
-                        >{{ $m->nombre_meta }}</td>
+                        >
+                           {{-- ( {{ $m->codigo_meta }} )  --}}
+                           {{ $m->nombre_meta }}</td>
                         @forelse ($m->resultados as $r)
                             {{-- primer resultado primera meta --}}
                             <?php $var_m = $m; ?>
@@ -75,7 +79,9 @@
                                 }
                                 echo  $row_resultado > 1 ? 'rowspan="'.$row_resultado.'"' : '';
                                 ?>
-                                >{{ $r->nombre_resultado }}</td>
+                                >
+                                 {{-- ( {{ $r->codigo_resultado }} )  --}}
+                                 {{ $r->nombre_resultado }}</td>
                                 @forelse ($r->acciones_mediano_plazo as $amp)
                                     {{-- primera accion mediano plazo primer resultado --}}
                                     <?php $var_r = $r; ?>
@@ -85,7 +91,9 @@
                                         if ($amp->pei_objetivos_especificos->count() >= 1) { $row_accion_mediano_plazo += $amp->pei_objetivos_especificos->count(); }
                                         echo  $row_accion_mediano_plazo > 1 ? 'rowspan="'.$row_accion_mediano_plazo.'"' : '';
                                         ?>
-                                        >{{ $amp->accion_mediano_plazo }}</td>
+                                        >
+                                          {{-- ( {{ $amp->codigo_mediano_plazo }} )  --}}
+                                          {{ $amp->accion_mediano_plazo }}</td>
                                         {{-- primer objetivo --}}
                                         @forelse ($amp->pei_objetivos_especificos as $obj)
                                             <?php $var_amp = $amp; ?>
@@ -97,9 +105,11 @@
                                         @empty
                                         <td></td>
                                         <td></td>
+                                        <td></td>
                                         @endforelse
                                     @endif
                                 @empty
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -110,9 +120,11 @@
                         <td></td>
                         <td></td>
                         <td></td>
+                        <td></td>
                         @endforelse
                     @endif
                 @empty
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -147,7 +159,9 @@
                             if ($amp->pei_objetivos_especificos->count() >= 1) { $row_accion_mediano_plazo += $amp->pei_objetivos_especificos->count(); }
                             echo  $row_accion_mediano_plazo > 1 ? 'rowspan="'.$row_accion_mediano_plazo.'"' : '';
                             ?>
-                            >{{ $amp->accion_mediano_plazo }}</td>
+                            >
+                              {{-- ( {{ $amp->codigo_mediano_plazo }} )  --}}
+                              {{ $amp->accion_mediano_plazo }}</td>
                             {{-- primer objetivo demas acciones mediano plazo primer resultado primera meta --}}
                             @forelse ($amp->pei_objetivos_especificos as $obj)
                                 <?php $var_amp = $amp; ?>
@@ -157,6 +171,7 @@
                                 <td>{{ $obj->gerencia->nombre_gerencia }}</td>
                                 @endif
                             @empty
+                            <td></td>
                             <td></td>
                             <td></td>
                             @endforelse
@@ -199,7 +214,9 @@
                             }
                             echo  $row_resultado > 1 ? 'rowspan="'.$row_resultado.'"' : '';
                             ?>
-                            >{{ $r->nombre_resultado }}</td>
+                            >
+                              {{-- ( {{ $r->codigo_resultado }} )  --}}
+                              {{ $r->nombre_resultado }}</td>
                             {{-- primer accion mediano plazo demas resultados --}}
                             @forelse ($r->acciones_mediano_plazo as $amp)
                                 <?php $var_r = $r; ?>
@@ -209,7 +226,9 @@
                                     if ($amp->pei_objetivos_especificos->count() >= 1) { $row_accion_mediano_plazo += $amp->pei_objetivos_especificos->count(); }
                                     echo  $row_accion_mediano_plazo > 1 ? 'rowspan="'.$row_accion_mediano_plazo.'"' : '';
                                     ?>
-                                    >{{ $amp->accion_mediano_plazo }}</td>
+                                    >
+                                       {{-- ( {{ $amp->codigo_mediano_plazo }} )  --}}
+                                       {{ $amp->accion_mediano_plazo }}</td>
                                     {{-- primer objetivo --}}
                                     @forelse ($amp->pei_objetivos_especificos as $obj)
                                         <?php $var_amp = $amp; ?>
@@ -221,9 +240,11 @@
                                     @empty
                                     <td></td>
                                     <td></td>
+                                    <td></td>
                                     @endforelse
                                 @endif
                             @empty
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -256,7 +277,9 @@
                                         if ($amp->pei_objetivos_especificos->count() >= 1) { $row_accion_mediano_plazo += $amp->pei_objetivos_especificos->count(); }
                                         echo  $row_accion_mediano_plazo > 1 ? 'rowspan="'.$row_accion_mediano_plazo.'"' : '';
                                         ?>
-                                        >{{ $amp->accion_mediano_plazo }}</td>
+                                        >
+                                          {{-- ( {{ $amp->codigo_mediano_plazo }} )  --}}
+                                          {{ $amp->accion_mediano_plazo }}</td>
                                         {{-- primer objetivos --}}
                                         @forelse ($amp->pei_objetivos_especificos as $obj)
                                             <?php $var_amp = $amp ?>
@@ -266,6 +289,7 @@
                                                 <td>{{ $obj->gerencia->nombre_gerencia }}</td>
                                             @endif
                                         @empty
+                                        <td></td>
                                         <td></td>
                                         <td></td>
                                         @endforelse
@@ -314,7 +338,9 @@
                         }
                         echo  $row_meta > 1 ? 'rowspan="'.$row_meta.'"' : '';
                         ?>
-                        >{{ $m->nombre_meta }}</td>
+                        >
+                           {{-- ( {{ $m->codigo_meta }} )  --}}
+                           {{ $m->nombre_meta }}</td>
                         {{-- primer resultado demas metas --}}
                         @forelse ($m->resultados as $r)
                             @if ($loop->first)
@@ -329,7 +355,9 @@
                                 }
                                 echo  $row_resultado > 1 ? 'rowspan="'.$row_resultado.'"' : '';
                                 ?>
-                                >{{ $r->nombre_resultado }}</td>
+                                >
+                                 {{-- ( {{ $r->codigo_resultado }} )  --}}
+                                 {{ $r->nombre_resultado }}</td>
 
                                 {{-- primer accion mediano plazo  --}}
                                 @forelse ($r->acciones_mediano_plazo as $amp)
@@ -340,7 +368,9 @@
                                         if ($amp->pei_objetivos_especificos->count() >= 1) { $row_accion_mediano_plazo += $amp->pei_objetivos_especificos->count(); }
                                         echo  $row_accion_mediano_plazo > 1 ? 'rowspan="'.$row_accion_mediano_plazo.'"' : '';
                                         ?>
-                                        >{{ $amp->accion_mediano_plazo }}</td>
+                                        >
+                                          {{-- ( {{ $amp->codigo_mediano_plazo }} )  --}}
+                                          {{ $amp->accion_mediano_plazo }}</td>
                                         {{--  --}}
                                         @forelse ($amp->pei_objetivos_especificos as $obj)
                                             <?php $var_amp = $amp; ?>
@@ -352,9 +382,11 @@
                                         @empty
                                         <td></td>
                                         <td></td>
+                                        <td></td>
                                         @endforelse
                                     @endif
                                 @empty
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -362,6 +394,7 @@
                             @endif
 
                         @empty
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -395,7 +428,9 @@
                                 if ($amp->pei_objetivos_especificos->count() >= 1) { $row_accion_mediano_plazo += $amp->pei_objetivos_especificos->count(); }
                                 echo  $row_accion_mediano_plazo > 1 ? 'rowspan="'.$row_accion_mediano_plazo.'"' : '';
                                 ?>
-                                >{{ $amp->accion_mediano_plazo }}</td>
+                                >
+                                 {{-- ( {{ $amp->codigo_mediano_plazo }} )  --}}
+                                 {{ $amp->accion_mediano_plazo }}</td>
                                 {{-- primer objetivos --}}
                                 @forelse ($amp->pei_objetivos_especificos as $obj)
                                     <?php $var_amp = $amp; ?>
@@ -405,6 +440,7 @@
                                         <td>{{ $obj->gerencia->nombre_gerencia }}</td>
                                     @endif
                                 @empty
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 @endforelse
@@ -446,7 +482,9 @@
                                 }
                                 echo  $row_resultado > 1 ? 'rowspan="'.$row_resultado.'"' : '';
                                 ?>
-                                >{{ $r->nombre_resultado }}</td>
+                                >
+                                 {{-- ( {{ $r->codigo_resultado }} )  --}}
+                                 {{ $r->nombre_resultado }}</td>
                                 {{-- primera accion mediano plazo --}}
                                 @forelse ($r->acciones_mediano_plazo as $amp)
                                     <?php $var_r = $r; ?>
@@ -456,7 +494,9 @@
                                         if ($amp->pei_objetivos_especificos->count() >= 1) { $row_accion_mediano_plazo += $amp->pei_objetivos_especificos->count(); }
                                         echo  $row_accion_mediano_plazo > 1 ? 'rowspan="'.$row_accion_mediano_plazo.'"' : '';
                                         ?>
-                                        >{{ $amp->accion_mediano_plazo }}</td>
+                                        >
+                                          {{-- ( {{ $amp->codigo_mediano_plazo }} )  --}}
+                                          {{ $amp->accion_mediano_plazo }}</td>
                                         {{-- primer objetivo --}}
                                         @forelse ($amp->pei_objetivos_especificos as $obj)
                                             <?php $var_amp = $amp; ?>
@@ -468,9 +508,11 @@
                                         @empty
                                         <td></td>
                                         <td></td>
+                                        <td></td>
                                         @endforelse
                                     @endif
                                 @empty
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -501,7 +543,9 @@
                                             if ($amp->pei_objetivos_especificos->count() >= 1) { $row_accion_mediano_plazo += $amp->pei_objetivos_especificos->count(); }
                                             echo  $row_accion_mediano_plazo > 1 ? 'rowspan="'.$row_accion_mediano_plazo.'"' : '';
                                             ?>
-                                            >{{ $amp->accion_mediano_plazo }}</td>
+                                            >
+                                             {{-- ( {{ $amp->codigo_mediano_plazo }} )  --}}
+                                             {{ $amp->accion_mediano_plazo }}</td>
                                             {{-- primer objetivo --}}
                                             @forelse ($amp->pei_objetivos_especificos as $obj)
                                                 <?php $var_amp = $amp; ?>
@@ -511,6 +555,7 @@
                                                     <td>{{ $obj->gerencia->nombre_gerencia }}</td>
                                                 @endif
                                             @empty
+                                                <td></td>
                                                 <td></td>
                                                 <td></td>
                                             @endforelse

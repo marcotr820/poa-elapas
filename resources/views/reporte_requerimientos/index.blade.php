@@ -44,7 +44,7 @@
                         <th>ACCION CORTO PLAZO</th>
                         <th>OPERACIONES</th>
                         <th>ACTIVIDADES</th>
-                        <th>ITEM</th>
+                        <th>ITEM / SERVICIO</th>
                         <th>FECHA REQUERIDA</th>
                         <th width="10%">PARTIDA</th>
                         <th>PRESUPUESTO</th>

@@ -15,7 +15,8 @@ class ResultadoController extends Controller
         if($request->ajax())
         {
             $resultados = Resultados::join("metas", "metas.id", "=", "resultados.meta_id")
-                    ->select("resultados.id", 'resultados.nombre_resultado', 'resultados.uuid')
+                  //   ->select("resultados.id", "resultados.codigo_resultado", 'resultados.nombre_resultado', 'resultados.uuid')
+                  ->select("resultados.id", 'resultados.nombre_resultado', 'resultados.uuid')
                     ->where('resultados.meta_id', $meta->id);
 
             return datatables()
@@ -29,6 +30,7 @@ class ResultadoController extends Controller
     public function store(ResultadoRequest $request, Metas $meta)
     {
         Resultados::create([
+            // 'codigo_resultado' => $request->codigo_resultado,
             'nombre_resultado' => str::upper($request->nombre_resultado),
             'meta_id' => $meta->id
         ]);
@@ -37,6 +39,7 @@ class ResultadoController extends Controller
     public function update(ResultadoRequest $request, Resultados $resultado)
     {
         $resultado->update([
+            // 'codigo_resultado' => $request->codigo_resultado,
             'nombre_resultado' => str::upper($request->nombre_resultado),
         ]);
     }

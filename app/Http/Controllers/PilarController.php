@@ -34,9 +34,9 @@ class PilarController extends Controller
         if($request->ajax())
         {
             if (isset($gestion)) {
-                $query = Pilares::query()->select('id', 'nombre_pilar', 'gestion_pilar', 'uuid') // mostrar solo los pilares para la siguiente gestion
-                ->where('gestion_pilar', $gestion)
-                ->orderBy('id', 'ASC');
+               //  $query = Pilares::query()->select('id', 'codigo_pilar', 'nombre_pilar', 'gestion_pilar', 'uuid') // mostrar solo los pilares para la siguiente gestion
+               $query = Pilares::query()->select('id', 'nombre_pilar', 'gestion_pilar', 'uuid') 
+               ->where('gestion_pilar', $gestion);
             } else {
                 $query = [];
             }
@@ -49,6 +49,7 @@ class PilarController extends Controller
     public function store(PilarRequest $request)
     {
         Pilares::create([
+            // 'codigo_pilar' => $request->codigo_pilar,
             'nombre_pilar' => str::upper($request->nombre_pilar),
             'gestion_pilar' => $request->gestion_pilar
         ]); 
@@ -58,6 +59,7 @@ class PilarController extends Controller
     {
         // $pilar->update($request->only(['nombre_pilar', 'gestion_pilar']));
         $pilar->update([
+            // 'codigo_pilar' => $request->codigo_pilar,
             'nombre_pilar' => str::upper($request->nombre_pilar),
             'gestion_pilar' => $request->gestion_pilar,
         ]);

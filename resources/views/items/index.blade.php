@@ -118,9 +118,9 @@
             <table id="items" class="table table-striped table-sm table-bordered" style="width:100%">
                 <thead class="thead" style="background-color: skyblue;">
                     <tr>
-                        <td width='5%'>ID</td>
-                        <td>BIEN O SERVICIO</td>
-                        <td>FECHA REQUERIDA</td>
+                        {{-- <td width='5%'>ID</td> --}}
+                        <td width="15%">BIEN O SERVICIO</td>
+                        <td width="10%">FECHA REQUERIDA</td>
                         <td>PRESUPUESTO</td>
                         <td>PARTIDA</td>
                         <td width="12%">ACCIONES</td>
@@ -148,7 +148,7 @@
             "processing": true,
             "ajax": "/actividades/{!!$actividad->uuid!!}/items/",
             columns: [
-                { data: 'id', name: 'items.id'},
+                // { data: 'id', name: 'items.id'},
                 { data: 'bien_servicio', name: 'items.bien_servicio'},
                 { data: 'fecha_requerida', name: 'items.fecha_requerida'},
                 { 
@@ -158,7 +158,12 @@
                         return number;
                     }
                 },
-                { data: 'partida.nombre_partida', name: 'partida.nombre_partida'},
+                {
+                    data: 'partida.nombre_partida', name: 'partida.nombre_partida',
+                    render: function(data, type, row) {
+                        return row.partida.codigo_partida + ' - ' + data;
+                    }
+                },
                 {
                     data: 'uuid',
                     render: function( data, type, row)

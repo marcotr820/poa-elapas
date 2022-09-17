@@ -24,6 +24,7 @@ function edit(resultado_uuid){
             $(document).find('[data-error="textarea"]').removeClass('is-invalid');
             $(document).find('[data-error="span"]').text('');
             axios.put('/resultados/'+ resultado_uuid,{
+               //  codigo_resultado: d.getElementById('codigo_resultado').value,
                 nombre_resultado: d.getElementById('nombre_resultado').value,
             })
             .then(function (resp){
@@ -90,6 +91,7 @@ d.addEventListener('click', (e)=>{
         $(document).find('[data-error="span"]').text('');
         d.getElementById('form').removeAttribute('data-form');
         let data = $('#resultados').DataTable().row($(e.target).parents('tr') ).data();
+        $("#codigo_resultado").val(data.codigo_resultado);
         $("#nombre_resultado").val(data.nombre_resultado);
         $(".modal-title").text("Editar Resultado"); 
         $("#modal").modal("show");

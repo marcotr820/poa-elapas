@@ -14,19 +14,27 @@
             <thead>
                 <tr>
                     <td width="12%"><b>Pilar</b></td>
-                    <td width="88%">{{ $mpa->resultado->meta->pilar->nombre_pilar }}</td>
+                    <td width="88%">
+                        {{-- ( {{  $mpa->resultado->meta->pilar->codigo_pilar }} )  --}}
+                        {{ $mpa->resultado->meta->pilar->nombre_pilar }}</td>
                 </tr>
                 <tr>
                     <td width="12%"><b>Meta</b></td>
-                    <td width="88%">{{ $mpa->resultado->meta->nombre_meta }}</td>
+                    <td width="88%">
+                        {{-- ( {{ $mpa->resultado->meta->codigo_meta }} )  --}}
+                        {{ $mpa->resultado->meta->nombre_meta }}</td>
                 </tr>
                 <tr>
                     <td width="12%"><b>Resultado</b></td>
-                    <td width="88%">{{ $mpa->resultado->nombre_resultado }}</td>
+                    <td width="88%">
+                        {{-- ( {{ $mpa->resultado->codigo_resultado }} )  --}}
+                        {{ $mpa->resultado->nombre_resultado }}</td>
                 </tr>
                 <tr>
                     <td width="12%"><b>Acción Mediano Plazo</b></td>
-                    <td width="88%">{{ $mpa->accion_mediano_plazo }}</td>
+                    <td width="88%">
+                        {{-- ( {{ $mpa->codigo_mediano_plazo }} )  --}}
+                        {{ $mpa->accion_mediano_plazo }}</td>
                 </tr>
             </thead>
         </table>
@@ -34,7 +42,7 @@
         <table cellspacing="0" cellpadding="3" border="0.5" style="margin-bottom: 10px;">
             <thead>
                 <tr style="text-align: center;font-weight:bold;background-color: #eee;">
-                    <th rowspan="2">Objetivo Institucional Específico</th>
+                    <th rowspan="2">Acción Institucional Específica</th>
                     <th rowspan="2">Accion corto plazo Gestion {{ $gestion }}</th>
                     <th rowspan="2">Presupuesto Programado Gestion {{ $gestion }}</th>
                     <th rowspan="2">Unidad Responsable</th>

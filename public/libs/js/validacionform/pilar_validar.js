@@ -26,6 +26,7 @@ function edit(pilar_uuid){
             d.querySelectorAll('[data-error="textarea"]').forEach( (el)=>{ el.classList.remove('is-invalid');  el.classList.remove('is-valid'); });
             d.querySelectorAll('[data-error="span"]').forEach( (el) =>{ el.textContent = '' });
             axios.put('/pilares/'+ pilar_uuid,{
+               //  codigo_pilar: d.getElementById('codigo_pilar').value,
                 nombre_pilar: d.getElementById('nombre_pilar').value,
                 gestion_pilar: d.getElementById('gestion_pilar').value,
             })
@@ -128,6 +129,7 @@ d.addEventListener('click', (e)=>{
 
         let nombre_pilar = data['nombre_pilar'];
         let gestion_pilar = data['gestion_pilar'];
+      //   d.getElementById('codigo_pilar').value = data.codigo_pilar;
         d.getElementById('nombre_pilar').value = nombre_pilar;
         d.getElementById('gestion_pilar').value = gestion_pilar;
         d.querySelector('.modal-title').textContent = 'Editar Pilar';

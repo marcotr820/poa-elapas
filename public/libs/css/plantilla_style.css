@@ -60,7 +60,8 @@ input:focus{
     border: 1px solid #595959 !important;
     color: black !important;
 }
-input::placeholder { text-transform: none; } /* placeholder */
+
+textarea::placeholder, input::placeholder { text-transform: none; } /* placeholder */
 
 .form-control.is-invalid{
     border: 1px solid #dc3545 !important;

@@ -15,6 +15,7 @@ class CreatePilaresTable extends Migration
     {
         Schema::create('pilares', function (Blueprint $table) {
             $table->id();
+            // $table->integer('codigo_pilar');
             $table->string('nombre_pilar');
             $table->string('gestion_pilar');
             $table->enum('status', [0, 1])->default(1);

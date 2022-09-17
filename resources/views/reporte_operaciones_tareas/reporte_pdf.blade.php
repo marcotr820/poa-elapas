@@ -13,7 +13,7 @@
     <thead>
         <tr style="background-color: #ddd; font-weight:bold;">
             <th>ACCION CORTO PLAZO</th>
-            <th>RESULTADO ESPERADO GESTION</th>
+            <th>RESULTADO ESPERADO DE GESTION EXPRESADO EN (%)</th>
             <th>OPERACIONES</th>
             <th>ACTIVIDADES</th>
             <th>RESULTADOS INTERMEDIOS ESPERADOS</th>

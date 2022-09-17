@@ -16,6 +16,7 @@ class MedianoPlazoAcciones extends Model
     }
 
     protected $fillable = [
+        'codigo_mediano_plazo',
         'accion_mediano_plazo',
         'status',
         'resultado_id',

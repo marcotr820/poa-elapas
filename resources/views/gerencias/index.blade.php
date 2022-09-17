@@ -16,7 +16,7 @@
                 <table id="gerencias" class="table table-striped table-sm table-bordered" style="width:100%;">
                     <thead style="background-color: skyblue;">
                         <tr>
-                            <td width="5%">ID</td>
+                            {{-- <td width="5%">ID</td> --}}
                             <td>NOMBRE GERENCIA</td>
                             <td width="10%">ACCIONES</td>
                         </tr>
@@ -41,7 +41,7 @@
             "order": [[ 0, "desc" ]],
             "ajax": "{{ route('gerencias.index') }}",
             columns: [
-                { data: 'id'},
+                // { data: 'id'},
                 { data: 'nombre_gerencia'},
                 { 
                     data: 'uuid',

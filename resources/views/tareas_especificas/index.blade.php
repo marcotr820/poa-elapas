@@ -33,7 +33,7 @@
             <table id="tareas_especificas" class="table table-striped table-sm table-bordered" style="width:100%">
                 <thead class="thead" style="background-color: skyblue">
                     <tr>
-                        <td width='5%'>ID</td>
+                        {{-- <td width='5%'>ID</td> --}}
                         <td>TAREA ESPECIFICA</td>
                         {{-- <th>RESULTADO ESPERADO</th> --}}
                         <td width="15%">ACCIONES</td>
@@ -57,7 +57,7 @@
             "processing": true,
             "ajax": "/actividades/{!!$actividad->uuid!!}/tareas_especificas/",
             columns: [
-                { data: 'id'},
+                // { data: 'id'},
                 { data: 'nombre_tarea'},
                 // { data: 'resultado_esperado'},
                 {

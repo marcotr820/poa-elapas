@@ -15,6 +15,7 @@ class CreateMetasTable extends Migration
     {
         Schema::create('metas', function (Blueprint $table) {
             $table->id();
+            // $table->integer('codigo_meta');
             $table->string('nombre_meta');
             $table->enum('status', [0, 1])->default(1);
             $table->string('uuid', 49)->unique();

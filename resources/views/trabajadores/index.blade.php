@@ -16,9 +16,9 @@
                 <table id="trabajadores" class="table table-striped table-bordered table-sm" style="width:100%;">
                     <thead class="thead" style="background-color: skyblue">
                         <tr>
-                            <td width="5%">ID</td>
+                            {{-- <td width="5%">ID</td> --}}
                             <td width="10%">DOCUMENTO</td>
-                            <td width="15%">NOMBRE</td>
+                            <td width="20%">NOMBRE</td>
                             <td width="15%">CARGO</td>
                             <td width="15%">UNIDAD</td>
                             <td width="15%">GERENCIA</td>
@@ -46,7 +46,7 @@
         // "order": [[ 0, "desc" ]],
         "ajax": "{{ route('trabajadores.index') }}",
         columns: [
-            { data: 'id', name: 'trabajadores.id'},
+            // { data: 'id', name: 'trabajadores.id'},
             { data: 'documento', name: 'trabajadores.documento'},
             { data: 'nombre', name: 'trabajadores.nombre'},
             { data: 'cargo', name:'trabajadores.cargo'},
