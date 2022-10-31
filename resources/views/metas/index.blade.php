@@ -6,13 +6,13 @@
     <div class="card">
         <div class="bg-light p-2">
             <table class="table table-bordered table-sm m-0">
-                <tr>
-                    <td width="10%" class="font-weight-bold">Pilar</td>
-                    <td>
-                        {{-- ( {{ $pilar->codigo_pilar }} ) --}}
-                        {{ $pilar->nombre_pilar }}
-                     </td>
-                </tr>
+              <tr>
+                  <td width="10%" class="font-weight-bold">Pilar</td>
+                  <td>
+                    ( {{ $pilar->codigo_pilar }} )
+                    {{ $pilar->nombre_pilar }}
+                  </td>
+              </tr>
             </table>
         </div>
         <h5 class="card-header py-1 d-flex justify-content-between align-items-center">
@@ -26,7 +26,7 @@
             <table id="metas" class="table table-striped table-sm table-bordered" style="width:100%">
                 <thead class="thead" style="background-color: skyblue;">
                     <tr>
-                        {{-- <td width="10%">CODIGO</td> --}}
+                        <td width="10%">CODIGO</td>
                         <td>META</td>
                         <td width="20%">ACCIONES</td>
                     </tr>
@@ -47,7 +47,7 @@
             "processing": true,
             "ajax": '/pilares/{!!$pilar->uuid!!}/metas',
             columns: [
-               //  { data: 'codigo_meta', name:'metas.codigo_meta'},
+                { data: 'codigo_meta', name:'metas.codigo_meta'},
                 { data: 'nombre_meta', name:'metas.nombre_meta'},
                 {
                     data: 'uuid',

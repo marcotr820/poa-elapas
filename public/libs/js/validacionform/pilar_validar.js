@@ -26,7 +26,7 @@ function edit(pilar_uuid){
             d.querySelectorAll('[data-error="textarea"]').forEach( (el)=>{ el.classList.remove('is-invalid');  el.classList.remove('is-valid'); });
             d.querySelectorAll('[data-error="span"]').forEach( (el) =>{ el.textContent = '' });
             axios.put('/pilares/'+ pilar_uuid,{
-               //  codigo_pilar: d.getElementById('codigo_pilar').value,
+                codigo_pilar: d.getElementById('codigo_pilar').value,
                 nombre_pilar: d.getElementById('nombre_pilar').value,
                 gestion_pilar: d.getElementById('gestion_pilar').value,
             })
@@ -129,7 +129,7 @@ d.addEventListener('click', (e)=>{
 
         let nombre_pilar = data['nombre_pilar'];
         let gestion_pilar = data['gestion_pilar'];
-      //   d.getElementById('codigo_pilar').value = data.codigo_pilar;
+        d.getElementById('codigo_pilar').value = data.codigo_pilar;
         d.getElementById('nombre_pilar').value = nombre_pilar;
         d.getElementById('gestion_pilar').value = gestion_pilar;
         d.querySelector('.modal-title').textContent = 'Editar Pilar';
@@ -170,25 +170,26 @@ d.addEventListener('submit', (e) =>{
             d.querySelector('.overlay').classList.add('show');
             axios.post('/pilares', data) //enviamos todos los input del form
             .then(function (response) {
+              //console.log(response);
                 $('#modal').modal('hide');
                 $('#pilares').DataTable().ajax.reload(null, false);
             })
             .catch(function (error) {
-                // console.log(error.response.data.errors);
-                const objeto = error.response.data.errors; //creamos el objeto para luego recorrerlo
-                if (error.response.data.hasOwnProperty('errors')) //preguntamos si exite la propiedad donde se almacenan los errores false/true
-                {
-                    d.querySelector('.overlay').classList.remove('show');
-                    for (let key in  objeto) 
-                    {
-                        //console.log(key);
-                        //console.log(errores[key]);
-                        //key nombre del campo ej. nombre_operacion
-                        //objeto[key] valor ej. "El campo nombre operacion es obligatorio. SU VALOR"
-                        d.getElementById(key).classList.add('is-invalid');
-                        d.getElementById(key+'-error').textContent = objeto[key];
-                    }
-                }
+              //console.log(error.response.data.errors);
+              const objeto = error.response.data.errors; //creamos el objeto para luego recorrerlo
+              if (error.response.data.hasOwnProperty('errors')) //preguntamos si exite la propiedad donde se almacenan los errores false/true
+              {
+                  d.querySelector('.overlay').classList.remove('show');
+                  for (let key in  objeto) 
+                  {
+                      //console.log(key);
+                      //console.log(errores[key]);
+                      //key nombre del campo ej. nombre_operacion
+                      //objeto[key] valor ej. "El campo nombre operacion es obligatorio. SU VALOR"
+                      d.getElementById(key).classList.add('is-invalid');
+                      d.getElementById(key+'-error').textContent = objeto[key];
+                  }
+              }
             });
         }
     }

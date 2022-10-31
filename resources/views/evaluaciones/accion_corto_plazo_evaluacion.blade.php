@@ -26,8 +26,9 @@
                             <td>{{ $cpa->accion_corto_plazo }}</td>
                             <td>{{ $cpa->fecha_inicio }}</td>
                             <td>{{ $cpa->fecha_fin }}</td>
-                            {{-- @if ( (\Carbon\Carbon::now()->year) == (\Carbon\Carbon::createFromDate($cpa->fecha_inicio)->year)) --}}
-                            @if ( 2023 == (\Carbon\Carbon::createFromDate($cpa->fecha_inicio)->year))
+                            {{-- controlamos que el btn de evaluacion se habilite cuando los años sean iguales --}}
+                            @if ( (\Carbon\Carbon::now()->year) == (\Carbon\Carbon::createFromDate($cpa->fecha_inicio)->year))
+                            {{-- @if ( 2023 == (\Carbon\Carbon::createFromDate($cpa->fecha_inicio)->year)) --}}
                                 <td>
                                     <a href="{{ route('evaluacion.index', $cpa->uuid) }}" class="boton default">Evaluar</a>
                                 </td>

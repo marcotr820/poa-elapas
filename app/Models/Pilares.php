@@ -13,10 +13,10 @@ class Pilares extends Model
 
     //nombramos a los campos que se pueden llenar y editar enviando
     protected $fillable = [
-        'codigo_pilar',
-        'nombre_pilar',
-        'gestion_pilar',
-        'status'
+      'codigo_pilar',
+      'nombre_pilar',
+      'gestion_pilar',
+      'status'
     ];
 
     protected $hidden = [

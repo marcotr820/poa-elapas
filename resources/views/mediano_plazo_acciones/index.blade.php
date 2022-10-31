@@ -9,21 +9,21 @@
                 <tr>
                     <td width="10%" class="font-weight-bold">Pilar</td>
                     <td>
-                        {{-- ( {{ $resultado->meta->pilar->codigo_pilar }} ) --}}
+                        ( {{ $resultado->meta->pilar->codigo_pilar }} )
                         {{$resultado->meta->pilar->nombre_pilar}}
                      </td>
                 </tr>
                 <tr>
                     <td width="10%" class="font-weight-bold">Meta</td>
                     <td>
-                        {{-- ( {{ $resultado->meta->codigo_meta }} ) --}}
+                        ( {{ $resultado->meta->codigo_meta }} )
                         {{$resultado->meta->nombre_meta}}
                      </td>
                 </tr>
                 <tr>
                     <td width="10%" class="font-weight-bold">Resultado</td>
                     <td>
-                        {{-- ( {{ $resultado->codigo_resultado }} )  --}}
+                        ( {{ $resultado->codigo_resultado }} ) 
                         {{$resultado->nombre_resultado}}
                      </td>
                 </tr>
@@ -40,7 +40,7 @@
             <table id="acciones_mediano_plazo" class="table table-striped table-sm table-bordered" style="width:100%">
                 <thead class="thead" style="background-color: skyblue">
                     <tr>
-                        {{-- <td width="10%">CÓDIGO</td></td> --}}
+                        <td width="10%">CÓDIGO</td></td>
                         <td>ACCIÓN MEDIANO PLAZO</td>
                         <td width="25%">ACCIONES</td>
                     </tr>
@@ -62,7 +62,7 @@
             "processing": true,
             "ajax": "/resultados/{!!$resultado->uuid!!}/acciones_mediano_plazo",
             columns: [
-               //  { data: 'codigo_mediano_plazo', name:'mediano_plazo_acciones.codigo_mediano_plazo'},
+                { data: 'codigo_mediano_plazo', name:'mediano_plazo_acciones.codigo_mediano_plazo'},
                 { data: 'accion_mediano_plazo', name:'mediano_plazo_acciones.accion_mediano_plazo'},
                 {
                     data: 'uuid',

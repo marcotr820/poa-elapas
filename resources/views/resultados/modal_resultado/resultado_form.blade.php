@@ -16,11 +16,11 @@
         <form action="" method="" id="form">  
           @csrf
           <div class="modal-body">
-            {{-- <div class="form-group">
+            <div class="form-group">
               <label for="" class="col-form-label"><b>Codigo Resultado <span class="text-danger">*</span></b></label>
               <input type="number" data-error="input" class="form-control" name="codigo_resultado" id="codigo_resultado">
               <span class="text-danger" data-error="span" id="codigo_resultado-error"></span>
-            </div> --}}
+            </div>
             <div class="form-group">
               <label for="" class="col-form-label"><b>Nombre Resultado <span class="text-danger">*</span></b></label>
               <textarea name="nombre_resultado" id="nombre_resultado" class="form-control" data-error="textarea" cols="30" rows="3" required></textarea>

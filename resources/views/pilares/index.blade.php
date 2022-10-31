@@ -15,10 +15,10 @@
             <table id="pilares" class="table table-striped table-sm table-bordered" style="width:100%">
                 <thead class="thead" style="background-color: skyblue;">
                     <tr>
-                        {{-- <td width="10%">CÓDIGO</td> --}}
-                        <td>PILAR</td>
-                        <td>GESTION</td>
-                        <td width="20%">ACCIONES</td>
+                      <td width="10%">CÓDIGO</td>
+                      <td>PILAR</td>
+                      <td>GESTION</td>
+                      <td width="20%">ACCIONES</td>
                     </tr>
                 </thead>
             </table>
@@ -36,7 +36,7 @@
             "processing": true,
             "ajax": "{{ route('pilares.index') }}",
             columns: [
-               //  { data: 'codigo_pilar'},
+                { data: 'codigo_pilar'},
                 { data: 'nombre_pilar'},
                 { data: 'gestion_pilar'},
                 // { data: 'btn_pilares'},

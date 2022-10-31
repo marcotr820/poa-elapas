@@ -24,7 +24,7 @@ function edit(resultado_uuid){
             $(document).find('[data-error="textarea"]').removeClass('is-invalid');
             $(document).find('[data-error="span"]').text('');
             axios.put('/resultados/'+ resultado_uuid,{
-               //  codigo_resultado: d.getElementById('codigo_resultado').value,
+                codigo_resultado: d.getElementById('codigo_resultado').value,
                 nombre_resultado: d.getElementById('nombre_resultado').value,
             })
             .then(function (resp){
@@ -124,22 +124,24 @@ d.addEventListener('submit', (e)=>{
                     $(document).find('input.form-control').removeClass('is-invalid');
                 },
                 success:function(resp){
+                    console.log(resp);
                     $('#resultados').DataTable().ajax.reload(null, false);
                     $("#modal").modal("hide");
                     //removemos la clase una ves registrado el trabajador
                     $('#form_resultado').removeClass('nuevo');
                 },
                 error:function(resp){
-                    if(resp.responseJSON.hasOwnProperty('errors')){
-                        d.querySelector('.overlay').classList.remove('show');
-                        $.each(resp.responseJSON.errors, function(key, value){
-                            $('textarea[id='+ key +']').addClass('is-invalid');
-                            // console.log(key);
-                            // console.log(value);
-                            //mostramos los erroes que perteneve sl id del input donde se mostrara el error
-                            $('span[id='+key+'-error]').text(value);
-                        })
-                    }
+                  console.log(resp);
+                  if(resp.responseJSON.hasOwnProperty('errors')){
+                      d.querySelector('.overlay').classList.remove('show');
+                      $.each(resp.responseJSON.errors, function(key, value){
+                          $('textarea[id='+ key +']').addClass('is-invalid');
+                          // console.log(key);
+                          // console.log(value);
+                          //mostramos los erroes que perteneve sl id del input donde se mostrara el error
+                          $('span[id='+key+'-error]').text(value);
+                      })
+                  }
                 }
             })
         }

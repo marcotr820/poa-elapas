@@ -28,11 +28,11 @@
             </div>
 
             <div class="row">
-              {{-- <div class="col">
+              <div class="col">
                 <label><b>Codigo Pilar <span class="text-danger">*</span></b></label>
                 <input type="text" name="codigo_pilar" id="codigo_pilar" data-error="input" class="form-control" placeholder="Codigo pilar..." required>
                 <span class="text-danger" data-error="span" id="codigo_pilar-error"></span>
-              </div> --}}
+              </div>
               <div class="col">
                 <label><b>Gestion Pilar <span class="text-danger">*</span></b></label>
                 <input class="form-control" value="{{ date('Y') + 1}}" data-error="input" type="number" id="gestion_pilar" name="gestion_pilar" placeholder="Gestion pilar..." required>

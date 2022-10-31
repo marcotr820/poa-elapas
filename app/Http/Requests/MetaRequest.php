@@ -24,7 +24,7 @@ class MetaRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'codigo_meta' => ["required", "numeric", "min:0", "max:99"],
+            'codigo_meta' => ["required", "numeric", "min:0", "max:99"],
             'nombre_meta' => 'required|string',
         ];
     }

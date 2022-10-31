@@ -16,11 +16,11 @@
         <form action="" method="" id="form" autocomplete="off">  
           @csrf  
           <div class="modal-body">
-            {{-- <div class="form-group">
+            <div class="form-group">
               <label for="" class="col-form-label"><b>Código Acción Mediano Plazo <span class="text-danger">*</span></b></label>
               <input type="number" data-error="input" class="form-control" name="codigo_mediano_plazo" id="codigo_mediano_plazo">
               <span class="text-danger" data-error="span" id="codigo_mediano_plazo-error"></span>
-            </div> --}}
+            </div>
             <div class="form-group">
               <label for="" class="col-form-label"><b>Nombre Accion Mediano Plazo <span class="text-danger">*</span></b></label>
               <textarea data-error="textarea" id="accion_mediano_plazo" name="accion_mediano_plazo" class="form-control" rows="3" required></textarea>

@@ -15,7 +15,7 @@ class CreateMedianoPlazoAccionesTable extends Migration
     {
         Schema::create('mediano_plazo_acciones', function (Blueprint $table) {
             $table->id();
-            // $table->integer('codigo_mediano_plazo');
+            $table->integer('codigo_mediano_plazo');
             $table->string('accion_mediano_plazo');
             $table->unsignedBigInteger('resultado_id');
             $table->string('uuid', 49)->unique();

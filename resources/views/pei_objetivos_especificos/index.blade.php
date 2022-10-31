@@ -9,28 +9,28 @@
                 <tr>
                     <td width="15%" class="font-weight-bold">Pilar</td>
                     <td>
-                        {{-- ( {{ $mediano_plazo_accion->resultado->meta->pilar->codigo_pilar }} )  --}}
+                        ( {{ $mediano_plazo_accion->resultado->meta->pilar->codigo_pilar }} ) 
                         {{$mediano_plazo_accion->resultado->meta->pilar->nombre_pilar}}
                      </td>
                 </tr>
                 <tr>
                     <td width="15%" class="font-weight-bold">Meta</td>
                     <td>
-                        {{-- ( {{ $mediano_plazo_accion->resultado->meta->codigo_meta }} )  --}}
+                        ( {{ $mediano_plazo_accion->resultado->meta->codigo_meta }} ) 
                         {{$mediano_plazo_accion->resultado->meta->nombre_meta}}
                      </td>
                 </tr>
                 <tr>
                     <td width="15%" class="font-weight-bold">Resultado</td>
                     <td>
-                        {{-- ( {{ $mediano_plazo_accion->resultado->codigo_resultado }} )  --}}
+                        ( {{ $mediano_plazo_accion->resultado->codigo_resultado }} ) 
                         {{$mediano_plazo_accion->resultado->nombre_resultado}}
                      </td>
                 </tr>
                 <tr>
                     <td width="15%" class="font-weight-bold">Acción Mediano Plazo</td>
                     <td>
-                        {{-- ( {{ $mediano_plazo_accion->codigo_mediano_plazo }} )  --}}
+                        ( {{ $mediano_plazo_accion->codigo_mediano_plazo }} ) 
                         {{$mediano_plazo_accion->accion_mediano_plazo}}
                      </td>
                 </tr>

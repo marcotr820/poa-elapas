@@ -24,7 +24,7 @@ class MedianoPlazoAccionRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'codigo_mediano_plazo' => ['required', 'numeric', 'min:0', 'max:99'],
+            'codigo_mediano_plazo' => ['required', 'numeric', 'min:0', 'max:99'],
             'accion_mediano_plazo' =>'required',
         ];
     }

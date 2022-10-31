@@ -9,14 +9,14 @@
                 <tr>
                     <td width="10%" class="font-weight-bold">Pilar</td>
                     <td>
-                        {{-- ( {{ $meta->pilar->codigo_pilar }} ) --}}
+                        ( {{ $meta->pilar->codigo_pilar }} )
                         {{$meta->pilar->nombre_pilar}}
                      </td>
                 </tr>
                 <tr>
                     <td width="10%" class="font-weight-bold">Meta</td>
                     <td>
-                        {{-- ( {{ $meta->codigo_meta }} ) --}}
+                        ( {{ $meta->codigo_meta }} )
                         {{$meta->nombre_meta}}
                      </td>
                 </tr>
@@ -33,7 +33,7 @@
             <table id="resultados" class="table table-striped table-sm table-bordered" style="width:100%">
                 <thead class="thead" style="background-color: skyblue;">
                     <tr>
-                        {{-- <td width="10%">CODIGO</td> --}}
+                        <td width="10%">CODIGO</td>
                         <td>RESULTADO</td>
                         <td width="26%">ACCIONES</td>
                     </tr>
@@ -55,7 +55,7 @@
         "processing": true,
         "ajax": "/metas/{!!$meta->uuid!!}/resultados/",
         columns: [
-            // { data: 'codigo_resultado', name:'resultados.codigo_resultado'},
+            { data: 'codigo_resultado', name:'resultados.codigo_resultado'},
             { data: 'nombre_resultado'},
             {
                 data: 'uuid',

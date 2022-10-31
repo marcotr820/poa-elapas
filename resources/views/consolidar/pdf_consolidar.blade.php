@@ -15,25 +15,25 @@
                 <tr>
                     <td width="12%"><b>Pilar</b></td>
                     <td width="88%">
-                        {{-- ( {{  $mpa->resultado->meta->pilar->codigo_pilar }} )  --}}
+                        ( {{  $mpa->resultado->meta->pilar->codigo_pilar }} ) 
                         {{ $mpa->resultado->meta->pilar->nombre_pilar }}</td>
                 </tr>
                 <tr>
                     <td width="12%"><b>Meta</b></td>
                     <td width="88%">
-                        {{-- ( {{ $mpa->resultado->meta->codigo_meta }} )  --}}
+                        ( {{ $mpa->resultado->meta->codigo_meta }} ) 
                         {{ $mpa->resultado->meta->nombre_meta }}</td>
                 </tr>
                 <tr>
                     <td width="12%"><b>Resultado</b></td>
                     <td width="88%">
-                        {{-- ( {{ $mpa->resultado->codigo_resultado }} )  --}}
+                        ( {{ $mpa->resultado->codigo_resultado }} ) 
                         {{ $mpa->resultado->nombre_resultado }}</td>
                 </tr>
                 <tr>
                     <td width="12%"><b>Acción Mediano Plazo</b></td>
                     <td width="88%">
-                        {{-- ( {{ $mpa->codigo_mediano_plazo }} )  --}}
+                        ( {{ $mpa->codigo_mediano_plazo }} ) 
                         {{ $mpa->accion_mediano_plazo }}</td>
                 </tr>
             </thead>

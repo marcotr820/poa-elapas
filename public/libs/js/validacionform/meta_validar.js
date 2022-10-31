@@ -23,7 +23,7 @@ function edit(meta_uuid){
             $(document).find('[data-error="span"]').text('');
             $(document).find('[data-error="textarea"]').removeClass('is-invalid');
             axios.put('/metas/'+ meta_uuid,{
-               //codigo_meta: d.getElementById('codigo_meta').value,
+                codigo_meta: d.getElementById('codigo_meta').value,
                 nombre_meta: d.getElementById('nombre_meta').value,
             })
             .then(function (resp){
