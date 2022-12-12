@@ -54,6 +54,7 @@
 @section('js')
     <script src="{{asset('libs/js/validacionform/poas_gerencia.js')}}"></script>
     <script>
+        const app_url = "{{ config('app.url') }}"
         var URL = "{{ asset('libs/datatables/es-ES.json') }}";
         var t = $('#table').DataTable({
                     "language": {

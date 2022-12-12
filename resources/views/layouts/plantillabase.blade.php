@@ -243,7 +243,7 @@
                             </div>
                         </li>
                         <li>
-                            <form action="/logout" method="POST">
+                            <form action="{{route('logout')}}" method="POST">
                                 @csrf
                                 <!--usamos JS para que al momento de dar click en el enlace se envie el formulario
                                 y asi no tendremos que usar un boton ripo submit-->

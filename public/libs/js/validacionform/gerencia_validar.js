@@ -22,7 +22,7 @@ function edit(gerencia_uuid){
         if(! e.target.hasAttribute('data-form')){
             let datosform = $(e.target).serializeArray();
             $.ajax({
-                url:"/gerencias/" + gerencia_uuid,
+                url: `${app_url}/gerencias/` + gerencia_uuid,
                 type: 'PUT',
                 data: datosform,
                 beforeSend:function(){
@@ -89,7 +89,7 @@ d.addEventListener('submit', (e)=>{
             let datosform = $(e.target).serializeArray();
             $.ajax({
                 // url:$(this).attr('action'), //{{route('gerencias.store')}}
-                url: '/gerencias',
+                url: `${app_url}/gerencias`,
                 type: 'POST',
                 data: datosform,
                 beforeSend:function(resp){
@@ -128,8 +128,8 @@ d.addEventListener('submit', (e)=>{
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: "/gerencias/" + data.uuid,
-                    type: 'delete', 
+                    url: `${app_url}/gerencias/` + data.uuid,
+                    type: 'Delete', 
                     data: datosform,  
                     success:function(resp)
                     {

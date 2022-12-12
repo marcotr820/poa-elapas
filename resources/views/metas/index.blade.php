@@ -41,11 +41,11 @@
 
 @section('js')
     <script>
-        var pilar_uuid = "{!!$pilar->uuid!!}";
+        const app_url = "{{ config('app.url') }}";
         $('#metas').DataTable({
             "serverSide": true,
             "processing": true,
-            "ajax": '/pilares/{!!$pilar->uuid!!}/metas',
+            "ajax": `${app_url}/pilares/{{ $pilar->uuid }}/metas`,
             columns: [
                 { data: 'codigo_meta', name:'metas.codigo_meta'},
                 { data: 'nombre_meta', name:'metas.nombre_meta'},

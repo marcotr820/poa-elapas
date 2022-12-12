@@ -17,6 +17,7 @@ class GerenciaController extends Controller
     }
 
     public function index(Request $request){
+        //return $request->url();
         // return (string) Str::uuid().round(microtime(true) * 1000);
         // abort_if(!auth('usuario')->user()->can('super-admi'), 403, 'error');
         if($request->ajax())

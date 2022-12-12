@@ -29,7 +29,7 @@ d.addEventListener('change', (e) => {
                     }
                 ],
                 "ajax": {
-                    "url": "/get_poas_gerencia/" + gerencia_uuid,
+                    "url": `${app_url}/get_poas_gerencia/` + gerencia_uuid,
                     "type": "GET"
                 },
                 columns: [

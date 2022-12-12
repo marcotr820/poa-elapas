@@ -49,7 +49,7 @@ Route::view('/', 'login')->name('login');
 
 Route::post('/autenticacion', [LoginController::class, 'autenticacion'])->name('autenticacion');
 
-Route::post('logout', [LoginController::class, 'logout']);
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 //con el middleware indicamos que si no estamos autenticados no nos deje entrar a la ruta principal aumentando url
 //protegemos la ruta con middleware para que usuarios no autenticados no puedan ingresar

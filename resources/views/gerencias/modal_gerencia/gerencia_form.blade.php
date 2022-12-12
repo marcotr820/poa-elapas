@@ -13,7 +13,7 @@
                 </button>
             </div>
 
-            <form action="" method="" id="form" autocomplete="off">
+            <form action="" method="POST" id="form" autocomplete="off">
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">

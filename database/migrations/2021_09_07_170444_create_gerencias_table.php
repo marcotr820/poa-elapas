@@ -15,7 +15,7 @@ class CreateGerenciasTable extends Migration
     {
         Schema::create('gerencias', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre_gerencia')->unique();
+            $table->string('nombre_gerencia');
             $table->enum('status', [0, 1])->default(1);
             $table->string('uuid', 49)->unique();
             $table->timestamps();

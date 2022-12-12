@@ -3,6 +3,7 @@
 @section('title', 'Gerencias')
 
 @section('contenido')
+    
     <div class="card">
         <h5 class="card-header py-1 d-flex justify-content-between align-items-center">
             Lista Gerencias
@@ -74,7 +75,10 @@
                 // document.querySelector('.loading').style.display = 'none';
             },
         });
+
+        const app_url = "{{ config('app.url') }}";
     </script>
 
+    
     <script src="{{asset('libs/js/validacionform/gerencia_validar.js')}}"></script>
 @endsection

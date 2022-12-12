@@ -31,6 +31,8 @@
 
 @section('js')
     <script>
+        const app_url = "{{ config('app.url') }}";
+
         $('#pilares').DataTable({
             "serverSide": true,
             "processing": true,

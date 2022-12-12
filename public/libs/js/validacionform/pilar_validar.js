@@ -25,7 +25,7 @@ function edit(pilar_uuid){
             d.querySelectorAll('[data-error="input"]').forEach( (el) =>{ el.classList.remove('is-invalid');  el.classList.remove('is-valid'); });
             d.querySelectorAll('[data-error="textarea"]').forEach( (el)=>{ el.classList.remove('is-invalid');  el.classList.remove('is-valid'); });
             d.querySelectorAll('[data-error="span"]').forEach( (el) =>{ el.textContent = '' });
-            axios.put('/pilares/'+ pilar_uuid,{
+            axios.put(`${app_url}/pilares/`+ pilar_uuid,{
                 codigo_pilar: d.getElementById('codigo_pilar').value,
                 nombre_pilar: d.getElementById('nombre_pilar').value,
                 gestion_pilar: d.getElementById('gestion_pilar').value,
@@ -54,7 +54,7 @@ function edit(pilar_uuid){
 function delet(pilar_uuid){
     d.getElementById('form_delete').onsubmit = function(e){
         e.preventDefault();
-        axios.delete('/pilares/'+ pilar_uuid)
+        axios.delete(`${app_url}/pilares/`+ pilar_uuid)
         .then(function (resp){
             $('#modal_delete').modal('hide');
             $('#pilares').DataTable().ajax.reload();
@@ -139,7 +139,7 @@ d.addEventListener('click', (e)=>{
     if(e.target.matches('[data-metas]')){
         let data = $('#pilares').DataTable().row($(e.target).parents('tr') ).data();
         let pilar_uuid = data.uuid;
-        location.href='/pilares/'+pilar_uuid+'/metas'; //enviamos el id del pilar clickeado
+        location.href=`${app_url}/pilares/${pilar_uuid}/metas`; //enviamos el id del pilar clickeado
     }
 
     if(e.target.matches('[data-delete]') || e.target.matches('[data-delete] *')){
@@ -168,7 +168,7 @@ d.addEventListener('submit', (e) =>{
             d.querySelectorAll('[data-error="span"]').forEach( (el) => { el.textContent = '' });
             let data = new FormData(e.target);
             d.querySelector('.overlay').classList.add('show');
-            axios.post('/pilares', data) //enviamos todos los input del form
+            axios.post(`${app_url}/pilares`, data) //enviamos todos los input del form
             .then(function (response) {
               //console.log(response);
                 $('#modal').modal('hide');
