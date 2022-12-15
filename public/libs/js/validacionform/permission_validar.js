@@ -22,7 +22,7 @@ function edit(id){
          let datosform = $(e.target).serializeArray();
          d.querySelector('.overlay').classList.add('show');
          $.ajax({
-            url: "/permissions/" + id,
+            url: `${app_url}/permissions/` + id,
             type: 'put', 
             data: datosform,  
             success:function(resp){
@@ -76,7 +76,7 @@ d.addEventListener('submit', (e)=>{
          d.querySelector('.overlay').classList.add('show');
          let datosform = $(e.target).serializeArray();
          $.ajax({
-            url: "/permissions",
+            url: `${app_url}/permissions`,
             type: 'post', 
             data: datosform,  
             success:function(resp){
@@ -112,7 +112,7 @@ d.addEventListener('submit', (e)=>{
       }).then((result) => {
          if (result.isConfirmed) {
             $.ajax({
-               url: "/permissions/" + data.id,
+               url: `${app_url}/permissions/` + data.id,
                type: 'delete', 
                data: datosform,  
                success:function(resp){

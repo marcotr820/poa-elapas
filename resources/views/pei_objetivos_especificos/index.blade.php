@@ -65,12 +65,12 @@
 
 @section('js')
     <script>
-        var mediano_plazo_accion_uuid = "{!!$mediano_plazo_accion->uuid!!}";
+        const mediano_plazo_accion_uuid = "{{ $mediano_plazo_accion->uuid }}";
         $('#pei_objetivos_especificos').DataTable({
             "order": [[ 0, "desc" ]],
             "serverSide": true,
             "processing": true,
-            "ajax": "/mediano_plazo_acciones/{!!$mediano_plazo_accion->uuid!!}/pei_objetivos_especificos/",
+            "ajax": `${app_url}/mediano_plazo_acciones/${mediano_plazo_accion_uuid}/pei_objetivos_especificos/`,
             columns: [
                 // { data: 'id', name:'pei_objetivos_especificos.id'},
                 { data: 'objetivo_institucional', name:'pei_objetivos_especificos.objetivo_institucional'},

@@ -75,8 +75,6 @@
                 // document.querySelector('.loading').style.display = 'none';
             },
         });
-
-        const app_url = "{{ config('app.url') }}";
     </script>
 
     

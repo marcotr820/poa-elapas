@@ -102,41 +102,6 @@ class ActividadSeeder extends Seeder
             'operacion_id' => '7'
         ]);
 
-        // $actividades_op1 = [
-        //     'COTIZACIÓN',
-        //     'INICIAR PROCESOS DE ADQUISICION',
-        //     'COMPRA DE LOS DISCOS DUROS'
-        // ];
-        // foreach($actividades_op1 as $act){
-        //     Actividades::create([
-        //         'nombre_actividad' => $act,
-        //         'resultado_esperado' => rand(10,90),
-        //         'operacion_id' => '1'
-        //     ]);
-        // }
-
-        // $actividades_op2 = [
-        //     'CONFIGURACION DE SERVIDOR COMO RAID 5'
-        // ];
-        // foreach($actividades_op2 as $act){
-        //     Actividades::create([
-        //         'nombre_actividad' => $act,
-        //         'resultado_esperado' => rand(10,90),
-        //         'operacion_id' => '2'
-        //     ]);
-        // }
-
-        // $actividades_op3 = [
-        //     'ADQUIRIR SERVICIOS'
-        // ];
-        // foreach($actividades_op3 as $act){
-        //     Actividades::create([
-        //         'nombre_actividad' => $act,
-        //         'resultado_esperado' => rand(10,90),
-        //         'operacion_id' => '3'
-        //     ]);
-        // }
-
         // Actividades::factory(6)->create();
     }
 }

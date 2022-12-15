@@ -48,11 +48,11 @@
 @section('js')
     
     <script>
-        var pei_uuid = "{!!$pei_objetivo_especifico->uuid!!}";
+        var pei_uuid = "{{ $pei_objetivo_especifico->uuid }}";
         $('#corto_plazo_acciones').DataTable({    
             "serverSide": true,
             "processing": true,
-            "ajax": "/pei_objetivos_especifico/{!!$pei_objetivo_especifico->uuid!!}/corto_plazo_acciones/",
+            "ajax": `${app_url}/pei_objetivos_especifico/${pei_uuid}/corto_plazo_acciones/`,
             columns: [
                 { data: 'accion_corto_plazo'},
                 { data: 'gestion'},

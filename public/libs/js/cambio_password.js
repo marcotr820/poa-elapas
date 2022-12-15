@@ -33,12 +33,12 @@ d.addEventListener('submit', (e)=>{
         e.preventDefault();
         d.querySelectorAll('[data-error="input"]').forEach((el)=>{ el.classList.remove('is-invalid') });
         d.querySelectorAll('[data-error="span"]').forEach((el)=>{ el.textContent = '' });
-        axios.put('/update_password/'+ usuario_uuid,{
+        axios.put(`${app_url}/update_password/`+ usuario_uuid,{
             password: d.getElementById('password').value,
             password_confirm: d.getElementById('password_confirm').value
         })
         .then(function (resp){
-            location.href= '/usuarios';
+            location.href= `${app_url}/usuarios`;
         })
         .catch(function (error){
             // console.log(error.response.data.errors);

@@ -24,7 +24,7 @@ d.getElementById('form').onsubmit = function (e){
       d.querySelectorAll('[data-error="textarea"]').forEach((el)=>{ el.classList.remove('is-invalid') });
       d.querySelectorAll('[data-error="input"]').forEach((el)=>{ el.classList.remove('is-invalid') });
       d.querySelectorAll('[data-error="span"]').forEach((el)=>{ el.textContent = '' });
-      axios.put('/tareas_especificas/'+ tarea_uuid, {
+      axios.put(`${app_url}/tareas_especificas/`+ tarea_uuid, {
       nombre_tarea: d.getElementById('nombre_tarea').value,
       })   
       .then(function (resp){
@@ -51,7 +51,7 @@ d.getElementById('form').onsubmit = function (e){
 function delet(tarea_uuid){
    d.getElementById('form_delete').onsubmit = function (e){
       e.preventDefault();
-      axios.delete('/tareas_especificas/'+ tarea_uuid)
+      axios.delete(`${app_url}/tareas_especificas/`+ tarea_uuid)
       .then(function (resp){
          $('#modal_delete').modal('hide');
          $('#tareas_especificas').DataTable().ajax.reload();
@@ -114,7 +114,7 @@ d.addEventListener('submit', (e)=>{
          d.querySelectorAll('[data-error="input"]').forEach((el)=>{ el.classList.remove('is-invalid') });
          d.querySelectorAll('[data-error="span"]').forEach((el)=>{ el.textContent = '' });
          const datos = new FormData(e.target);
-         axios.post('/tareas_especificas/'+ actividad_uuid, datos) //enviamos todos los input del form
+         axios.post(`${app_url}/tareas_especificas/`+ actividad_uuid, datos) //enviamos todos los input del form
         	.then(function (response) {
         	   // console.log(response);
             $('#tareas_especificas').DataTable().ajax.reload(null, false);

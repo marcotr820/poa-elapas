@@ -43,14 +43,14 @@
     
     <script src="{{asset('libs/js/validacionform/planificacion_validar.js')}}"></script>
     <script>
-        var corto_plazo_uuid = '{!!$corto_plazo_accion->uuid!!}';
+        var corto_plazo_uuid = "{{ $corto_plazo_accion->uuid }}";
         $('#planificacion').DataTable({
             "searching": false,
             "bPaginate": false, 
             "serverSide": true,
             "processing": true,
             "order": [[ 0, "desc" ]],
-            "ajax": "/planificacion/"+ corto_plazo_uuid,
+            "ajax": `${app_url}/planificacion/`+ corto_plazo_uuid,
             columns: [
                 { 
                     data: 'primer_trimestre', name: 'planificaciones.primer_trimestre',

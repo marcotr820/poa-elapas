@@ -7,7 +7,7 @@
 // });
 
 $(function () {
-    $.get('/notificacion', function(dato){
+    $.get(`${app_url}/notificacion`, function(dato){
         //console.log(dato);
         dato === '0' ? $('#notificacion').attr('hidden', true) : $('#notificacion').html(dato);
     });

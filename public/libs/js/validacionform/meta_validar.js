@@ -22,7 +22,7 @@ function edit(meta_uuid){
             d.querySelector('.overlay').classList.add('show');
             $(document).find('[data-error="span"]').text('');
             $(document).find('[data-error="textarea"]').removeClass('is-invalid');
-            axios.put('/metas/'+ meta_uuid,{
+            axios.put(`${app_url}/metas/`+ meta_uuid,{
                 codigo_meta: d.getElementById('codigo_meta').value,
                 nombre_meta: d.getElementById('nombre_meta').value,
             })
@@ -50,7 +50,7 @@ function edit(meta_uuid){
 function delet(meta_uuid){
     d.getElementById('form_delete').onsubmit = function(e){
         e.preventDefault();
-        axios.delete('/metas/'+ meta_uuid)
+        axios.delete(`${app_url}/metas/`+ meta_uuid)
         .then(function (resp){
             $('#modal_delete').modal('hide');
             $('#metas').DataTable().ajax.reload();
@@ -72,7 +72,7 @@ d.addEventListener('click', (e)=>{
     if(e.target.matches('[data-resultados]'))
     {
         let data = $('#metas').DataTable().row($(e.target).parents('tr') ).data();
-        location.href='/metas/'+data.uuid+'/resultados';
+        location.href=`${app_url}/metas/${data.uuid}/resultados`;
     }
 
     if(e.target.matches('#nuevo') || e.target.matches('#nuevo *'))
@@ -126,7 +126,7 @@ d.addEventListener('submit', (e)=>{
             $(document).find('[data-error="textarea"]').removeClass('is-invalid');
             $(document).find('[data-error="input"]').removeClass('is-invalid');
             const datos = new FormData(e.target);
-            axios.post('/metas/'+ pilar_uuid, datos) //enviamos todos los input del form
+            axios.post(`${app_url}/metas/`+ pilar_uuid, datos) //enviamos todos los input del form
         	.then(function (response) {
                 // console.log(response);
                 $('#metas').DataTable().ajax.reload(null, false);

@@ -23,7 +23,7 @@ function edit(resultado_uuid){
             d.querySelector('.overlay').classList.add('show');
             $(document).find('[data-error="textarea"]').removeClass('is-invalid');
             $(document).find('[data-error="span"]').text('');
-            axios.put('/resultados/'+ resultado_uuid,{
+            axios.put(`${app_url}/resultados/`+ resultado_uuid,{
                 codigo_resultado: d.getElementById('codigo_resultado').value,
                 nombre_resultado: d.getElementById('nombre_resultado').value,
             })
@@ -50,7 +50,7 @@ function edit(resultado_uuid){
 function delet(resultado_uuid){
     d.getElementById('form_delete').onsubmit = function(e){
         e.preventDefault();
-        axios.delete('/resultados/'+ resultado_uuid)
+        axios.delete(`${app_url}/resultados/`+ resultado_uuid)
         .then(function (resp){
             $('#modal_delete').modal('hide');
             $('#resultados').DataTable().ajax.reload();
@@ -67,11 +67,12 @@ function delet(resultado_uuid){
     }
 }
 
+//Evento click
 d.addEventListener('click', (e)=>{
     if(e.target.matches('[data-mediano]')){
         // let data = $('#resultados').DataTable().row($(this).parents('tr') ).data();
         let data = $('#resultados').DataTable().row($(e.target).parents('tr') ).data();
-        location.href='/resultados/'+data.uuid+'/acciones_mediano_plazo';
+        location.href=`${app_url}/resultados/${data.uuid}/acciones_mediano_plazo`;
     }
 
     if(e.target.matches('#nuevo')){
@@ -115,7 +116,7 @@ d.addEventListener('submit', (e)=>{
             $(document).find('[data-error="span"]').text('');
             $.ajax({
                 // url:$(this).attr('action'),
-                url: '/resultados/'+ meta_uuid,
+                url: `${app_url}/resultados/`+ meta_uuid,
                 type: 'POST',
                 data: datosform,
                 beforeSend:function(resp){

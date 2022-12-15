@@ -49,11 +49,11 @@
 @section('js')
     
     <script>
-        var meta_uuid = "{!!$meta->uuid!!}";
+        var meta_uuid = "{{ $meta->uuid }}";
         $('#resultados').DataTable({
         "serverSide": true,
         "processing": true,
-        "ajax": "/metas/{!!$meta->uuid!!}/resultados/",
+        "ajax": `${app_url}/metas/${meta_uuid}/resultados`,
         columns: [
             { data: 'codigo_resultado', name:'resultados.codigo_resultado'},
             { data: 'nombre_resultado'},

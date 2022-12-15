@@ -10,7 +10,7 @@
           <h6><strong>Trabajador:</strong> {{$usuario->trabajador->nombre}}</h6>
           <h6> <strong>Gerencia:</strong> {{ $usuario->trabajador->unidad->gerencia->nombre_gerencia }}</h6>
           <h6> <strong>Unidad:</strong> {{ $usuario->trabajador->unidad->nombre_unidad }}</h6>
-          <form id="form" method="post" action="{{route('update.password', $usuario)}}" class="mt-4">
+          <form id="form" method="post" action="" class="mt-4">
             @csrf
             @method ('PUT')
             <div class="form-group">

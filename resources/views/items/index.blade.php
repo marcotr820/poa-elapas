@@ -142,11 +142,11 @@
         var total_progress = '{{ round(($accion->items->sum('presupuesto')/$accion->presupuesto_programado)*100) }}%';
         document.querySelector('.skill-per').style.width = total_progress;
 
-        var actividad_uuid = "{!!$actividad->uuid!!}";
+        var actividad_uuid = "{{ $actividad->uuid }}";
         $('#items').DataTable({
             "serverSide": true,
             "processing": true,
-            "ajax": "/actividades/{!!$actividad->uuid!!}/items/",
+            "ajax": `${app_url}/actividades/${actividad_uuid}/items`,
             columns: [
                 // { data: 'id', name: 'items.id'},
                 { data: 'bien_servicio', name: 'items.bien_servicio'},

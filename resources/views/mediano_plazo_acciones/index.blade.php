@@ -56,11 +56,11 @@
 @section('js')
     
     <script>
-        var resultado_uuid = "{!!$resultado->uuid!!}";
+        var resultado_uuid = "{{ $resultado->uuid }}";
         $('#acciones_mediano_plazo').DataTable({
             "serverSide": true,
             "processing": true,
-            "ajax": "/resultados/{!!$resultado->uuid!!}/acciones_mediano_plazo",
+            "ajax": `${app_url}/resultados/${resultado_uuid}/acciones_mediano_plazo`,
             columns: [
                 { data: 'codigo_mediano_plazo', name:'mediano_plazo_acciones.codigo_mediano_plazo'},
                 { data: 'accion_mediano_plazo', name:'mediano_plazo_acciones.accion_mediano_plazo'},

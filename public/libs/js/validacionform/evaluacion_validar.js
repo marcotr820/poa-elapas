@@ -29,7 +29,7 @@ function edit(evaluacion_uuid) {
          d.querySelector('.overlay').classList.add('show');
          d.querySelectorAll('[data-error="input"]').forEach((el)=>{ el.classList.remove('is-invalid') });
          d.querySelectorAll('[data-error="span"]').forEach((el)=>{ el.textContent = '' });
-         axios.put('/evaluacion/' + evaluacion_uuid, {
+         axios.put(`${app_url}/evaluacion/` + evaluacion_uuid, {
             resultado_logrado: d.getElementById('resultado_logrado').value,
             presupuesto_ejecutado: d.getElementById('presupuesto_ejecutado').value
          })
@@ -71,7 +71,7 @@ d.addEventListener('click', (e)=>{
       d.querySelectorAll('[data-error="input"]').forEach((el)=>{ el.classList.remove('is-invalid') });
       d.querySelectorAll('[data-error="span"]').forEach((el)=>{ el.textContent = '' });
       let evaluacion_uuid = e.target.getAttribute('data-edit');
-      axios.get('/get_evaluacion/' + evaluacion_uuid)
+      axios.get(`${app_url}/get_evaluacion/` + evaluacion_uuid)
       .then(function (resp){
          // console.log(resp.data);
          d.getElementById('resultado_logrado').value = resp.data.resultado_logrado;
@@ -95,7 +95,7 @@ d.addEventListener('submit', (e)=>{
       {
          d.querySelector('.overlay').classList.add('show');
          const datos = new FormData(e.target);
-         axios.post('/evaluacion/' + corto_plazo_accion_uuid, datos)
+         axios.post(`${app_url}/evaluacion/` + corto_plazo_accion_uuid, datos)
          .then(function (resp){
             // console.log(resp);
             location.reload();

@@ -14,7 +14,7 @@ class PlanificacionSeeder extends Seeder
      */
     public function run()
     {
-        // GESTION 2023
+        // GESTION 2022
         Planificaciones::create([
             'primer_trimestre' => 20,
             'segundo_trimestre' => 30,
@@ -30,7 +30,7 @@ class PlanificacionSeeder extends Seeder
             'corto_plazo_accion_id' => 2
         ]);
 
-        // GESTION 2023
+        // // GESTION 2023
         // jefatura aduccion G.TECNICA
         Planificaciones::create([
             'primer_trimestre' => 20,

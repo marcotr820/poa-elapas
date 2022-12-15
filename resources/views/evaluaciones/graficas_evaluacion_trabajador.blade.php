@@ -47,8 +47,8 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js" integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
    <script>
       const cpa_uuid = '{{ $corto_plazo_accion->uuid }}';
-      $.get(`/evaluacion_graficas/${ cpa_uuid }`, function(data){
-         // console.log(data);
+      $.get(`${app_url}/evaluacion_graficas/${ cpa_uuid }`, function(data){
+         console.log(data);
          const esperados = [];
          esperados.push(data.planificacion.primer_trimestre);
          esperados.push(data.planificacion.segundo_trimestre);

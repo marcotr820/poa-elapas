@@ -49,27 +49,6 @@ class CortoPlazoAccionSeeder extends Seeder
             'pei_objetivo_especifico_id' => '7'
         ]);
 
-        // PILAR 2023
-        // $cpas = [
-        //     'RESGUARDAR LA INFORMACIÓN EMPRESARIAL',
-        //     'RESGUARDAR LA INFRAESTUCTURA TECNOLOGICA DE ATAQUES CIBERNETICOS',
-        //     'BRINDAR DE SERVICIO DE INTERNET',
-        //     'MANTENIMIENTO DE LOS SISTEMAS DE ELAPAS'
-        // ];
-        
-        // foreach ($cpas as $value) {
-        //     CortoPlazoAcciones::create([
-        //         'gestion' => '2023',
-        //         'accion_corto_plazo' => Str::upper($value),
-        //         'resultado_esperado' => 25,
-        //         'presupuesto_programado' => rand(50000, 100000),
-        //         'fecha_inicio' => date('2023-02-03'),
-        //         'fecha_fin' => date('2023-07-03'),
-        //         'trabajador_id' => '3',
-        //         'pei_objetivo_especifico_id' => '1'
-        //     ]);
-        // }
-
         // CortoPlazoAcciones::factory(20)->create();
     }
 }

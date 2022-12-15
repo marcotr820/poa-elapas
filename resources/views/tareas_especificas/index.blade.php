@@ -55,7 +55,7 @@
         $('#tareas_especificas').DataTable({
             "serverSide": true,
             "processing": true,
-            "ajax": "/actividades/{!!$actividad->uuid!!}/tareas_especificas/",
+            "ajax": `${app_url}/actividades/${actividad_uuid}/tareas_especificas/`,
             columns: [
                 // { data: 'id'},
                 { data: 'nombre_tarea'},

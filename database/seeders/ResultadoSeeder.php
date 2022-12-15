@@ -37,11 +37,6 @@ class ResultadoSeeder extends Seeder
             'nombre_resultado' => Str::upper('El 95% de la población urbana cuenta con servicios de agua potable.'),
             'meta_id' => '2'
         ]);
-        // Resultados::create([
-        //     // id = 4
-        //     'nombre_resultado' => Str::upper('El 70% de la población urbana cuenta con servicios de alcantarillado y saneamiento.'),
-        //     'meta_id' => '2'
-        // ]);
         
     }
 }

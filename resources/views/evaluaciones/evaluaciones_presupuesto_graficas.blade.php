@@ -11,7 +11,7 @@
 @section('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js" integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-   $.get('/evaluaciones_presupuesto_grafica/71e4e3e9-ee5f-4cfa-8dbd-d79174a8df161658265913354', function(datos){
+   $.get(`${app_url}/evaluaciones_presupuesto_grafica/71e4e3e9-ee5f-4cfa-8dbd-d79174a8df161658265913354`, function(datos){
       datos.forEach((el, i) => {
          const card = `<div class="col-sm-6 mb-4">
                         <div class="card">

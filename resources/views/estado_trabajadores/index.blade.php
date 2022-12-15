@@ -112,7 +112,7 @@
                 {
                     data: 'uuid', name: 'trabajadores.uuid',
                     render: function(data, type, row){
-                        return `<a href="/ver_evaluaciones/${data}" class="boton default">Ver Evaluación</a>`;
+                        return `<a href="${app_url}/ver_evaluaciones/${data}" class="boton default">Ver Evaluación</a>`;
                     }
                 }
             ],

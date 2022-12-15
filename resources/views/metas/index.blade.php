@@ -41,7 +41,7 @@
 
 @section('js')
     <script>
-        const app_url = "{{ config('app.url') }}";
+        const pilar_uuid = "{{ $pilar->uuid }}";
         $('#metas').DataTable({
             "serverSide": true,
             "processing": true,

@@ -202,6 +202,7 @@ class PoaController extends Controller
         } else {
             $corto_plazo_acciones = [];
         }
+        
         return view('poa.acciones_unidad_gerencia', compact('unidad', 'corto_plazo_acciones'));
     }
 }

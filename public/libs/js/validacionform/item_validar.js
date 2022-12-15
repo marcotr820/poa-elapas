@@ -30,7 +30,7 @@ function edit(item_uuid){
          d.querySelectorAll('[data-error="input"]').forEach((el)=>{ el.classList.remove('is-invalid') });
          d.querySelectorAll('[data-error="span"]').forEach((el)=>{ el.textContent = '' });
          d.querySelectorAll('[data-error="select"]').forEach((el)=>{ el.classList.remove('is-invalid') });
-         axios.put('/items/'+ item_uuid,{
+         axios.put(`${app_url}/items/`+ item_uuid,{
             bien_servicio: d.getElementById('bien_servicio').value,
             fecha_requerida: d.getElementById('fecha_requerida').value,
             presupuesto: d.getElementById('presupuesto').value,
@@ -65,7 +65,7 @@ function edit(item_uuid){
 function delet(item_uuid){
    d.getElementById('form_delete').onsubmit = function(e){
       e.preventDefault();
-      axios.delete('/items/' + item_uuid)
+      axios.delete(`${app_url}/items/` + item_uuid)
       .then(function (response) {
          location.reload();
          // $('#modal_delete').modal('hide');
@@ -144,9 +144,9 @@ d.addEventListener('submit', (e)=>{
          d.querySelectorAll('[data-error="span"]').forEach((el)=>{ el.textContent = '' });
          d.querySelectorAll('[data-error="select"]').forEach((el)=>{ el.classList.remove('is-invalid') });
          const datos = new FormData(e.target);
-			axios.post('/items/'+ actividad_uuid, datos) //enviamos todos los input del form
+			axios.post(`${app_url}/items/`+ actividad_uuid, datos) //enviamos todos los input del form
         	.then(function (response) {
-            console.log(response);
+            //console.log(response);
             location.reload();
             // $('#items').DataTable().ajax.reload(null, false);
             // $('#modal').modal('hide');

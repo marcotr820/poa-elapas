@@ -22,7 +22,7 @@ function edit(unidad_uuid){
             e.preventDefault();
             let datosform = $(e.target).serializeArray();
             $.ajax({
-                url:"/unidades/" + unidad_uuid,
+                url: `${app_url}/unidades/` + unidad_uuid,
                 type: 'PUT',
                 data: datosform,
                 beforeSend:function(){
@@ -88,7 +88,7 @@ d.addEventListener('submit', (e)=>{
             let datosform = $(e.target).serializeArray();
             $.ajax({
                 // url:$(this).attr('action'),
-                url: '/unidades',
+                url: `${app_url}/unidades`,
                 type: 'POST',
                 data: datosform,
                 beforeSend:function(resp){
@@ -131,7 +131,7 @@ d.addEventListener('submit', (e)=>{
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: "/unidades/" + data.uuid,
+                    url: `${app_url}/unidades/` + data.uuid,
                     type: 'delete', 
                     data: datosform,  
                     success:function(resp)

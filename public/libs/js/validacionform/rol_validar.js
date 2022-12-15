@@ -29,7 +29,7 @@ function edit(role_id){
                update_permisos.push(el.value); //lo añadimos al array su valor id
             }
          })
-         axios.put('/roles/' + role_id,{
+         axios.put(`${app_url}/roles/` + role_id,{
             nombre_rol: d.getElementById('nombre_rol').value,
             permisos: update_permisos,
          }) //enviamos todos los input del form
@@ -57,7 +57,7 @@ function edit(role_id){
 function delet(role_id){
    d.getElementById('form_delete').onsubmit = function(e){
       e.preventDefault();
-      axios.delete('/roles/'+ role_id)
+      axios.delete(`${app_url}/roles/`+ role_id)
       .then(function (response) {
          // console.log(response);
          $("#modal_delete").modal("hide");
@@ -95,7 +95,7 @@ d.addEventListener('click', (e)=>{
       d.querySelectorAll('[data-error="span"]').forEach((el)=>{ el.textContent = '' });
       d.getElementById('form').reset(); //limpiamos el formulario
       let data = $('#roles').DataTable().row($(e.target).parents('tr') ).data();
-      axios.get('/permisos_rol/' + data.id)
+      axios.get(`${app_url}/permisos_rol/` + data.id)
       .then(function (response) {
          for(let i=0; i < response.data.length; i++){
             d.querySelector('[data-permiso="permiso'+response.data[i].permission_id+'"]').checked = true;
@@ -127,7 +127,7 @@ d.addEventListener('submit', (e)=>{
          d.querySelectorAll('[data-error="input"]').forEach((el)=>{ el.classList.remove('is-invalid') });
          d.querySelectorAll('[data-error="span"]').forEach((el)=>{ el.textContent = '' });
          let datos = new FormData(e.target);
-         axios.post('/roles', datos) //enviamos todos los input del form
+         axios.post(`${app_url}/roles`, datos) //enviamos todos los input del form
          .then(function (response) {
             // console.log(response);
             $("#modal").modal("hide");

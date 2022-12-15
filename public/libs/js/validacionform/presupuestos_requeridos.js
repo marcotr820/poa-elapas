@@ -5,8 +5,7 @@ d.addEventListener('click', (e)=>{
       if(d.getElementById('fecha_inicio').value !== '' && d.getElementById('fecha_fin').value !== ''){
          let fecha_inicio = d.getElementById('fecha_inicio').value || null; //agregar la toma de valor por defecto si no tiene algun valor
          let fecha_fin = d.getElementById('fecha_fin').value || null;
-         let iframepdf = d.getElementById('iframe_pdf');
-         window.open ('/presupuestos_pdf/'+ fecha_inicio + '/' + fecha_fin);
+         window.open (`${app_url}/presupuestos_pdf/${fecha_inicio}/${fecha_fin}`);
       }
       else{
          
@@ -30,7 +29,7 @@ inputs_date.forEach((el)=>{
                "processing": true,
                "serverSide": true,
                "ajax": {
-                  "url": "/presupuestos_requeridos",
+                  "url": `${app_url}/presupuestos_requeridos`,
                   "type": "GET",
                   "data": {
                      "fecha_inicio": document.getElementById('fecha_inicio').value,

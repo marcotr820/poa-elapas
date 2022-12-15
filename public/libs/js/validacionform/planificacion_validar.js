@@ -21,9 +21,9 @@ d.querySelector('.alert').style.display = 'none';
 function delet(planificacion_uuid){
    d.getElementById('form_delete').onsubmit = function(e){
       e.preventDefault();
-         axios.delete('/planificacion/' + planificacion_uuid)
+         axios.delete(`${app_url}/planificacion/` + planificacion_uuid)
          .then(function (response) {
-            console.log(response.data);
+            //console.log(response.data);
             $('#modal_delete').modal('hide');
             $('#planificacion').DataTable().ajax.reload(null, false);
             d.getElementById('nuevo').style.display = 'inline';
@@ -80,7 +80,7 @@ d.addEventListener('submit', (e)=>{
          {
             d.querySelector('.overlay').classList.add('show');
             const datos = new FormData(e.target);
-            axios.post('/planificacion/'+ corto_plazo_uuid, datos) //enviamos todos los input del form
+            axios.post(`${app_url}/planificacion/`+ corto_plazo_uuid, datos) //enviamos todos los input del form
             .then(function (response) {
                // console.log(response);
                d.getElementById('nuevo').style.display = 'none';

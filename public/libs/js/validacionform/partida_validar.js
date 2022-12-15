@@ -24,7 +24,7 @@ function edit(partida_uuid){
          d.querySelectorAll('[data-error="select"]').forEach( (el) => { el.classList.remove('is-invalid') }); //limpiamos el select del error
          d.querySelectorAll('[data-error="span"]').forEach( (el) => { el.textContent = '' }); //limpiamos el span del error
          d.querySelector('.overlay').classList.add('show');
-         axios.put('/partidas/'+ partida_uuid, {
+         axios.put(`${app_url}/partidas/`+ partida_uuid, {
             nombre_partida: d.getElementById('nombre_partida').value,
             codigo_partida: d.getElementById('codigo_partida').value,
             tipo_partida: d.getElementById('tipo_partida').value
@@ -90,7 +90,7 @@ d.addEventListener('submit', (e)=>{
          d.querySelectorAll('[data-error="span"]').forEach( (el) => { el.textContent = '' }); //limpiamos el span del error
          const datos = new FormData(e.target);
          d.querySelector('.overlay').classList.add('show');
-         axios.post('/partidas', datos) //enviamos todos los input del form
+         axios.post(`${app_url}/partidas`, datos) //enviamos todos los input del form
          .then(function (response) {
             $('#partidas').DataTable().ajax.reload(null, false);
             $('#modal').modal('hide');
@@ -123,7 +123,7 @@ d.addEventListener('submit', (e)=>{
 		}).then((result) => {
 			if (result.isConfirmed) 
 			{
-				axios.delete('/partidas/' + data.uuid)
+				axios.delete(`${app_url}/partidas/` + data.uuid)
 				.then(function (response) {
 					$('#partidas').DataTable().ajax.reload(null, false);
 				})

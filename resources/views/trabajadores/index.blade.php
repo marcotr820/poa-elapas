@@ -36,6 +36,7 @@
 
 @section('js')
     <script>
+
         $('#trabajadores').DataTable({
         // "initComplete": function( settings, json ) {
         // document.getElementById('trabajadores').style.display = 'table';

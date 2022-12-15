@@ -125,7 +125,7 @@
 
 @section('js')
     <script>
-        var corto_plazo_accion_uuid = '{!! $corto_plazo_accion->uuid !!}';
+        var corto_plazo_accion_uuid = "{{ $corto_plazo_accion->uuid }}";
     </script>
    <script src="{{asset('libs/js/validacionform/evaluacion_validar.js')}}"></script>
 @endsection

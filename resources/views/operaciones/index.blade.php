@@ -42,11 +42,11 @@
     
     <script src="{{asset('libs/js/validacionform/operacion_validar.js')}}"></script>
     <script>
-        var accion_corto_uuid = "{!!$corto_plazo_accion->uuid!!}";
+        var accion_corto_uuid = "{{ $corto_plazo_accion->uuid }}";
         $('#operaciones').DataTable({
             "serverSide": true,
             "processing": true,
-            "ajax": "/corto_plazo_acciones/{!!$corto_plazo_accion->uuid!!}/operaciones",
+            "ajax": `${app_url}/corto_plazo_acciones/${accion_corto_uuid}/operaciones`,
             columns: [
                 // { data: 'id'},
                 { data: 'nombre_operacion'},

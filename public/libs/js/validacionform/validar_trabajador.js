@@ -27,7 +27,7 @@ function edit(trabajador_uuid) {
          d.querySelectorAll('[data-error="select"]').forEach((el) => { el.classList.remove('is-invalid') }); //limpiamos el select del error
          d.querySelectorAll('[data-error="span"]').forEach((el) => { el.textContent = '' }); //limpiamos el span del error
          d.querySelector('.overlay').classList.add('show');
-         axios.put('/trabajadores/' + trabajador_uuid, {
+         axios.put(`${app_url}/trabajadores/` + trabajador_uuid, {
             documento: d.getElementById('documento').value,
             unidad_id: d.getElementById('unidad_id').value,
             nombre: d.getElementById('nombre').value,
@@ -55,7 +55,7 @@ function edit(trabajador_uuid) {
 function delet(trabajador_uuid) {
    d.getElementById('form_delete').onsubmit = function (e) {
       e.preventDefault();
-      axios.delete('/trabajadores/' + trabajador_uuid)
+      axios.delete(`${app_url}/trabajadores/` + trabajador_uuid)
          .then(function (resp) {
             $('#modal_delete').modal('hide');
             $('#trabajadores').DataTable().ajax.reload(null, false);
@@ -132,7 +132,7 @@ d.addEventListener('submit', (e) => {
          d.querySelectorAll('[data-error="span"]').forEach((el) => { el.textContent = '' }); //limpiamos el span del error
          d.querySelector('.overlay').classList.add('show');
          const datos = new FormData(e.target);
-         axios.post('/trabajadores', datos) //enviamos todos los input del form
+         axios.post(`${app_url}/trabajadores`, datos) //enviamos todos los input del form
             .then(function (response) {
                // console.log(response);
                $("#trabajadores").DataTable().ajax.reload(null, false);

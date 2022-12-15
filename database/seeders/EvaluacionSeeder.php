@@ -106,19 +106,5 @@ class EvaluacionSeeder extends Seeder
             "trimestre" => "cuarto_trimestre",
             "corto_plazo_accion_id" => 3
         ]);
-
-        // ACCION CORTO PLAZO 2023
-        // JEFATURA ADUCCION G.TECNICA
-        // Evaluaciones::create([
-        //     "resultado_esperado" => 25,
-        //     "resultado_logrado" => 22,
-        //     "eficacia" => 88,
-        //     "presupuesto" => 100000,
-        //     "presupuesto_ejecutado" => ,
-        //     "ejecucion" => 32,
-        //     "relacion_avance" => 0.7,
-        //     "trimestre" => "primer_trimestre",
-        //     "corto_plazo_accion_id" => 3
-        // ]);
     }
 }

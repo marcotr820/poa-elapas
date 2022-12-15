@@ -30,7 +30,7 @@ function edit(usuario_uuid){
             d.querySelectorAll('input[type=checkbox]:checked').forEach((el)=>{
                 array_roles.push(el.value);
             });
-            axios.put('/usuarios/'+ usuario_uuid,{
+            axios.put(`${app_url}/usuarios/`+ usuario_uuid,{
                 // password: d.getElementById('password').value,
                 roles: array_roles, //enviamos los roles con checked
             })
@@ -62,7 +62,7 @@ function delet(usuario_uuid){
         //rescatamos el token del formulario de eliminar para enviarlo
         let datosform = $('#form_delete').serializeArray();
         $.ajax({
-            url: "/usuarios/" + usuario_uuid,
+            url: `${app_url}/usuarios/` + usuario_uuid,
             type: 'DELETE', 
             data: datosform,  
             success:function(respuesta)
@@ -106,7 +106,7 @@ d.addEventListener('click', (e)=>{
         d.querySelector('[data-block="btn"]').style.display = 'none';
         d.querySelector('[data-block="input"]').style.display = 'block';
         //quitamos los valores seleccionados del input multiple
-        axios.get('/selectTrabajadores')
+        axios.get(`${app_url}/selectTrabajadores`)
         .then(function (datos){
             let $options = '<option value="">seleccione...</option>';
             for(let i=0; i<datos.data.length; i++){
@@ -145,7 +145,7 @@ d.addEventListener('click', (e)=>{
         d.getElementById('trabajador_id').setAttribute('disabled', true);
         // d.getElementById('password').value = data.password;
 
-        axios.get('/rolesUsuario/'+ data.uuid)
+        axios.get(`${app_url}/rolesUsuario/` + data.uuid)
         .then(function (datos){
             // let roles=[] //para trabajar con select2 multiple
             // for(let i=0; i<datos.data.length; i++){
@@ -173,7 +173,7 @@ d.addEventListener('click', (e)=>{
     }
 
     if(e.target.matches('#u_password') || e.target.matches('#u_password *')){
-        location.href = '/usuarios/' + d.getElementById('u_password').value + '/update_password';
+        location.href = `${app_url}/usuarios/${d.getElementById('u_password').value}/update_password`;
     }
 })
 
@@ -189,7 +189,7 @@ d.addEventListener('submit', (e)=>{
             d.querySelectorAll('[data-error="input"]').forEach((el)=>{ el.classList.remove('is-invalid') });
             d.querySelectorAll('[data-error="span"]').forEach((el)=>{ el.textContent = '' });
             const datos = new FormData(e.target);
-            axios.post('/usuarios', datos) //enviamos todos los input del form
+            axios.post(`${app_url}/usuarios`, datos) //enviamos todos los input del form
             .then(function (response) {
                 // console.log(response);
                 $("#modal").modal("hide");

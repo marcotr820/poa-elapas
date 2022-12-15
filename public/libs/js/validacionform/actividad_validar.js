@@ -24,7 +24,7 @@ function edit(actividad_uuid){
 			d.querySelectorAll('[data-error="textarea"]').forEach( (el) => { el.classList.remove('is-invalid') });
 			d.querySelectorAll('[data-error="input"]').forEach( (el) => { el.classList.remove('is-invalid') }); //limpiamos el input del error
     		d.querySelectorAll('[data-error="span"]').forEach( (el) => { el.textContent = '' }); //limpiamos el span del error
-			axios.put('/actividades/' + actividad_uuid, {
+			axios.put(`${app_url}/actividades/` + actividad_uuid, {
 				nombre_actividad: d.getElementById('nombre_actividad').value,
 				resultado_esperado: d.getElementById('resultado_esperado').value
 			})
@@ -53,7 +53,7 @@ function edit(actividad_uuid){
 function delet(actividad_uuid){
 	d.getElementById('form_delete').onsubmit = function(e){
 		e.preventDefault();
-		axios.delete('/actividades/' + actividad_uuid)
+		axios.delete(`${app_url}/actividades/` + actividad_uuid)
 		.then(function (response) {
 			$('#modal_delete').modal('hide');
 			$('#actividades').DataTable().ajax.reload(null, false);
@@ -110,13 +110,13 @@ d.addEventListener('click', (e)=>{
 	if(e.target.matches('[data-tareas]'))
 	{
 		let data = $('#actividades').DataTable().row($(e.target).parents('tr') ).data();
-		location.href='/actividades/'+data.uuid+'/tareas_especificas';
+		location.href=`${app_url}/actividades/${data.uuid}/tareas_especificas`;
 	}
 
 	if(e.target.matches('[data-items]'))
 	{
 		let data = $('#actividades').DataTable().row($(e.target).parents('tr') ).data();
-		this.location.href='/actividades/'+ data.uuid+'/items';
+		this.location.href=`${app_url}/actividades/${data.uuid}/items`;
 	}
 
 })
@@ -132,7 +132,7 @@ d.addEventListener('submit', (e)=>{
 			d.querySelectorAll('[data-error="input"]').forEach((el) => { el.classList.remove('is-invalid') }); //limpiamos el input del error
 			d.querySelectorAll('[data-error="span"]').forEach((el) => { el.textContent = '' }); //limpiamos el span del error
 			const datos = new FormData(e.target);
-			axios.post('/actividades/'+ operacion_uuid, datos) //enviamos todos los input del form
+			axios.post(`${app_url}/actividades/${operacion_uuid}`, datos) //enviamos todos los input del form
         	.then(function (response) {
 				// console.log(response);
 				$('#actividades').DataTable().ajax.reload(null, false);

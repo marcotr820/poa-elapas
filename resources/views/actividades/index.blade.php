@@ -47,11 +47,11 @@
 @section('js')
     <script src="{{asset('libs/js/validacionform/actividad_validar.js')}}"></script>
     <script>
-        var operacion_uuid = "{!!$operacion->uuid!!}";
+        var operacion_uuid = "{{ $operacion->uuid }}";
         $('#actividades').DataTable({
             "serverSide": true,
             "processing": true,
-            "ajax": "/operaciones/{!!$operacion->uuid!!}/actividades",
+            "ajax": `${app_url}/operaciones/${operacion_uuid}/actividades`,
             columns: [
                 // { data: 'id'},
                 { data: 'nombre_actividad'},

@@ -21,7 +21,7 @@ function edit(operacion_uuid){
 		if(! e.target.hasAttribute('data-form')){
 			e.preventDefault();
 			d.querySelector('.overlay').classList.add('show');
-			axios.put('/operaciones/'+operacion_uuid, {
+			axios.put(`${app_url}/operaciones/`+operacion_uuid, {
 				nombre_operacion: d.getElementById('nombre_operacion').value
 			})
 			.then(function (response) {
@@ -53,7 +53,7 @@ function edit(operacion_uuid){
 function delet(operacion_uuid){
 	d.getElementById('form_delete').onsubmit = function(e){
 		e.preventDefault();
-		axios.delete('/operaciones/' + operacion_uuid)
+		axios.delete(`${app_url}/operaciones/` + operacion_uuid)
 		.then(function (response) {
 			//console.log(response);
 			$('#modal_delete').modal('hide');
@@ -74,7 +74,7 @@ function delet(operacion_uuid){
 d.addEventListener('click', (e) => {
 	if(e.target.matches('[data-actividades]')){
 		let data = $('#operaciones').DataTable().row($(e.target).parents('tr') ).data();
-		location.href='/operaciones/' +data.uuid+ '/actividades' ;
+		location.href=`${app_url}/operaciones/${data.uuid}/actividades`;
 	}
 
     if (e.target.matches('#nuevo') || e.target.matches('#nuevo *')) //matches busca un selector valido y responde true o false
@@ -117,14 +117,14 @@ d.addEventListener('submit', (e) =>{
 		{	//POST
 			d.querySelector('.overlay').classList.add('show');
 			const datos = new FormData(e.target);
-			axios.post('/operaciones/'+accion_corto_uuid, datos)
+			axios.post(`${app_url}/operaciones/`+accion_corto_uuid, datos)
 			.then(function (response) {
 				// console.log(response);
 				$('#modal').modal('hide');
 				$('#operaciones').DataTable().ajax.reload(null, false);
 			})
 			.catch(function (error) {
-				console.log(error.response.data.errors);
+				//console.log(error.response.data.errors);
 				let objeto = error.response.data.errors; //creamos el objeto para luego recorrerlo
 				if (error.response.data.hasOwnProperty('errors')) //preguntamos si exite la propiedad donde se almacenan los errores resp(false/true)
 				{
@@ -141,17 +141,6 @@ d.addEventListener('submit', (e) =>{
 				}
 			});
 		}
-		else
-		{	//PUT
-			
-		}
 	}
 });
 
-//=================EVENTO ELIMINAR==================
-$(document).on( 'click', '[data-delete]', function (e) {
-	e.preventDefault();
-    // let id_operacion = data['id'];
-
-
-} );

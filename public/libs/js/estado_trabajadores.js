@@ -4,7 +4,7 @@ const d = document;
 d.addEventListener('change', (e)=>{
     if(e.target.matches('[data-crear]')){
         let data = $('#estados_trabajadores').DataTable().row($(e.target).parents('tr') ).data();
-        axios.put('/estados_trabajadores/poa_status/' + data.uuid)
+        axios.put(`${app_url}/estados_trabajadores/poa_status/` + data.uuid)
         .then(function (resp) {
             $('#estados_trabajadores').DataTable().ajax.reload(null, false);
         })
@@ -14,7 +14,7 @@ d.addEventListener('change', (e)=>{
 
     if(e.target.matches('[data-evaluar]')){
         let data = $('#estados_trabajadores').DataTable().row($(e.target).parents('tr') ).data();
-        axios.put('/estados_trabajadores/poa_evaluacion/' + data.uuid)
+        axios.put(`${app_url}/estados_trabajadores/poa_evaluacion/` + data.uuid)
         .then(function (resp) {
             $('#estados_trabajadores').DataTable().ajax.reload(null, false);
         })
@@ -26,7 +26,7 @@ d.addEventListener('change', (e)=>{
 // EVENTO CLICK
 d.addEventListener('click', (e)=>{
     if(e.target.matches('[data-habilitar="creacion"]')){
-        axios.get('/estados_trabajadores/habilitar_creacion_all')
+        axios.get(`${app_url}/estados_trabajadores/habilitar_creacion_all`)
         .then(function (resp) {
             $('#estados_trabajadores').DataTable().ajax.reload(null, false);
         })
@@ -35,7 +35,7 @@ d.addEventListener('click', (e)=>{
     }
 
     if(e.target.matches('[data-deshabilitar="creacion"]')){
-        axios.get('/estados_trabajadores/deshabilitar_creacion_all')
+        axios.get(`${app_url}/estados_trabajadores/deshabilitar_creacion_all`)
         .then(function (resp) {
             $('#estados_trabajadores').DataTable().ajax.reload(null, false);
         })
@@ -45,7 +45,7 @@ d.addEventListener('click', (e)=>{
 
     // EVALUACION POA
     if(e.target.matches('[data-habilitar="evaluacion"]')){
-        axios.post('/estados_trabajadores/habilitar_evaluacion_all')
+        axios.post(`${app_url}/estados_trabajadores/habilitar_evaluacion_all`)
         .then(function (resp) {
             $('#estados_trabajadores').DataTable().ajax.reload(null, false);
         })
@@ -54,7 +54,7 @@ d.addEventListener('click', (e)=>{
     }
 
     if(e.target.matches('[data-deshabilitar="evaluacion"]')){
-        axios.post('/estados_trabajadores/deshabilitar_evaluacion_all')
+        axios.post(`${app_url}/estados_trabajadores/deshabilitar_evaluacion_all`)
         .then(function (resp) {
             $('#estados_trabajadores').DataTable().ajax.reload(null, false);
         })

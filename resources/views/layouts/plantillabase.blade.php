@@ -275,6 +275,12 @@
 
     </div>
 
+    <script>
+
+        const app_url = "{{ config('app.url') }}";
+
+    </script>
+
     <!--incluimos el archivo jquery-->
     <script src="{{asset('libs/datatables/jquery-3.6.0.min.js')}}"></script>
 

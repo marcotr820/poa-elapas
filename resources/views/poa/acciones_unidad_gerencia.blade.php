@@ -28,7 +28,7 @@
     </div>
 @endsection
 
-@section('js')
+<!-- @section('js')
     <script>
         $('#table').DataTable({
             "language": {
@@ -36,4 +36,4 @@
             }
         });
     </script>
-@endsection
+@endsection -->

@@ -22,7 +22,7 @@ function edit(pei_objetivo_uuid){
             d.querySelector('.overlay').classList.add('show');
             let datosform = $('#form').serializeArray();
             $.ajax({
-                url:"/pei_objetivos_especificos/" + pei_objetivo_uuid,
+                url: `${app_url}/pei_objetivos_especificos/` + pei_objetivo_uuid,
                 type: 'PUT',
                 data: datosform,
                 beforeSend:function(){
@@ -58,7 +58,7 @@ function delet(pei_objetivo_uuid){
         e.preventDefault();
         let datosform = $('#form_delete').serializeArray();
         $.ajax({
-            url: "/pei_objetivos_especificos/" + pei_objetivo_uuid,
+            url: `${app_url}/pei_objetivos_especificos/` + pei_objetivo_uuid,
             type: 'delete', 
             data: datosform,
             success:function(resp)
@@ -127,7 +127,7 @@ d.addEventListener('submit', (e)=>{
             var datosform = $('#form').serializeArray();
             $.ajax({
                 // url:$(this).attr('action'),
-                url: '/pei_objetivos_especificos/' + mediano_plazo_accion_uuid,
+                url: `${app_url}/pei_objetivos_especificos/` + mediano_plazo_accion_uuid,
                 type: 'POST',
                 data: datosform,
                 beforeSend:function(resp){

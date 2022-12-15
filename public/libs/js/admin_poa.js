@@ -6,7 +6,7 @@ function update(accion_uuid){
         d.querySelector('.overlay').classList.add('show');
         let datosform = $(e.target).serializeArray();
         $.ajax({
-            url:"/update_status_corto_plazo_accion/"+ accion_uuid,
+            url: `${app_url}/update_status_corto_plazo_accion/`+ accion_uuid,
             type: 'PUT',
             data: datosform,
             success:function(resp){
@@ -14,7 +14,7 @@ function update(accion_uuid){
                 $('#modal').modal('hide');
                 $('#table').DataTable().ajax.reload(null, false);
                 // contamos las acciones que tengan un status 1 para mostrarlos como notificacion en el sidebar
-                axios.get('/notificacion')
+                axios.get(`${app_url}/notificacion`)
                 .then(function(response){
                     if(response.data === 0){
                         d.getElementById('notificacion').setAttribute('hidden', true);
@@ -37,7 +37,7 @@ $('.select2').on('select2:select', function (e) {
     var data = e.params.data;
     // console.log(data.uuid);
     var obj_uuid = data.uuid;
-        axios.get('/data_pei/' + obj_uuid)
+        axios.get(`${app_url}/data_pei/` + obj_uuid)
         .then(function (resp) {
             d.querySelector('.objetivo_especifico').innerHTML = resp.data.objetivo_institucional;
             d.querySelector('.gerencia').textContent = resp.data.nombre_gerencia;
@@ -50,7 +50,7 @@ $('.select2').on('select2:select', function (e) {
             "processing": true,
             "serverSide": true,
             "ajax": {
-               "url": "/listar_acciones/"+obj_uuid,
+               "url": `${app_url}/listar_acciones/`+obj_uuid,
                "type": "GET"
             },
             columns: [
@@ -129,7 +129,7 @@ d.addEventListener('click', (e)=>{
     if(e.target.matches('[data-accion]') || e.target.matches('[data-accion] *')){
         d.querySelector('.overlay').classList.remove('show');
         let data = $('#table').DataTable().row($(e.target).parents('tr') ).data();
-        axios.get('/status_corto_plazo_accion/' + data.uuid) //enviamos todos los input del form
+        axios.get(`${app_url}/status_corto_plazo_accion/` + data.uuid) //enviamos todos los input del form
         .then(function (resp) {
             d.getElementById('accion_corto_plazo').textContent = resp.data.accion_corto_plazo;
             const presupuesto = resp.data.presupuesto_programado.toLocaleString('es-MX');

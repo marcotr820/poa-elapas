@@ -21,7 +21,7 @@ function edit(accion_uuid){
         if(! e.target.hasAttribute('data-form')){
             let datosform = $('#form').serializeArray();
             $.ajax({
-                url:"/corto_plazo_acciones/" + accion_uuid,
+                url: `${app_url}/corto_plazo_acciones/` + accion_uuid,
                 type: 'PUT',
                 data: datosform,
                 beforeSend:function(){
@@ -57,7 +57,7 @@ function delet(accion_uuid){
         e.preventDefault();
         let datosform = $('#form_delete').serializeArray();
         $.ajax({
-            url: "/corto_plazo_acciones/" + accion_uuid,
+            url: `${app_url}/corto_plazo_acciones/` + accion_uuid,
             type: 'delete', 
             data: datosform,  
             success:function(resp)
@@ -83,12 +83,12 @@ function delet(accion_uuid){
 d.addEventListener('click', (e)=>{
     if(e.target.matches('[data-planificacion]')){
         let data = $('#corto_plazo_acciones').DataTable().row($(e.target).parents('tr') ).data();
-        location.href='/planificacion/'+data.uuid;
+        location.href=`${app_url}/planificacion/${data.uuid}`;
     }
 
     if(e.target.matches('[data-operaciones]')){
         let data = $('#corto_plazo_acciones').DataTable().row($(e.target).parents('tr') ).data();
-        location.href='/corto_plazo_acciones/'+data.uuid+'/operaciones';
+        location.href=`${app_url}/corto_plazo_acciones/${data.uuid}/operaciones`;
     }
 
     if(e.target.matches('#nuevo') || e.target.matches('#nuevo *')){
@@ -144,7 +144,7 @@ d.addEventListener('submit', (e)=>{
             let datosform = $('#form').serializeArray();
             $.ajax({
                 // url:$(this).attr('action'),
-                url: '/corto_plazo_acciones/'+ pei_uuid,
+                url: `${app_url}/corto_plazo_acciones/`+ pei_uuid,
                 type: 'POST',
                 data: datosform,
                 beforeSend:function(resp){

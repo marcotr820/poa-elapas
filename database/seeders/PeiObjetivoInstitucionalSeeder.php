@@ -82,14 +82,6 @@ class PeiObjetivoInstitucionalSeeder extends Seeder
             'gerencia_id' => '4',
             'mediano_plazo_accion_id' => '5' 
         ]);
-        // PeiObjetivosEspecificos::create([
-        //     //  id = 8
-        //     'objetivo_institucional' => 'INCREMENTAR LA EFICIENCIA OPERATIVA DEL SISTEMA DE AGUA Y ALCANTARILLADO PARA MEJORAR LA COBERTURA DEL SERVICIO.',
-        //     'ponderacion' => 25,
-        //     'indicador_proceso' => 30,
-        //     'gerencia_id' => '4',
-        //     'mediano_plazo_accion_id' => '7' 
-        // ]);
 
         // GERENCIA COMERCIAL
         PeiObjetivosEspecificos::create([

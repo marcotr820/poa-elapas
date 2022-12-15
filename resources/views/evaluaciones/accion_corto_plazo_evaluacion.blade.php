@@ -28,13 +28,14 @@
                             <td>{{ $cpa->fecha_fin }}</td>
                             {{-- controlamos que el btn de evaluacion se habilite cuando los años sean iguales --}}
                             @if ( (\Carbon\Carbon::now()->year) == (\Carbon\Carbon::createFromDate($cpa->fecha_inicio)->year))
-                            {{-- @if ( 2023 == (\Carbon\Carbon::createFromDate($cpa->fecha_inicio)->year)) --}}
+                            {{-- @if ( 2023 == (\Carbon\Carbon::createFromDate($cpa->fecha_inicio)->year) ) --}}
                                 <td>
                                     <a href="{{ route('evaluacion.index', $cpa->uuid) }}" class="boton default">Evaluar</a>
                                 </td>
                             @else
                                 <td></td>
                             @endif
+
                             {{-- @if ( (\Carbon\Carbon::now() > \Carbon\Carbon::createFromDate($cpa->fecha_inicio)) &&
                                 (\Carbon\Carbon::now() < \Carbon\Carbon::createFromDate($cpa->fecha_fin)) )
                                 <td> <a href="{{ route('evaluacion.index', $cpa->uuid) }}" class="boton default">Evaluar</a> </td>

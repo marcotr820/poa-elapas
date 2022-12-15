@@ -24,7 +24,7 @@ function edit(mediano_plazo_accion_uuid){
             $(document).find('[data-error="input"]').removeClass('is-invalid');
             $(document).find('[data-error="textarea"]').removeClass('is-invalid');
             $(document).find('[data-error="span"]').text('');
-            axios.put('/mediano_plazo_acciones/'+ mediano_plazo_accion_uuid, {
+            axios.put(`${app_url}/mediano_plazo_acciones/`+ mediano_plazo_accion_uuid, {
                 codigo_mediano_plazo: d.getElementById('codigo_mediano_plazo').value,
                 accion_mediano_plazo: d.getElementById('accion_mediano_plazo').value,
             })
@@ -51,7 +51,7 @@ function edit(mediano_plazo_accion_uuid){
 function delet(mediano_plazo_accion_uuid){
     d.getElementById('form_delete').onsubmit = function(e){
         e.preventDefault();
-        axios.delete('/mediano_plazo_acciones/'+ mediano_plazo_accion_uuid)
+        axios.delete(`${app_url}/mediano_plazo_acciones/`+ mediano_plazo_accion_uuid)
         .then(function (resp){
             $('#modal_delete').modal('hide');
             $('#acciones_mediano_plazo').DataTable().ajax.reload();
@@ -72,7 +72,7 @@ function delet(mediano_plazo_accion_uuid){
 d.addEventListener('click', (e)=>{
     if(e.target.matches('[data-objetivo_gestion]')){
         let data = $('#acciones_mediano_plazo').DataTable().row($(e.target).parents('tr') ).data();
-        location.href='/mediano_plazo_acciones/'+data.uuid+'/pei_objetivos_especificos';
+        location.href=`${app_url}/mediano_plazo_acciones/${data.uuid}/pei_objetivos_especificos`;
     }
 
     if(e.target.matches('#nuevo') || e.target.matches('#nuevo *')){
@@ -106,6 +106,7 @@ d.addEventListener('click', (e)=>{
     }
 })
 
+//Evento Submit
 d.addEventListener('submit', (e)=>{
     if(e.target.matches('#form')){
         if(e.target.hasAttribute('data-form')){
@@ -114,7 +115,7 @@ d.addEventListener('submit', (e)=>{
             $(document).find('[data-error="textarea"]').removeClass('is-invalid');
             $(document).find('[data-error="span"]').text('');
             const datos = new FormData(e.target);
-            axios.post('/mediano_plazo_acciones/'+ resultado_uuid, datos)
+            axios.post(`${app_url}/mediano_plazo_acciones/`+ resultado_uuid, datos)
             .then(function (resp){
                 $('#modal').modal('hide');
                 $('#acciones_mediano_plazo').DataTable().ajax.reload(null, false);

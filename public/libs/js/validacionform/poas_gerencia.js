@@ -49,7 +49,7 @@ d.addEventListener('change', (e) => {
                     {
                         data: 'uuid', name: 'unidades.uuid',
                         render: function (data, type) {
-                            return `<a class="boton blue text-center" href="/acciones_unidad/${data}">Ver Acciones</a>`;
+                            return `<a class="boton blue text-center" href="${app_url}/acciones_unidad/${data}">Ver Acciones</a>`;
                         }
                     }
                 ],

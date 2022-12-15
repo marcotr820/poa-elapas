@@ -17,8 +17,8 @@ class EvaluacionController extends Controller
 {
     public function index(CortoPlazoAcciones $corto_plazo_accion)
     {
-        // $fecha_actual = Carbon::now();
-        $fecha_actual = Carbon::createFromDate("2023-04-01");
+        $fecha_actual = Carbon::now();
+        //$fecha_actual = Carbon::createFromDate("2023-04-01");
 
         $fecha_inicio = Carbon::createFromDate($corto_plazo_accion->fecha_inicio);
         $fecha_fin = Carbon::createFromDate($corto_plazo_accion->fecha_fin);
@@ -88,8 +88,8 @@ class EvaluacionController extends Controller
 
     public function store(EvaluacionRequest $request, CortoPlazoAcciones $corto_plazo_accion)
     {
-        // $fecha_actual = Carbon::now();
-        $fecha_actual = Carbon::createFromDate("2023-04-01");
+        $fecha_actual = Carbon::now();
+        //$fecha_actual = Carbon::createFromDate("2023-04-01");
         switch ($fecha_actual->month) 
         {
             case 4: case 5: case 6:
