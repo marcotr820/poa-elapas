@@ -58,11 +58,7 @@
 					render: function( data, type, row)
 					{
                         if(row.id == 1){
-                            return `
-                            <div class="btn-group">
-                                <button class="boton blue" data-edit="" onclick="edit('${data}')"><i class="fas fa-pen"></i></button>
-                            </div>
-                            `;
+                            return ``;
                         }else{
                             return `
                             <div class="btn-group">

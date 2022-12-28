@@ -73,6 +73,9 @@ class UsuarioController extends Controller
     }
 
     public function update(StoreUsuario $request, Usuario $usuario){
+        if($usuario->trabajador_id == 1){
+            abort(200);
+        }
         $usuario->roles()->sync($request->roles);
     }
 
@@ -89,6 +92,10 @@ class UsuarioController extends Controller
     }
 
     public function update_password(UpdatePasswordRequest $request, Usuario $usuario){
+        if($usuario->trabajador_id == 1){
+            abort(200);
+        }
+        
         $usuario->update([
             'password' => Hash::make(trim($request->password)),
         ]);

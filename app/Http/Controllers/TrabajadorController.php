@@ -56,6 +56,10 @@ class TrabajadorController extends Controller
 
     public function update(TrabajadorRequest $request, Trabajadores $trabajador)
     {
+        if($trabajador->id == 1){   //evitamos que se elimine el usuario con id 1 ADMINISTRADOR
+            abort(200);
+        }
+
         $trabajador->update([
             'documento' => $request->documento,
             'nombre' => strtoupper(trim($request->nombre)),
